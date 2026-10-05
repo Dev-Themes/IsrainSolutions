@@ -1,48 +1,6 @@
-import { notFound } from "next/navigation";
-
-interface PageProps {
-  params: Promise<{ slug: string }>;
-}
-
-export const dynamicParams = false;
-
-export function generateStaticParams() {
-  return [
-    { slug: 'ac-repair-houston-tx' },
-    { slug: 'furnace-repair-houston-tx' },
-    { slug: 'ac-repair-austin-tx' },
-    { slug: 'furnace-repair-austin-tx' },
-    { slug: 'ac-repair-dallas-tx' },
-    { slug: 'furnace-repair-dallas-tx' },
-  ];
-}
-
-export default async function CityRepairPage({ params }: PageProps) {
-  const resolvedParams = await params;
-  const slug = resolvedParams.slug;
-  
-  const isAcRepair = slug.startsWith("ac-repair-") && slug.endsWith("-tx");
-  const isFurnaceRepair = slug.startsWith("furnace-repair-") && slug.endsWith("-tx");
-  
-  if (!isAcRepair && !isFurnaceRepair) {
-    notFound();
-  }
-  
-  let citySlug = "";
-  let serviceType = "";
-  
-  if (isAcRepair) {
-    citySlug = slug.replace("ac-repair-", "").replace("-tx", "");
-    serviceType = "AC Repair";
-  } else {
-    citySlug = slug.replace("furnace-repair-", "").replace("-tx", "");
-    serviceType = "Furnace Repair";
-  }
-  
-  const cityName = citySlug
-    .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
+export default function CityRepairPage() {
+  const serviceType = "Furnace Repair";
+  const cityName = "Dallas";
 
   return (
     <div className="py-24 px-4 max-w-5xl mx-auto text-center">
