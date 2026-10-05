@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #07152F;
+  --color-navy-900: #0B1F44;
+  --color-navy-800: #12306A;
+  --color-cool-600: #1565C0;
+  --color-cool-500: #1E88E5;
+  --color-cool-100: #E3F0FD;
+  --color-heat-600: #D2401C;
+  --color-heat-500: #EA5A2A;
+  --color-heat-100: #FDECE6;
+  --color-ink-700: #1F2A44;
+  --color-ink-500: #5B6784;
+  --color-paper: #FFFFFF;
+  --color-mist: #F4F8FC;
+  
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-saira), ui-sans-serif, system-ui, sans-serif;
+  
+  --radius-xl: 16px;
+  --radius-md: 10px;
+
+  --shadow-soft: 0 10px 30px -12px rgba(11,31,68,.25);
+
+  /* Animations */
+  --animate-drift: drift 20s linear infinite;
+}
+
+@layer base {
+  :root {
+    --navy-950: #07152F;
+    --navy-900: #0B1F44;
+    --navy-800: #12306A;
+    --cool-600: #1565C0;
+    --cool-500: #1E88E5;
+    --cool-100: #E3F0FD;
+    --heat-600: #D2401C;
+    --heat-500: #EA5A2A;
+    --heat-100: #FDECE6;
+    --ink-700: #1F2A44;
+    --ink-500: #5B6784;
+    --paper: #FFFFFF;
+    --mist: #F4F8FC;
+    
+    --brand-gradient: linear-gradient(90deg, var(--cool-500) 0%, var(--navy-900) 50%, var(--heat-500) 100%);
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink-700);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: var(--font-sans);
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .bg-brand-gradient {
+    background: var(--brand-gradient);
+  }
+  
+  .text-brand-gradient {
+    background: var(--brand-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-dark {
+    background: rgba(11, 31, 68, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .container-custom {
+    @apply mx-auto max-w-[1280px] px-5 md:px-8;
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
