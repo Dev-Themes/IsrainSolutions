@@ -4,6 +4,19 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return [
+    { slug: 'ac-repair-houston-tx' },
+    { slug: 'furnace-repair-houston-tx' },
+    { slug: 'ac-repair-austin-tx' },
+    { slug: 'furnace-repair-austin-tx' },
+    { slug: 'ac-repair-dallas-tx' },
+    { slug: 'furnace-repair-dallas-tx' },
+  ];
+}
+
 export default async function CityRepairPage({ params }: PageProps) {
   const resolvedParams = await params;
   const slug = resolvedParams.slug;
