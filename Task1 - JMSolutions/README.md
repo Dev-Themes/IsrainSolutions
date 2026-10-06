@@ -105,3 +105,25 @@ npm run start
 ```
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new). Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## JM Comfort Solutions - Architecture & Deployment
+
+### Configuration & Content
+All global configuration (phone numbers, addresses, social links) should be managed in `src/config/site.ts` once implemented. The content for FAQs and Reviews should be stored in typed files in `src/content/*.ts` to decouple content from the UI components.
+
+### Swapping Images
+1. Add new images to `public/images/`.
+2. Ensure they are optimized (AVIF/WebP) and correctly sized.
+3. **HARD RULE:** Visually vet every image to ensure there are no women or girls anywhere in the frame before adding it to the repository. Update `docs/image-manifest.json` for every new image.
+
+### Regenerating the Logo Variant
+If you need to update the logo:
+1. Place the new source file at `public/brand/logo-source.png`.
+2. Generate the dark-mode variant (`public/brand/logo-dark.png`) using an image processing script or software to invert the dark navy portions to light ice-white (`#EAF2FF`) while preserving the orange/blue accents.
+
+### Deploying
+1. Ensure all placeholders (`[PLACEHOLDER]`) are filled.
+2. Run `npm run lint` and `npm run build` to verify there are no TypeScript or dark-theme violations.
+3. Run layout integrity tests with Playwright.
+4. Deploy to Vercel or any Next.js compatible hosting provider using standard Next.js deployment commands (`npm run build && npm start`).

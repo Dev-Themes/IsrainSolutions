@@ -1,7 +1,15 @@
-# Site Map - JM Comfort Solutions
+# Site Map (Fallback Blueprint)
 
-- `/` (Home)
-- `/services` (Services overview)
-  - Anchors: `#heating`, `#cooling`, `#refrigeration`
-- `/about` (About / Our Story)
-- `/contact` (Contact / Book Service / Get a Quote)
+1. Home (/)
+2. Services (/services)
+   - Cooling (#cooling)
+   - Heating (#heating)
+   - Commercial Refrigeration (#refrigeration)
+   - Installation & Replacement
+   - Air Quality & Ducts
+   - Maintenance Plans (#plans)
+3. About (/about)
+4. Reviews (/reviews)
+5. Contact (/contact)
+6. Privacy Policy (/privacy)
+7. Terms of Service (/terms)

@@ -1,0 +1,14 @@
+[
+  { 
+    "file": "none", 
+    "source": "None", 
+    "pageUrl": "N/A",
+    "author": "N/A", 
+    "license": "N/A", 
+    "peopleInImage": "none",
+    "womenPresent": false, 
+    "verifiedBy": "visual-inspection", 
+    "alt": "No image", 
+    "usedIn": ["home-hero"] 
+  }
+]
