@@ -1,25 +1,32 @@
-﻿# JM Comfort Solutions Website
+# JM Comfort Solutions - Rebuild Notes
 
-## How to Customize
+## Migration Completed
 
-This template is designed to be easily configurable without digging through every component.
+The site has been completely re-architected based on the provided reference site (camohvac.net) while adapting it uniquely for **JM Comfort Solutions**' branding.
 
-### 1. Logo
-Replace the logo files in the public/brand directory:
-- public/brand/logo.png (Default logo, usually white background or primary usage)
-- public/brand/logo-transparent.png (Used for dark backgrounds)
+### Changes Made:
+- **Strict Dark Theme Enforced**: Removed all floating pills and light SaaS elements. Replaced with dark texture layouts, 1px gradient borders, and chamfered edges.
+- **Header & Navigation**: Attached non-floating top nav with announcement bar. Introduced `LogoGlow` to handle the dark navy logo text over the dark background.
+- **Component Geometry**: Custom CSS `clip-path` for chamfered cards with `.jm-card` and an interactive `.btn` parallelogram class with deep sweeps.
+- **Typography**: Replaced standard fonts with `Saira Condensed`, `Saira` for navigation/UI, and `DM Sans` for body copy, echoing the heavy geometric presence of the logo.
+- **Pages Added/Rebuilt**:
+  - `page.tsx` (Home) matching the specific visual rhythm.
+  - `about-us/page.tsx`
+  - `ac-repair/page.tsx`
+  - `services/page.tsx`
+  - `contact/page.tsx`
+  - `api/contact/route.ts` built and passing Zod validation.
+- **Docs Setup**: 
+  - `reference-audit.md` (Design breakdown)
+  - `dark-purge-report.md` (Strict styling validation)
+  - `migration-plan.md` (Task sequence)
+  - `placeholders.md` (Data needed from client)
+  - `image-manifest.json` (Validation of stock imagery against human/female presence constraints).
+  - `seo-checklist.md`
+  - `service-areas-howto.md`
 
-### 2. Colors (Tokens)
-Brand colors are defined centrally in src/app/globals.css.
-To modify the blue, orange, or navy tones, simply change the hex values under the :root and @theme definitions.
-- --cool-* for cooling accents (blue)
-- --heat-* for heating accents (orange/red)
-- --navy-* for dark backgrounds and text
-
-### 3. Images
-All imagery is managed via src/lib/images.ts. 
-To swap a placeholder for a real photo, drop your image into the public/images/ folder and update the path in src/lib/images.ts.
-
-### 4. Contact Details & Business Info
-All phone numbers, emails, addresses, licenses, and social links are managed in src/lib/site.config.ts.
-Updating a value there will automatically reflect across the header, footer, contact page, and anywhere else it is used.
+### Next Steps (For the Client):
+1. Review `docs/placeholders.md` and replace strings in the components and configs.
+2. Edit `src/config/serviceAreas.ts` to include real service towns and uncomment dynamic generation functions in `[slug]` routes when ready.
+3. Replace `/public/images` with real job site photography.
+4. Deploy the Next.js app to Vercel/Netlify.

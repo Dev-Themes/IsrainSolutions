@@ -18,7 +18,7 @@ test.describe('Layout Integrity and Dark Theme', () => {
         await page.goto(`http://localhost:3000${route}`);
         
         // Wait for page to be fully loaded
-        await page.waitForLoadState('networkidle');
+        await page.waitForLoadState('load');
 
         // 1. Dark check: Find the body background color
         const bodyBg = await page.evaluate(() => {

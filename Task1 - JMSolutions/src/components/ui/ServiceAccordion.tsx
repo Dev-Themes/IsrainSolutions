@@ -1,52 +1,65 @@
 "use client";
 
-import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface AccordionItem {
   title: string;
-  items: string[];
+  items: { label: string; slug: string }[];
 }
 
 export function ServiceAccordion({ data }: { data: AccordionItem[] }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
-    <div className="w-full max-w-4xl mx-auto space-y-4">
-      {data.map((section, idx) => (
-        <div key={idx} className="border border-stroke bg-bg-2">
-          <button
-            onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-            className="w-full flex justify-between items-center p-6 text-left hover:bg-bg-3 transition-colors"
-          >
-            <h3 className="font-bold text-ice-500 text-xl">{section.title}</h3>
-            <ChevronDown 
-              className={`w-6 h-6 transition-transform duration-300 ${
-                openIndex === idx ? "rotate-180 text-ice-500" : "text-text-2"
-              }`} 
-            />
-          </button>
-          
-          <div 
-            className={`grid transition-all duration-300 ease-in-out ${
-              openIndex === idx ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-            }`}
-          >
-            <div className="overflow-hidden">
-              <div className="p-6 border-t border-stroke bg-bg-1">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {section.items.map((item, itemIdx) => (
-                    <div key={itemIdx} className="flex items-center gap-2 text-text-1 hover:text-ice-500 transition-colors cursor-pointer">
-                      <span className="w-1.5 h-1.5 rounded-full bg-ice-500 flex-shrink-0"></span>
-                      <span>{item}</span>
-                    </div>
+    <div className="w-full flex flex-col gap-4 text-left">
+      {data.map((accordion, index) => {
+        const isOpen = openIndex === index;
+        return (
+          <div key={index} className="clip-chamfer bg-card border border-line overflow-hidden transition-colors relative isolate" style={{'--cut': '8px'} as any}>
+            <button
+              onClick={() => toggle(index)}
+              className={cn(
+                "w-full px-6 py-5 flex items-center justify-center relative hover:bg-card-2 transition-colors cursor-pointer",
+                isOpen && "bg-[image:var(--grad-brand)]"
+              )}
+              aria-expanded={isOpen}
+            >
+              {isOpen && <div className="absolute inset-0 bg-card opacity-90 -z-10"></div>}
+              <span className="font-display font-bold text-[20px] uppercase tracking-wide text-fg-0">{accordion.title}</span>
+              <ChevronDown className={cn("absolute right-6 w-5 h-5 text-ice transition-transform duration-350", isOpen && "rotate-180")} />
+            </button>
+            <div 
+              className={cn(
+                "grid transition-all duration-350 ease-in-out",
+                isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              )}
+            >
+              <div className="overflow-hidden">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 p-6 border-t border-line">
+                  {accordion.items.map((item, idx) => (
+                    <li key={idx} className="group flex items-center gap-3">
+                      <span className="w-1.5 h-1.5 shrink-0 bg-[image:var(--grad-brand)] rounded-full"></span>
+                      <Link 
+                        href={`/ac-repair-${item.slug}`} 
+                        className="text-fg-1 text-[15px] group-hover:text-transparent group-hover:bg-[image:var(--grad-brand)] group-hover:bg-clip-text transition-all duration-300 group-hover:translate-x-1 inline-block"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

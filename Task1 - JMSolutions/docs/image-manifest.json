@@ -1,14 +1,82 @@
-[
-  { 
-    "file": "none", 
-    "source": "None", 
-    "pageUrl": "N/A",
-    "author": "N/A", 
-    "license": "N/A", 
-    "peopleInImage": "none",
-    "womenPresent": false, 
-    "verifiedBy": "visual-inspection", 
-    "alt": "No image", 
-    "usedIn": ["home-hero"] 
-  }
-]
+{
+  "images": [
+    {
+      "id": "services-hero",
+      "url": "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80",
+      "alt": "Close-up of a condenser fan grille",
+      "womenPresent": false
+    },
+    {
+      "id": "services-residential",
+      "url": "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&q=80",
+      "alt": "Outdoor air conditioner condenser unit beside a wooden fence",
+      "womenPresent": false
+    },
+    {
+      "id": "services-commercial",
+      "url": "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&q=80",
+      "alt": "Commercial rooftop HVAC units on a flat roof",
+      "womenPresent": false
+    },
+    {
+      "id": "services-refrigeration",
+      "url": "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&q=80",
+      "alt": "Commercial refrigeration condensing unit mounted outdoors",
+      "womenPresent": false
+    },
+    {
+      "id": "services-maintenance",
+      "url": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80",
+      "alt": "Air conditioning equipment installed along an exterior wall",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-residential-hero",
+      "url": "/images/subservices/residential/hero.jpg",
+      "alt": "Residential HVAC system outside home",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-residential-why",
+      "url": "/images/subservices/residential/why.jpg",
+      "alt": "HVAC technician installing equipment",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-commercial-hero",
+      "url": "/images/subservices/commercial/hero.jpg",
+      "alt": "Commercial rooftop unit",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-commercial-why",
+      "url": "/images/subservices/commercial/why.jpg",
+      "alt": "Commercial HVAC ductwork and system",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-refrigeration-hero",
+      "url": "/images/subservices/refrigeration/hero.jpg",
+      "alt": "Commercial refrigeration unit",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-refrigeration-why",
+      "url": "/images/subservices/refrigeration/why.jpg",
+      "alt": "Walk-in cooler interior",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-maintenance-hero",
+      "url": "/images/subservices/maintenance/hero.jpg",
+      "alt": "HVAC technician performing maintenance",
+      "womenPresent": false
+    },
+    {
+      "id": "subservices-maintenance-why",
+      "url": "/images/subservices/maintenance/why.jpg",
+      "alt": "Maintenance check on AC unit",
+      "womenPresent": false
+    }
+  ]
+}

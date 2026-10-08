@@ -1,5 +1,5 @@
-﻿import { MetadataRoute } from 'next'
-
+import { MetadataRoute } from 'next'
+import { serviceSlugs } from '@/content/service-pages'
 export const dynamic = 'force-static';
  
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -30,5 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.7,
     },
+    ...serviceSlugs.map((slug) => ({
+      url: `${baseUrl}/services/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }))
   ]
 }

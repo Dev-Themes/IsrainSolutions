@@ -3,21 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Menu, X } from 'lucide-react';
+import { Phone, Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { LogoGlow } from '../ui/LogoGlow';
+import { site } from '@/config/site';
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -27,101 +20,124 @@ export default function Header() {
     }
   }, [mobileMenuOpen]);
 
-  const navLinkClass = "relative text-sm font-bold text-[#05070D] transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[#05070D] hover:after:scale-x-100 after:transition-transform after:duration-300";
+  const navLinkClass = "relative text-[13px] tracking-[.1em] font-nav font-semibold text-fg-1 uppercase transition-colors hover:text-fg-0 hover:after:scale-x-100 after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[image:var(--grad-brand)] after:transition-transform after:duration-[280ms]";
 
   return (
     <>
-      <header 
-        className={`fixed left-1/2 -translate-x-1/2 z-[100] w-[calc(100%-32px)] md:w-[calc(100%-48px)] max-w-[1280px] rounded-sm transition-all duration-300 ${scrolled ? 'top-3 bg-[#94A3B8]/95 backdrop-blur-xl shadow-lg' : 'top-4 md:top-8 lg:top-12 bg-[#94A3B8]/75 backdrop-blur-md'}`}
-        style={{
-          border: '1px solid rgba(255,255,255,0.2)',
-        }}
-      >
-        <div className="px-4 md:px-8 py-3 flex items-center justify-between">
-          <Link href="/" className="flex items-center">
-            <Image 
-              src="/logo-removebg-preview.png" 
-              alt="JM Comfort Solutions" 
-              width={160} 
-              height={50}
-              className="h-8 md:h-10 w-auto object-contain drop-shadow-sm"
-              priority
-            />
+      {/* Announcement Bar */}
+      <div className="flex items-center justify-center h-[40px] bg-[image:var(--grad-fill-cta)] text-white text-[13px] uppercase tracking-[.12em] px-4 font-nav font-semibold">
+        <span className="flex items-center gap-2">
+          <span className="text-[14px]">⚠️</span>
+          <span>24/7 EMERGENCY LINE: <a href={`tel:${site.phone.replace(/[^0-9]/g, '')}`} className="underline hover:text-white/80">{site.phone}</a> — We Answer Every Call</span>
+        </span>
+      </div>
+
+      {/* Header */}
+      <header className="sticky top-0 z-30 w-full h-[72px] md:h-[88px] bg-[#050D1A]/95 backdrop-blur-[10px] border-b border-b-transparent relative isolation">
+        <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[image:var(--grad-brand)] opacity-55 pointer-events-none"></div>
+        <div className="container-custom h-full flex items-center justify-between overflow-visible">
+          
+          <Link href="/" className="flex items-center flex-shrink-0" style={{ overflow: 'visible' }}>
+            <LogoGlow>
+              {/* Replace logo.png when ready, using the removed bg version */}
+              <Image 
+                src="/logo-removebg-preview.png" 
+                alt={site.name} 
+                width={160} 
+                height={50}
+                className="h-[48px] md:h-[64px] w-auto object-contain"
+                priority
+              />
+            </LogoGlow>
           </Link>
 
-          {/* Desktop Nav - Centered */}
-          <nav className="hidden md:flex items-center justify-center gap-8 flex-1">
-            <Link href="/" className={navLinkClass}>HOME</Link>
-            <Link href="/about" className={navLinkClass}>ABOUT US</Link>
-            <div className="relative group">
-              <Link href="/services" className={navLinkClass + " inline-flex items-center gap-1"}>
-                SERVICES
-                <svg className="w-4 h-4 text-[#05070D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-              </Link>
-              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-all duration-300">
-                <div className="bg-bg-0 border border-stroke rounded-sm shadow-xl w-56 flex flex-col p-2">
-                  <Link href="/services" className="text-text-1 hover:text-ice-500 hover:bg-bg-1 px-4 py-3 text-sm font-bold transition-colors border-b border-stroke/50">All Services</Link>
-                  <Link href="/services/residential" className="text-text-1 hover:text-ice-500 hover:bg-bg-1 px-4 py-3 text-sm font-bold transition-colors border-b border-stroke/50">Residential HVAC</Link>
-                  <Link href="/services/commercial" className="text-text-1 hover:text-ice-500 hover:bg-bg-1 px-4 py-3 text-sm font-bold transition-colors border-b border-stroke/50">Commercial HVAC</Link>
-                  <Link href="/services/maintenance" className="text-text-1 hover:text-ice-500 hover:bg-bg-1 px-4 py-3 text-sm font-bold transition-colors">Maintenance Plans</Link>
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-8 ml-auto mr-12">
+            <Link href="/" className={navLinkClass}>Home</Link>
+            <Link href="/about" className={navLinkClass}>About Us</Link>
+            
+            <div 
+              className="relative group"
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+            >
+              <button className={`${navLinkClass} inline-flex items-center gap-1 cursor-pointer`} aria-expanded={servicesOpen} aria-haspopup="true">
+                Services <ChevronDown className="w-4 h-4" />
+              </button>
+              
+              {/* Services Dropdown */}
+              <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-[24px] transition-all duration-200 z-40 ${servicesOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                <div className="clip-chamfer bg-bg-0 border border-line w-[280px] p-2 flex flex-col relative isolate">
+                  {/* Inner background hack for chamfer gap */}
+                  <div className="absolute inset-[1px] bg-card -z-10 clip-chamfer" style={{clipPath: 'polygon(0 0, calc(100% - 17.6px) 0, 100% 17.6px, 100% 100%, 17.6px 100%, 0 calc(100% - 17.6px))'}}></div>
+                  <Link href="/services" className="px-4 py-3 text-sm font-bold uppercase text-fg-1 hover:text-ice hover:bg-card-2 hover:border-l-[2px] hover:border-l-ice transition-all">All Services</Link>
+                  <Link href="/services/residential" className="px-4 py-3 text-sm font-bold uppercase text-fg-1 hover:text-ice hover:bg-card-2 hover:border-l-[2px] hover:border-l-ice transition-all">Residential HVAC</Link>
+                  <Link href="/services/commercial" className="px-4 py-3 text-sm font-bold uppercase text-fg-1 hover:text-ice hover:bg-card-2 hover:border-l-[2px] hover:border-l-ice transition-all">Commercial HVAC</Link>
+                  <Link href="/services/refrigeration" className="px-4 py-3 text-sm font-bold uppercase text-fg-1 hover:text-ice hover:bg-card-2 hover:border-l-[2px] hover:border-l-ice transition-all">Commercial Refrigeration</Link>
+                  <Link href="/services/maintenance" className="px-4 py-3 text-sm font-bold uppercase text-fg-1 hover:text-ice hover:bg-card-2 hover:border-l-[2px] hover:border-l-ice transition-all">Maintenance Plans</Link>
                 </div>
               </div>
             </div>
-            <Link href="/contact" className={navLinkClass}>CONTACT</Link>
+
+            <Link href="/ac-repair" className={navLinkClass}>AC Repair</Link>
+            <Link href="/contact" className={navLinkClass}>Contact</Link>
           </nav>
 
           {/* Right Button */}
-          <div className="hidden md:flex items-center justify-end w-[200px]">
-            <Button href="tel:5551234567" variant="primary" className="py-2 px-6 text-sm shadow-md flex items-center gap-2">
-              <Phone className="w-4 h-4" /> CALL NOW
+          <div className="hidden lg:flex items-center flex-shrink-0">
+            <Button href={`tel:${site.phone.replace(/[^0-9]/g, '')}`} variant="warm">
+              <Phone className="w-4 h-4 fill-current" /> CALL NOW
             </Button>
           </div>
 
           {/* Mobile Toggle */}
           <button 
-            className="md:hidden p-2 text-[#05070D]" 
+            className="lg:hidden p-2 text-fg-1 focus:outline-none" 
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open Menu"
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="w-8 h-8" />
           </button>
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Panel */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-[110] bg-bg-0/95 backdrop-blur-xl flex flex-col p-6 text-text-0 overflow-y-auto">
+        <div className="fixed inset-0 z-50 bg-[#050D1A] flex flex-col p-6 text-fg-0 overflow-y-auto w-full h-full transform transition-transform translate-x-0">
           <div className="flex justify-end mb-8 shrink-0">
-            <button onClick={() => setMobileMenuOpen(false)} className="p-2 border border-stroke rounded-sm">
-              <X className="w-6 h-6" />
+            <button onClick={() => setMobileMenuOpen(false)} className="p-2 border border-line rounded-sm">
+              <X className="w-8 h-8 text-fg-1" />
             </button>
           </div>
-          <nav className="flex flex-col gap-6 text-2xl font-display font-bold text-center">
-            <Link href="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
+          <nav className="flex flex-col gap-6 text-2xl font-display font-bold uppercase tracking-wider text-center">
+            <Link href="/" onClick={() => setMobileMenuOpen(false)} className="hover:text-ice">Home</Link>
+            <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="hover:text-ice">About Us</Link>
             
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col items-center gap-3">
               <button 
-                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className="flex items-center justify-center gap-2 cursor-pointer"
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="flex items-center justify-center gap-2 cursor-pointer hover:text-ice"
               >
                 Services
-                <svg className={`w-5 h-5 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+                <ChevronDown className={`w-6 h-6 transition-transform duration-300 ${servicesOpen ? 'rotate-180' : ''}`} />
               </button>
               
-              <div className={`flex flex-col gap-3 text-lg font-sans font-normal text-text-1 overflow-hidden transition-all duration-300 ease-in-out ${mobileServicesOpen ? 'max-h-60 opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+              <div className={`flex flex-col gap-4 text-lg font-sans font-normal text-fg-1 overflow-hidden transition-all duration-300 ease-in-out ${servicesOpen ? 'max-h-[400px] opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
                 <Link href="/services" onClick={() => setMobileMenuOpen(false)}>All Services</Link>
                 <Link href="/services/residential" onClick={() => setMobileMenuOpen(false)}>Residential HVAC</Link>
                 <Link href="/services/commercial" onClick={() => setMobileMenuOpen(false)}>Commercial HVAC</Link>
+                <Link href="/services/refrigeration" onClick={() => setMobileMenuOpen(false)}>Commercial Refrigeration</Link>
                 <Link href="/services/maintenance" onClick={() => setMobileMenuOpen(false)}>Maintenance Plans</Link>
               </div>
             </div>
 
-            <Link href="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
-            <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Contact</Link>
+            <Link href="/ac-repair" onClick={() => setMobileMenuOpen(false)} className="hover:text-ice">AC Repair</Link>
+            <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="hover:text-ice">Contact</Link>
           </nav>
-          <div className="mt-8 flex flex-col gap-4 shrink-0">
-            <Button href="tel:5551234567" variant="secondary" className="w-full">
-              <Phone className="w-5 h-5" /> Call (555) 123-4567
+          
+          <div className="mt-auto pt-8 flex flex-col gap-4 shrink-0 pb-20">
+            <Button href={`tel:${site.phone.replace(/[^0-9]/g, '')}`} variant="warm" className="w-full">
+              <Phone className="w-5 h-5 fill-current" /> Call {site.phone}
             </Button>
             <Button href="/contact" variant="primary" className="w-full">
               Get a Free Quote
