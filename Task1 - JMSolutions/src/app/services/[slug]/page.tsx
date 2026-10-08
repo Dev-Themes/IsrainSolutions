@@ -1,4 +1,5 @@
-import { servicePages } from '@/content/service-pages';
+import { notFound } from 'next/navigation';
+import { servicePages, serviceSlugs } from '@/content/service-pages';
 import { serviceDetailMetadata } from '@/lib/seo';
 import { serviceDetailSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -9,15 +10,27 @@ import { WhySection } from '@/components/sections/service-detail/WhySection';
 import { FaqSection } from '@/components/sections/service-detail/FaqSection';
 import { RelatedServices } from '@/components/sections/service-detail/RelatedServices';
 
-const slug = 'maintenance';
+import { ReviewsSection } from '@/components/sections/home/ReviewsSection';
+import { CtaBand } from '@/components/sections/home/CtaBand';
+import { ServiceAreasSection } from '@/components/sections/home/ServiceAreasSection';
 
-export function generateMetadata() {
-  const page = servicePages[slug];
+export const dynamicParams = false;
+
+export function generateStaticParams() {
+  return serviceSlugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const page = servicePages[resolvedParams.slug];
+  if (!page) notFound();
   return serviceDetailMetadata(page);
 }
 
-export default function MaintenancePage() {
-  const page = servicePages[slug];
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const page = servicePages[resolvedParams.slug];
+  if (!page) notFound();
 
   return (
     <>
