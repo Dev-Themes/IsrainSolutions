@@ -7,7 +7,7 @@ export function RelatedServices({ current }: { current: string }) {
 
   return (
     <section className="relative isolate py-16 md:py-24 bg-bg-0 overflow-clip">
-      <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-[0.05] mix-blend-screen -z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-[0.05] mix-blend-screen -z-10 pointer-events-none"></div>
 
       <div className="container-custom">
         <div className="mb-12">

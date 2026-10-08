@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { Phone, Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -20,14 +21,18 @@ export default function Header() {
     }
   }, [mobileMenuOpen]);
 
-  const navLinkClass = "relative text-[13px] tracking-[.1em] font-nav font-semibold text-fg-1 uppercase transition-colors hover:text-fg-0 hover:after:scale-x-100 after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-[image:var(--grad-brand)] after:transition-transform after:duration-[280ms]";
+  const pathname = usePathname();
+  const getNavLinkClass = (path: string) => {
+    const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
+    return `relative text-[13px] tracking-[.1em] font-nav font-semibold uppercase transition-colors hover:text-fg-0 hover:after:scale-x-100 after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:origin-left after:bg-[image:var(--grad-brand)] after:transition-transform after:duration-[280ms] ${isActive ? 'text-fg-0 after:scale-x-100' : 'text-fg-1 after:scale-x-0'}`;
+  };
 
   return (
     <>
       {/* Announcement Bar */}
       <div className="flex items-center justify-center h-[40px] bg-[image:var(--grad-fill-cta)] text-white text-[13px] uppercase tracking-[.12em] px-4 font-nav font-semibold">
         <span className="flex items-center gap-2">
-          <span className="text-[14px]">⚠️</span>
+          <span className="text-[14px]">🔥</span>
           <span>24/7 EMERGENCY LINE: <a href={`tel:${site.phone.replace(/[^0-9]/g, '')}`} className="underline hover:text-white/80">{site.phone}</a> — We Answer Every Call</span>
         </span>
       </div>
@@ -53,15 +58,15 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-8 ml-auto mr-12">
-            <Link href="/" className={navLinkClass}>Home</Link>
-            <Link href="/about" className={navLinkClass}>About Us</Link>
+            <Link href="/" className={getNavLinkClass('/')}>Home</Link>
+            <Link href="/about" className={getNavLinkClass('/about')}>About Us</Link>
             
             <div 
               className="relative group"
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
             >
-              <button className={`${navLinkClass} inline-flex items-center gap-1 cursor-pointer`} aria-expanded={servicesOpen} aria-haspopup="true">
+              <button className={`${getNavLinkClass('/services')} inline-flex items-center gap-1 cursor-pointer`} aria-expanded={servicesOpen} aria-haspopup="true">
                 Services <ChevronDown className="w-4 h-4" />
               </button>
               
@@ -79,8 +84,8 @@ export default function Header() {
               </div>
             </div>
 
-            <Link href="/ac-repair" className={navLinkClass}>AC Repair</Link>
-            <Link href="/contact" className={navLinkClass}>Contact</Link>
+            <Link href="/services/residential" className={getNavLinkClass('/services/residential')}>AC Repair</Link>
+            <Link href="/contact" className={getNavLinkClass('/contact')}>Contact</Link>
           </nav>
 
           {/* Right Button */}

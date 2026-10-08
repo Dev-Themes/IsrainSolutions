@@ -14,7 +14,7 @@ export function AboutHero() {
     <div className="relative isolate overflow-clip py-12 md:py-24" style={{ minHeight: 'min(70svh, 640px)' }}>
       {/* Dark background base */}
       <div className="absolute inset-0 bg-bg-0 -z-10 pointer-events-none"></div>
-      <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-[0.05] mix-blend-screen -z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-[0.05] mix-blend-screen -z-10 pointer-events-none"></div>
 
       <div className="container-custom h-full grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] gap-[clamp(32px,5vw,72px)] items-center">
         

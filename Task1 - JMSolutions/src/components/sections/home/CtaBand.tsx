@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 export function CtaBand() {
   return (
     <Section bg="band" className="py-20 md:py-32 overflow-hidden relative isolate">
-      <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-10 mix-blend-screen pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-10 mix-blend-screen pointer-events-none"></div>
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] bg-[image:var(--grad-brand)] opacity-20 blur-[100px] rounded-full pointer-events-none animate-pulse"></div>
 
       <div className="container-custom relative z-10 max-w-4xl mx-auto text-center animate-fade-in-up">

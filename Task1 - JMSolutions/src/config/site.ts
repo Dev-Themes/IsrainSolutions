@@ -9,6 +9,18 @@ export const site = {
   metroArea: "Riverton Metro Area", // DUMMY
   state: "ST", // DUMMY
   zip: "12345", // DUMMY
-  hours: "24/7 emergency, Mon–Fri 7am–6pm scheduled", // DUMMY
+  hours: "24/7 emergency, Mon-Fri 7am-6pm scheduled", // DUMMY
   founded: 2012, // DUMMY
+  serviceAreas: [ // DUMMY
+    "Riverton North",
+    "Millbrook",
+    "Eastfield",
+    "Cedar Hollow",
+    "Lake Verdan",
+    "Harbor Point"
+  ],
+  socials: {
+    facebook: "", // DUMMY
+    instagram: "", // DUMMY
+  }
 };

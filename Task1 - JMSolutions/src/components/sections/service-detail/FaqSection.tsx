@@ -4,7 +4,7 @@ import { SmoothAccordion } from "@/components/ui/SmoothAccordion";
 export function FaqSection({ page }: { page: ServicePageData }) {
   return (
     <section className="relative isolate py-16 md:py-24 bg-band overflow-clip">
-      <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-[0.12] mix-blend-screen -z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-[0.12] mix-blend-screen -z-10 pointer-events-none"></div>
 
       <div className="container-custom">
         <div className="text-center max-w-3xl mx-auto mb-12">

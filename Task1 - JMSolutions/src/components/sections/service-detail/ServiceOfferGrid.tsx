@@ -4,7 +4,7 @@ import type { ServicePageData } from "@/content/service-pages";
 export function ServiceOfferGrid({ page }: { page: ServicePageData }) {
   return (
     <section className="relative isolate py-16 md:py-24 bg-band overflow-clip">
-      <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-[0.12] mix-blend-screen -z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-[0.12] mix-blend-screen -z-10 pointer-events-none"></div>
       
       {/* Glows */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1/3 aspect-square bg-ice/10 blur-[120px] rounded-full -z-10"></div>

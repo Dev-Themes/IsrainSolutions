@@ -6,7 +6,7 @@ import type { ServicePageData } from "@/content/service-pages";
 export function WhySection({ page }: { page: ServicePageData }) {
   return (
     <section className="relative isolate py-16 md:py-24 bg-bg-0 overflow-clip">
-      <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-[0.05] mix-blend-screen -z-10 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-[0.05] mix-blend-screen -z-10 pointer-events-none"></div>
 
       <div className="container-custom grid grid-cols-1 lg:grid-cols-2 gap-[clamp(40px,5vw,72px)] items-center">
         

@@ -30,7 +30,7 @@ export default async function ACRepairCityPage({ params }: { params: Promise<{ s
     <>
       {/* Dynamic Hero */}
       <Section className="min-h-[60svh] flex items-center relative isolation overflow-hidden py-12 md:py-20" bg="bg-0">
-        <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-[0.06] -z-10 mix-blend-screen pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-[0.06] -z-10 mix-blend-screen pointer-events-none"></div>
         <div className="absolute top-0 left-0 bottom-0 w-[40vw] bg-[radial-gradient(circle_at_0%_50%,rgba(63,160,240,0.15)_0%,transparent_70%)] -z-10 pointer-events-none"></div>
         
         <div className="container-custom relative z-10">

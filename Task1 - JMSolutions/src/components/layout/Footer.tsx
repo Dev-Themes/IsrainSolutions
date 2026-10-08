@@ -17,7 +17,7 @@ export default function Footer() {
       
       {/* Contour texture at low opacity */}
       {/* Handled via global texture class or inline SVG pattern if available, for now just a faint noise/gradient fallback */}
-      <div className="absolute inset-0 -z-10 opacity-[0.05] pointer-events-none bg-[url('/textures/contours.svg')] bg-repeat"></div>
+      <div className="absolute inset-0 -z-10 opacity-[0.05] pointer-events-none bg-[url(/textures/contours.svg)] bg-repeat"></div>
       
       <div className="container-custom grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 relative z-10">
         
@@ -39,10 +39,10 @@ export default function Footer() {
             Comfort, Engineered.
           </p>
           <div className="flex gap-3">
-            <a href="[FACEBOOK URL]" className="flex items-center justify-center w-10 h-10 border border-line bg-card hover:bg-[image:var(--grad-brand)] transition-all text-fg-1 hover:text-white rounded-[4px] clip-chamfer">
+            <a href="#" className="flex items-center justify-center w-10 h-10 border border-line bg-card hover:bg-[image:var(--grad-brand)] transition-all text-fg-1 hover:text-white rounded-[4px] clip-chamfer">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
             </a>
-            <a href="[GOOGLE URL]" className="flex items-center justify-center w-10 h-10 border border-line bg-card hover:bg-[image:var(--grad-brand)] transition-all text-fg-1 hover:text-white rounded-[4px] clip-chamfer">
+            <a href="#" className="flex items-center justify-center w-10 h-10 border border-line bg-card hover:bg-[image:var(--grad-brand)] transition-all text-fg-1 hover:text-white rounded-[4px] clip-chamfer">
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z" />
               </svg>
@@ -118,3 +118,4 @@ export default function Footer() {
     </footer>
   );
 }
+

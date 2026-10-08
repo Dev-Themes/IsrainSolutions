@@ -42,7 +42,7 @@ export default function Home() {
     <>
       {/* 2. HERO */}
       <Section className="min-h-[calc(100svh-128px)] flex items-center relative isolation overflow-hidden py-12 md:py-20" bg="bg-0">
-        <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-[0.06] -z-10 mix-blend-screen pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-[0.06] -z-10 mix-blend-screen pointer-events-none"></div>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:240px_100%] -z-10 pointer-events-none"></div>
         <div className="absolute top-0 left-0 bottom-0 w-[40vw] bg-[radial-gradient(circle_at_0%_50%,rgba(63,160,240,0.15)_0%,transparent_70%)] -z-10 pointer-events-none"></div>
         <div className="absolute top-0 right-0 bottom-0 w-[40vw] bg-[radial-gradient(circle_at_100%_50%,rgba(236,106,71,0.15)_0%,transparent_70%)] -z-10 pointer-events-none"></div>
@@ -246,7 +246,7 @@ export default function Home() {
 
       {/* 5. OUR STORY */}
       <Section bg="band">
-        <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-10 mix-blend-screen pointer-events-none mask-image-[linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"></div>
+        <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-10 mix-blend-screen pointer-events-none mask-image-[linear-gradient(to_bottom,transparent,black_10%,black_90%,transparent)]"></div>
         <div className="absolute left-0 top-0 bottom-0 w-[20vw] bg-[radial-gradient(circle_at_0%_50%,rgba(63,160,240,0.2)_0%,transparent_100%)] pointer-events-none"></div>
         <div className="absolute right-0 top-0 bottom-0 w-[20vw] bg-[radial-gradient(circle_at_100%_50%,rgba(236,106,71,0.2)_0%,transparent_100%)] pointer-events-none"></div>
 
@@ -345,7 +345,7 @@ export default function Home() {
       {/* 8. CTA BAND */}
       {/* 8. CTA BAND */}
       <Section bg="band" className="py-20 md:py-32 overflow-hidden relative isolate">
-        <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-10 mix-blend-screen pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-10 mix-blend-screen pointer-events-none"></div>
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] md:w-[40vw] md:h-[40vw] bg-[image:var(--grad-brand)] opacity-20 blur-[100px] rounded-full pointer-events-none animate-pulse"></div>
 
         <div className="container-custom relative z-10 max-w-4xl mx-auto text-center animate-fade-in-up">
@@ -375,7 +375,7 @@ export default function Home() {
 
       {/* 9. SERVING THESE AREAS */}
       <Section bg="bg-1" className="border-t border-line">
-        <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-5 mix-blend-screen pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-5 mix-blend-screen pointer-events-none"></div>
         <div className="container-custom relative z-10 text-center">
           <h2 className="text-3xl md:text-4xl font-display font-bold text-fg-0 mb-4 inline-flex flex-col items-center">
             <span>Serving Houston <span className="text-brand-gradient">and These Areas</span></span>

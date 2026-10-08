@@ -11,7 +11,7 @@ export function ServiceAreasSection() {
 
   return (
     <Section bg="bg-1" className="border-t border-line">
-      <div className="absolute inset-0 bg-[url('/textures/contours.svg')] bg-repeat opacity-5 mix-blend-screen pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[url(/textures/contours.svg)] bg-repeat opacity-5 mix-blend-screen pointer-events-none"></div>
       <div className="container-custom relative z-10 text-center">
         <h2 className="text-3xl md:text-4xl font-display font-bold text-fg-0 mb-4 inline-flex flex-col items-center">
           <span>Serving Houston <span className="text-brand-gradient">and These Areas</span></span>

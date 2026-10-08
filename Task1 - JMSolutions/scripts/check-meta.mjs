@@ -16,30 +16,44 @@ function checkText(name, text, max) {
   return errors;
 }
 
-// Quick check of the generated seo.ts
-const seoFile = path.join(process.cwd(), 'src/lib/seo.ts');
-const content = fs.readFileSync(seoFile, 'utf8');
-
-const titleMatch = content.match(/title:\s*["']([^"']+)["']/);
-const descMatch = content.match(/description:\s*["']([^"']+)["']/);
+const filesToCheck = [
+  'src/lib/seo.ts',
+  'src/content/contact.ts',
+];
 
 let hasError = false;
+let seenTitles = new Set();
+let seenDescs = new Set();
 
-if (titleMatch) {
-  const errs = checkText('Title', titleMatch[1], MAX_TITLE);
-  errs.forEach(e => { console.error('ERROR:', e); hasError = true; });
-} else {
-  console.error('ERROR: Could not find title in seo.ts');
-  hasError = true;
-}
+filesToCheck.forEach(file => {
+  const filePath = path.join(process.cwd(), file);
+  if (!fs.existsSync(filePath)) return;
+  const content = fs.readFileSync(filePath, 'utf8');
 
-if (descMatch) {
-  const errs = checkText('Description', descMatch[1], MAX_DESC);
-  errs.forEach(e => { console.error('ERROR:', e); hasError = true; });
-} else {
-  console.error('ERROR: Could not find description in seo.ts');
-  hasError = true;
-}
+  // Simple regex extraction. Handles simple string assignments
+  const titles = [...content.matchAll(/title:\s*['"]([^'"]+)['"]/g)].map(m => m[1]);
+  const descs = [...content.matchAll(/description:\s*['"]([^'"]+)['"]/g)].map(m => m[1]);
+
+  titles.forEach(title => {
+    const errs = checkText(`Title in ${file}`, title, MAX_TITLE);
+    errs.forEach(e => { console.error('ERROR:', e); hasError = true; });
+    if (seenTitles.has(title)) {
+      console.error(`ERROR: Duplicate title found: ${title}`);
+      hasError = true;
+    }
+    seenTitles.add(title);
+  });
+
+  descs.forEach(desc => {
+    const errs = checkText(`Description in ${file}`, desc, MAX_DESC);
+    errs.forEach(e => { console.error('ERROR:', e); hasError = true; });
+    if (seenDescs.has(desc)) {
+      console.error(`ERROR: Duplicate description found: ${desc}`);
+      hasError = true;
+    }
+    seenDescs.add(desc);
+  });
+});
 
 if (hasError) {
   process.exit(1);
