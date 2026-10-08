@@ -4,6 +4,7 @@
   <img src="https://images.unsplash.com/photo-1613146197177-3e5f22f7a070?q=80&w=2000&auto=format&fit=crop" alt="Project Hero Image" style="border-radius: 12px; margin-bottom: 20px;" />
   
   <p><strong>A modern, fast, and responsive website built for JM Comfort Solutions, an HVAC company, powered by Next.js, Tailwind CSS, and Framer Motion.</strong></p>
+  <p>By Muhammad Shariq</p>
 
   <p>
     <a href="https://nextjs.org/"><img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white" alt="Next.js" /></a>
