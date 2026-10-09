@@ -1,10 +1,13 @@
 import { ImageResponse } from 'next/og';
-import { parseLocalSlug } from '@/lib/local';
+import { parseLocalSlug, allLocalSlugs } from '@/lib/local';
 
-export const runtime = 'edge';
 export const alt = 'AC Repair Services';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
+
+export function generateStaticParams() {
+  return allLocalSlugs().map((localSlug) => ({ localSlug }));
+}
 
 export default async function Image({ params }: { params: Promise<{ localSlug: string }> }) {
   const { localSlug } = await params;
