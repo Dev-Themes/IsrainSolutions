@@ -31,11 +31,11 @@ export default async function Image({ params }: { params: Promise<{ localSlug: s
           padding: '64px',
         }}
       >
-        <div style={{ fontSize: 64, fontWeight: 'bold', marginBottom: 32 }}>
+        <div style={{ fontSize: 64, fontWeight: 'bold', marginBottom: 32, display: 'flex' }}>
           JM Comfort Solutions
         </div>
-        <div style={{ fontSize: 48, color: '#38bdf8' }}>
-          AC Repair in {area.town}, {area.st}
+        <div style={{ fontSize: 48, color: '#38bdf8', display: 'flex' }}>
+          {`AC Repair in ${area.town}, ${area.st}`}
         </div>
       </div>
     ),
