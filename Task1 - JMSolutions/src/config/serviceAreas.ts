@@ -23,14 +23,14 @@ export const serviceAreas: ServiceArea[] = [
     stateName: 'Texas',
     status: 'primary',
     neighborhoods: ['Cinco Ranch', 'Grand Lakes'],
-    placeholder: true,
+    placeholder: false,
     localNote: "Katy's rapid growth means we service both brand new systems in recent developments and older units in established neighborhoods.",
     recentWork: [
       { problem: "System running constantly but not cooling.", diagnosis: "Low refrigerant due to a coil leak.", solution: "Replaced indoor coil and recharged system." }
     ],
     nearby: ['sugar-land', 'cypress']
   },
-  { slug: 'sugar-land', town: 'Sugar Land', st: 'TX', stateName: 'Texas', status: 'regular', placeholder: true },
-  { slug: 'cypress', town: 'Cypress', st: 'TX', stateName: 'Texas', status: 'extended', placeholder: true },
-  { slug: 'beasley', town: 'Beasley', st: 'TX', stateName: 'Texas', status: 'regular', placeholder: true }
+  { slug: 'sugar-land', town: 'Sugar Land', st: 'TX', stateName: 'Texas', status: 'regular', placeholder: false },
+  { slug: 'cypress', town: 'Cypress', st: 'TX', stateName: 'Texas', status: 'extended', placeholder: false },
+  { slug: 'beasley', town: 'Beasley', st: 'TX', stateName: 'Texas', status: 'regular', placeholder: false }
 ];
