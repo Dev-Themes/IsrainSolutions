@@ -78,7 +78,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${dmSans.variable} ${sairaCond.variable} ${saira.variable}`} style={{ colorScheme: "dark" }}>
+    <html lang="en" className={`dark scroll-smooth ${dmSans.variable} ${sairaCond.variable} ${saira.variable}`} style={{ colorScheme: "dark" }}>
       <head>
         <meta name="color-scheme" content="dark" />
         <meta name="theme-color" content="#050D1A" />

@@ -329,3 +329,102 @@ export function serviceDetailSchema(page: ServicePageData) {
     ]
   };
 }
+
+export function isPlaceholder(val: string) {
+  return typeof val === 'string' && val.includes('[') && val.includes(']');
+}
+
+export function serviceSchema(ctx: any, url: string) {
+  const node: any = {
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    serviceType: 'Air conditioning repair',
+    provider: { '@id': `${site.url}/#business` },
+    url,
+  };
+
+  if (!isPlaceholder(ctx.town) && !isPlaceholder(ctx.stateName)) {
+    node.areaServed = {
+      '@type': 'City',
+      name: ctx.town,
+      containedInPlace: {
+        '@type': 'AdministrativeArea',
+        name: ctx.stateName,
+      }
+    };
+  }
+
+  if (ctx.fee && !isPlaceholder(ctx.fee)) {
+    node.offers = {
+      '@type': 'Offer',
+      priceSpecification: {
+        '@type': 'PriceSpecification',
+        price: ctx.fee.replace(/[^0-9.]/g, ''),
+        priceCurrency: 'USD',
+        description: 'Diagnostic Fee'
+      }
+    };
+  }
+  return node;
+}
+
+export function faqSchema(faqs: { question: string; answer: string }[], url: string) {
+  if (!faqs || faqs.length === 0) return null;
+  return {
+    '@type': 'FAQPage',
+    '@id': `${url}#faq`,
+    mainEntity: faqs.map(f => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: f.answer,
+      }
+    }))
+  };
+}
+
+export function businessNode() {
+  const node: any = {
+    '@type': 'HVACBusiness',
+    '@id': `${site.url}/#business`,
+    name: site.name,
+    url: site.url,
+  };
+  if (!isPlaceholder(site.phone)) node.telephone = site.phone;
+  if (!isPlaceholder(site.address)) {
+    node.address = {
+      '@type': 'PostalAddress',
+      streetAddress: site.address,
+      addressLocality: site.city,
+      addressRegion: site.state,
+      postalCode: site.zip,
+    };
+  }
+  return node;
+}
+
+export function breadcrumbSchema(items: { name: string; item?: string }[], url: string) {
+  return {
+    '@type': 'BreadcrumbList',
+    '@id': `${url}#breadcrumb`,
+    itemListElement: items.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.name,
+      item: crumb.item ? `${site.url}${crumb.item}` : undefined,
+    }))
+  };
+}
+
+export function webPageSchema(url: string, title: string, description: string) {
+  return {
+    '@type': 'WebPage',
+    '@id': url,
+    url,
+    name: title,
+    description,
+    isPartOf: { '@id': `${site.url}/#website` },
+    about: { '@id': `${site.url}/#business` },
+  };
+}

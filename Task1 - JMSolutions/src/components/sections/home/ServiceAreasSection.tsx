@@ -4,9 +4,9 @@ import { serviceAreas } from '@/config/serviceAreas';
 
 export function ServiceAreasSection() {
   const accordionData = [
-    { title: "Air Conditioning Repair", items: serviceAreas.map(area => ({ label: `Air Conditioning Repair ${area.city}`, slug: area.slug })) },
-    { title: "Heating & Furnace Repair", items: serviceAreas.map(area => ({ label: `Furnace Repair ${area.city}`, slug: area.slug })) },
-    { title: "Commercial Refrigeration Repair", items: serviceAreas.map(area => ({ label: `Commercial Refrigeration ${area.city}`, slug: area.slug })) },
+    { title: "Air Conditioning Repair", items: serviceAreas.map(area => ({ label: `Air Conditioning Repair ${area.town}`, slug: area.slug })) },
+    { title: "Heating & Furnace Repair", items: serviceAreas.map(area => ({ label: `Furnace Repair ${area.town}`, slug: area.slug })) },
+    { title: "Commercial Refrigeration Repair", items: serviceAreas.map(area => ({ label: `Commercial Refrigeration ${area.town}`, slug: area.slug })) },
   ];
 
   return (
@@ -21,7 +21,7 @@ export function ServiceAreasSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 mt-12 text-center max-w-4xl mx-auto mb-16">
           {serviceAreas.map((area, idx) => (
             <a key={idx} href={`/ac-repair-${area.slug}`} className="group relative inline-flex justify-center text-[16px] text-fg-1 hover:text-ice transition-colors font-medium">
-              {area.city}
+              {area.town}
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-full h-[1px] bg-line group-hover:h-[2px] group-hover:bg-[image:var(--grad-brand)] transition-all duration-300"></span>
             </a>
           ))}

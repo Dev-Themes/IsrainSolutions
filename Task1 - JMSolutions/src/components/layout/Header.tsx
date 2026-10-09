@@ -24,16 +24,21 @@ export default function Header() {
   const pathname = usePathname();
   const getNavLinkClass = (path: string) => {
     const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
-    return `relative text-[13px] tracking-[.1em] font-nav font-semibold uppercase transition-colors hover:text-fg-0 hover:after:scale-x-100 after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:origin-left after:bg-[image:var(--grad-brand)] after:transition-transform after:duration-[280ms] ${isActive ? 'text-fg-0 after:scale-x-100' : 'text-fg-1 after:scale-x-0'}`;
+    return `relative inline-flex items-center h-6 text-[13px] tracking-[.1em] font-nav font-semibold uppercase transition-colors hover:text-fg-0 hover:after:scale-x-100 after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:origin-left after:bg-[image:var(--grad-brand)] after:transition-transform after:duration-[280ms] ${isActive ? 'text-fg-0 after:scale-x-100' : 'text-fg-1 after:scale-x-0'}`;
   };
 
   return (
     <>
       {/* Announcement Bar */}
-      <div className="flex items-center justify-center h-[40px] bg-[image:var(--grad-fill-cta)] text-white text-[13px] uppercase tracking-[.12em] px-4 font-nav font-semibold">
-        <span className="flex items-center gap-2">
+      <div className="flex items-center justify-center min-h-[40px] py-2 bg-[image:var(--grad-fill-cta)] text-white text-[11px] sm:text-[13px] uppercase tracking-[.1em] sm:tracking-[.12em] px-4 font-nav font-semibold text-center leading-snug">
+        <span className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
           <span className="text-[14px]">🔥</span>
-          <span>24/7 EMERGENCY LINE: <a href={`tel:${site.phone.replace(/[^0-9]/g, '')}`} className="underline hover:text-white/80">{site.phone}</a> — We Answer Every Call</span>
+          <span>
+            <span className="hidden sm:inline">24/7 EMERGENCY LINE: </span>
+            <span className="sm:hidden">24/7 EMERGENCY: </span>
+            <a href={`tel:${site.phone.replace(/[^0-9]/g, '')}`} className="underline hover:text-white/80">{site.phone}</a>
+            <span className="hidden sm:inline"> — We Answer Every Call</span>
+          </span>
         </span>
       </div>
 
@@ -84,7 +89,7 @@ export default function Header() {
               </div>
             </div>
 
-            <Link href="/services/residential" className={getNavLinkClass('/services/residential')}>AC Repair</Link>
+            <Link href="/ac-repair" className={getNavLinkClass('/ac-repair')}>AC Repair</Link>
             <Link href="/contact" className={getNavLinkClass('/contact')}>Contact</Link>
           </nav>
 

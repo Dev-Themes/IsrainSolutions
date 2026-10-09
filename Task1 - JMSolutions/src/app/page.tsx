@@ -24,9 +24,9 @@ export default function Home() {
   };
 
   const accordionData = [
-    { title: "Air Conditioning Repair", items: serviceAreas.map(area => ({ label: `Air Conditioning Repair ${area.city}`, slug: area.slug })) },
-    { title: "Heating & Furnace Repair", items: serviceAreas.map(area => ({ label: `Furnace Repair ${area.city}`, slug: area.slug })) },
-    { title: "Commercial Refrigeration Repair", items: serviceAreas.map(area => ({ label: `Commercial Refrigeration ${area.city}`, slug: area.slug })) },
+    { title: "Air Conditioning Repair", items: serviceAreas.map(area => ({ label: `Air Conditioning Repair ${area.town}`, slug: area.slug })) },
+    { title: "Heating & Furnace Repair", items: serviceAreas.map(area => ({ label: `Furnace Repair ${area.town}`, slug: area.slug })) },
+    { title: "Commercial Refrigeration Repair", items: serviceAreas.map(area => ({ label: `Commercial Refrigeration ${area.town}`, slug: area.slug })) },
   ];
 
   const reviews = [
@@ -51,9 +51,16 @@ export default function Home() {
           
           {/* Left Column */}
           <div className="flex flex-col items-start text-left max-w-2xl animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="inline-flex items-center gap-2 px-[14px] py-[8px] mb-8 border border-[image:var(--grad-brand)] border-opacity-30 text-ice text-[12px] font-nav font-bold tracking-[.24em] uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-ice shadow-[0_0_8px_var(--ice)] animate-pulse"></span>
-              ● Sugar Land, TX · <span className="text-ember">HEATING</span> | <span className="text-blue">COOLING</span> | <span className="text-ice">REFRIGERATION</span>
+            <div className="inline-flex flex-wrap items-center gap-1 sm:gap-2 px-3 sm:px-[14px] py-2 mb-8 border border-[image:var(--grad-brand)] border-opacity-30 text-ice text-[10px] sm:text-[12px] font-nav font-bold tracking-[.1em] sm:tracking-[.24em] uppercase max-w-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-ice shadow-[0_0_8px_var(--ice)] animate-pulse shrink-0"></span>
+              <span>Sugar Land, TX <span className="hidden sm:inline">·</span></span>
+              <div className="flex flex-wrap items-center gap-1">
+                <span className="text-ember">HEATING</span>
+                <span className="opacity-50">|</span>
+                <span className="text-blue">COOLING</span>
+                <span className="opacity-50">|</span>
+                <span className="text-ice">REFRIGERATION</span>
+              </div>
             </div>
             
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.05] mb-6 text-fg-0 uppercase drop-shadow-md text-balance">
@@ -100,6 +107,7 @@ export default function Home() {
                   src={tab.src}
                   alt={tab.caption}
                   fill
+                  sizes="(min-width: 1024px) 50vw, 100vw"
                   className={`object-cover transition-opacity duration-700 ${activeHeroTab === key ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
                   priority={key === 'cooling'}
                 />
@@ -382,10 +390,10 @@ export default function Home() {
             <div className="w-[88px] h-[4px] mt-2 bg-[image:var(--grad-brand)] transform skew-x-[-20deg]"></div>
           </h2>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-6 mt-12 text-center max-w-4xl mx-auto mb-16">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-6 mt-12 max-w-4xl mx-auto mb-16">
             {serviceAreas.map((area, idx) => (
               <a key={idx} href={`/ac-repair-${area.slug}`} className="group relative inline-flex justify-center text-[16px] text-fg-1 hover:text-ice transition-colors font-medium">
-                {area.city}
+                {area.town}
                 <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-full h-[1px] bg-line group-hover:h-[2px] group-hover:bg-[image:var(--grad-brand)] transition-all duration-300"></span>
               </a>
             ))}

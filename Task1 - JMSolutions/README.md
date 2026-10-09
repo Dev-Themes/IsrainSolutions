@@ -128,3 +128,22 @@ If you need to update the logo:
 2. Run `npm run lint` and `npm run build` to verify there are no TypeScript or dark-theme violations.
 3. Run layout integrity tests with Playwright.
 4. Deploy to Vercel or any Next.js compatible hosting provider using standard Next.js deployment commands (`npm run build && npm start`).
+
+## AC Repair Local Page System
+
+### Adding a Town
+To add a new town, add an entry to `serviceAreas` in `src/config/serviceAreas.ts`. Provide `slug`, `town`, `st`, `stateName`, `status`. To make the page indexable, it must have at least 150 unique words across `localNote`, `neighborhoods`, `localFaq`, and real `recentWork`. Remove `placeholder: true` when it's ready.
+
+### Enabling Heating / Refrigeration
+To enable other services, set their `enabled` flag to `true` in `src/config/services.ts`. You will also need to create content providers for them in `src/content/localServices/` and update `LocalServicePage.tsx` to use the correct content based on the `service.slug`.
+
+### Setting Claim Flags and Diagnostic Fee
+Update the flags in `src/config/site.ts` under `features`.
+- `emergency247`: true/false
+- `sameDay`: true/false
+- `freeSecondOpinion`: true/false
+- `financing`: true/false
+- `diagnosticFee`: e.g., `"$89"` or `null`
+
+### Previewing Sample Towns
+Set `NEXT_PUBLIC_SHOW_SAMPLE_AREAS=1` in your environment (or run in `development` mode) to include placeholder towns in the local link grids and sitemap.

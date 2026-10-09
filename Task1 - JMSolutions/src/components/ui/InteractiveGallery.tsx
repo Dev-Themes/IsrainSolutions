@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { Search, X } from "lucide-react";
 
@@ -12,6 +13,11 @@ export interface GalleryImage {
 
 export function InteractiveGallery({ images }: { images: GalleryImage[] }) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <>
@@ -34,14 +40,20 @@ export function InteractiveGallery({ images }: { images: GalleryImage[] }) {
       </div>
 
       {/* Lightbox Modal */}
-      {selectedIndex !== null && (
-        <div className="fixed inset-0 z-[100] bg-bg-0/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-8 animate-fade-in-up">
-          <div className="relative w-full max-w-[1200px] max-h-[90vh] bg-card border border-line clip-chamfer shadow-2xl flex flex-col lg:flex-row overflow-hidden isolate">
+      {mounted && selectedIndex !== null && createPortal(
+        <div 
+          className="fixed inset-0 z-[9999] bg-bg-0/90 backdrop-blur-md flex items-center justify-center p-4 sm:p-8 md:p-12 animate-fade-in-up"
+          onClick={() => setSelectedIndex(null)}
+        >
+          <div 
+            className="relative w-full max-w-[1000px] max-h-[85vh] bg-card border border-line clip-chamfer shadow-2xl flex flex-col lg:flex-row overflow-hidden isolate"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="absolute inset-[1px] bg-bg-1 clip-chamfer -z-10" style={{clipPath: 'polygon(0 0, calc(100% - 17.6px) 0, 100% 17.6px, 100% 100%, 17.6px 100%, 0 calc(100% - 17.6px))'}}></div>
             
             {/* Close Button - Now inside the modal panel */}
             <button 
-              className="absolute top-4 right-4 p-2 bg-bg-0 border border-line text-fg-0 hover:bg-[image:var(--grad-brand)] hover:text-white hover:border-transparent rounded-sm z-50 transition-all cursor-pointer shadow-lg clip-chamfer group"
+              className="absolute top-2 right-2 md:top-4 md:right-4 p-2 bg-bg-0 border border-line text-fg-0 hover:bg-[image:var(--grad-brand)] hover:text-white hover:border-transparent rounded-sm z-[60] transition-all cursor-pointer shadow-lg clip-chamfer group"
               onClick={() => setSelectedIndex(null)}
               aria-label="Close"
               style={{'--cut': '6px'} as any}
@@ -50,7 +62,7 @@ export function InteractiveGallery({ images }: { images: GalleryImage[] }) {
             </button>
             
             {/* Image Area */}
-            <div className="relative w-full lg:w-[60%] h-[40vh] lg:h-auto min-h-[300px] bg-bg-0 border-r border-line isolate">
+            <div className="relative w-full lg:w-[55%] h-[30vh] lg:h-auto min-h-[200px] md:min-h-[300px] bg-bg-0 border-r border-line isolate shrink-0">
               <Image 
                 src={images[selectedIndex].src} 
                 alt={images[selectedIndex].alt} 
@@ -61,18 +73,19 @@ export function InteractiveGallery({ images }: { images: GalleryImage[] }) {
             </div>
             
             {/* Details Area */}
-            <div className="w-full lg:w-[40%] p-8 lg:p-10 flex flex-col overflow-y-auto max-h-[50vh] lg:max-h-[80vh]">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 border border-[image:var(--grad-brand)] text-ice text-[12px] font-nav font-bold tracking-[.24em] uppercase self-start bg-bg-0">
+            <div className="w-full lg:w-[45%] p-5 sm:p-6 md:p-8 flex flex-col overflow-y-auto max-h-[50vh] lg:max-h-[85vh]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 border border-[image:var(--grad-brand)] text-ice text-[10px] sm:text-[12px] font-nav font-bold tracking-[.2em] sm:tracking-[.24em] uppercase self-start bg-bg-0">
                 PROJECT DETAILS
               </div>
-              <h3 className="text-3xl font-display font-bold text-fg-0 mb-4">{images[selectedIndex].alt}</h3>
-              <div className="w-16 h-1 bg-[image:var(--grad-brand)] mb-8 transform skew-x-[-12deg]"></div>
-              <p className="text-fg-1 leading-relaxed text-[16px] flex-1">
+              <h3 className="text-2xl sm:text-3xl font-display font-bold text-fg-0 mb-4">{images[selectedIndex].alt}</h3>
+              <div className="w-16 h-1 bg-[image:var(--grad-brand)] mb-6 transform skew-x-[-12deg]"></div>
+              <p className="text-fg-1 leading-relaxed text-[14px] sm:text-[16px] flex-1">
                 {images[selectedIndex].description}
               </p>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
