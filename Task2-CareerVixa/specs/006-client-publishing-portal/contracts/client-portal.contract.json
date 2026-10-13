@@ -1,0 +1,200 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CareerVixa Client Publishing Portal API & Server Action Contracts",
+  "description": "Defines typed contracts for Server Actions and data operations in Spec 006",
+  "version": "1.0.0",
+  "actions": [
+    {
+      "name": "getDashboardMetrics",
+      "description": "Calculates real-time article counts for the authenticated client",
+      "authentication": "Required (Role: CLIENT)",
+      "input": null,
+      "output": {
+        "type": "object",
+        "properties": {
+          "totalDrafts": { "type": "integer", "minimum": 0 },
+          "pendingReview": { "type": "integer", "minimum": 0 },
+          "changesRequested": { "type": "integer", "minimum": 0 },
+          "rejected": { "type": "integer", "minimum": 0 },
+          "published": { "type": "integer", "minimum": 0 },
+          "totalSubmissions": { "type": "integer", "minimum": 0 }
+        },
+        "required": ["totalDrafts", "pendingReview", "changesRequested", "rejected", "published", "totalSubmissions"]
+      }
+    },
+    {
+      "name": "listClientArticles",
+      "description": "Retrieves paginated articles owned by the authenticated client with optional filters",
+      "authentication": "Required (Role: CLIENT)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["ALL", "DRAFT", "PENDING_REVIEW", "CHANGES_REQUESTED", "REJECTED", "APPROVED", "PUBLISHED"]
+          },
+          "categoryId": { "type": "string" },
+          "page": { "type": "integer", "minimum": 1, "default": 1 },
+          "pageSize": { "type": "integer", "minimum": 1, "maximum": 50, "default": 10 }
+        }
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "articles": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": { "type": "string" },
+                "title": { "type": "string" },
+                "slug": { "type": "string" },
+                "status": { "type": "string" },
+                "contentOrigin": { "type": "string", "enum": ["MANUAL", "AI"] },
+                "category": { "type": "object" },
+                "submittedAt": { "type": ["string", "null"], "format": "date-time" },
+                "updatedAt": { "type": "string", "format": "date-time" },
+                "reviewNotes": { "type": ["string", "null"] }
+              },
+              "required": ["id", "title", "slug", "status", "contentOrigin", "updatedAt"]
+            }
+          },
+          "totalCount": { "type": "integer" },
+          "totalPages": { "type": "integer" },
+          "currentPage": { "type": "integer" }
+        },
+        "required": ["articles", "totalCount", "totalPages", "currentPage"]
+      }
+    },
+    {
+      "name": "saveClientDraft",
+      "description": "Saves or updates a private article draft owned by the authenticated client",
+      "authentication": "Required (Role: CLIENT)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "description": "Optional article ID when updating an existing draft" },
+          "title": { "type": "string", "minLength": 1, "maxLength": 150 },
+          "slug": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+          "summary": { "type": "string", "maxLength": 300 },
+          "content": { "type": "string", "minLength": 1 },
+          "categoryId": { "type": "string" },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "coverImage": { "type": "string", "format": "uri" },
+          "originalSourceUrl": { "type": "string", "format": "uri" },
+          "promotionalUrl": { "type": "string", "format": "uri" }
+        },
+        "required": ["title", "content"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "articleId": { "type": "string" },
+          "slug": { "type": "string" },
+          "status": { "type": "string", "enum": ["DRAFT"] }
+        },
+        "required": ["success", "articleId", "status"]
+      }
+    },
+    {
+      "name": "submitArticleForReview",
+      "description": "Validates full submission requirements and transitions draft to PENDING_REVIEW",
+      "authentication": "Required (Role: CLIENT)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "articleId": { "type": "string" },
+          "promotionalUrl": { "type": "string", "format": "uri" },
+          "originalSourceUrl": { "type": "string", "format": "uri" },
+          "rightsDeclared": { "type": "boolean", "enum": [true] },
+          "termsAccepted": { "type": "boolean", "enum": [true] }
+        },
+        "required": ["articleId", "promotionalUrl", "rightsDeclared", "termsAccepted"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "articleId": { "type": "string" },
+          "status": { "type": "string", "enum": ["PENDING_REVIEW"] },
+          "submittedAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["success", "articleId", "status", "submittedAt"]
+      }
+    },
+    {
+      "name": "deleteClientDraft",
+      "description": "Deletes an unfinished draft or rejected article owned by the authenticated client",
+      "authentication": "Required (Role: CLIENT)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "articleId": { "type": "string" }
+        },
+        "required": ["articleId"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "deletedId": { "type": "string" }
+        },
+        "required": ["success", "deletedId"]
+      }
+    },
+    {
+      "name": "upsertContributorProfile",
+      "description": "Saves or updates contributor contact, business, and biographical metadata",
+      "authentication": "Required (Role: CLIENT)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "fullName": { "type": "string", "minLength": 2, "maxLength": 100 },
+          "organization": { "type": "string", "maxLength": 100 },
+          "country": { "type": "string", "minLength": 2, "maxLength": 100 },
+          "phoneNumber": { "type": "string", "maxLength": 30 },
+          "bio": { "type": "string", "maxLength": 500 },
+          "websiteUrl": { "type": "string", "format": "uri" }
+        },
+        "required": ["fullName", "country"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "profile": { "type": "object" }
+        },
+        "required": ["success", "profile"]
+      }
+    },
+    {
+      "name": "generateClientAIDraft",
+      "description": "Generates a structured career article using Tavily research and LLM; saves as private draft",
+      "authentication": "Required (Role: CLIENT)",
+      "input": {
+        "type": "object",
+        "properties": {
+          "topic": { "type": "string", "minLength": 5, "maxLength": 200 },
+          "keywords": { "type": "array", "items": { "type": "string" } },
+          "instructions": { "type": "string", "maxLength": 500 },
+          "categoryId": { "type": "string" }
+        },
+        "required": ["topic"]
+      },
+      "output": {
+        "type": "object",
+        "properties": {
+          "success": { "type": "boolean" },
+          "articleId": { "type": "string" },
+          "title": { "type": "string" },
+          "slug": { "type": "string" },
+          "status": { "type": "string", "enum": ["DRAFT"] },
+          "contentOrigin": { "type": "string", "enum": ["AI"] }
+        },
+        "required": ["success", "articleId", "title", "slug", "status", "contentOrigin"]
+      }
+    }
+  ]
+}
