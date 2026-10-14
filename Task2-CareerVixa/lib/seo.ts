@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const siteConfig = {
   name: "CareerVixa",
-  url: "https://careervixa.com", // Adjust as necessary
+  url: process.env.NEXT_PUBLIC_APP_URL || "https://career-vixa.vercel.app",
   description: "Practical, warm, and confident career advice, job search strategies, and professional growth guides.",
 };
 

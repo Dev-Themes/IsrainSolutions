@@ -6,12 +6,14 @@ import { constructMetadata } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
+const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://career-vixa.vercel.app";
+
 export const metadata = constructMetadata({
   title: "CareerVixa - Career, Jobs & Professional Growth",
   description: "Practical, warm, and confident career advice, job search strategies, and professional growth guides.",
-  url: "https://careervixa.com",
+  url: appUrl,
 });
-metadata.metadataBase = new URL("https://careervixa.com");
+metadata.metadataBase = new URL(appUrl);
 
 import { auth } from "@/lib/auth";
 

@@ -9,7 +9,7 @@ import { AdminNewSubmissionTemplate } from "@/components/emails/AdminNewSubmissi
 import { ArticleDecisionTemplate } from "@/components/emails/ArticleDecisionTemplate";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const domain = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+const domain = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://career-vixa.vercel.app";
 
 const gmailUser = process.env.GMAIL_USER || process.env.SMTP_USER;
 const gmailPassword = process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASSWORD;
