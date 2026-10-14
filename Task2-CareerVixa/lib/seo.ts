@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
 
+function getBaseUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL;
+  if (process.env.VERCEL || process.env.NODE_ENV === "production") {
+    if (envUrl && !envUrl.includes("localhost")) {
+      return envUrl.replace(/\/$/, "");
+    }
+    return "https://career-vixa.vercel.app";
+  }
+  return (envUrl || "http://localhost:3000").replace(/\/$/, "");
+}
+
 export const siteConfig = {
   name: "CareerVixa",
-  url: process.env.NEXT_PUBLIC_APP_URL || "https://career-vixa.vercel.app",
+  url: getBaseUrl(),
   description: "Practical, warm, and confident career advice, job search strategies, and professional growth guides.",
 };
 

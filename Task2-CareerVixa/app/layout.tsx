@@ -6,7 +6,9 @@ import { constructMetadata } from "@/lib/seo";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
-const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://career-vixa.vercel.app";
+const appUrl = (process.env.NEXT_PUBLIC_APP_URL && !process.env.NEXT_PUBLIC_APP_URL.includes("localhost"))
+  ? process.env.NEXT_PUBLIC_APP_URL.replace(/\/$/, "")
+  : "https://career-vixa.vercel.app";
 
 export const metadata = constructMetadata({
   title: "CareerVixa - Career, Jobs & Professional Growth",

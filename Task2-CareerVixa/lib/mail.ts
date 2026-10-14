@@ -9,7 +9,26 @@ import { AdminNewSubmissionTemplate } from "@/components/emails/AdminNewSubmissi
 import { ArticleDecisionTemplate } from "@/components/emails/ArticleDecisionTemplate";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const domain = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || "https://career-vixa.vercel.app";
+
+function getBaseUrl(): string {
+  const envUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL;
+
+  // If in production or on Vercel, guarantee we never send a localhost link
+  if (process.env.VERCEL || process.env.NODE_ENV === "production") {
+    if (envUrl && !envUrl.includes("localhost")) {
+      return envUrl.replace(/\/$/, "");
+    }
+    if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+      return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`;
+    }
+    if (process.env.VERCEL_URL) {
+      return `https://${process.env.VERCEL_URL}`;
+    }
+    return "https://career-vixa.vercel.app";
+  }
+
+  return (envUrl || "http://localhost:3000").replace(/\/$/, "");
+}
 
 const gmailUser = process.env.GMAIL_USER || process.env.SMTP_USER;
 const gmailPassword = process.env.GMAIL_APP_PASSWORD || process.env.SMTP_PASSWORD;
@@ -58,7 +77,7 @@ async function deliverEmail({
 }
 
 export const sendVerificationEmail = async (email: string, token: string, name?: string) => {
-  const verifyUrl = `${domain}/verify-email?token=${token}`;
+  const verifyUrl = `${getBaseUrl()}/verify-email?token=${token}`;
   console.log(`\n======================================================`);
   console.log(`📧 [DEV EMAIL] Verification Link for ${email}:`);
   console.log(`🔗 ${verifyUrl}`);
@@ -78,7 +97,7 @@ export const sendVerificationEmail = async (email: string, token: string, name?:
 };
 
 export const sendPasswordResetEmail = async (email: string, token: string, name?: string) => {
-  const resetUrl = `${domain}/reset-password?token=${token}`;
+  const resetUrl = `${getBaseUrl()}/reset-password?token=${token}`;
   console.log(`\n======================================================`);
   console.log(`📧 [DEV EMAIL] Password Reset Link for ${email}:`);
   console.log(`🔗 ${resetUrl}`);
@@ -111,8 +130,8 @@ export const sendArticleSubmissionConfirmationEmail = async ({
   categoryName?: string;
 }) => {
   try {
-    const dashboardUrl = `${domain}/dashboard/articles`;
-    const previewUrl = `${domain}/dashboard/articles/${articleId}/preview`;
+    const dashboardUrl = `${getBaseUrl()}/dashboard/articles`;
+    const previewUrl = `${getBaseUrl()}/dashboard/articles/${articleId}/preview`;
 
     const res = await deliverEmail({
       to: email,
@@ -151,7 +170,7 @@ export const sendAdminSubmissionNotificationEmail = async ({
   promotionalUrl?: string;
 }) => {
   try {
-    const reviewUrl = `${domain}/admin/articles`;
+    const reviewUrl = `${getBaseUrl()}/admin/articles`;
 
     const res = await deliverEmail({
       to: adminEmail,
@@ -191,8 +210,8 @@ export const sendArticleDecisionEmail = async ({
   reviewNotes?: string | null;
 }) => {
   try {
-    const dashboardUrl = `${domain}/dashboard/articles`;
-    const articleUrl = articleSlug ? `${domain}/articles/${articleSlug}` : undefined;
+    const dashboardUrl = `${getBaseUrl()}/dashboard/articles`;
+    const articleUrl = articleSlug ? `${getBaseUrl()}/articles/${articleSlug}` : undefined;
 
     let subject = `Editorial Update: "${articleTitle}" - CareerVixa`;
     if (status === "PUBLISHED" || status === "APPROVED") {
