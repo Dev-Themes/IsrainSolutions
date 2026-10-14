@@ -4,6 +4,7 @@
     "app": {
       "root": ".",
       "framework": "nextjs",
+      "installCommand": "npm install",
       "bindings": [
         {
           "type": "service",

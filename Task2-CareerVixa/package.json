@@ -1,6 +1,7 @@
 {
   "name": "ai-powered-blog",
   "version": "1.0.0",
+  "packageManager": "npm@10.9.0",
   "description": "",
   "main": "index.js",
   "scripts": {
