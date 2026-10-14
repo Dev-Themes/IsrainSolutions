@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "../layout/ThemeToggle";
@@ -27,10 +28,26 @@ interface ClientHeaderProps {
 }
 
 export default function ClientHeader({ user }: ClientHeaderProps) {
+  const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isMobileNavOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileNavOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
@@ -68,7 +85,8 @@ export default function ClientHeader({ user }: ClientHeaderProps) {
   ];
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#102925] px-4 sm:px-6 shadow-2xs transition-colors">
+    <>
+      <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#102925] px-4 sm:px-6 shadow-2xs transition-colors">
       {/* Mobile brand & menu button */}
       <div className="flex items-center gap-2 lg:hidden">
         <button
@@ -152,42 +170,67 @@ export default function ClientHeader({ user }: ClientHeaderProps) {
         </div>
       </div>
 
-      {/* Mobile nav drawer with 100% solid opaque background */}
-      {isMobileNavOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-40">
+      </header>
+
+      {/* Mobile nav drawer portaled directly to document.body */}
+      {mounted && isMobileNavOpen && createPortal(
+        <div className="lg:hidden fixed inset-0 z-[9999] flex justify-start">
           <div
-            className="fixed inset-0 bg-black/60"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
             onClick={() => setIsMobileNavOpen(false)}
             aria-hidden="true"
           />
           <nav
             id="contributor-mobile-nav"
             aria-label="Contributor Navigation"
-            className="relative z-10 w-full max-w-xs bg-[#11483F] dark:bg-[#092B27] text-white border-r border-[#21473F] dark:border-[#153630] h-[calc(100vh-4rem)] p-4 flex flex-col justify-between overflow-y-auto shadow-2xl animate-in slide-in-from-left duration-200"
+            className="relative z-10 w-full max-w-xs bg-[#11483F] dark:bg-[#092B27] text-white border-r border-[#21473F] dark:border-[#153630] h-full p-4 flex flex-col justify-between overflow-y-auto shadow-2xl animate-in slide-in-from-left duration-200"
           >
-            <div className="flex flex-col gap-1.5">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-2">
-                Contributor Portal
-              </span>
-              {mobileNav.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsMobileNavOpen(false)}
-                    className={cn(
-                      "flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-semibold min-h-[44px] transition-colors",
-                      isActive
-                        ? "bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-xs"
-                        : "text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
-                    )}
-                  >
-                    <item.icon className="h-4 w-4 shrink-0" />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between pb-3 border-b border-[#21473F] dark:border-[#153630]">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-[#087B61] dark:bg-[#65DEAE] text-white dark:text-[#08261E] font-black text-xs flex items-center justify-center">
+                    CV
+                  </div>
+                  <span className="font-extrabold text-sm text-white">Contributor Hub</span>
+                </div>
+                <button
+                  onClick={() => setIsMobileNavOpen(false)}
+                  className="p-1.5 text-[#B5D8CC] hover:text-white rounded-lg hover:bg-[#21473F] min-h-[40px] min-w-[40px] flex items-center justify-center"
+                  aria-label="Close navigation"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-1.5 pt-2">
+                {mobileNav.map((item) => {
+                  const isWriteArticle = pathname === "/dashboard/articles/new";
+                  const isActive = item.href === "/dashboard/articles/new"
+                    ? isWriteArticle
+                    : item.href === "/dashboard/articles"
+                      ? pathname.startsWith("/dashboard/articles") && !isWriteArticle
+                      : item.href === "/dashboard"
+                        ? pathname === "/dashboard"
+                        : pathname === item.href || pathname.startsWith(item.href);
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileNavOpen(false)}
+                      className={cn(
+                        "flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-semibold min-h-[44px] transition-colors",
+                        isActive
+                          ? "bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-xs"
+                          : "text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+                      )}
+                    >
+                      <item.icon className="h-4 w-4 shrink-0" />
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="pt-4 border-t border-[#21473F] dark:border-[#153630] flex flex-col gap-2">
@@ -218,8 +261,9 @@ export default function ClientHeader({ user }: ClientHeaderProps) {
               </button>
             </div>
           </nav>
-        </div>
+        </div>,
+        document.body
       )}
-    </header>
+    </>
   );
 }

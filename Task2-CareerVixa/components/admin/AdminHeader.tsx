@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "../layout/ThemeToggle";
@@ -42,10 +43,26 @@ const adminNav = [
 ];
 
 export default function AdminHeader({ user }: AdminHeaderProps) {
+  const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (isMobileNavOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileNavOpen]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
@@ -75,7 +92,8 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
   }, [isMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-border-default bg-bg-surface px-4 sm:px-6 shadow-2xs">
+    <>
+      <header className="sticky top-0 z-30 flex h-16 items-center justify-between gap-4 border-b border-border-default bg-bg-surface px-4 sm:px-6 shadow-2xs">
       {/* Mobile brand & menu button */}
       <div className="flex items-center gap-2 lg:hidden">
         <button
@@ -141,41 +159,61 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
         </div>
       </div>
 
-      {/* Mobile nav drawer with 100% solid opaque background */}
-      {isMobileNavOpen && (
-        <div className="lg:hidden fixed inset-0 top-16 z-40">
+      </header>
+
+      {/* Mobile nav drawer portaled directly to document.body */}
+      {mounted && isMobileNavOpen && createPortal(
+        <div className="lg:hidden fixed inset-0 z-[9999] flex justify-start">
           <div
-            className="fixed inset-0 bg-black/60"
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
             onClick={() => setIsMobileNavOpen(false)}
             aria-hidden="true"
           />
           <nav
             id="admin-mobile-nav"
             aria-label="Admin Mobile Navigation"
-            className="relative z-10 w-full max-w-xs bg-[#142B49] dark:bg-[#080F1D] text-slate-100 border-r border-[#1B385E] dark:border-[#1E2E48] h-[calc(100vh-4rem)] p-4 flex flex-col justify-between overflow-y-auto shadow-2xl animate-in slide-in-from-left duration-200"
+            className="relative z-10 w-full max-w-xs bg-[#142B49] dark:bg-[#080F1D] text-slate-100 border-r border-[#1B385E] dark:border-[#1E2E48] h-full p-4 flex flex-col justify-between overflow-y-auto shadow-2xl animate-in slide-in-from-left duration-200"
           >
-            <div className="flex flex-col gap-1">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#7E96BA] dark:text-[#647C9E] px-3 py-2">
-                Editorial Management
-              </span>
-              {adminNav.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setIsMobileNavOpen(false)}
-                    className={`flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-xs font-semibold min-h-[44px] transition-colors cursor-pointer ${
-                      isActive
-                        ? "bg-[#2458C6] text-white dark:bg-[#78A5FF] dark:text-[#09162C] font-bold shadow-xs"
-                        : "text-[#B8C8DF] hover:bg-[#1B385E] dark:hover:bg-[#122036] hover:text-white"
-                    }`}
-                  >
-                    <item.icon className={cn("h-4 w-4 shrink-0", isActive ? "text-white dark:text-[#09162C]" : "text-[#7E96BA] dark:text-[#647C9E]")} />
-                    <span>{item.name}</span>
-                  </Link>
-                );
-              })}
+            <div className="flex flex-col gap-2">
+              <div className="flex items-center justify-between pb-3 border-b border-[#1B385E] dark:border-[#1E2E48]">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-[#2458C6] dark:bg-[#78A5FF] text-white dark:text-[#09162C] font-black text-xs flex items-center justify-center">
+                    CV
+                  </div>
+                  <span className="font-extrabold text-sm text-white">Admin CMS</span>
+                </div>
+                <button
+                  onClick={() => setIsMobileNavOpen(false)}
+                  className="p-1.5 text-[#B8C8DF] hover:text-white rounded-lg hover:bg-[#1B385E] min-h-[40px] min-w-[40px] flex items-center justify-center"
+                  aria-label="Close navigation"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-1 pt-2">
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#7E96BA] dark:text-[#647C9E] px-3 py-1">
+                  Editorial Management
+                </span>
+                {adminNav.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setIsMobileNavOpen(false)}
+                      className={`flex items-center gap-2.5 px-3.5 py-3 rounded-xl text-xs font-semibold min-h-[44px] transition-colors cursor-pointer ${
+                        isActive
+                          ? "bg-[#2458C6] text-white dark:bg-[#78A5FF] dark:text-[#09162C] font-bold shadow-xs"
+                          : "text-[#B8C8DF] hover:bg-[#1B385E] dark:hover:bg-[#122036] hover:text-white"
+                      }`}
+                    >
+                      <item.icon className={cn("h-4 w-4 shrink-0", isActive ? "text-white dark:text-[#09162C]" : "text-[#7E96BA] dark:text-[#647C9E]")} />
+                      <span>{item.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="pt-4 border-t border-[#1B385E] dark:border-[#1E2E48] flex flex-col gap-2">
@@ -206,8 +244,9 @@ export default function AdminHeader({ user }: AdminHeaderProps) {
               </button>
             </div>
           </nav>
-        </div>
+        </div>,
+        document.body
       )}
-    </header>
+    </>
   );
 }

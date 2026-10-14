@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Container } from "./Container";
@@ -9,10 +10,15 @@ import { Menu, X, User as UserIcon, PenTool, LayoutDashboard, Settings, LogOut }
 import { signOut } from "next-auth/react";
 
 export function SiteHeader({ user }: { user?: any }) {
+  const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const pathname = usePathname();
   const hamburgerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Close menus on Escape key and restore focus
   useEffect(() => {
@@ -217,102 +223,107 @@ export function SiteHeader({ user }: { user?: any }) {
           </div>
         </Container>
 
-        {/* Mobile Navigation Drawer with Overlay */}
-        {isMenuOpen && (
-          <div className="xl:hidden fixed inset-0 top-16 lg:top-[72px] z-50">
-            {/* Backdrop */}
-            <div
-              className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
-              onClick={() => setIsMenuOpen(false)}
-              aria-hidden="true"
-            />
+      </header>
 
-            {/* Slide-in Drawer */}
-            <nav
-              id="mobile-nav-drawer"
-              aria-label="Mobile Navigation Drawer"
-              className="relative z-10 w-full max-w-sm ml-auto h-[calc(100vh-4rem)] bg-surface border-l border-border-default shadow-2xl p-6 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-200"
-            >
-              <div className="flex flex-col gap-3">
-                <div className="flex items-center justify-between pb-3 border-b border-border-default">
-                  <span className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                    Navigation Menu
-                  </span>
-                  <button
-                    onClick={() => setIsMenuOpen(false)}
-                    className="p-2 text-text-muted hover:text-text-heading min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg"
-                    aria-label="Close navigation menu"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
+      {/* Mobile Navigation Drawer with Overlay (Portaled directly to document.body to open immediately in front of the screen at current scroll position) */}
+      {mounted && isMenuOpen && createPortal(
+        <div className="xl:hidden fixed inset-0 z-[9999] flex justify-end">
+          {/* Full Screen Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
+            onClick={() => setIsMenuOpen(false)}
+            aria-hidden="true"
+          />
 
-                <div className="flex flex-col gap-1 pt-1">
-                  {navLinks.map((link) => {
-                    const isActive = pathname === link.href;
-                    return (
-                      <Link
-                        key={link.name}
-                        href={link.href}
-                        aria-current={isActive ? "page" : undefined}
-                        className={`font-semibold text-sm min-h-[44px] flex items-center px-3.5 rounded-lg transition-colors ${
-                          isActive
-                            ? "bg-brand-soft text-brand-primary-text font-bold"
-                            : "text-text-heading hover:bg-surface-subtle"
-                        }`}
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        {link.name}
-                      </Link>
-                    );
-                  })}
-                </div>
+          {/* Slide-in Drawer */}
+          <nav
+            id="mobile-nav-drawer"
+            aria-label="Mobile Navigation Drawer"
+            className="relative z-10 w-full max-w-xs sm:max-w-sm h-full bg-surface border-l border-border-default shadow-2xl p-6 flex flex-col justify-between overflow-y-auto animate-in slide-in-from-right duration-200"
+          >
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between pb-3.5 border-b border-border-default">
+                <Link href="/" onClick={() => setIsMenuOpen(false)} className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-primary-hover via-brand-primary to-brand-accent flex items-center justify-center text-white font-black text-sm shadow-xs">
+                    CV
+                  </div>
+                  <span className="font-extrabold text-base text-text-heading">CareerVixa</span>
+                </Link>
+                <button
+                  onClick={() => setIsMenuOpen(false)}
+                  className="p-2 text-text-muted hover:text-text-heading min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg hover:bg-surface-subtle"
+                  aria-label="Close navigation menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
-                <div className="pt-3 border-t border-border-default">
+              <div className="flex flex-col gap-1 pt-1">
+                {navLinks.map((link) => {
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      aria-current={isActive ? "page" : undefined}
+                      className={`font-semibold text-sm min-h-[44px] flex items-center px-3.5 rounded-lg transition-colors ${
+                        isActive
+                          ? "bg-brand-soft text-brand-primary-text font-bold"
+                          : "text-text-heading hover:bg-surface-subtle"
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <div className="pt-3 border-t border-border-default">
+                <Link
+                  href="/publish"
+                  className="flex items-center gap-2 px-3.5 py-3 rounded-lg text-xs font-bold text-brand-primary-text bg-brand-soft border border-brand-primary/20 min-h-[44px]"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <PenTool className="w-4 h-4 shrink-0" />
+                  <span>Write For CareerVixa</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Bottom Auth Section */}
+            <div className="pt-6 border-t border-border-default flex flex-col gap-2.5">
+              {!user ? (
+                <div className="grid grid-cols-2 gap-2">
                   <Link
-                    href="/publish"
-                    className="flex items-center gap-2 px-3.5 py-3 rounded-lg text-xs font-bold text-brand-primary-text bg-brand-soft border border-brand-primary/20 min-h-[44px]"
+                    href="/login"
+                    className="flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-bold border border-border-default text-text-heading hover:bg-surface-subtle min-h-[44px]"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    <PenTool className="w-4 h-4 shrink-0" />
-                    <span>Write For CareerVixa</span>
+                    Log In
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-brand-btn-fill hover:bg-brand-btn-hover min-h-[44px]"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign Up
                   </Link>
                 </div>
-              </div>
-
-              {/* Bottom Auth Section */}
-              <div className="pt-6 border-t border-border-default flex flex-col gap-2.5">
-                {!user ? (
-                  <div className="grid grid-cols-2 gap-2">
-                    <Link
-                      href="/login"
-                      className="flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-bold border border-border-default text-text-heading hover:bg-surface-subtle min-h-[44px]"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Log In
-                    </Link>
-                    <Link
-                      href="/signup"
-                      className="flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-brand-btn-fill hover:bg-brand-btn-hover min-h-[44px]"
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      Sign Up
-                    </Link>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => signOut()}
-                    className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 w-full min-h-[44px]"
-                  >
-                    <LogOut className="w-4 h-4" />
-                    <span>Sign Out</span>
-                  </button>
-                )}
-              </div>
-            </nav>
-          </div>
-        )}
-      </header>
+              ) : (
+                <button
+                  onClick={() => signOut()}
+                  className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 w-full min-h-[44px]"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Sign Out</span>
+                </button>
+              )}
+            </div>
+          </nav>
+        </div>,
+        document.body
+      )}
     </>
   );
 }

@@ -445,7 +445,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                   <p className="text-xs text-text-muted mb-4 leading-relaxed">
                     Join 50,000+ ambitious professionals receiving weekly career frameworks every Tuesday.
                   </p>
-                  <NewsletterForm buttonText="Subscribe" />
+                  <NewsletterForm buttonText="Subscribe" stacked />
                 </div>
               </div>
             </aside>

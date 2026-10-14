@@ -62,8 +62,15 @@ export default function ClientSidebar({ user }: ClientSidebarProps) {
           Publishing Portal
         </span>
         {navItems.map((item) => {
+          const isWriteArticle = pathname === "/dashboard/articles/new";
           const isActive =
-            pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(item.href));
+            item.href === "/dashboard/articles/new"
+              ? isWriteArticle
+              : item.href === "/dashboard/articles"
+                ? pathname.startsWith("/dashboard/articles") && !isWriteArticle
+                : item.href === "/dashboard"
+                  ? pathname === "/dashboard"
+                  : pathname === item.href || pathname.startsWith(item.href);
           return (
             <Link
               key={item.href}
