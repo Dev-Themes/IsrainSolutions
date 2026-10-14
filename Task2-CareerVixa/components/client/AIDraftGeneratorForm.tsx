@@ -117,9 +117,9 @@ export default function AIDraftGeneratorForm({ categories }: AIDraftGeneratorFor
           </div>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="rounded-2xl border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 sm:p-8 space-y-5 shadow-sm">
+        <form onSubmit={handleSubmit} className="rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 sm:p-8 space-y-5 shadow-xs">
           <div>
-            <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
               Career Topic or Title Idea <span className="text-red-500">*</span>
             </label>
             <input
@@ -128,34 +128,34 @@ export default function AIDraftGeneratorForm({ categories }: AIDraftGeneratorFor
               placeholder="e.g. How to Transition into AI Engineering Without a CS Degree"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             />
-            <p className="mt-1 text-[11px] text-slate-700 dark:text-[#B5D8CC]">
+            <p className="mt-1 text-[11px] text-slate-500 dark:text-[#B5D8CC]">
               Must be related to careers, job searching, interviews, resumes, or professional workplace skills.
             </p>
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
-              Target Keywords &amp; Focus Areas <span className="text-xs font-normal text-slate-700 dark:text-[#B5D8CC]">(Comma-separated)</span>
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+              Target Keywords &amp; Focus Areas <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Comma-separated)</span>
             </label>
             <input
               type="text"
               placeholder="e.g. portfolio projects, machine learning, career switch"
               value={keywords}
               onChange={(e) => setKeywords(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
               Career Category
             </label>
             <select
               value={categoryId}
               onChange={(e) => setCategoryId(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             >
               {categories.map((c) => (
                 <option key={c.id} value={c.id}>
@@ -166,7 +166,7 @@ export default function AIDraftGeneratorForm({ categories }: AIDraftGeneratorFor
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
               Optional Style or Outline Instructions
             </label>
             <textarea
@@ -174,12 +174,12 @@ export default function AIDraftGeneratorForm({ categories }: AIDraftGeneratorFor
               placeholder="e.g. Emphasize actionable advice for junior engineers and include concrete portfolio project suggestions."
               value={instructions}
               onChange={(e) => setInstructions(e.target.value)}
-              className="w-full px-3.5 py-2.5 text-sm rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none"
             />
           </div>
 
-          <div className="rounded-xl border border-[#C6E2D6] dark:border-[#355A50] bg-[#E2F5ED]/50 dark:bg-[#21473F]/40 p-3.5 text-xs text-slate-700 dark:text-[#B5D8CC] space-y-1">
-            <p className="font-semibold text-slate-950 dark:text-white">Zero Auto-Publish Guarantee:</p>
+          <div className="rounded-xl border border-emerald-200 dark:border-[#355A50] bg-emerald-50/60 dark:bg-[#21473F]/40 p-4 text-xs text-slate-700 dark:text-[#B5D8CC] space-y-1">
+            <p className="font-bold text-slate-950 dark:text-white">Zero Auto-Publish Guarantee:</p>
             <p>
               AI-generated articles deposit directly into your private drafts. They are <strong>never</strong> published automatically and do not consume platform daily quotas. You will have full ability to edit and review before submitting.
             </p>
@@ -189,7 +189,7 @@ export default function AIDraftGeneratorForm({ categories }: AIDraftGeneratorFor
             <button
               type="submit"
               disabled={isGenerating || !topic.trim()}
-              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg bg-primary hover:opacity-90 text-primary-foreground font-semibold transition-all shadow-sm disabled:opacity-50 cursor-pointer"
+              className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
             >
               <Sparkles className="h-4 w-4" />
               <span>Generate AI Draft Now</span>

@@ -170,91 +170,79 @@
     --brand-soft: #20324E;
   }
 
-  /* Client Dashboard (Light Theme) - Professional Teal & Emerald */
+  /* Client Dashboard (Light Theme) - Clean Crisp White & Deep Slate */
   .dashboard-client, [data-dashboard="client"] {
-    --dashboard-bg: #F2FBF8;
+    --dashboard-bg: #F8FAFC;
     --dashboard-sidebar: #11483F;
     --dashboard-header: #FFFFFF;
     --dashboard-card: #FFFFFF;
-    --dashboard-surface-elevated: #E2F5ED;
+    --dashboard-surface-elevated: #F1F5F9;
     --dashboard-text-primary: #0F172A;
-    --dashboard-text-secondary: #334155;
+    --dashboard-text-secondary: #475569;
     --dashboard-btn-primary: #087B61;
     --dashboard-btn-primary-text: #FFFFFF;
-    --dashboard-border: #C6E2D6;
+    --dashboard-border: #E2E8F0;
     --dashboard-accent: #086A54;
 
-    --bg-page: #F2FBF8;
+    --bg-page: #F8FAFC;
     --bg-surface: #FFFFFF;
-    --bg-surface-subtle: #E2F5ED;
+    --bg-surface-subtle: #F1F5F9;
     --text-heading: #0F172A;
     --text-body: #1E293B;
-    --text-muted: #334155;
-    --border-default: #C6E2D6;
-    --border-strong: #A8D1C1;
+    --text-muted: #475569;
+    --border-default: #E2E8F0;
+    --border-strong: #CBD5E1;
     --brand-primary: #087B61;
     --brand-primary-hover: #086A54;
     --brand-btn-fill: #087B61;
     --brand-btn-hover: #086A54;
     --brand-btn-text: #FFFFFF;
-    --brand-soft: #E2F5ED;
+    --brand-soft: #F1F5F9;
   }
 
-  /* Client Dashboard Light Theme - White background components strictly use dark font color */
+  /* Client Dashboard Light Theme - Strict white background cards with crisp dark font colors */
+  html:not(.dark) .dashboard-client,
+  html:not(.dark) [data-dashboard="client"] {
+    color: #1E293B;
+  }
+
   html:not(.dark) .dashboard-client .bg-white,
   html:not(.dark) [data-dashboard="client"] .bg-white,
   html:not(.dark) .dashboard-client .bg-card,
   html:not(.dark) [data-dashboard="client"] .bg-card {
-    color: #1E293B;
-  }
-
-  html:not(.dark) .dashboard-client .bg-white h1,
-  html:not(.dark) .dashboard-client .bg-white h2,
-  html:not(.dark) .dashboard-client .bg-white h3,
-  html:not(.dark) .dashboard-client .bg-white h4,
-  html:not(.dark) .dashboard-client .bg-white h5,
-  html:not(.dark) .dashboard-client .bg-white h6,
-  html:not(.dark) [data-dashboard="client"] .bg-white h1,
-  html:not(.dark) [data-dashboard="client"] .bg-white h2,
-  html:not(.dark) [data-dashboard="client"] .bg-white h3,
-  html:not(.dark) [data-dashboard="client"] .bg-white h4,
-  html:not(.dark) [data-dashboard="client"] .bg-white h5,
-  html:not(.dark) [data-dashboard="client"] .bg-white h6,
-  html:not(.dark) .dashboard-client .bg-card h1,
-  html:not(.dark) .dashboard-client .bg-card h2,
-  html:not(.dark) .dashboard-client .bg-card h3,
-  html:not(.dark) .dashboard-client .bg-card h4,
-  html:not(.dark) .dashboard-client .bg-card h5,
-  html:not(.dark) .dashboard-client .bg-card h6,
-  html:not(.dark) [data-dashboard="client"] .bg-card h1,
-  html:not(.dark) [data-dashboard="client"] .bg-card h2,
-  html:not(.dark) [data-dashboard="client"] .bg-card h3,
-  html:not(.dark) [data-dashboard="client"] .bg-card h4,
-  html:not(.dark) [data-dashboard="client"] .bg-card h5,
-  html:not(.dark) [data-dashboard="client"] .bg-card h6 {
+    background-color: #FFFFFF !important;
     color: #0F172A;
   }
 
-  html:not(.dark) .dashboard-client .bg-white label,
-  html:not(.dark) [data-dashboard="client"] .bg-white label,
-  html:not(.dark) .dashboard-client .bg-card label,
-  html:not(.dark) [data-dashboard="client"] .bg-card label {
-    color: #0F172A;
+  html:not(.dark) .dashboard-client h1,
+  html:not(.dark) .dashboard-client h2,
+  html:not(.dark) .dashboard-client h3,
+  html:not(.dark) .dashboard-client h4,
+  html:not(.dark) .dashboard-client h5,
+  html:not(.dark) .dashboard-client h6,
+  html:not(.dark) [data-dashboard="client"] h1,
+  html:not(.dark) [data-dashboard="client"] h2,
+  html:not(.dark) [data-dashboard="client"] h3,
+  html:not(.dark) [data-dashboard="client"] h4,
+  html:not(.dark) [data-dashboard="client"] h5,
+  html:not(.dark) [data-dashboard="client"] h6 {
+    color: #0F172A !important;
   }
 
-  html:not(.dark) .dashboard-client .bg-white input:not([type="checkbox"]):not([type="radio"]),
-  html:not(.dark) [data-dashboard="client"] .bg-white input:not([type="checkbox"]):not([type="radio"]),
-  html:not(.dark) .dashboard-client .bg-white select,
-  html:not(.dark) [data-dashboard="client"] .bg-white select,
-  html:not(.dark) .dashboard-client .bg-white textarea,
-  html:not(.dark) [data-dashboard="client"] .bg-white textarea,
-  html:not(.dark) .dashboard-client .bg-card input:not([type="checkbox"]):not([type="radio"]),
-  html:not(.dark) [data-dashboard="client"] .bg-card input:not([type="checkbox"]):not([type="radio"]),
-  html:not(.dark) .dashboard-client .bg-card select,
-  html:not(.dark) [data-dashboard="client"] .bg-card select,
-  html:not(.dark) .dashboard-client .bg-card textarea,
-  html:not(.dark) [data-dashboard="client"] .bg-card textarea {
-    color: #0F172A;
+  html:not(.dark) .dashboard-client label,
+  html:not(.dark) [data-dashboard="client"] label {
+    color: #0F172A !important;
+  }
+
+  html:not(.dark) .dashboard-client input:not([type="checkbox"]):not([type="radio"]),
+  html:not(.dark) [data-dashboard="client"] input:not([type="checkbox"]):not([type="radio"]),
+  html:not(.dark) .dashboard-client select,
+  html:not(.dark) [data-dashboard="client"] select,
+  html:not(.dark) .dashboard-client textarea,
+  html:not(.dark) [data-dashboard="client"] textarea {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    border-color: #CBD5E1;
   }
 
   /* Client Dashboard (Dark Theme) - Professional Teal & Emerald */

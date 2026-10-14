@@ -70,7 +70,7 @@ export default async function PublishLandingPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="rounded-xl border border-border-default bg-bg-surface p-6 space-y-3 shadow-xs">
-                <div className="h-10 w-10 rounded-lg bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center">
+                <div className="h-11 w-11 rounded-xl bg-slate-900 text-sky-400 dark:bg-slate-950 dark:text-sky-300 flex items-center justify-center shadow-sm border border-slate-800 dark:border-slate-800">
                   <Users className="h-5 w-5" />
                 </div>
                 <h3 className="font-semibold text-base text-text-heading">
@@ -82,11 +82,11 @@ export default async function PublishLandingPage() {
               </div>
 
               <div className="rounded-xl border border-border-default bg-bg-surface p-6 space-y-3 shadow-xs">
-                <div className="h-10 w-10 rounded-lg bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex items-center justify-center">
+                <div className="h-11 w-11 rounded-xl bg-slate-900 text-emerald-400 dark:bg-slate-950 dark:text-emerald-300 flex items-center justify-center shadow-sm border border-slate-800 dark:border-slate-800">
                   <PenTool className="h-5 w-5" />
                 </div>
                 <h3 className="font-semibold text-base text-text-heading">
-                  AI Research & Rich-Text Tools
+                  AI Research &amp; Rich-Text Tools
                 </h3>
                 <p className="text-sm text-text-muted leading-relaxed">
                   Use our live AI agent to research and structure initial drafts, or craft custom articles with our rich-text editor.
@@ -94,7 +94,7 @@ export default async function PublishLandingPage() {
               </div>
 
               <div className="rounded-xl border border-border-default bg-bg-surface p-6 space-y-3 shadow-xs">
-                <div className="h-10 w-10 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+                <div className="h-11 w-11 rounded-xl bg-slate-900 text-teal-300 dark:bg-slate-950 dark:text-teal-300 flex items-center justify-center shadow-sm border border-slate-800 dark:border-slate-800">
                   <ShieldCheck className="h-5 w-5" />
                 </div>
                 <h3 className="font-semibold text-base text-text-heading">

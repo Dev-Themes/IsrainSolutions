@@ -305,7 +305,7 @@ export default async function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="p-6 rounded-2xl bg-bg-surface border border-border-default flex flex-col gap-3.5 shadow-xs">
-              <div className="w-11 h-11 rounded-xl bg-brand-soft text-brand-primary-text flex items-center justify-center font-bold">
+              <div className="w-11 h-11 rounded-xl bg-slate-900 text-emerald-400 dark:bg-slate-950 dark:text-emerald-300 flex items-center justify-center font-bold shadow-sm border border-slate-800 dark:border-slate-800">
                 <TrendingUp className="w-5 h-5" />
               </div>
               <h3 className="text-lg font-bold text-text-heading">Data-Backed Research</h3>
@@ -315,7 +315,7 @@ export default async function HomePage() {
             </div>
 
             <div className="p-6 rounded-2xl bg-bg-surface border border-border-default flex flex-col gap-3.5 shadow-xs">
-              <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold">
+              <div className="w-11 h-11 rounded-xl bg-slate-900 text-teal-300 dark:bg-slate-950 dark:text-teal-300 flex items-center justify-center font-bold shadow-sm border border-slate-800 dark:border-slate-800">
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <h3 className="text-lg font-bold text-text-heading">Supervised Editorial Rigor</h3>
@@ -325,7 +325,7 @@ export default async function HomePage() {
             </div>
 
             <div className="p-6 rounded-2xl bg-bg-surface border border-border-default flex flex-col gap-3.5 shadow-xs">
-              <div className="w-11 h-11 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold">
+              <div className="w-11 h-11 rounded-xl bg-slate-900 text-sky-300 dark:bg-slate-950 dark:text-sky-300 flex items-center justify-center font-bold shadow-sm border border-slate-800 dark:border-slate-800">
                 <FileText className="w-5 h-5" />
               </div>
               <h3 className="text-lg font-bold text-text-heading">Actionable Scripts &amp; Templates</h3>

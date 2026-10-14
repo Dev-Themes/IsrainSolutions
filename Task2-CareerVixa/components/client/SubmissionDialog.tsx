@@ -127,32 +127,32 @@ export default function SubmissionDialog({
         if (e.target === e.currentTarget && !isSubmitting) onClose();
       }}
     >
-      <div className="relative w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] p-5 sm:p-6 shadow-2xl max-sm:max-h-[92vh] max-sm:overflow-y-auto">
+      <div className="relative w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 shadow-2xl max-sm:max-h-[92vh] max-sm:overflow-y-auto">
         <button
           onClick={onClose}
           disabled={isSubmitting}
           aria-label="Close submission dialog"
-          className="absolute right-3.5 top-3.5 inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-lg text-slate-700 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white hover:bg-[#F2FBF8] dark:hover:bg-[#102925] transition-colors"
+          className="absolute right-3.5 top-3.5 inline-flex items-center justify-center min-w-[44px] min-h-[44px] rounded-xl text-slate-500 hover:text-slate-950 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#102925] transition-colors"
         >
           <X className="h-5 w-5" />
         </button>
 
-        <div className="flex items-center gap-3 border-b border-[#C6E2D6] dark:border-[#355A50] pb-4 pr-10">
-          <div className="rounded-xl bg-[#E2F5ED] dark:bg-[#21473F] p-2.5 text-[#087B61] dark:text-[#65DEAE] shrink-0">
+        <div className="flex items-center gap-3 border-b border-slate-200 dark:border-[#355A50] pb-4 pr-10">
+          <div className="rounded-xl bg-emerald-50 dark:bg-[#21473F] p-2.5 text-emerald-800 dark:text-[#65DEAE] shrink-0 border border-emerald-200 dark:border-transparent">
             <ShieldCheck className="h-6 w-6" />
           </div>
           <div>
             <h2 id="submission-dialog-title" className="text-lg font-bold text-slate-950 dark:text-white">
               Submit for Editorial Review
             </h2>
-            <p className="text-xs text-slate-700 dark:text-[#B5D8CC] line-clamp-1">
+            <p className="text-xs text-slate-600 dark:text-[#B5D8CC] line-clamp-1">
               Article: &quot;{articleTitle}&quot;
             </p>
           </div>
         </div>
 
         {errorMessage && (
-          <div className="mt-4 flex items-start gap-2.5 rounded-lg bg-rose-50 dark:bg-rose-950/40 p-3 text-xs text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800" role="alert">
+          <div className="mt-4 flex items-start gap-2.5 rounded-xl bg-rose-50 dark:bg-rose-950/40 p-3 text-xs text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800" role="alert">
             <AlertCircle className="h-4 w-4 shrink-0 text-rose-600 mt-0.5" />
             <span>{errorMessage}</span>
           </div>
@@ -161,14 +161,14 @@ export default function SubmissionDialog({
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           {categories.length > 0 && (
             <div>
-              <label htmlFor="submission-category" className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1.5">
+              <label htmlFor="submission-category" className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1.5">
                 Career Category <span className="text-rose-600 dark:text-rose-400">*</span>
               </label>
               <select
                 id="submission-category"
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
-                className="w-full px-3 py-2.5 text-sm rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-[#087B61]/40 focus:border-[#087B61]"
+                className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
               >
                 <option value="">Select Career Category...</option>
                 {categories.map((cat) => (
@@ -177,14 +177,14 @@ export default function SubmissionDialog({
                   </option>
                 ))}
               </select>
-              <p className="mt-1 text-[11px] text-slate-700 dark:text-[#B5D8CC]">
+              <p className="mt-1 text-[11px] text-slate-500 dark:text-[#B5D8CC]">
                 Assign your article to the appropriate CareerVixa editorial category.
               </p>
             </div>
           )}
 
           <div>
-            <label htmlFor="submission-promotional-url" className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1.5">
+            <label htmlFor="submission-promotional-url" className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1.5">
               Promotional / Organization URL <span className="text-rose-600 dark:text-rose-400">*</span>
             </label>
             <input
@@ -194,16 +194,16 @@ export default function SubmissionDialog({
               placeholder="https://yourbusiness.com or https://portfolio.com"
               value={promotionalUrl}
               onChange={(e) => setPromotionalUrl(e.target.value)}
-              className="w-full px-3 py-2.5 text-sm rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#087B61]/40 focus:border-[#087B61]"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             />
-            <p className="mt-1 text-[11px] text-slate-700 dark:text-[#B5D8CC]">
+            <p className="mt-1 text-[11px] text-slate-500 dark:text-[#B5D8CC]">
               Required promotional website link for attribution and sponsored link verification.
             </p>
           </div>
 
           <div>
-            <label htmlFor="submission-source-url" className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1.5">
-              Original Source URL <span className="text-xs text-slate-700 dark:text-[#B5D8CC] font-normal">(Optional)</span>
+            <label htmlFor="submission-source-url" className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1.5">
+              Original Source URL <span className="text-xs text-slate-500 dark:text-[#B5D8CC] font-normal">(Optional)</span>
             </label>
             <input
               id="submission-source-url"
@@ -211,22 +211,22 @@ export default function SubmissionDialog({
               placeholder="https://originalsource.com/post-name (if previously published)"
               value={originalSourceUrl}
               onChange={(e) => setOriginalSourceUrl(e.target.value)}
-              className="w-full px-3 py-2.5 text-sm rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#087B61]/40 focus:border-[#087B61]"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             />
-            <p className="mt-1 text-[11px] text-slate-700 dark:text-[#B5D8CC]">
+            <p className="mt-1 text-[11px] text-slate-500 dark:text-[#B5D8CC]">
               Provide only if this article was previously published on another platform.
             </p>
           </div>
 
-          <div className="rounded-xl border border-[#C6E2D6] dark:border-[#355A50] bg-[#F2FBF8] dark:bg-[#102925]/60 p-3.5 space-y-3">
+          <div className="rounded-xl border border-slate-200 dark:border-[#355A50] bg-slate-50 dark:bg-[#102925]/60 p-4 space-y-3">
             <label className="flex items-start gap-2.5 cursor-pointer text-xs">
               <input
                 type="checkbox"
                 checked={rightsDeclared}
                 onChange={(e) => setRightsDeclared(e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded border-[#C6E2D6] text-[#087B61] focus:ring-[#087B61]"
+                className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
               />
-              <span className="text-slate-900 dark:text-slate-200">
+              <span className="text-slate-800 dark:text-slate-200">
                 <strong className="text-slate-950 dark:text-white">Publication Rights Declaration:</strong> I certify that this article is my original work (or I possess full authorization and rights to publish it) and does not infringe upon any third-party intellectual property.
               </span>
             </label>
@@ -236,27 +236,27 @@ export default function SubmissionDialog({
                 type="checkbox"
                 checked={termsAccepted}
                 onChange={(e) => setTermsAccepted(e.target.checked)}
-                className="mt-0.5 h-4 w-4 rounded border-[#C6E2D6] text-[#087B61] focus:ring-[#087B61]"
+                className="mt-0.5 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
               />
-              <span className="text-slate-900 dark:text-slate-200">
+              <span className="text-slate-800 dark:text-slate-200">
                 <strong className="text-slate-950 dark:text-white">Publishing Terms &amp; Review Consent:</strong> I agree to CareerVixa&apos;s guest publishing guidelines and acknowledge that articles undergo mandatory manual review and <strong className="text-slate-950 dark:text-white">never publish automatically</strong>.
               </span>
             </label>
           </div>
 
-          <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-[#C6E2D6] dark:border-[#355A50]">
+          <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-200 dark:border-[#355A50]">
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded-lg border border-[#C6E2D6] dark:border-[#355A50] text-slate-900 dark:text-slate-200 hover:bg-[#F2FBF8] dark:hover:bg-[#102925] transition-colors cursor-pointer"
+              className="min-h-[44px] px-4 py-2 text-xs font-semibold rounded-xl border border-slate-300 dark:border-[#355A50] text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-[#102925] transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting || !rightsDeclared || !termsAccepted || !promotionalUrl.trim()}
-              className="inline-flex items-center justify-center min-h-[44px] gap-2 px-5 py-2 text-xs font-semibold rounded-lg bg-brand-btn-fill text-white hover:opacity-95 transition-all shadow-sm disabled:opacity-50 disabled:pointer-events-none"
+              className="inline-flex items-center justify-center min-h-[44px] gap-2 px-5 py-2 text-xs font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-xs disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
             >
               {isSubmitting ? (
                 <>
@@ -264,7 +264,7 @@ export default function SubmissionDialog({
                   <span>Submitting for Review...</span>
                 </>
               ) : (
-                <span>Confirm & Submit for Review</span>
+                <span>Confirm &amp; Submit for Review</span>
               )}
             </button>
           </div>

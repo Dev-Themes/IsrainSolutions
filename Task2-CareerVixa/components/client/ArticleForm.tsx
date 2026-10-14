@@ -150,7 +150,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
         <div className="flex items-center gap-3">
           <Link
             href="/dashboard/articles"
-            className="p-1.5 rounded-lg border border-[#C6E2D6] dark:border-[#355A50] hover:bg-[#E2F5ED] dark:hover:bg-[#21473F] text-slate-800 dark:text-slate-200 transition-colors"
+            className="p-2 rounded-xl border border-slate-200 dark:border-[#355A50] hover:bg-slate-100 dark:hover:bg-[#21473F] text-slate-800 dark:text-slate-200 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
           </Link>
@@ -173,7 +173,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 {status.replace("_", " ")}
               </span>
             </div>
-            <p className="text-xs text-slate-700 dark:text-slate-300">
+            <p className="text-xs text-slate-600 dark:text-slate-300">
               {isLocked
                 ? "This article is locked and cannot be modified."
                 : "Save private drafts anytime or submit for editorial review."}
@@ -186,7 +186,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
           {initialArticle?.id && (
             <Link
               href={`/dashboard/articles/${initialArticle.id}/preview`}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-900 dark:text-[#F0FCF7] hover:bg-[#087B61] hover:text-white dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-all shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-800 dark:text-[#F0FCF7] hover:bg-slate-100 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-all shadow-xs cursor-pointer"
             >
               <Eye className="h-3.5 w-3.5" />
               <span>Preview</span>
@@ -199,7 +199,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 type="button"
                 onClick={handleSaveDraft}
                 disabled={isSaving}
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-lg border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-900 dark:text-[#F0FCF7] hover:bg-[#087B61] hover:text-white dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-all disabled:opacity-50 shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-800 dark:text-[#F0FCF7] hover:bg-slate-100 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-all disabled:opacity-50 shadow-xs cursor-pointer"
               >
                 {isSaving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />}
                 <span>Save Draft</span>
@@ -214,7 +214,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                   }
                   setIsSubmissionOpen(true);
                 }}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-all shadow-xs cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition-all shadow-xs cursor-pointer"
               >
                 <Send className="h-3.5 w-3.5" />
                 <span>{isChangesRequested ? "Resubmit for Review" : "Submit for Review"}</span>
@@ -273,9 +273,9 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Editor (2 columns) */}
         <div className="lg:col-span-2 space-y-5">
-          <div className="rounded-xl border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] p-5 space-y-4">
+          <div className="rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 space-y-4 shadow-xs">
             <div>
-              <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+              <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
                 Article Title <span className="text-red-500">*</span>
               </label>
               <input
@@ -284,20 +284,20 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 placeholder="e.g. Master the Tech Interview: 7 Key Strategies for 2027"
                 value={formData.title}
                 onChange={(e) => handleTitleChange(e.target.value)}
-                className="w-full px-3 py-2 text-base font-semibold rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 text-base font-semibold rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+                <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
                   Career Category <span className="text-red-500">*</span>
                 </label>
                 <select
                   disabled={isLocked}
                   value={formData.categoryId || ""}
                   onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-                  className="w-full px-3 py-2 text-sm rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                  className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
                 >
                   <option value="">Select Category...</option>
                   {categories.map((cat) => (
@@ -309,8 +309,8 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
-                  Slug <span className="text-xs font-normal text-slate-700 dark:text-[#B5D8CC]">(URL identifier)</span>
+                <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+                  Slug <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(URL identifier)</span>
                 </label>
                 <input
                   type="text"
@@ -318,13 +318,13 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                   placeholder="master-the-tech-interview"
                   value={formData.slug || ""}
                   onChange={(e) => setFormData({ ...formData, slug: slugify(e.target.value) })}
-                  className="w-full px-3 py-2 text-xs font-mono rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-[#F2FBF8] dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                  className="w-full px-3.5 py-2.5 text-xs font-mono rounded-xl border border-slate-300 dark:border-[#355A50] bg-slate-50 dark:bg-[#091A19] text-slate-800 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+              <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
                 Article Excerpt / Summary <span className="text-red-500">*</span>
               </label>
               <textarea
@@ -334,25 +334,25 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 placeholder="Brief, engaging summary of the article for blog listings and previews..."
                 value={formData.summary || ""}
                 onChange={(e) => setFormData({ ...formData, summary: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none disabled:opacity-60"
               />
-              <p className="text-[11px] text-slate-700 dark:text-[#B5D8CC] text-right">
+              <p className="text-[11px] text-slate-500 dark:text-[#B5D8CC] text-right mt-1">
                 {(formData.summary || "").length}/300
               </p>
             </div>
           </div>
 
           {/* Tiptap Rich Text Editor */}
-          <div className="rounded-xl border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] p-5 space-y-2">
-            <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7]">
+          <div className="rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 space-y-2 shadow-xs">
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7]">
               Article Content <span className="text-red-500">*</span>
             </label>
-            <p className="text-xs text-slate-700 dark:text-[#B5D8CC]">
+            <p className="text-xs text-slate-500 dark:text-[#B5D8CC]">
               Format your article with headings, paragraphs, bullet points, quotes, and links.
             </p>
             {isLocked ? (
               <div
-                className="prose max-w-none p-4 rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-[#F2FBF8] dark:bg-[#091A19] text-sm overflow-y-auto max-h-[500px]"
+                className="prose max-w-none p-4 rounded-xl border border-slate-200 dark:border-[#355A50] bg-slate-50 dark:bg-[#091A19] text-sm overflow-y-auto max-h-[500px]"
                 dangerouslySetInnerHTML={{ __html: formData.content || "" }}
               />
             ) : (
@@ -366,18 +366,18 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
 
         {/* Sidebar Settings (1 column) */}
         <div className="space-y-5">
-          <div className="rounded-xl border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] p-5 space-y-4">
+          <div className="rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 space-y-4 shadow-xs">
             <h3 className="font-bold text-sm text-slate-950 dark:text-[#F0FCF7]">Classification &amp; Attribution</h3>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+              <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
                 Career Category <span className="text-red-500">*</span>
               </label>
               <select
                 disabled={isLocked}
                 value={formData.categoryId || ""}
                 onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
               >
                 <option value="">Select Category...</option>
                 {categories.map((cat) => (
@@ -389,8 +389,8 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
-                Tags <span className="text-xs font-normal text-slate-700 dark:text-[#B5D8CC]">(Comma-separated)</span>
+              <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+                Tags <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Comma-separated)</span>
               </label>
               <input
                 type="text"
@@ -398,13 +398,13 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 placeholder="tech, interview, careers"
                 value={tagsInput}
                 onChange={(e) => handleTagsChange(e.target.value)}
-                className="w-full px-3 py-2 text-sm rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
-                Cover Image URL <span className="text-xs font-normal text-slate-700 dark:text-[#B5D8CC]">(Optional)</span>
+              <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+                Cover Image URL <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Optional)</span>
               </label>
               <input
                 type="url"
@@ -412,16 +412,16 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 placeholder="https://example.com/cover.jpg"
                 value={formData.coverImage || ""}
                 onChange={(e) => setFormData({ ...formData, coverImage: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
               />
             </div>
           </div>
 
-          <div className="rounded-xl border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#153630] p-5 space-y-4">
+          <div className="rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 space-y-4 shadow-xs">
             <h3 className="font-bold text-sm text-slate-950 dark:text-[#F0FCF7]">Promotional Provenance</h3>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
+              <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
                 Promotional Website URL <span className="text-red-500">*</span>
               </label>
               <input
@@ -430,16 +430,16 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 placeholder="https://yourbusiness.com"
                 value={formData.promotionalUrl || ""}
                 onChange={(e) => setFormData({ ...formData, promotionalUrl: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
               />
-              <p className="mt-1 text-[11px] text-slate-700 dark:text-[#B5D8CC]">
+              <p className="mt-1 text-[11px] text-slate-500 dark:text-[#B5D8CC]">
                 Required for contributor attribution and sponsored link verification.
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-950 dark:text-[#F0FCF7] mb-1">
-                Original Source URL <span className="text-xs font-normal text-slate-700 dark:text-[#B5D8CC]">(Optional)</span>
+              <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+                Original Source URL <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Optional)</span>
               </label>
               <input
                 type="url"
@@ -447,7 +447,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                 placeholder="https://medium.com/@author/my-post"
                 value={formData.originalSourceUrl || ""}
                 onChange={(e) => setFormData({ ...formData, originalSourceUrl: e.target.value })}
-                className="w-full px-3 py-2 text-sm rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
+                className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 disabled:opacity-60"
               />
             </div>
           </div>
