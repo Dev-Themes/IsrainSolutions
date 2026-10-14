@@ -41,6 +41,22 @@ export const dailyAIPublisher = inngest.createFunction(
     // For this monorepo, we execute it locally assuming python is available.
     // We would pass topics/existing here.
     const rawArticle = await step.run("run-python-agent", async () => {
+      if (process.env.AGENT_URL) {
+        const agentUrl = process.env.AGENT_URL.replace(/\/$/, "");
+        const res = await fetch(`${agentUrl}/generate`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({}),
+        });
+
+        if (!res.ok) {
+          const errorData = await res.json().catch(() => ({}));
+          throw new Error(errorData.detail || errorData.error || `AI Agent service execution failed with status ${res.status}`);
+        }
+
+        return await res.json();
+      }
+
       // Execute the Python script locally to get the article
       // We use python module path or standard command assuming python is in PATH or venv
       try {

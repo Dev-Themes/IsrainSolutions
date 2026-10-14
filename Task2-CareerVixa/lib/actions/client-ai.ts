@@ -34,18 +34,37 @@ export async function generateClientAIDraft(input: GenerateClientAIDraftInput) {
     fullPrompt += ` - ${input.instructions.trim()}`;
   }
 
-  const sanitizedTopic = fullPrompt.replace(/"/g, '\\"');
-  const pythonCmd = process.platform === "win32"
-    ? `venv\\Scripts\\python agent/main.py --topic "${sanitizedTopic}"`
-    : `venv/bin/python agent/main.py --topic "${sanitizedTopic}"`;
-
   try {
-    const { stdout, stderr } = await execAsync(pythonCmd, { timeout: 60000 });
-    if (stderr) {
-      console.warn("Client AI Generator Stderr:", stderr);
+    let rawArticle: any;
+
+    if (process.env.AGENT_URL) {
+      const agentUrl = process.env.AGENT_URL.replace(/\/$/, "");
+      const res = await fetch(`${agentUrl}/generate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topic: fullPrompt }),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.detail || errorData.error || `AI agent service failed with status ${res.status}`);
+      }
+
+      rawArticle = await res.json();
+    } else {
+      const sanitizedTopic = fullPrompt.replace(/"/g, '\\"');
+      const pythonCmd = process.platform === "win32"
+        ? `venv\\Scripts\\python agent/main.py --topic "${sanitizedTopic}"`
+        : `venv/bin/python agent/main.py --topic "${sanitizedTopic}"`;
+
+      const { stdout, stderr } = await execAsync(pythonCmd, { timeout: 60000 });
+      if (stderr) {
+        console.warn("Client AI Generator Stderr:", stderr);
+      }
+
+      rawArticle = JSON.parse(stdout);
     }
 
-    const rawArticle = JSON.parse(stdout);
     const validated = validateArticleContent(rawArticle);
 
     // Resolve category
