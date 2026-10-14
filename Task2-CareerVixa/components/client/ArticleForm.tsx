@@ -103,7 +103,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
       return;
     }
 
-    if (!formData.content.trim()) {
+    if (!formData.content || !formData.content.trim()) {
       setErrorMessage("Article content cannot be empty.");
       return;
     }
@@ -114,6 +114,12 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
 
     try {
       const result = await saveClientDraft(formData);
+
+      if (!result.success || !result.articleId) {
+        setErrorMessage(result.error || "Failed to save draft. Please check your inputs.");
+        return;
+      }
+
       setSuccessMessage("Draft saved successfully.");
 
       // If new article, update the URL without full reload
@@ -121,7 +127,11 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
         router.push(`/dashboard/articles/${result.articleId}/edit`);
       }
     } catch (err: any) {
-      setErrorMessage(err.message || "Failed to save draft.");
+      const rawMsg = err?.message || "";
+      const displayMsg = rawMsg.includes("441")
+        ? "Unable to save draft at this time. Please make sure all required fields are filled out."
+        : rawMsg || "Failed to save draft.";
+      setErrorMessage(displayMsg);
     } finally {
       setIsSaving(false);
     }
@@ -306,7 +316,7 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
                   type="text"
                   disabled={isLocked}
                   placeholder="master-the-tech-interview"
-                  value={formData.slug}
+                  value={formData.slug || ""}
                   onChange={(e) => setFormData({ ...formData, slug: slugify(e.target.value) })}
                   className="w-full px-3 py-2 text-xs font-mono rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-[#F2FBF8] dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-primary/30 disabled:opacity-60"
                 />
@@ -343,12 +353,12 @@ export default function ArticleForm({ initialArticle, categories }: ArticleFormP
             {isLocked ? (
               <div
                 className="prose max-w-none p-4 rounded-md border border-[#C6E2D6] dark:border-[#355A50] bg-[#F2FBF8] dark:bg-[#091A19] text-sm overflow-y-auto max-h-[500px]"
-                dangerouslySetInnerHTML={{ __html: formData.content }}
+                dangerouslySetInnerHTML={{ __html: formData.content || "" }}
               />
             ) : (
               <TiptapEditor
-                value={formData.content}
-                onChange={(content) => setFormData({ ...formData, content })}
+                value={formData.content || ""}
+                onChange={(content) => setFormData({ ...formData, content: content || "" })}
               />
             )}
           </div>

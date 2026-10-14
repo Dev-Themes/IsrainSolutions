@@ -44,9 +44,13 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
     setActionLoadingId(articleId);
     setErrorMessage(null);
     try {
-      await deleteClientDraft(articleId);
+      const res = await deleteClientDraft(articleId);
+      if (!res.success) {
+        setErrorMessage(res.error || "Failed to delete article.");
+      }
     } catch (err: any) {
-      setErrorMessage(err.message || "Failed to delete article.");
+      const rawMsg = err?.message || "";
+      setErrorMessage(rawMsg.includes("441") ? "Failed to delete draft." : rawMsg || "Failed to delete article.");
     } finally {
       setActionLoadingId(null);
     }
@@ -60,9 +64,13 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
     setActionLoadingId(articleId);
     setErrorMessage(null);
     try {
-      await withdrawSubmission(articleId);
+      const res = await withdrawSubmission(articleId);
+      if (!res.success) {
+        setErrorMessage(res.error || "Failed to withdraw submission.");
+      }
     } catch (err: any) {
-      setErrorMessage(err.message || "Failed to withdraw submission.");
+      const rawMsg = err?.message || "";
+      setErrorMessage(rawMsg.includes("441") ? "Failed to withdraw submission." : rawMsg || "Failed to withdraw submission.");
     } finally {
       setActionLoadingId(null);
     }

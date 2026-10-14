@@ -100,9 +100,19 @@ export default function SubmissionDialog({
         termsAccepted: true,
       });
 
+      if (!result.success) {
+        setErrorMessage(result.error || "Failed to submit article for review.");
+        setIsSubmitting(false);
+        return;
+      }
+
       onSubmitSuccess(result);
     } catch (err: any) {
-      setErrorMessage(err.message || "Failed to submit article for review.");
+      const rawMsg = err?.message || "";
+      const displayMsg = rawMsg.includes("441")
+        ? "Submission failed. Please check your contributor profile in settings and try again."
+        : rawMsg || "Failed to submit article for review.";
+      setErrorMessage(displayMsg);
       setIsSubmitting(false);
     }
   };
