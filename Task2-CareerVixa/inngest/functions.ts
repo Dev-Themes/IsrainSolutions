@@ -2,10 +2,7 @@ import { inngest } from "./client";
 import { prisma } from "@/lib/prisma";
 import { publishAIArticle } from "@/lib/articles/publish";
 import { hasPublishedToday } from "@/lib/automation/lock";
-import { exec } from "child_process";
-import { promisify } from "util";
-
-const execAsync = promisify(exec);
+import { generateCareerArticle } from "@/lib/ai/generate-article";
 
 export const dailyAIPublisher = inngest.createFunction(
   { 
@@ -36,43 +33,11 @@ export const dailyAIPublisher = inngest.createFunction(
       return { status: "skipped", reason: "Already published today" };
     }
 
-    // 3. Call the Python AI Agent to research and generate
-    // Note: In production on Vercel, Python scripts might be hosted as separate API routes.
-    // For this monorepo, we execute it locally assuming python is available.
-    // We would pass topics/existing here.
-    const rawArticle = await step.run("run-python-agent", async () => {
-      if (process.env.AGENT_URL) {
-        const agentUrl = process.env.AGENT_URL.replace(/\/$/, "");
-        const res = await fetch(`${agentUrl}/generate`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({}),
-        });
-
-        if (!res.ok) {
-          const errorData = await res.json().catch(() => ({}));
-          throw new Error(errorData.detail || errorData.error || `AI Agent service execution failed with status ${res.status}`);
-        }
-
-        return await res.json();
-      }
-
-      // Execute the Python script locally to get the article
-      // We use python module path or standard command assuming python is in PATH or venv
-      try {
-        // Run the agent. We explicitly use the venv python to ensure dependencies are found.
-        const pythonCmd = process.platform === "win32" ? "venv\\Scripts\\python agent/main.py" : "venv/bin/python agent/main.py";
-        const { stdout, stderr } = await execAsync(pythonCmd);
-        if (stderr) {
-          console.warn("Python Agent Stderr:", stderr);
-        }
-        
-        // The python script outputs JSON, so we parse it
-        return JSON.parse(stdout);
-      } catch (error) {
-        console.error("Failed to run python agent:", error);
-        throw new Error("AI Agent execution failed");
-      }
+    // 3. Research and generate the daily article
+    const rawArticle = await step.run("generate-ai-article", async () => {
+      return await generateCareerArticle({
+        topic: "Navigating Career Trajectories, Compensation Benchmarks, and Strategic Workplace Skills in 2025",
+      });
     });
 
     // 4. Validate and Publish using Next.js logic

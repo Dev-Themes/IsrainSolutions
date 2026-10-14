@@ -61,12 +61,22 @@ export default function AIDraftGeneratorForm({ categories }: AIDraftGeneratorFor
       clearTimeout(stepTimer);
       clearTimeout(stepTimer2);
 
+      if (!result.success || !result.articleId) {
+        setErrorMessage(result.error || "Failed to generate AI draft. Please try again.");
+        setIsGenerating(false);
+        return;
+      }
+
       // Successfully generated. Redirect to the editor so the contributor can review and refine!
       router.push(`/dashboard/articles/${result.articleId}/edit`);
     } catch (err: any) {
       clearTimeout(stepTimer);
       clearTimeout(stepTimer2);
-      setErrorMessage(err.message || "Failed to generate AI draft. Please try again.");
+      const rawMsg = err?.message || "";
+      const displayMsg = rawMsg.includes("441")
+        ? "The AI research service encountered a timeout. Please try again with a specific career topic."
+        : rawMsg || "Failed to generate AI draft. Please try again.";
+      setErrorMessage(displayMsg);
       setIsGenerating(false);
     }
   };

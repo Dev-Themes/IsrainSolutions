@@ -1,14 +1,10 @@
 "use server";
 
-import { exec } from "child_process";
-import { promisify } from "util";
 import { prisma } from "@/lib/prisma";
 import { requireClientUser } from "@/lib/client/auth";
-import { validateArticleContent } from "@/lib/validation/content";
+import { generateCareerArticle } from "@/lib/ai/generate-article";
 import { ArticleStatus } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-
-const execAsync = promisify(exec);
 
 interface GenerateClientAIDraftInput {
   topic: string;
@@ -17,55 +13,41 @@ interface GenerateClientAIDraftInput {
   categoryId?: string;
 }
 
-export async function generateClientAIDraft(input: GenerateClientAIDraftInput) {
-  const session = await requireClientUser({ redirectOnFail: false });
-  const userId = session.user.id;
+export type GenerateClientAIDraftResult = {
+  success: boolean;
+  articleId?: string;
+  title?: string;
+  slug?: string;
+  status?: ArticleStatus;
+  error?: string;
+};
 
-  if (!input.topic || input.topic.trim().length < 5) {
-    throw new Error("Please provide a specific career topic (minimum 5 characters).");
-  }
-
-  // Construct topic with optional keywords and instructions to guide the research agent
-  let fullPrompt = input.topic.trim();
-  if (input.keywords && input.keywords.length > 0) {
-    fullPrompt += ` (Focus areas: ${input.keywords.join(", ")})`;
-  }
-  if (input.instructions && input.instructions.trim().length > 0) {
-    fullPrompt += ` - ${input.instructions.trim()}`;
-  }
-
+export async function generateClientAIDraft(
+  input: GenerateClientAIDraftInput
+): Promise<GenerateClientAIDraftResult> {
   try {
-    let rawArticle: any;
+    const session = await requireClientUser({ redirectOnFail: false });
+    if (!session?.user?.id) {
+      return {
+        success: false,
+        error: "Please sign in to generate AI career articles.",
+      };
+    }
+    const userId = session.user.id;
 
-    if (process.env.AGENT_URL) {
-      const agentUrl = process.env.AGENT_URL.replace(/\/$/, "");
-      const res = await fetch(`${agentUrl}/generate`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topic: fullPrompt }),
-      });
-
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.detail || errorData.error || `AI agent service failed with status ${res.status}`);
-      }
-
-      rawArticle = await res.json();
-    } else {
-      const sanitizedTopic = fullPrompt.replace(/"/g, '\\"');
-      const pythonCmd = process.platform === "win32"
-        ? `venv\\Scripts\\python agent/main.py --topic "${sanitizedTopic}"`
-        : `venv/bin/python agent/main.py --topic "${sanitizedTopic}"`;
-
-      const { stdout, stderr } = await execAsync(pythonCmd, { timeout: 60000 });
-      if (stderr) {
-        console.warn("Client AI Generator Stderr:", stderr);
-      }
-
-      rawArticle = JSON.parse(stdout);
+    if (!input.topic || input.topic.trim().length < 5) {
+      return {
+        success: false,
+        error: "Please provide a specific career topic (minimum 5 characters).",
+      };
     }
 
-    const validated = validateArticleContent(rawArticle);
+    // Generate article using the unified engine (Tavily research + Gemini/OpenAI synthesis)
+    const validated = await generateCareerArticle({
+      topic: input.topic.trim(),
+      keywords: input.keywords,
+      instructions: input.instructions,
+    });
 
     // Resolve category
     let categoryId = input.categoryId;
@@ -84,13 +66,14 @@ export async function generateClientAIDraft(input: GenerateClientAIDraftInput) {
     }
 
     // Connect tags if keywords provided
-    const tagConnect = input.keywords?.map((keyword) => ({
-      where: { name: keyword.trim() },
-      create: {
-        name: keyword.trim(),
-        slug: keyword.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      },
-    })) || [];
+    const tagConnect =
+      input.keywords?.map((keyword) => ({
+        where: { name: keyword.trim() },
+        create: {
+          name: keyword.trim(),
+          slug: keyword.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        },
+      })) || [];
 
     // Save strictly as private DRAFT. NEVER publish automatically.
     const article = await prisma.article.create({
@@ -125,6 +108,11 @@ export async function generateClientAIDraft(input: GenerateClientAIDraftInput) {
     };
   } catch (error: any) {
     console.error("Error generating client AI draft:", error);
-    throw new Error(error.message || "Failed to generate AI draft. Please try a different career topic.");
+    return {
+      success: false,
+      error:
+        error?.message ||
+        "Failed to generate AI draft. Please try a different career topic or try again in a few moments.",
+    };
   }
 }

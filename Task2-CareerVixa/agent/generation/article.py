@@ -65,19 +65,20 @@ def generate_article_content(topic: str, research_data: List[Dict[str, Any]]) ->
     openai_key = os.environ.get("OPENAI_API_KEY")
     
     if gemini_key:
-        try:
-            client = OpenAI(
-                api_key=gemini_key,
-                base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
-            )
-            completion = client.beta.chat.completions.parse(
-                model="gemini-2.5-flash",
-                messages=[{"role": "user", "content": prompt}],
-                response_format=ArticleSchema
-            )
-            return completion.choices[0].message.parsed
-        except Exception as e:
-            print(f"Gemini API attempt encountered: {e}. Falling back to OpenAI...", file=sys.stderr)
+        for gemini_model in ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.8-flash"]:
+            try:
+                client = OpenAI(
+                    api_key=gemini_key,
+                    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+                )
+                completion = client.beta.chat.completions.parse(
+                    model=gemini_model,
+                    messages=[{"role": "user", "content": prompt}],
+                    response_format=ArticleSchema
+                )
+                return completion.choices[0].message.parsed
+            except Exception as e:
+                print(f"Gemini {gemini_model} attempt encountered: {e}. Trying next option...", file=sys.stderr)
             
     if openai_key:
         client = OpenAI(api_key=openai_key)

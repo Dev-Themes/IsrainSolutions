@@ -1,11 +1,9 @@
-import { exec } from "child_process";
-import { promisify } from "util";
 import { redirect } from "next/navigation";
 import { requireAdmin } from "@/lib/auth";
 import { publishAIArticle } from "@/lib/articles/publish";
 import { revalidatePath } from "next/cache";
 
-const execAsync = promisify(exec);
+import { generateCareerArticle } from "@/lib/ai/generate-article";
 
 export default async function AIGeneratePage() {
   const session = await requireAdmin();
@@ -13,18 +11,12 @@ export default async function AIGeneratePage() {
   async function handleManualGeneration(formData: FormData) {
     "use server";
     const session = await requireAdmin();
-    const topic = formData.get("topic") as string;
+    const rawTopic = formData.get("topic") as string;
+    const topic = rawTopic && rawTopic.trim().length >= 5
+      ? rawTopic.trim()
+      : "Executive Career Strategy and High-Impact Leadership Navigation in 2025";
 
-    const pythonCmd = process.platform === "win32"
-      ? (topic ? `venv\\Scripts\\python agent/main.py --topic "${topic}"` : "venv\\Scripts\\python agent/main.py")
-      : (topic ? `venv/bin/python agent/main.py --topic "${topic}"` : "venv/bin/python agent/main.py");
-
-    const { stdout, stderr } = await execAsync(pythonCmd);
-    if (stderr) {
-      console.warn("Manual AI Generator Stderr:", stderr);
-    }
-
-    const rawArticle = JSON.parse(stdout);
+    const rawArticle = await generateCareerArticle({ topic });
 
     // Publish using existing pipeline with ignoreLock = true (does not count toward daily cron quota)
     const published = await publishAIArticle(rawArticle, session.user?.id as string, true);
