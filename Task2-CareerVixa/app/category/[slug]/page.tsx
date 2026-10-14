@@ -71,9 +71,44 @@ export default async function CategoryPage(props: { params: Promise<{ slug: stri
     return artCat.includes(targetCat) || targetCat.includes(artCat) || artCat.includes(targetSlug);
   });
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `${categoryMeta.name} Guides | CareerVixa`,
+    description: categoryMeta.description,
+    url: `${siteConfig.url}/category/${slug}`,
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: categoryArticles.map((art, idx) => ({
+        "@type": "ListItem",
+        position: idx + 1,
+        url: `${siteConfig.url}/articles/${art.slug}`,
+        name: art.title,
+      })),
+    },
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: categoryMeta.name, item: `${siteConfig.url}/category/${slug}` },
+    ],
+  };
+
   return (
-    <div className="w-full max-w-full overflow-x-clip">
-      <Container className="py-10 lg:py-16 flex flex-col gap-10">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <div className="w-full max-w-full overflow-x-clip">
+        <Container className="py-10 lg:py-16 flex flex-col gap-10">
       {/* Category Header */}
       <div className="flex flex-col gap-4 border-b border-border pb-8">
         <Link
@@ -163,6 +198,7 @@ export default async function CategoryPage(props: { params: Promise<{ slug: stri
         </div>
       )}
       </Container>
-    </div>
+      </div>
+    </>
   );
 }

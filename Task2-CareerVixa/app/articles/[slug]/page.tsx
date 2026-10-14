@@ -125,14 +125,24 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
   const headings = extractHeadings(article.content);
   const processedContent = article.isDbArticle ? injectHeadingIds(article.content) : article.content;
 
+  const imageUrl = article.heroImage.src.startsWith("http")
+    ? article.heroImage.src
+    : `${siteConfig.url}${article.heroImage.src.startsWith("/") ? "" : "/"}${article.heroImage.src}`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}/articles/${article.slug}`,
+    },
     headline: article.title,
     description: article.description,
-    image: article.heroImage.src,
+    image: imageUrl,
     datePublished: article.publishedAt.toISOString(),
     dateModified: article.updatedAt.toISOString(),
+    articleSection: article.category,
+    keywords: article.tags && article.tags.length > 0 ? article.tags.join(", ") : undefined,
     author: {
       "@type": "Person",
       name: article.author,
@@ -140,11 +150,12 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
+      url: siteConfig.url,
       logo: {
         "@type": "ImageObject",
-        url: `${siteConfig.url}/logo.png`,
-      }
-    }
+        url: `${siteConfig.url}/opengraph-image`,
+      },
+    },
   };
 
   const breadcrumbLd = {

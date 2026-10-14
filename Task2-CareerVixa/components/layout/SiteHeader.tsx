@@ -48,6 +48,7 @@ export function SiteHeader({ user }: { user?: any }) {
   }, [isMenuOpen]);
 
   const navLinks = [
+    { name: "All Guides", href: "/articles" },
     { name: "Career Growth", href: "/category/career-development" },
     { name: "Job Search", href: "/category/job-search-strategies" },
     { name: "Resumes", href: "/category/resume-and-cover-letters" },

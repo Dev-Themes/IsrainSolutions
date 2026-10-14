@@ -13,6 +13,13 @@ import {
   Clock,
   PenTool,
 } from "lucide-react";
+import { constructMetadata, siteConfig } from "@/lib/seo";
+
+export const metadata = constructMetadata({
+  title: "CareerVixa - Career, Jobs & Professional Growth",
+  description: "Data-backed career advice, compensation benchmarks, interview scripts, and executive frameworks to elevate your professional trajectory.",
+  url: siteConfig.url,
+});
 
 export default async function HomePage() {
   const allArticles = await getAllArticles();

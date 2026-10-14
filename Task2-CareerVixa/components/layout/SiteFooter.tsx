@@ -71,6 +71,11 @@ export function SiteFooter() {
                   Salary Negotiation
                 </Link>
               </li>
+              <li>
+                <Link href="/articles" className="text-brand-primary-text font-semibold hover:underline transition-colors min-h-[36px] sm:min-h-0 inline-flex items-center break-words">
+                  All Career Guides &rarr;
+                </Link>
+              </li>
             </ul>
           </div>
 

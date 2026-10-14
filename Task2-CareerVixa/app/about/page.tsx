@@ -12,15 +12,32 @@ import {
   ArrowRight,
   PenTool,
 } from "lucide-react";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = constructMetadata({
   title: "About CareerVixa | Executive Career Intelligence & Editorial Mission",
   description: "Learn about CareerVixa's mission, editorial standards, data-backed career intelligence, and contributor community.",
-  url: "https://career-vixa.vercel.app/about",
+  url: `${siteConfig.url}/about`,
 });
 
 export default function AboutPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: "About CareerVixa",
+    description: "Learn about CareerVixa's mission, editorial standards, data-backed career intelligence, and contributor community.",
+    url: `${siteConfig.url}/about`,
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "About", item: `${siteConfig.url}/about` },
+    ],
+  };
+
   const pillars = [
     {
       title: "Data-Backed Market Intelligence",
@@ -57,7 +74,16 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="w-full max-w-full overflow-x-clip bg-bg-page min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <div className="w-full max-w-full overflow-x-clip bg-bg-page min-h-screen">
       {/* 1. Hero Section */}
       <section className="relative border-b border-border-default bg-gradient-to-b from-brand-primary/5 via-bg-page to-bg-page py-16 sm:py-24">
         <Container>
@@ -207,5 +233,6 @@ export default function AboutPage() {
         </Container>
       </section>
     </div>
+    </>
   );
 }

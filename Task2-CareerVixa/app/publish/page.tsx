@@ -4,10 +4,13 @@ import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { Sparkles, CheckCircle2, ShieldCheck, PenTool, Users, ArrowRight } from "lucide-react";
 
-export const metadata = {
+import { constructMetadata, siteConfig } from "@/lib/seo";
+
+export const metadata = constructMetadata({
   title: "Publish Your Article | CareerVixa Contributor Portal",
   description: "Share your career expertise, industry insights, and professional growth strategies with thousands of ambitious job seekers.",
-};
+  url: `${siteConfig.url}/publish`,
+});
 
 export default async function PublishLandingPage() {
   const session = await auth();

@@ -10,15 +10,32 @@ import {
   UserCheck,
   RefreshCw,
 } from "lucide-react";
-import { constructMetadata } from "@/lib/seo";
+import { constructMetadata, siteConfig } from "@/lib/seo";
 
 export const metadata = constructMetadata({
   title: "Privacy Policy & Data Protection | CareerVixa",
   description: "Read CareerVixa's privacy policy, data protection standards, GDPR/CCPA compliance, and reader data rights.",
-  url: "https://career-vixa.vercel.app/privacy",
+  url: `${siteConfig.url}/privacy`,
 });
 
 export default function PrivacyPolicyPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Privacy Policy & Data Protection | CareerVixa",
+    description: "Read CareerVixa's privacy policy, data protection standards, GDPR/CCPA compliance, and reader data rights.",
+    url: `${siteConfig.url}/privacy`,
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteConfig.url },
+      { "@type": "ListItem", position: 2, name: "Privacy Policy", item: `${siteConfig.url}/privacy` },
+    ],
+  };
+
   const sections = [
     {
       id: "collection",
@@ -145,7 +162,16 @@ export default function PrivacyPolicyPage() {
   ];
 
   return (
-    <div className="w-full max-w-full overflow-x-clip bg-bg-page min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      <div className="w-full max-w-full overflow-x-clip bg-bg-page min-h-screen">
       {/* Hero Header */}
       <section className="relative border-b border-border-default bg-gradient-to-b from-brand-primary/5 via-bg-page to-bg-page py-14 sm:py-20">
         <Container>
@@ -224,5 +250,6 @@ export default function PrivacyPolicyPage() {
         </Container>
       </section>
     </div>
+    </>
   );
 }

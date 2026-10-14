@@ -60,7 +60,7 @@ export function constructMetadata({
       siteName: siteConfig.name,
       images: [
         {
-          url: image || `${siteConfig.url}/og-default.png`,
+          url: image || `${siteConfig.url}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: title,
@@ -80,7 +80,7 @@ export function constructMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: [image || `${siteConfig.url}/og-default.png`],
+      images: [image || `${siteConfig.url}/twitter-image`],
     },
   };
 }
