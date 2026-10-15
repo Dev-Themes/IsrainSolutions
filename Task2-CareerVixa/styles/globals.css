@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-bg-page: var(--bg-page);
   --color-bg-surface: var(--bg-surface);
@@ -190,7 +192,7 @@
     --bg-surface-subtle: #F1F5F9;
     --text-heading: #0F172A;
     --text-body: #0F172A;
-    --text-muted: #64748B;
+    --text-muted: #475569;
     --border-default: #CBD5E1;
     --border-strong: #94A3B8;
     --brand-primary: #059669;
