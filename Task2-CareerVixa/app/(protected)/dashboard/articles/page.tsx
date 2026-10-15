@@ -46,17 +46,17 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-2xl border border-slate-200 dark:border-[#334155] bg-white dark:bg-[#151F32] p-6 shadow-xs">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl text-slate-950 dark:text-white">My Articles</h1>
-          <p className="text-sm text-slate-600 dark:text-slate-300 mt-1 font-medium">
+          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl text-slate-950 dark:text-[#F8FAFC]">My Articles</h1>
+          <p className="text-sm text-slate-600 dark:text-[#CBD5E1] mt-1 font-medium">
             Track your guest article submissions, review feedback, and private drafts.
           </p>
         </div>
 
         <Link
           href="/dashboard/articles/new"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700 transition-colors shadow-xs text-sm"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#059669] text-white font-semibold hover:bg-[#047857] dark:bg-[#34D399] dark:text-[#064E3B] dark:hover:bg-[#6EE7B7] transition-colors shadow-xs text-sm"
         >
           <PlusCircle className="h-4 w-4" />
           <span>Write Article</span>
@@ -64,7 +64,7 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex overflow-x-auto border-b border-slate-200 dark:border-border gap-2 pb-1 scrollbar-none">
+      <div className="flex overflow-x-auto border-b border-slate-200 dark:border-[#334155] gap-2 pb-1 scrollbar-none">
         {statusTabs.map((tab) => {
           const isActive = status === tab.value;
           return (
@@ -75,8 +75,8 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
               }`}
               className={`whitespace-nowrap px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
                 isActive
-                  ? "bg-slate-900 text-white dark:bg-[#65DEAE] dark:text-[#08261E] shadow-xs"
-                  : "text-slate-700 dark:text-[#B5D8CC] hover:bg-slate-100 hover:text-slate-950 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E]"
+                  ? "bg-slate-900 text-white dark:bg-[#34D399] dark:text-[#064E3B] shadow-xs"
+                  : "text-slate-700 dark:text-[#CBD5E1] hover:bg-slate-100 hover:text-slate-950 dark:hover:bg-[#1E293B] dark:hover:text-[#F8FAFC]"
               }`}
             >
               {tab.label}
@@ -97,12 +97,12 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
               name="query"
               defaultValue={query || ""}
               placeholder="Search by article title or summary..."
-              className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+              className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
             />
           </div>
           <button
             type="submit"
-            className="px-3.5 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-[#355A50] bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-[#153630] dark:text-[#F0FCF7] dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-colors cursor-pointer"
+            className="px-3.5 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-[#334155] bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-[#1E293B] dark:text-[#F8FAFC] dark:hover:bg-[#334155] transition-colors cursor-pointer"
           >
             Search
           </button>
@@ -114,7 +114,7 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
           <select
             name="categoryId"
             defaultValue={categoryId}
-            className="px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-950 dark:text-[#F0FCF7] focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+            className="px-3 py-2 text-xs rounded-lg border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
           >
             <option value="ALL">All Categories</option>
             {categories.map((c) => (
@@ -125,7 +125,7 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
           </select>
           <button
             type="submit"
-            className="px-3.5 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-[#355A50] bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-[#153630] dark:text-[#F0FCF7] dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-colors flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2 text-xs font-semibold rounded-lg border border-slate-300 dark:border-[#334155] bg-slate-100 text-slate-900 hover:bg-slate-200 dark:bg-[#1E293B] dark:text-[#F8FAFC] dark:hover:bg-[#334155] transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <Filter className="h-3 w-3" />
             <span>Filter</span>
@@ -138,8 +138,8 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between border-t border-slate-200 dark:border-border pt-4 text-xs">
-          <span className="text-slate-700 dark:text-slate-300 font-medium">
+        <div className="flex items-center justify-between border-t border-slate-200 dark:border-[#334155] pt-4 text-xs">
+          <span className="text-slate-600 dark:text-[#CBD5E1] font-medium">
             Showing page {currentPage} of {totalPages} ({totalCount} total submissions)
           </span>
           <div className="flex gap-2">
@@ -148,7 +148,7 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
                 href={`/dashboard/articles?page=${currentPage - 1}&status=${status}${
                   query ? `&query=${query}` : ""
                 }${categoryId !== "ALL" ? `&categoryId=${categoryId}` : ""}`}
-                className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-900 dark:text-[#F0FCF7] hover:bg-slate-100 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#1E293B] text-slate-800 dark:text-[#F8FAFC] hover:bg-slate-100 dark:hover:bg-[#334155] transition-colors cursor-pointer"
               >
                 Previous
               </Link>
@@ -158,7 +158,7 @@ export default async function ClientArticlesPage({ searchParams }: ArticlesPageP
                 href={`/dashboard/articles?page=${currentPage + 1}&status=${status}${
                   query ? `&query=${query}` : ""
                 }${categoryId !== "ALL" ? `&categoryId=${categoryId}` : ""}`}
-                className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-900 dark:text-[#F0FCF7] hover:bg-slate-100 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-colors cursor-pointer"
+                className="px-3 py-1.5 rounded-lg border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#1E293B] text-slate-800 dark:text-[#F8FAFC] hover:bg-slate-100 dark:hover:bg-[#334155] transition-colors cursor-pointer"
               >
                 Next
               </Link>

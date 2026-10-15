@@ -170,109 +170,108 @@
     --brand-soft: #20324E;
   }
 
-  /* Client Dashboard (Light Theme) - Clean Crisp White & Deep Slate */
+  /* Client Dashboard (Light Theme) - Professional CareerVixa Emerald & Slate */
   .dashboard-client, [data-dashboard="client"] {
     --dashboard-bg: #F8FAFC;
-    --dashboard-sidebar: #11483F;
+    --dashboard-sidebar: #064E3B;
     --dashboard-header: #FFFFFF;
     --dashboard-card: #FFFFFF;
     --dashboard-surface-elevated: #F1F5F9;
     --dashboard-text-primary: #0F172A;
     --dashboard-text-secondary: #475569;
-    --dashboard-btn-primary: #087B61;
+    --dashboard-text-muted: #64748B;
+    --dashboard-btn-primary: #059669;
     --dashboard-btn-primary-text: #FFFFFF;
-    --dashboard-border: #E2E8F0;
-    --dashboard-accent: #086A54;
+    --dashboard-border: #CBD5E1;
+    --dashboard-accent: #047857;
 
     --bg-page: #F8FAFC;
     --bg-surface: #FFFFFF;
     --bg-surface-subtle: #F1F5F9;
     --text-heading: #0F172A;
-    --text-body: #1E293B;
-    --text-muted: #475569;
-    --border-default: #E2E8F0;
-    --border-strong: #CBD5E1;
-    --brand-primary: #087B61;
-    --brand-primary-hover: #086A54;
-    --brand-btn-fill: #087B61;
-    --brand-btn-hover: #086A54;
+    --text-body: #0F172A;
+    --text-muted: #64748B;
+    --border-default: #CBD5E1;
+    --border-strong: #94A3B8;
+    --brand-primary: #059669;
+    --brand-primary-text: #047857;
+    --brand-primary-hover: #047857;
+    --brand-btn-fill: #059669;
+    --brand-btn-hover: #047857;
     --brand-btn-text: #FFFFFF;
-    --brand-soft: #F1F5F9;
+    --brand-soft: #ECFDF5;
   }
 
-  /* Client Dashboard Light Theme - Strict white background cards with crisp dark font colors */
-  html:not(.dark) .dashboard-client,
-  html:not(.dark) [data-dashboard="client"] {
-    color: #1E293B;
-  }
-
-  html:not(.dark) .dashboard-client .bg-white,
-  html:not(.dark) [data-dashboard="client"] .bg-white,
-  html:not(.dark) .dashboard-client .bg-card,
-  html:not(.dark) [data-dashboard="client"] .bg-card {
-    background-color: #FFFFFF !important;
-    color: #0F172A;
-  }
-
-  html:not(.dark) .dashboard-client h1,
-  html:not(.dark) .dashboard-client h2,
-  html:not(.dark) .dashboard-client h3,
-  html:not(.dark) .dashboard-client h4,
-  html:not(.dark) .dashboard-client h5,
-  html:not(.dark) .dashboard-client h6,
-  html:not(.dark) [data-dashboard="client"] h1,
-  html:not(.dark) [data-dashboard="client"] h2,
-  html:not(.dark) [data-dashboard="client"] h3,
-  html:not(.dark) [data-dashboard="client"] h4,
-  html:not(.dark) [data-dashboard="client"] h5,
-  html:not(.dark) [data-dashboard="client"] h6 {
-    color: #0F172A !important;
-  }
-
-  html:not(.dark) .dashboard-client label,
-  html:not(.dark) [data-dashboard="client"] label {
-    color: #0F172A !important;
-  }
-
+  /* Scoped Input & Placeholder Styling for Light Mode */
   html:not(.dark) .dashboard-client input:not([type="checkbox"]):not([type="radio"]),
   html:not(.dark) [data-dashboard="client"] input:not([type="checkbox"]):not([type="radio"]),
   html:not(.dark) .dashboard-client select,
   html:not(.dark) [data-dashboard="client"] select,
   html:not(.dark) .dashboard-client textarea,
   html:not(.dark) [data-dashboard="client"] textarea {
-    background-color: #FFFFFF !important;
-    color: #0F172A !important;
+    background-color: #FFFFFF;
+    color: #0F172A;
     border-color: #CBD5E1;
   }
 
-  /* Client Dashboard (Dark Theme) - Professional Teal & Emerald */
-  .dark .dashboard-client, .dark [data-dashboard="client"], [data-dashboard="client"].dark {
-    --dashboard-bg: #091A19;
-    --dashboard-sidebar: #092B27;
-    --dashboard-header: #102925;
-    --dashboard-card: #153630;
-    --dashboard-surface-elevated: #21473F;
-    --dashboard-text-primary: #F0FCF7;
-    --dashboard-text-secondary: #B5D8CC;
-    --dashboard-btn-primary: #65DEAE;
-    --dashboard-btn-primary-text: #08261E;
-    --dashboard-border: #355A50;
-    --dashboard-accent: #95F0CB;
+  html:not(.dark) .dashboard-client input::placeholder,
+  html:not(.dark) [data-dashboard="client"] input::placeholder,
+  html:not(.dark) .dashboard-client textarea::placeholder,
+  html:not(.dark) [data-dashboard="client"] textarea::placeholder {
+    color: #64748B;
+    opacity: 1;
+  }
 
-    --bg-page: #091A19;
-    --bg-surface: #153630;
-    --bg-surface-subtle: #21473F;
-    --text-heading: #F0FCF7;
-    --text-body: #F0FCF7;
-    --text-muted: #B5D8CC;
-    --border-default: #355A50;
-    --border-strong: #477568;
-    --brand-primary: #65DEAE;
-    --brand-primary-hover: #95F0CB;
-    --brand-btn-fill: #65DEAE;
-    --brand-btn-hover: #95F0CB;
-    --brand-btn-text: #08261E;
-    --brand-soft: #21473F;
+  /* Client Dashboard (Dark Theme) - Professional Navy/Slate & Emerald */
+  .dark .dashboard-client, .dark [data-dashboard="client"], [data-dashboard="client"].dark {
+    --dashboard-bg: #0B1220;
+    --dashboard-sidebar: #0F172A;
+    --dashboard-header: #151F32;
+    --dashboard-card: #151F32;
+    --dashboard-surface-elevated: #1E293B;
+    --dashboard-text-primary: #F8FAFC;
+    --dashboard-text-secondary: #CBD5E1;
+    --dashboard-text-muted: #94A3B8;
+    --dashboard-btn-primary: #34D399;
+    --dashboard-btn-primary-text: #064E3B;
+    --dashboard-border: #334155;
+    --dashboard-accent: #6EE7B7;
+
+    --bg-page: #0B1220;
+    --bg-surface: #151F32;
+    --bg-surface-subtle: #1E293B;
+    --text-heading: #F8FAFC;
+    --text-body: #F8FAFC;
+    --text-muted: #94A3B8;
+    --border-default: #334155;
+    --border-strong: #475569;
+    --brand-primary: #34D399;
+    --brand-primary-text: #6EE7B7;
+    --brand-primary-hover: #6EE7B7;
+    --brand-btn-fill: #34D399;
+    --brand-btn-hover: #6EE7B7;
+    --brand-btn-text: #064E3B;
+    --brand-soft: rgba(6, 78, 59, 0.3);
+  }
+
+  /* Scoped Input & Placeholder Styling for Dark Mode */
+  .dark .dashboard-client input:not([type="checkbox"]):not([type="radio"]),
+  .dark [data-dashboard="client"] input:not([type="checkbox"]):not([type="radio"]),
+  .dark .dashboard-client select,
+  .dark [data-dashboard="client"] select,
+  .dark .dashboard-client textarea,
+  .dark [data-dashboard="client"] textarea {
+    background-color: #0B1220;
+    color: #F8FAFC;
+    border-color: #334155;
+  }
+
+  .dark .dashboard-client input::placeholder,
+  .dark [data-dashboard="client"] input::placeholder,
+  .dark .dashboard-client textarea::placeholder,
+  .dark [data-dashboard="client"] textarea::placeholder {
+    color: #94A3B8;
+    opacity: 1;
   }
 }
 

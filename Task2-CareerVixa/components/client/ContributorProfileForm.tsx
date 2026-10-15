@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useOptimistic, startTransition } from "react";
 import { upsertContributorProfile } from "@/lib/actions/client-profile";
 import { ContributorProfileInput } from "@/lib/validation/contributor-profile";
 import { User, Building, Globe, Phone, FileText, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
@@ -30,6 +30,14 @@ export default function ContributorProfileForm({ initialProfile, user }: Profile
     websiteUrl: initialProfile?.websiteUrl || "",
   });
 
+  const [optimisticProfile, setOptimisticProfile] = useOptimistic(
+    formData,
+    (current, update: ContributorProfileInput) => ({
+      ...current,
+      ...update,
+    })
+  );
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -40,14 +48,17 @@ export default function ContributorProfileForm({ initialProfile, user }: Profile
     setSuccessMessage(null);
     setErrorMessage(null);
 
-    try {
-      await upsertContributorProfile(formData);
-      setSuccessMessage("Your contributor profile has been updated successfully.");
-    } catch (err: any) {
-      setErrorMessage(err.message || "Failed to update profile. Please check your inputs.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    startTransition(async () => {
+      setOptimisticProfile(formData);
+      try {
+        await upsertContributorProfile(formData);
+        setSuccessMessage("Your contributor profile has been updated successfully.");
+      } catch (err: any) {
+        setErrorMessage(err.message || "Failed to update profile. Please check your inputs.");
+      } finally {
+        setIsSubmitting(false);
+      }
+    });
   };
 
   return (
@@ -67,116 +78,129 @@ export default function ContributorProfileForm({ initialProfile, user }: Profile
       )}
 
       {/* Account Identity (Read-only) */}
-      <div className="rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 space-y-4 shadow-xs">
-        <h3 className="font-bold text-base text-slate-950 dark:text-white">Account Identity</h3>
-        <p className="text-xs text-slate-600 dark:text-[#B5D8CC]">
+      <div className="rounded-2xl border border-slate-200 dark:border-[#334155] bg-white dark:bg-[#151F32] p-6 space-y-4 shadow-xs">
+        <h3 className="font-bold text-base text-slate-950 dark:text-[#F8FAFC]">Account Identity</h3>
+        <p className="text-xs text-slate-600 dark:text-[#94A3B8]">
           Verified email address associated with your CareerVixa login.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
               Verified Email
             </label>
             <input
               type="text"
               disabled
               value={user.email || ""}
-              className="w-full rounded-xl border border-slate-200 dark:border-[#355A50] bg-slate-50 dark:bg-[#091A19] px-3.5 py-2.5 text-sm text-slate-700 dark:text-slate-300 cursor-not-allowed"
+              className="w-full rounded-xl border border-slate-200 dark:border-[#334155] bg-slate-100 dark:bg-[#1E293B] px-3.5 py-2.5 text-sm text-slate-700 dark:text-slate-300 cursor-not-allowed"
             />
+          </div>
+          <div>
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
+              Author Display Name
+            </label>
+            <div className="w-full rounded-xl border border-slate-200 dark:border-[#334155] bg-slate-100 dark:bg-[#1E293B] px-3.5 py-2.5 text-sm text-slate-900 dark:text-[#F8FAFC] font-semibold flex items-center justify-between min-h-[42px]">
+              <span className="truncate">{optimisticProfile.fullName || "Not set"}</span>
+              {isSubmitting && (
+                <span className="text-[10px] uppercase font-bold text-[#059669] dark:text-[#34D399] flex items-center gap-1 shrink-0 ml-2">
+                  <Loader2 className="h-3 w-3 animate-spin" /> Saving
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Contributor Details */}
-      <div className="rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] p-6 space-y-4 shadow-xs">
-        <h3 className="font-bold text-base text-slate-950 dark:text-white">Contributor Information</h3>
-        <p className="text-xs text-slate-600 dark:text-[#B5D8CC]">
+      <div className="rounded-2xl border border-slate-200 dark:border-[#334155] bg-white dark:bg-[#151F32] p-6 space-y-4 shadow-xs">
+        <h3 className="font-bold text-base text-slate-950 dark:text-[#F8FAFC]">Contributor Information</h3>
+        <p className="text-xs text-slate-600 dark:text-[#94A3B8]">
           Mandatory contributor attribution fields for guest article submissions.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
               Full Name <span className="text-red-500">*</span>
             </label>
             <div className="relative">
-              <User className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
+              <User className="absolute left-3.5 top-3 h-4 w-4 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 required
                 placeholder="e.g. Sarah Jenkins"
                 value={formData.fullName}
                 onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#059669]/30"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
               Country <span className="text-red-500">*</span>
             </label>
             <div className="relative">
-              <Globe className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
+              <Globe className="absolute left-3.5 top-3 h-4 w-4 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 required
                 placeholder="e.g. United States, United Kingdom, Canada"
                 value={formData.country}
                 onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#059669]/30"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
-              Organization / Company <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Optional)</span>
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
+              Organization / Company <span className="text-xs font-normal text-slate-500 dark:text-[#94A3B8]">(Optional)</span>
             </label>
             <div className="relative">
-              <Building className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
+              <Building className="absolute left-3.5 top-3 h-4 w-4 text-slate-500 dark:text-slate-400" />
               <input
                 type="text"
                 placeholder="e.g. TechCareer Academy, RemoteWorks Inc"
                 value={formData.organization || ""}
                 onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#059669]/30"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
-              Phone Number <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Optional)</span>
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
+              Phone Number <span className="text-xs font-normal text-slate-500 dark:text-[#94A3B8]">(Optional)</span>
             </label>
             <div className="relative">
-              <Phone className="absolute left-3.5 top-3 h-4 w-4 text-slate-400 dark:text-slate-400" />
+              <Phone className="absolute left-3.5 top-3 h-4 w-4 text-slate-500 dark:text-slate-400" />
               <input
                 type="tel"
                 placeholder="e.g. +1 555-019-2834"
                 value={formData.phoneNumber || ""}
                 onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                className="w-full pl-10 pr-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#059669]/30"
               />
             </div>
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
-              Website / Portfolio URL <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Optional)</span>
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
+              Website / Portfolio URL <span className="text-xs font-normal text-slate-500 dark:text-[#94A3B8]">(Optional)</span>
             </label>
             <input
               type="url"
               placeholder="https://yourcompany.com"
               value={formData.websiteUrl || ""}
               onChange={(e) => setFormData({ ...formData, websiteUrl: e.target.value })}
-              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#059669]/30"
             />
           </div>
 
           <div className="md:col-span-2">
-            <label className="block text-xs font-bold text-slate-900 dark:text-[#F0FCF7] mb-1">
-              Author Biography <span className="text-xs font-normal text-slate-500 dark:text-[#B5D8CC]">(Optional, max 500 characters)</span>
+            <label className="block text-xs font-bold text-slate-900 dark:text-[#F8FAFC] mb-1">
+              Author Biography <span className="text-xs font-normal text-slate-500 dark:text-[#94A3B8]">(Optional, max 500 characters)</span>
             </label>
             <textarea
               rows={3}
@@ -184,9 +208,9 @@ export default function ContributorProfileForm({ initialProfile, user }: Profile
               placeholder="Brief professional bio highlighting your industry experience..."
               value={formData.bio || ""}
               onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
-              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#091A19] text-slate-950 dark:text-[#F0FCF7] placeholder:text-slate-400 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/30 resize-none"
+              className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-slate-300 dark:border-[#334155] bg-white dark:bg-[#0B1220] text-slate-950 dark:text-[#F8FAFC] placeholder:text-slate-500 dark:placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#059669]/30 resize-none"
             />
-            <p className="text-[11px] text-slate-500 dark:text-[#B5D8CC] text-right mt-1">
+            <p className="text-[11px] text-slate-500 dark:text-[#94A3B8] text-right mt-1">
               {(formData.bio || "").length}/500
             </p>
           </div>
@@ -197,7 +221,7 @@ export default function ContributorProfileForm({ initialProfile, user }: Profile
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition-all shadow-xs disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#059669] hover:bg-[#047857] text-white font-semibold dark:bg-[#34D399] dark:text-[#064E3B] dark:hover:bg-[#6EE7B7] transition-all shadow-xs disabled:opacity-50 cursor-pointer"
         >
           {isSubmitting ? (
             <>

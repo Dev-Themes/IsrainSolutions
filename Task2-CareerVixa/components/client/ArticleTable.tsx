@@ -95,11 +95,11 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
 
   if (articles.length === 0) {
     return (
-      <div className="rounded-2xl border border-dashed border-slate-300 dark:border-[#355A50] bg-white dark:bg-[#153630] p-12 text-center space-y-4 shadow-xs">
-        <p className="text-sm text-slate-600 dark:text-[#B5D8CC]">No articles match your selected filters.</p>
+      <div className="rounded-2xl border border-dashed border-slate-300 dark:border-[#334155] bg-white dark:bg-[#151F32] p-12 text-center space-y-4 shadow-xs">
+        <p className="text-sm text-slate-600 dark:text-[#94A3B8]">No articles match your selected filters.</p>
         <Link
           href="/dashboard/articles/new"
-          className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 transition-colors shadow-xs"
+          className="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold rounded-xl bg-[#059669] text-white hover:bg-[#047857] dark:bg-[#34D399] dark:text-[#064E3B] dark:hover:bg-[#6EE7B7] transition-colors shadow-xs"
         >
           Create New Article
         </Link>
@@ -116,10 +116,10 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
         </div>
       )}
 
-      <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] shadow-xs">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 dark:border-[#334155] bg-white dark:bg-[#151F32] shadow-xs">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-slate-200 dark:border-[#355A50] bg-slate-50 dark:bg-[#102925] text-xs font-bold text-slate-800 dark:text-slate-200">
+            <thead className="border-b border-slate-200 dark:border-[#334155] bg-slate-50 dark:bg-[#1E293B] text-xs font-bold text-slate-800 dark:text-[#F8FAFC]">
               <tr>
                 <th className="py-3.5 px-4 sm:px-6">Article</th>
                 <th className="py-3.5 px-4">Category</th>
@@ -128,7 +128,7 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                 <th className="py-3.5 px-4 sm:px-6 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 dark:divide-[#355A50]">
+            <tbody className="divide-y divide-slate-200 dark:divide-[#334155]">
               {articles.map((article) => {
                 const isEditable =
                   article.status === "DRAFT" || article.status === "CHANGES_REQUESTED";
@@ -138,21 +138,21 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                 const isBusy = actionLoadingId === article.id;
 
                 return (
-                  <tr key={article.id} className="hover:bg-slate-50/80 dark:hover:bg-[#21473F]/40 transition-colors">
+                  <tr key={article.id} className="hover:bg-slate-50/80 dark:hover:bg-[#1E293B]/50 transition-colors">
                     <td className="py-4 px-4 sm:px-6">
                       <div className="space-y-1">
                         <Link
                           href={`/dashboard/articles/${article.id}/preview`}
-                          className="font-semibold text-slate-950 dark:text-[#F0FCF7] hover:text-emerald-700 dark:hover:text-[#65DEAE] transition-colors line-clamp-1"
+                          className="font-semibold text-slate-950 dark:text-[#F8FAFC] hover:text-[#059669] dark:hover:text-[#34D399] transition-colors line-clamp-1"
                         >
                           {article.title}
                         </Link>
-                        <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-300">
+                        <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-[#94A3B8]">
                           <span className="font-mono text-[11px] truncate max-w-[200px]">
                             /{article.slug}
                           </span>
                           <span>·</span>
-                          <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-slate-100 dark:bg-[#21473F] text-slate-700 dark:text-slate-200">
+                          <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded bg-slate-100 dark:bg-[#1E293B] text-slate-700 dark:text-[#CBD5E1] border border-slate-200 dark:border-[#334155]">
                             {article.contentOrigin}
                           </span>
                         </div>
@@ -166,11 +166,11 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
 
                     <td className="py-4 px-4 text-xs">
                       {article.category ? (
-                        <span className="rounded-md bg-slate-100 dark:bg-[#21473F] px-2.5 py-1 font-semibold text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-transparent">
+                        <span className="rounded-md bg-slate-100 dark:bg-[#1E293B] px-2.5 py-1 font-semibold text-slate-800 dark:text-[#CBD5E1] border border-slate-200 dark:border-[#334155]">
                           {article.category.name}
                         </span>
                       ) : (
-                        <span className="text-slate-500 dark:text-slate-400 italic">Uncategorized</span>
+                        <span className="text-slate-500 dark:text-[#94A3B8] italic">Uncategorized</span>
                       )}
                     </td>
 
@@ -184,7 +184,7 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                       </span>
                     </td>
 
-                    <td className="py-4 px-4 text-xs text-slate-600 dark:text-slate-300 whitespace-nowrap">
+                    <td className="py-4 px-4 text-xs text-slate-600 dark:text-[#94A3B8] whitespace-nowrap">
                       {formatDistanceToNow(new Date(article.updatedAt), { addSuffix: true })}
                     </td>
 
@@ -194,7 +194,7 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                         <Link
                           href={`/dashboard/articles/${article.id}/preview`}
                           title="Preview Article"
-                          className="p-1.5 rounded-lg border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-700 dark:text-[#F0FCF7] hover:bg-slate-100 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-all shadow-xs cursor-pointer"
+                          className="p-1.5 rounded-lg border border-slate-200 dark:border-[#334155] bg-white dark:bg-[#1E293B] text-slate-700 dark:text-[#F8FAFC] hover:bg-slate-100 dark:hover:bg-[#334155] transition-all shadow-xs cursor-pointer"
                         >
                           <Eye className="h-4 w-4" />
                         </Link>
@@ -204,7 +204,7 @@ export default function ArticleTable({ articles }: ArticleTableProps) {
                           <Link
                             href={`/dashboard/articles/${article.id}/edit`}
                             title="Edit Draft"
-                            className="p-1.5 rounded-lg border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-700 dark:text-[#F0FCF7] hover:bg-slate-100 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-all shadow-xs cursor-pointer"
+                            className="p-1.5 rounded-lg border border-slate-200 dark:border-[#334155] bg-white dark:bg-[#1E293B] text-slate-700 dark:text-[#F8FAFC] hover:bg-slate-100 dark:hover:bg-[#334155] transition-all shadow-xs cursor-pointer"
                           >
                             <Edit className="h-4 w-4" />
                           </Link>
