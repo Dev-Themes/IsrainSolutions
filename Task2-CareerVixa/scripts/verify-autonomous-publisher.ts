@@ -112,10 +112,10 @@ async function audit() {
   // --------------------------------------------------------------------------
   try {
     // Test production auth logic
-    const testSecret = "test-secret-123";
-    const unauthorizedHeader = "Bearer wrong-token";
+    const testSecret: string = "test-secret-123";
+    const unauthorizedHeader: string = "Bearer wrong-token";
     const isVercelBearer = unauthorizedHeader === `Bearer ${testSecret}`;
-    const predictableKeyAttempt = "careervixa-cron";
+    const predictableKeyAttempt: string = "careervixa-cron";
     const isProduction = true;
     const isDevAuthorized = !isProduction && predictableKeyAttempt === "careervixa-cron";
 
