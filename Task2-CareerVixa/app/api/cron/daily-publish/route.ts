@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { publishAIArticle } from "@/lib/articles/publish";
-import { hasPublishedToday } from "@/lib/automation/lock";
+import {
+  acquireDailyLock,
+  completeDailyLock,
+  releaseDailyLock,
+} from "@/lib/automation/lock";
 import { generateCareerArticle } from "@/lib/ai/generate-article";
+import { formatInTimeZone } from "date-fns-tz";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
@@ -17,29 +22,30 @@ export async function POST(request: NextRequest) {
 
 async function handleCronExecution(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const isForce = searchParams.get("force") === "true";
   const cronKey = searchParams.get("key");
-
-  // Verify authorization:
-  // 1. Vercel Cron header: Authorization: Bearer <CRON_SECRET>
-  // 2. Secret query param (?key=careervixa-cron or process.env.CRON_SECRET)
-  // 3. Or in development mode
   const authHeader = request.headers.get("authorization");
   const expectedSecret = process.env.CRON_SECRET;
+  const isProduction = process.env.NODE_ENV === "production";
 
-  const isVercelCron =
-    Boolean(expectedSecret && authHeader === `Bearer ${expectedSecret}`);
-  const isKeyAuthorized =
-    Boolean(cronKey && (cronKey === expectedSecret || cronKey === "careervixa-cron"));
-  const isLocalDev = process.env.NODE_ENV === "development";
+  // Strict Authorization Verification:
+  // In production: Requires Bearer <CRON_SECRET> or secret query param. Predictable fallback keys are prohibited.
+  // In development: Permits testing query keys for local verification.
+  const isVercelBearer = Boolean(expectedSecret && authHeader === `Bearer ${expectedSecret}`);
+  const isSecretKeyValid = Boolean(expectedSecret && cronKey === expectedSecret);
+  const isDevAuthorized = !isProduction && (cronKey === "careervixa-cron" || process.env.NODE_ENV === "development");
 
-  // If CRON_SECRET is defined, enforce either the Vercel cron header or the key
-  if (expectedSecret && !isVercelCron && !isKeyAuthorized && !isLocalDev) {
+  if (!isVercelBearer && !isSecretKeyValid && !isDevAuthorized) {
     return NextResponse.json(
-      { error: "Unauthorized. Provide valid Bearer token or ?key=" },
+      { error: "Unauthorized. Valid Bearer token or authenticated key required." },
       { status: 401 }
     );
   }
+
+  // Force override safety: Prohibited in production unless explicitly authenticated with CRON_SECRET
+  const isForceParam = searchParams.get("force") === "true";
+  const isForce = isForceParam && (!isProduction || isVercelBearer || isSecretKeyValid);
+
+  let lockKey: string | null = null;
 
   try {
     // 1. Check automation config
@@ -55,34 +61,49 @@ async function handleCronExecution(request: NextRequest) {
       });
     }
 
-    // 2. Check daily lock (unless forced)
     const timezone = config.timezone || "Asia/Karachi";
+    const currentYear = formatInTimeZone(new Date(), timezone, "yyyy");
+
+    // 2. Atomic Database-Backed Idempotency Lock
     if (!isForce) {
-      const alreadyPublished = await hasPublishedToday(timezone);
-      if (alreadyPublished) {
+      const lockResult = await acquireDailyLock(timezone, 3);
+      if (!lockResult.acquired) {
         return NextResponse.json({
           status: "skipped",
-          reason: `An article has already been published today in timezone ${timezone}. Use ?force=true to test override.`,
+          reason: lockResult.reason,
         });
       }
+      lockKey = lockResult.lockKey;
     }
 
-    // 3. Determine topic from preferences or default
+    // 3. Determine topic dynamically (Never hardcoded to a legacy year!)
     const topic =
       config.topicPreferences?.trim() ||
-      "Navigating Career Trajectories, Compensation Benchmarks, and Strategic Workplace Skills in 2025";
+      `Navigating Career Trajectories, Compensation Benchmarks, and Strategic Workplace Skills in ${currentYear}`;
 
     // 4. Research and generate the article
-    const rawArticle = await generateCareerArticle({ topic });
+    const rawArticle = await generateCareerArticle({
+      topic,
+      timezone,
+    });
 
-    // 5. Find an Admin user for author attribution
-    const admin = await prisma.user.findFirst({ where: { role: "ADMIN" } });
+    // 5. Author attribution under verified Platform Admin
+    const admin = await prisma.user.findFirst({
+      where: { role: "ADMIN" },
+      orderBy: { createdAt: "asc" },
+    });
+
     if (!admin) {
-      throw new Error("No Admin user found in database to assign as author.");
+      throw new Error("No verified Admin user found in database to assign as author.");
     }
 
-    // 6. Validate, attach stock photo, and publish
+    // 6. Validate, attach topic-matched visual, and publish
     const published = await publishAIArticle(rawArticle, admin.id, isForce);
+
+    // 7. Complete daily lock atomically
+    if (lockKey) {
+      await completeDailyLock(lockKey, published.id);
+    }
 
     return NextResponse.json({
       status: "published",
@@ -96,6 +117,12 @@ async function handleCronExecution(request: NextRequest) {
     });
   } catch (err: any) {
     console.error("Cron execution error:", err);
+
+    // Release lock on failure so a bounded retry can attempt
+    if (lockKey) {
+      await releaseDailyLock(lockKey, err.message);
+    }
+
     await prisma.aIExecutionLog.create({
       data: {
         status: "FAILURE",

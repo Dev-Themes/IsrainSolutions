@@ -16,6 +16,7 @@ app = FastAPI(title="CareerVixa AI Research Agent Service")
 
 class GenerateRequest(BaseModel):
     topic: Optional[str] = None
+    timezone: Optional[str] = "Asia/Karachi"
 
 @app.get("/health")
 def health():
@@ -24,7 +25,7 @@ def health():
 @app.post("/generate")
 def generate(req: GenerateRequest):
     try:
-        result_json_str = generate_article(req.topic)
+        result_json_str = generate_article(req.topic, req.timezone or "Asia/Karachi")
         return json.loads(result_json_str)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

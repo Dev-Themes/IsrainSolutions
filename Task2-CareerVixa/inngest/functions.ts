@@ -1,17 +1,23 @@
 import { inngest } from "./client";
 import { prisma } from "@/lib/prisma";
 import { publishAIArticle } from "@/lib/articles/publish";
-import { hasPublishedToday } from "@/lib/automation/lock";
+import {
+  acquireDailyLock,
+  completeDailyLock,
+  releaseDailyLock,
+  hasPublishedToday,
+} from "@/lib/automation/lock";
 import { generateCareerArticle } from "@/lib/ai/generate-article";
+import { formatInTimeZone } from "date-fns-tz";
 
 export const dailyAIPublisher = inngest.createFunction(
-  { 
+  {
     id: "daily-ai-publisher",
-    retries: 3 // Bounded retries as per requirements
+    retries: 3, // Bounded retries as per requirements
   },
   { cron: "TZ=Asia/Karachi 0 9 * * *" }, // 9:00 AM Karachi time
   async ({ step }) => {
-    // 1. Check if automation is enabled
+    // 1. Check if automation is enabled in Admin settings
     const config = await step.run("check-config", async () => {
       let conf = await prisma.aIConfiguration.findFirst();
       if (!conf) {
@@ -21,34 +27,59 @@ export const dailyAIPublisher = inngest.createFunction(
     });
 
     if (!config.enabled) {
-      return { status: "skipped", reason: "Automation disabled by Admin" };
+      return { status: "skipped", reason: "Automation disabled by Admin in /admin/ai/automation" };
     }
 
-    // 2. Check daily lock
-    const alreadyPublished = await step.run("check-lock", async () => {
-      return await hasPublishedToday(config.timezone);
+    const timezone = config.timezone || "Asia/Karachi";
+    const currentYear = formatInTimeZone(new Date(), timezone, "yyyy");
+
+    // 2. Atomic Database Idempotency Lock Check
+    const lockResult = await step.run("acquire-daily-lock", async () => {
+      return await acquireDailyLock(timezone, 3);
     });
 
-    if (alreadyPublished) {
-      return { status: "skipped", reason: "Already published today" };
+    if (!lockResult.acquired) {
+      return { status: "skipped", reason: lockResult.reason };
     }
 
-    // 3. Research and generate the daily article
-    const rawArticle = await step.run("generate-ai-article", async () => {
-      return await generateCareerArticle({
-        topic: "Navigating Career Trajectories, Compensation Benchmarks, and Strategic Workplace Skills in 2025",
+    try {
+      // 3. Research and generate the daily article dynamically
+      const rawArticle = await step.run("generate-ai-article", async () => {
+        const topic =
+          config.topicPreferences?.trim() ||
+          `Navigating Career Trajectories, Compensation Benchmarks, and Strategic Workplace Skills in ${currentYear}`;
+
+        return await generateCareerArticle({
+          topic,
+          timezone,
+        });
       });
-    });
 
-    // 4. Validate and Publish using Next.js logic
-    const published = await step.run("validate-and-publish", async () => {
-      // Find an admin user to assign as author
-      const admin = await prisma.user.findFirst({ where: { role: "ADMIN" } });
-      if (!admin) throw new Error("No Admin user found to assign author to");
+      // 4. Validate and Publish under verified Admin author
+      const published = await step.run("validate-and-publish", async () => {
+        const admin = await prisma.user.findFirst({
+          where: { role: "ADMIN" },
+          orderBy: { createdAt: "asc" },
+        });
 
-      return await publishAIArticle(rawArticle, admin.id);
-    });
+        if (!admin) {
+          throw new Error("No Admin user found to assign as author");
+        }
 
-    return { status: "published", articleId: published.id };
+        return await publishAIArticle(rawArticle, admin.id);
+      });
+
+      // 5. Complete atomic lock
+      await step.run("complete-lock", async () => {
+        await completeDailyLock(lockResult.lockKey, published.id);
+      });
+
+      return { status: "published", articleId: published.id };
+    } catch (err: any) {
+      await step.run("release-lock-on-failure", async () => {
+        await releaseDailyLock(lockResult.lockKey, err?.message);
+      });
+      throw err;
+    }
   }
 );

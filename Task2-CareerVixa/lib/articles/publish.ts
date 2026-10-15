@@ -5,11 +5,14 @@ import { resolveWorkplaceImage } from "./images";
 
 /**
  * Publishes an AI-generated article into the database after rigorous validation.
- * @param rawArticle The unvalidated article data from the Python agent
- * @param AdminId The ID of the System Admin or AI virtual user creating the post
+ * Uses atomic transaction for article creation and audit logging.
+ *
+ * @param rawArticle The unvalidated article data from the generation engine
+ * @param adminId The ID of the verified Admin or Platform Editorial user
+ * @param ignoreLock Bypass flag reserved strictly for manual Admin generation
  */
 export async function publishAIArticle(rawArticle: any, adminId: string, ignoreLock = false) {
-  // 1. Check duplicate locks (bypassed for manual admin generation per FR-16)
+  // 1. Check duplicate locks (bypassed only for explicit manual Admin generation)
   if (!ignoreLock) {
     const alreadyPublished = await hasPublishedToday();
     if (alreadyPublished) {
@@ -17,10 +20,10 @@ export async function publishAIArticle(rawArticle: any, adminId: string, ignoreL
     }
   }
 
-  // 2. Validate and sanitize content
+  // 2. Validate, sanitize content, and verify layout
   const validatedArticle = validateArticleContent(rawArticle);
 
-  // 3. Resolve curated, strictly compliant professional workplace stock image
+  // 3. Resolve curated, topic-matched workplace stock image with alt metadata
   const resolvedImage = resolveWorkplaceImage(validatedArticle.title);
 
   // 4. Resolve default or topic matching category
@@ -31,32 +34,49 @@ export async function publishAIArticle(rawArticle: any, adminId: string, ignoreL
     matchedCategory = await prisma.category.findFirst();
   }
 
-  // 5. Create the article in the database directly as PUBLISHED with rich media
-  const article = await prisma.article.create({
-    data: {
-      title: validatedArticle.title,
-      slug: validatedArticle.slug,
-      summary: validatedArticle.summary,
-      content: validatedArticle.content,
-      coverImage: resolvedImage.src,
-      categoryId: matchedCategory?.id || null,
-      metaTitle: validatedArticle.metaTitle,
-      metaDescription: validatedArticle.metaDescription,
-      status: "PUBLISHED",
-      publishedAt: new Date(),
-      isAIGenerated: true,
-      aiSourceReferences: JSON.stringify(validatedArticle.sources),
-      authorId: adminId, 
-    }
+  // 5. Ensure unique slug
+  let slug = validatedArticle.slug;
+  const existingArticle = await prisma.article.findUnique({
+    where: { slug },
   });
+  if (existingArticle) {
+    slug = `${slug}-${Date.now().toString().slice(-4)}`;
+  }
 
-  // 4. Log the success
-  await prisma.aIExecutionLog.create({
-    data: {
-      status: "SUCCESS",
-      articleId: article.id,
-      validationData: JSON.stringify({ passed: true })
-    }
+  // 6. Create the article and log execution atomically in a transaction
+  const article = await prisma.$transaction(async (tx) => {
+    const created = await tx.article.create({
+      data: {
+        title: validatedArticle.title,
+        slug,
+        summary: validatedArticle.summary,
+        content: validatedArticle.content,
+        coverImage: resolvedImage.src,
+        categoryId: matchedCategory?.id || null,
+        metaTitle: validatedArticle.metaTitle,
+        metaDescription: validatedArticle.metaDescription,
+        status: "PUBLISHED",
+        publishedAt: new Date(),
+        isAIGenerated: true,
+        aiSourceReferences: JSON.stringify(validatedArticle.sources),
+        authorId: adminId,
+      },
+    });
+
+    await tx.aIExecutionLog.create({
+      data: {
+        status: "SUCCESS",
+        articleId: created.id,
+        validationData: JSON.stringify({
+          passed: true,
+          sourcesCount: validatedArticle.sources.length,
+          slug,
+          coverImage: resolvedImage.src,
+        }),
+      },
+    });
+
+    return created;
   });
 
   return article;
@@ -64,16 +84,16 @@ export async function publishAIArticle(rawArticle: any, adminId: string, ignoreL
 
 /**
  * Ensures Client submissions are never automatically published.
- * This helper throws an error if an article is owned by a Client.
+ * Throws a Security Violation if an article is authored by a CLIENT user.
  */
 export async function verifyPlatformOwnership(articleId: string) {
   const article = await prisma.article.findUnique({
     where: { id: articleId },
-    include: { author: true }
+    include: { author: true },
   });
 
   if (!article) throw new Error("Article not found");
-  
+
   if (article.author.role === "CLIENT") {
     throw new Error("SECURITY VIOLATION: Client articles cannot be automatically published.");
   }

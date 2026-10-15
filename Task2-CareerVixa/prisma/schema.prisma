@@ -157,6 +157,16 @@ model AIExecutionLog {
   article        Article?          @relation(fields: [articleId], references: [id])
 }
 
+model AIPublishingLock {
+  dayKey    String   @id // e.g. "2026-10-15-Asia/Karachi"
+  status    String   // "LOCKED" | "COMPLETED" | "FAILED"
+  articleId String?
+  attempts  Int      @default(1)
+  errorLogs String?  @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Category {
   id          String    @id @default(cuid())
   name        String    @unique
