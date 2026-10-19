@@ -26,6 +26,7 @@ export interface PortfolioProject {
   client: string;
   year: number;
   description: ProjectLocalizedText;
+  caption?: ProjectLocalizedText;
   details: ProjectDetails;
   coverImage: string;
   galleryImages: string[];
@@ -33,6 +34,7 @@ export interface PortfolioProject {
   layout: "standard" | "wide";
   alt: ProjectLocalizedText;
   tagline?: ProjectLocalizedText;
+  accentColor?: string;
 }
 
 export interface SiteConfig {

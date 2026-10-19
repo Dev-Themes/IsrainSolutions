@@ -34,4 +34,11 @@ export const brandColors = {
   contactBackground: "#292929",
   accent: "#E8D49B",
   subtleBorder: "#424242",
+  // Artistic Multicolor Accent Tokens (80/20 balance)
+  electricCoral: "#FF665C",
+  vibrantYellow: "#F7D85B",
+  electricBlue: "#6298FF",
+  mintGreen: "#78E6BF",
+  softLavender: "#BA9CFF",
+  charcoal: "#292929",
 };
