@@ -1,0 +1,2017 @@
+{
+  "Overview": {
+    "light": {
+      "bodyBg": "rgb(248, 250, 252)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(30, 41, 59)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(255, 255, 255)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "Welcome back, Audit Client Use",
+          "tag": "H1",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "30px",
+          "fontWeight": "900"
+        },
+        {
+          "text": "Write Manually",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "AI-Assisted Drafting",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Author Attribution",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Recent Submissions & Drafts",
+          "tag": "H2",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "14px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "AI Draft",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(33, 71, 63)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Start Writing →",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Generate Draft →",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Manage Profile →",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(30, 64, 175)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "cards": [
+        {
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "border": "rgb(21, 54, 48)"
+        },
+        {
+          "text": "Recent Submissions & Drafts\nView All",
+          "bg": "lab(14.4963 -11.1014 -0.513154 / 0.6)",
+          "color": "rgb(15, 23, 42)",
+          "border": "rgb(53, 90, 80)"
+        }
+      ]
+    },
+    "dark": {
+      "bodyBg": "rgb(9, 13, 22)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(226, 232, 240)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(16, 41, 37)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "Welcome back, Audit Client Use",
+          "tag": "H1",
+          "color": "rgb(255, 255, 255)",
+          "fontSize": "30px",
+          "fontWeight": "900"
+        },
+        {
+          "text": "Write Manually",
+          "tag": "H3",
+          "color": "rgb(240, 252, 247)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "AI-Assisted Drafting",
+          "tag": "H3",
+          "color": "rgb(240, 252, 247)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Author Attribution",
+          "tag": "H3",
+          "color": "rgb(240, 252, 247)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Recent Submissions & Drafts",
+          "tag": "H2",
+          "color": "rgb(240, 252, 247)",
+          "fontSize": "14px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "AI Draft",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(33, 71, 63)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Start Writing →",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Generate Draft →",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Manage Profile →",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(37, 99, 235)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "cards": []
+    }
+  },
+  "MyArticles": {
+    "light": {
+      "bodyBg": "rgb(248, 250, 252)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(30, 41, 59)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(255, 255, 255)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "My Articles",
+          "tag": "H1",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "30px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "hidden",
+          "name": "status",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(203, 213, 225)"
+        },
+        {
+          "type": "text",
+          "name": "query",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "hidden",
+          "name": "status",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(203, 213, 225)"
+        },
+        {
+          "type": "select-one",
+          "name": "categoryId",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Search",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(21, 54, 48)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Filter",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(21, 54, 48)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Create New Article",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(30, 64, 175)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "cards": [
+        {
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "border": "rgb(21, 54, 48)"
+        },
+        {
+          "text": "All Articles\nDrafts\nPending Review\nChang",
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(30, 41, 59)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "No articles match your selected filters.",
+          "bg": "rgb(255, 255, 255)",
+          "color": "rgb(15, 23, 42)",
+          "border": "rgb(53, 90, 80)"
+        }
+      ]
+    },
+    "dark": {
+      "bodyBg": "rgb(9, 13, 22)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(226, 232, 240)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(16, 41, 37)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "My Articles",
+          "tag": "H1",
+          "color": "rgb(255, 255, 255)",
+          "fontSize": "30px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "hidden",
+          "name": "status",
+          "color": "rgb(226, 232, 240)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "query",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(21, 54, 48)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "hidden",
+          "name": "status",
+          "color": "rgb(226, 232, 240)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "select-one",
+          "name": "categoryId",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(21, 54, 48)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Search",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(21, 54, 48)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Filter",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(21, 54, 48)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Create New Article",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(37, 99, 235)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "cards": []
+    }
+  },
+  "WriteArticle": {
+    "light": {
+      "bodyBg": "rgba(0, 0, 0, 0)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(0, 0, 0)",
+      "sidebarBg": "rgba(0, 0, 0, 0)",
+      "sidebarColor": "rgb(0, 0, 0)",
+      "headerBg": "rgba(0, 0, 0, 0)",
+      "headerBorder": "rgb(0, 0, 0)",
+      "headings": [],
+      "inputs": [],
+      "buttons": [],
+      "cards": []
+    },
+    "dark": {
+      "bodyBg": "rgb(9, 13, 22)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(226, 232, 240)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(16, 41, 37)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "Create New Article",
+          "tag": "H1",
+          "color": "rgb(255, 255, 255)",
+          "fontSize": "20px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Classification & Attribution",
+          "tag": "H3",
+          "color": "rgb(240, 252, 247)",
+          "fontSize": "14px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Promotional Provenance",
+          "tag": "H3",
+          "color": "rgb(240, 252, 247)",
+          "fontSize": "14px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "text",
+          "name": "e.g. Master the Tech Interview: 7 Key Strategies for 2027",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "select-one",
+          "name": "",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "master-the-tech-interview",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "textarea",
+          "name": "Brief, engaging summary of the article for blog listings and previews...",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "select-one",
+          "name": "",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "tech, interview, careers",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "url",
+          "name": "https://example.com/cover.jpg",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "url",
+          "name": "https://yourbusiness.com",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "url",
+          "name": "https://medium.com/@author/my-post",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Save Draft",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(21, 54, 48)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Submit for Review",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(37, 99, 235)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "cards": []
+    }
+  },
+  "AIDraft": {
+    "light": {
+      "bodyBg": "rgb(248, 250, 252)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(30, 41, 59)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(255, 255, 255)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "AI Article Generator",
+          "tag": "H1",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "30px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "text",
+          "name": "e.g. How to Transition into AI Engineering Without a CS Degree",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. portfolio projects, machine learning, career switch",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "select-one",
+          "name": "",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "textarea",
+          "name": "e.g. Emphasize actionable advice for junior engineers and include concrete portfolio project suggestions.",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Generate AI Draft Now",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(30, 64, 175)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "cards": [
+        {
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "border": "rgb(21, 54, 48)"
+        }
+      ]
+    },
+    "dark": {
+      "bodyBg": "rgb(9, 13, 22)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(226, 232, 240)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(16, 41, 37)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "AI Article Generator",
+          "tag": "H1",
+          "color": "rgb(255, 255, 255)",
+          "fontSize": "30px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "text",
+          "name": "e.g. How to Transition into AI Engineering Without a CS Degree",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. portfolio projects, machine learning, career switch",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "select-one",
+          "name": "",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "textarea",
+          "name": "e.g. Emphasize actionable advice for junior engineers and include concrete portfolio project suggestions.",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Generate AI Draft Now",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(37, 99, 235)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "cards": []
+    }
+  },
+  "Settings": {
+    "light": {
+      "bodyBg": "rgb(248, 250, 252)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(30, 41, 59)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(255, 255, 255)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "Contributor Profile",
+          "tag": "H1",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "30px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Account Identity",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Contributor Information",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(15, 23, 42)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "text",
+          "name": "",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. Sarah Jenkins",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. United States, United Kingdom, Canada",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. TechCareer Academy, RemoteWorks Inc",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "tel",
+          "name": "e.g. +1 555-019-2834",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "url",
+          "name": "https://yourcompany.com",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "textarea",
+          "name": "Brief professional bio highlighting your industry experience...",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(15, 23, 42)",
+          "bg": "rgb(255, 255, 255)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Save Profile",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(30, 64, 175)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(71, 85, 105)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(226, 232, 240)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(30, 64, 175)",
+          "border": "rgb(226, 232, 240)"
+        }
+      ],
+      "cards": [
+        {
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "bg": "rgba(0, 0, 0, 0)",
+          "color": "rgb(255, 255, 255)",
+          "border": "rgb(21, 54, 48)"
+        }
+      ]
+    },
+    "dark": {
+      "bodyBg": "rgb(9, 13, 22)",
+      "dashContainerBg": "rgba(0, 0, 0, 0)",
+      "dashContainerColor": "rgb(226, 232, 240)",
+      "sidebarBg": "rgb(9, 43, 39)",
+      "sidebarColor": "rgb(255, 255, 255)",
+      "headerBg": "rgb(16, 41, 37)",
+      "headerBorder": "rgb(53, 90, 80)",
+      "headings": [
+        {
+          "text": "Contributor Profile",
+          "tag": "H1",
+          "color": "rgb(255, 255, 255)",
+          "fontSize": "30px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Account Identity",
+          "tag": "H3",
+          "color": "rgb(255, 255, 255)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "Contributor Information",
+          "tag": "H3",
+          "color": "rgb(255, 255, 255)",
+          "fontSize": "16px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "CAREER GUIDES",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "ABOUT & EDITORIAL",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        },
+        {
+          "text": "WEEKLY CAREER INTELLIGENCE",
+          "tag": "H3",
+          "color": "rgb(248, 250, 252)",
+          "fontSize": "12px",
+          "fontWeight": "700"
+        }
+      ],
+      "inputs": [
+        {
+          "type": "text",
+          "name": "",
+          "color": "lab(84.7652 -1.94535 -7.93337)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. Sarah Jenkins",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. United States, United Kingdom, Canada",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "text",
+          "name": "e.g. TechCareer Academy, RemoteWorks Inc",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "tel",
+          "name": "e.g. +1 555-019-2834",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "url",
+          "name": "https://yourcompany.com",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "textarea",
+          "name": "Brief professional bio highlighting your industry experience...",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(9, 26, 25)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "type": "email",
+          "name": "Enter your executive email",
+          "color": "rgb(248, 250, 252)",
+          "bg": "rgb(17, 24, 39)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "buttons": [
+        {
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Contributor Profile",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Save Profile",
+          "color": "rgb(255, 255, 255)",
+          "bg": "lab(55.0481 -49.9246 15.93)",
+          "border": "rgb(53, 90, 80)"
+        },
+        {
+          "text": "Career Growth",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Job Search Tactics",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Resumes & Portfolios",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Interview Mastery",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Salary Negotiation",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "All Career Guides →",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "About Platform",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Write For Us",
+          "color": "rgb(147, 197, 253)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Contributor Hub",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Privacy Policy",
+          "color": "rgb(203, 213, 225)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "border": "rgb(30, 41, 59)"
+        },
+        {
+          "text": "Subscribe",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgb(37, 99, 235)",
+          "border": "rgb(30, 41, 59)"
+        }
+      ],
+      "cards": []
+    }
+  }
+}

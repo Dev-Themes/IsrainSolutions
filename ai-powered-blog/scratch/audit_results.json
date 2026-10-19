@@ -1,0 +1,1870 @@
+{
+  "responsiveIssues": [],
+  "themeIssues": [
+    {
+      "page": "Home",
+      "darkTokens": {
+        "theme": "dark",
+        "bodyBg": "rgb(9, 13, 22)",
+        "bodyColor": "rgb(226, 232, 240)",
+        "h1Color": "rgb(248, 250, 252)",
+        "mutedColor": "rgb(203, 213, 225)",
+        "cardBg": "rgb(17, 24, 39)"
+      },
+      "lightTokens": {
+        "theme": "light",
+        "bodyBg": "rgb(248, 250, 252)",
+        "bodyColor": "rgb(30, 41, 59)",
+        "h1Color": "rgb(15, 23, 42)",
+        "mutedColor": "rgb(71, 85, 105)",
+        "cardBg": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "Articles",
+      "darkTokens": {
+        "theme": "dark",
+        "bodyBg": "rgb(9, 13, 22)",
+        "bodyColor": "rgb(226, 232, 240)",
+        "h1Color": "rgb(248, 250, 252)",
+        "mutedColor": "rgb(203, 213, 225)",
+        "cardBg": "rgb(17, 24, 39)"
+      },
+      "lightTokens": {
+        "theme": "light",
+        "bodyBg": "rgb(248, 250, 252)",
+        "bodyColor": "rgb(30, 41, 59)",
+        "h1Color": "rgb(15, 23, 42)",
+        "mutedColor": "rgb(71, 85, 105)",
+        "cardBg": "rgb(255, 255, 255)"
+      }
+    },
+    {
+      "page": "ArticleDetail",
+      "darkTokens": {
+        "theme": "dark",
+        "bodyBg": "rgb(9, 13, 22)",
+        "bodyColor": "rgb(226, 232, 240)",
+        "h1Color": "rgb(248, 250, 252)",
+        "mutedColor": "rgb(203, 213, 225)",
+        "cardBg": "rgb(17, 24, 39)"
+      },
+      "lightTokens": {
+        "theme": "light",
+        "bodyBg": "rgb(248, 250, 252)",
+        "bodyColor": "rgb(30, 41, 59)",
+        "h1Color": "rgb(15, 23, 42)",
+        "mutedColor": "rgb(71, 85, 105)",
+        "cardBg": "rgb(255, 255, 255)"
+      }
+    }
+  ],
+  "dashboardIssues": [
+    {
+      "page": "DashboardOverview",
+      "darkAnomalies": [],
+      "lightAnomalies": [],
+      "darkSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ],
+      "lightSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ]
+    },
+    {
+      "page": "DashboardArticles",
+      "darkAnomalies": [],
+      "lightAnomalies": [],
+      "darkSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ],
+      "lightSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ]
+    },
+    {
+      "page": "DashboardNewArticle",
+      "darkAnomalies": [],
+      "lightAnomalies": [
+        {
+          "issue": "Low contrast / illegible text in light mode",
+          "tag": "BUTTON",
+          "text": "Save Draft",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgb(255, 255, 255)",
+          "classes": "inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold rounded-xl border border-slate-200 dark:border-[#355A50] bg-white dark:bg-[#153630] text-slate-800 dark:text-[#F0FCF7] hover:bg-slate-100 dark:hover:bg-[#65DEAE] dark:hover:text-[#08261E] transition-all disabled:opacity-50 shadow-xs cursor-pointer"
+        }
+      ],
+      "darkSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ],
+      "lightSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ]
+    },
+    {
+      "page": "DashboardAIDraft",
+      "darkAnomalies": [],
+      "lightAnomalies": [],
+      "darkSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ],
+      "lightSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ]
+    },
+    {
+      "page": "DashboardSettings",
+      "darkAnomalies": [],
+      "lightAnomalies": [],
+      "darkSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ],
+      "lightSamples": [
+        {
+          "tag": "A",
+          "text": "CV\nCareerVixa\nCONTRIBUTOR HUB",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-2.5 font-bold min-h-[44px] group"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-base font-extrabold tracking-tight text-white leading-none"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CONTRIBUTOR HUB",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] font-bold uppercase tracking-wider text-[#95F0CB] dark:text-[#65DEAE] mt-1"
+        },
+        {
+          "tag": "SPAN",
+          "text": "PUBLISHING PORTAL",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block text-[10px] font-black uppercase tracking-widest text-[#B5D8CC] px-3 py-1 mb-1"
+        },
+        {
+          "tag": "A",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Overview",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "My Articles",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Write Article",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs font-semibold transition-all min-h-[42px] text-[#E2F5ED] hover:bg-[#21473F]/70 hover:text-white dark:text-[#B5D8CC] dark:hover:bg-[#21473F]/60 dark:hover:text-white"
+        },
+        {
+          "tag": "SPAN",
+          "text": "AI Draft Generator",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "A",
+          "text": "Contributor Profile",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "flex items-center gap-3 rounded-xl px-3 py-2.5 text-xs transition-all min-h-[42px] bg-[#087B61] text-white dark:bg-[#65DEAE] dark:text-[#08261E] font-bold shadow-sm"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Profile",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:block truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Audit Client User",
+          "color": "rgb(255, 255, 255)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-bold text-white truncate"
+        },
+        {
+          "tag": "SPAN",
+          "text": "client.audit.1792061473027@tes",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-[10px] text-[#B5D8CC] truncate"
+        },
+        {
+          "tag": "A",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-[#B5D8CC] hover:text-white hover:bg-[#21473F]/60 rounded-lg px-2.5 py-1.5 transition-colors"
+        },
+        {
+          "tag": "SPAN",
+          "text": "View Public Blog",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "flex items-center justify-between text-xs font-semibold text-rose-300 hover:text-rose-100 hover:bg-rose-950/40 rounded-lg px-2.5 py-1.5 transition-colors text-left"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Sign Out",
+          "color": "lab(76.6339 38.3549 9.68835)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "hidden lg:inline"
+        },
+        {
+          "tag": "SPAN",
+          "text": "CareerVixa",
+          "color": "rgb(101, 222, 174)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-extrabold text-[#087B61] dark:text-[#65DEAE]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "Contributor Portal",
+          "color": "rgb(240, 252, 247)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "font-bold text-slate-950 dark:text-[#F0FCF7]"
+        },
+        {
+          "tag": "SPAN",
+          "text": "·",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": ""
+        },
+        {
+          "tag": "SPAN",
+          "text": "Guest Publishing, Editorial Qu",
+          "color": "rgb(181, 216, 204)",
+          "bg": "rgba(0, 0, 0, 0)",
+          "classes": "text-xs font-semibold text-slate-600 dark:text-[#B5D8CC]"
+        },
+        {
+          "tag": "A",
+          "text": "Write Article",
+          "color": "rgb(8, 38, 30)",
+          "bg": "rgb(101, 222, 174)",
+          "classes": "hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-[#65DEAE] dark:text-[#08261E] dark:hover:bg-[#95F0CB] transition-colors shadow-xs min-h-[40px] cursor-pointer"
+        }
+      ]
+    }
+  ],
+  "colorAbnormalities": [],
+  "structuralIssues": []
+}
