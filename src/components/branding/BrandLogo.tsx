@@ -17,11 +17,11 @@ export function BrandLogo({ locale = "fr", className = "", showDescriptor = true
       className={`group inline-flex items-center gap-3 transition-opacity duration-300 hover:opacity-80 focus-visible:ring-1 focus-visible:ring-[#E8D49B] ${className}`}
       aria-label="FORME Studio Créatif — Accueil"
     >
-      {/* Geometric SVG Brand Logo */}
+      {/* Geometric SVG Brand Logo (FORME) */}
       <svg
-        width="110"
+        width="135"
         height="32"
-        viewBox="0 0 160 48"
+        viewBox="0 0 202 48"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="h-7 w-auto md:h-8"
@@ -39,7 +39,7 @@ export function BrandLogo({ locale = "fr", className = "", showDescriptor = true
         <g id="letter-o" transform="translate(38, 4)">
           <circle cx="19" cy="20" r="18" stroke="#FFFFFF" strokeWidth="6" />
           {/* Subtle concentric inner accent */}
-          <circle cx="19" cy="20" r="8" stroke="#E8D49B" strokeWidth="1.5" strokeOpacity="0.75" />
+          <circle cx="19" cy="20" r="8" stroke="#F7D85B" strokeWidth="1.5" strokeOpacity="0.75" />
           <circle cx="19" cy="20" r="3" fill="#FFFFFF" />
         </g>
 
@@ -56,7 +56,7 @@ export function BrandLogo({ locale = "fr", className = "", showDescriptor = true
           />
           {/* Striped diagonal leg */}
           <path d="M16 19L31 40H22L10 21H16Z" fill="#FFFFFF" />
-          <line x1="24" y1="26" x2="33" y2="38" stroke="#E8D49B" strokeWidth="1" strokeOpacity="0.8" />
+          <line x1="24" y1="26" x2="33" y2="38" stroke="#F7D85B" strokeWidth="1" strokeOpacity="0.8" />
         </g>
 
         {/* Letter M */}
@@ -64,6 +64,16 @@ export function BrandLogo({ locale = "fr", className = "", showDescriptor = true
           <rect x="0" y="0" width="6" height="40" fill="#FFFFFF" />
           <path d="M6 0L17 26L28 0H34V40H28V12L19 32H15L6 12V40H0V0H6Z" fill="#FFFFFF" />
           <rect x="28" y="0" width="6" height="40" fill="#FFFFFF" />
+        </g>
+
+        {/* Letter E */}
+        <g id="letter-e" transform="translate(167, 4)">
+          <rect x="0" y="0" width="7" height="40" fill="#FFFFFF" />
+          <rect x="7" y="0" width="22" height="6" fill="#FFFFFF" />
+          <rect x="7" y="17" width="16" height="5" fill="#FFFFFF" />
+          <rect x="7" y="34" width="22" height="6" fill="#FFFFFF" />
+          <line x1="8" y1="3" x2="27" y2="3" stroke="#050505" strokeWidth="1" />
+          <line x1="8" y1="37" x2="27" y2="37" stroke="#050505" strokeWidth="1" />
         </g>
       </svg>
 
