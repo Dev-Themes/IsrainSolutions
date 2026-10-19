@@ -113,6 +113,9 @@ model Article {
   aiExecutionLogs    AIExecutionLog[]
 
   // Guest Contributor & Submission Metadata:
+  guestAuthorName   String?
+  guestAuthorBio    String?   @db.Text
+  guestAuthorUrl    String?   @db.Text
   originalSourceUrl String?   @db.Text
   promotionalUrl    String?   @db.Text
   contentOrigin     String    @default("MANUAL") // "MANUAL" or "AI"
@@ -121,6 +124,8 @@ model Article {
   termsAcceptedAt   DateTime?
   reviewNotes       String?   @db.Text
   editorialReviews  EditorialReview[]
+  // Featured Homepage Selection
+  isFeatured        Boolean                  @default(false)
 
   // Performance & Analytics (Spec 008)
   viewsCount        Int                      @default(0)

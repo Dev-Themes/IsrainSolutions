@@ -31,7 +31,7 @@ export default async function HomePage() {
     .slice(0, 6);
 
   const session = await auth();
-  const publishUrl = "/publish";
+  const publishUrl = "/write-for-us";
 
   const topicCategories = [
     { name: "All Guides", href: "#latest", active: true },
@@ -70,7 +70,7 @@ export default async function HomePage() {
 
               {/* Dek Subtitle */}
               <p className="text-base sm:text-lg text-text-muted leading-relaxed max-w-2xl">
-                From executive compensation benchmarks and high-stakes interview mastery to strategic leadership transitions—CareerVixa delivers tested frameworks, roadmaps, and word-for-word scripts trusted by 50,000+ ambitious professionals worldwide.
+                From compensation benchmarks and high-stakes interview mastery to strategic leadership transitions—CareerVixa delivers tested frameworks, roadmaps, and word-for-word scripts for ambitious professionals across every stage of their career.
               </p>
 
               {/* Trending Topic Pills */}
@@ -111,7 +111,7 @@ export default async function HomePage() {
                   className="inline-flex justify-center items-center gap-2 px-6 py-3.5 rounded-xl bg-bg-surface border border-border-default text-text-heading font-bold text-sm hover:bg-bg-surface-subtle hover:border-brand-primary/40 transition-all hover:-translate-y-0.5 min-h-[44px]"
                 >
                   <PenTool className="w-4 h-4 text-brand-primary-text" />
-                  <span>Publish as Guest Author</span>
+                  <span>Write for Us</span>
                 </Link>
               </div>
             </div>
@@ -131,8 +131,8 @@ export default async function HomePage() {
                 <span className="text-xs font-medium text-text-muted mt-0.5">Copy Scripts</span>
               </div>
               <div className="flex flex-col">
-                <span className="text-2xl sm:text-3xl font-extrabold text-brand-accent tracking-tight tabular-nums">50K+</span>
-                <span className="text-xs font-medium text-text-muted mt-0.5">Monthly Leaders</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-brand-accent tracking-tight tabular-nums">Daily</span>
+                <span className="text-xs font-medium text-text-muted mt-0.5">Fresh Research</span>
               </div>
             </div>
           </div>
@@ -347,19 +347,19 @@ export default async function HomePage() {
         <section className="w-full relative rounded-3xl overflow-hidden bg-brand-primary/[0.06] dark:bg-brand-primary/[0.12] p-8 sm:p-12 lg:p-14 border border-brand-primary/20">
           <div className="max-w-2xl mx-auto text-center flex flex-col items-center gap-5">
             <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-soft text-brand-primary-text border border-brand-primary/20">
-              Thought Leadership &middot; Guest Contributor Program
+              Editorial Guidelines &middot; Contributor Pitching
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-text-heading tracking-tight leading-tight">
-              Share Your Professional Expertise with 50,000+ Leaders
+              Share Your Professional Insights with CareerVixa Readers
             </h2>
             <p className="text-text-muted text-xs sm:text-sm leading-relaxed max-w-xl">
-              Are you an executive coach, senior engineer, or talent acquisition leader? Publish sponsored articles, expand your authority, and connect with ambitious professionals.
+              Are you a practitioner, hiring manager, recruiter, or career mentor? Pitch your article to our editorial team, share real-world guidance, and reach ambitious professionals across every career stage.
             </p>
             <Link
               href={publishUrl}
               className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl bg-brand-btn-fill hover:opacity-95 text-white font-bold text-sm shadow-md shadow-brand-primary/20 transition-all hover:scale-105 min-h-[44px]"
             >
-              <span>Submit an Article Pitch &rarr;</span>
+              <span>Review Guidelines &amp; Pitch an Article &rarr;</span>
             </Link>
           </div>
         </section>

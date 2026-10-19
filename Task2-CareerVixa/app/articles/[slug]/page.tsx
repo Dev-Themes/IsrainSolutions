@@ -146,6 +146,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
     author: {
       "@type": "Person",
       name: article.author,
+      ...(article.guestAuthorUrl ? { url: article.guestAuthorUrl } : {}),
     },
     publisher: {
       "@type": "Organization",
@@ -238,7 +239,7 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                   <div className="flex flex-col">
                     <span className="font-extrabold text-base text-text-heading">{article.author}</span>
                     <div className="flex items-center flex-wrap gap-x-2 text-xs font-medium text-text-muted">
-                      <span>Executive Contributor</span>
+                      <span>{article.guestAuthorName ? "Guest Contributor" : "Career Strategist"}</span>
                       <span aria-hidden="true">&middot;</span>
                       <time dateTime={article.publishedAt.toISOString()}>{format(article.publishedAt, "MMM d, yyyy")}</time>
                       <span aria-hidden="true">&middot;</span>
@@ -370,16 +371,29 @@ export default async function ArticlePage(props: { params: Promise<{ slug: strin
                 <div className="w-14 h-14 rounded-2xl bg-slate-950 text-white dark:bg-slate-100 dark:text-slate-950 font-black text-xl flex items-center justify-center shadow-xs shrink-0">
                   {article.author.charAt(0)}
                 </div>
-                <div className="flex flex-col gap-1.5">
+                <div className="flex flex-col gap-1.5 flex-1">
                   <div className="flex items-center gap-2">
                     <h3 className="font-extrabold text-lg text-text-heading">{article.author}</h3>
                     <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-slate-950 text-white dark:bg-slate-100 dark:text-slate-950 shadow-2xs">
-                      Verified Contributor
+                      {article.guestAuthorName ? "Guest Contributor" : "Verified Contributor"}
                     </span>
                   </div>
                   <p className="text-text-muted text-xs leading-relaxed">
-                    Contributing executive career strategist for CareerVixa. Researched and published with focus on practical workplace navigation, compensation benchmarks, negotiation frameworks, and professional leadership.
+                    {article.guestAuthorBio ||
+                      "Contributing career strategist for CareerVixa. Researched and published with focus on practical workplace navigation, compensation benchmarks, negotiation frameworks, and professional leadership."}
                   </p>
+                  {article.guestAuthorUrl && (
+                    <div className="mt-2">
+                      <a
+                        href={article.guestAuthorUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-primary-text hover:underline"
+                      >
+                        Author Profile <ExternalLink className="w-3.5 h-3.5" />
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             </article>

@@ -27,6 +27,9 @@ export const articleFrontmatterSchema = z.object({
   ).optional().default([]),
   takeaways: z.array(z.string()).optional().default([]),
   featured: z.boolean().optional().default(false),
+  guestAuthorName: z.string().nullable().optional(),
+  guestAuthorBio: z.string().nullable().optional(),
+  guestAuthorUrl: z.string().nullable().optional(),
 });
 
 export type ArticleFrontmatter = z.infer<typeof articleFrontmatterSchema>;
@@ -39,4 +42,7 @@ export type Article = ArticleFrontmatter & {
   originalSourceUrl?: string | null;
   viewsCount?: number;
   clicksCount?: number;
+  guestAuthorName?: string | null;
+  guestAuthorBio?: string | null;
+  guestAuthorUrl?: string | null;
 };

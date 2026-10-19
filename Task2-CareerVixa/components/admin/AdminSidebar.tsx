@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -30,7 +29,6 @@ interface AdminSidebarProps {
 const mainNav = [
   { name: "Overview Dashboard", href: "/admin", icon: LayoutDashboard },
   { name: "All Articles", href: "/admin/articles", icon: FileText },
-  { name: "Review Queue", href: "/admin/articles?status=PENDING_REVIEW", icon: Clock },
 ];
 
 const taxonomyNav = [
@@ -47,13 +45,6 @@ const aiNav = [
 
 export default function AdminSidebar({ user }: AdminSidebarProps) {
   const pathname = usePathname();
-  const [searchParam, setSearchParam] = useState("");
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setSearchParam(window.location.search);
-    }
-  }, [pathname]);
 
   const renderNavGroup = (items: typeof mainNav, title: string) => (
     <div className="flex flex-col gap-1">
@@ -61,14 +52,10 @@ export default function AdminSidebar({ user }: AdminSidebarProps) {
         {title}
       </span>
       {items.map((item) => {
-        const isReviewQueue = searchParam.includes("status=PENDING_REVIEW");
-        const isActive = item.href.includes("status=PENDING_REVIEW")
-          ? pathname === "/admin/articles" && isReviewQueue
-          : item.href === "/admin/articles"
-            ? pathname === "/admin/articles" && !isReviewQueue
-            : item.href === "/admin"
-              ? pathname === "/admin"
-              : pathname === item.href || pathname.startsWith(item.href);
+        const isActive =
+          item.href === "/admin"
+            ? pathname === "/admin"
+            : pathname === item.href || pathname.startsWith(item.href);
         return (
           <Link
             key={item.name}

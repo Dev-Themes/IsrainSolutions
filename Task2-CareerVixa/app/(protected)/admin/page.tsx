@@ -5,7 +5,6 @@ import Link from "next/link";
 export default async function AdminDashboardPage() {
   const [
     totalArticles,
-    pendingArticles,
     publishedArticles,
     draftArticles,
     totalCategories,
@@ -14,7 +13,6 @@ export default async function AdminDashboardPage() {
     topArticles,
   ] = await Promise.all([
     prisma.article.count(),
-    prisma.article.count({ where: { status: "PENDING_REVIEW" } }),
     prisma.article.count({ where: { status: "PUBLISHED" } }),
     prisma.article.count({ where: { status: "DRAFT" } }),
     prisma.category.count(),
@@ -42,11 +40,11 @@ export default async function AdminDashboardPage() {
   const totalClicks = trafficAggregate._sum.clicksCount || 0;
 
   const stats = [
-    { title: "Pending Review", value: pendingArticles, icon: Clock, href: "/admin/articles?status=PENDING_REVIEW", highlight: pendingArticles > 0 },
-    { title: "Platform Views", value: totalViews, icon: Eye, href: "/admin/articles?status=PUBLISHED" },
-    { title: "Referral Clicks", value: totalClicks, icon: MousePointerClick, href: "/admin/articles?status=PUBLISHED" },
     { title: "Total Articles", value: totalArticles, icon: FileText, href: "/admin/articles" },
     { title: "Published", value: publishedArticles, icon: FileText, href: "/admin/articles?status=PUBLISHED" },
+    { title: "Drafts", value: draftArticles, icon: FileEdit, href: "/admin/articles?status=DRAFT" },
+    { title: "Platform Views", value: totalViews, icon: Eye, href: "/admin/articles?status=PUBLISHED" },
+    { title: "Referral Clicks", value: totalClicks, icon: MousePointerClick, href: "/admin/articles?status=PUBLISHED" },
     { title: "Categories", value: totalCategories, icon: Folder, href: "/admin/categories" },
   ];
 
@@ -64,37 +62,18 @@ export default async function AdminDashboardPage() {
           <Link
             key={i}
             href={stat.href}
-            className={`rounded-2xl border bg-card text-card-foreground shadow-xs hover:shadow-md transition-all cursor-pointer ${
-              stat.highlight
-                ? "border-amber-400 bg-amber-50/40 dark:bg-amber-950/20"
-                : "border-border hover:border-primary/50"
-            }`}
+            className="rounded-2xl border border-border bg-card text-card-foreground shadow-xs hover:border-primary/50 hover:shadow-md transition-all cursor-pointer"
           >
             <div className="p-6 flex flex-row items-center justify-between space-y-0 pb-3">
               <h3 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{stat.title}</h3>
-              <div
-                className={`rounded-xl p-2.5 flex items-center justify-center shrink-0 border ${
-                  stat.highlight
-                    ? "bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border-amber-300 dark:border-amber-800"
-                    : "bg-[#EAF1FF] dark:bg-[#20324E] text-[#17479B] dark:text-[#A2C4FF] border-[#D1DDEE] dark:border-[#344762]"
-                }`}
-              >
+              <div className="rounded-xl p-2.5 flex items-center justify-center shrink-0 border bg-[#EAF1FF] dark:bg-[#20324E] text-[#17479B] dark:text-[#A2C4FF] border-[#D1DDEE] dark:border-[#344762]">
                 <stat.icon className="h-4 w-4" />
               </div>
             </div>
             <div className="p-6 pt-0 flex items-baseline justify-between">
-              <div
-                className={`text-3xl font-black tracking-tight tabular-nums ${
-                  stat.highlight ? "text-amber-900 dark:text-amber-200" : "text-foreground"
-                }`}
-              >
+              <div className="text-3xl font-black tracking-tight tabular-nums text-foreground">
                 {typeof stat.value === "number" ? stat.value.toLocaleString() : stat.value}
               </div>
-              {stat.highlight && (
-                <span className="text-[11px] font-bold text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-900/60 border border-amber-300 dark:border-amber-800 px-2.5 py-0.5 rounded-full">
-                  Action Required
-                </span>
-              )}
             </div>
           </Link>
         ))}

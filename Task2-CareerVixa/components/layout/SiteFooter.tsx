@@ -32,7 +32,7 @@ export function SiteFooter() {
               </span>
             </Link>
             <p className="text-text-muted text-sm leading-relaxed max-w-sm">
-              The premier executive career intelligence publication. Data-backed strategies, compensation benchmarks, and actionable interview roadmaps to accelerate professional trajectories.
+              The trusted career intelligence publication. Data-backed strategies, compensation benchmarks, and actionable roadmaps across every stage of your career.
             </p>
             <div className="flex items-center gap-2 mt-1 text-xs text-text-muted font-medium">
               <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
@@ -91,13 +91,8 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/publish" className="text-brand-primary-text font-bold hover:underline inline-flex items-center gap-1 min-h-[36px] sm:min-h-0 break-words">
+                <Link href="/write-for-us" className="text-brand-primary-text font-bold hover:underline inline-flex items-center gap-1 min-h-[36px] sm:min-h-0 break-words">
                   Write For Us <ArrowUpRight className="w-3.5 h-3.5" />
-                </Link>
-              </li>
-              <li>
-                <Link href="/dashboard" className="text-text-muted hover:text-brand-primary-text transition-colors min-h-[36px] sm:min-h-0 inline-flex items-center break-words">
-                  Contributor Hub
                 </Link>
               </li>
               <li>
@@ -140,13 +135,13 @@ export function SiteFooter() {
               Privacy Policy
             </Link>
             <span aria-hidden="true">&middot;</span>
-            <Link href="/publish" className="hover:text-brand-primary-text transition-colors">
+            <Link href="/write-for-us" className="hover:text-brand-primary-text transition-colors">
               Editorial Guidelines
             </Link>
           </div>
           <div className="flex items-center gap-4">
             <span className="italic hidden md:inline text-[11px]">
-              Verified executive insights &amp; career intelligence.
+              Verified career insights &amp; professional intelligence.
             </span>
             <ThemeToggle />
           </div>

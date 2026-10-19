@@ -19,12 +19,23 @@ const articleSchema = z.object({
   metaDescription: z.string().optional().nullable(),
   tags: z.array(z.string()).optional(),
   reviewNotes: z.string().optional().nullable(),
+  guestAuthorName: z.string().optional().nullable(),
+  guestAuthorBio: z.string().optional().nullable(),
+  guestAuthorUrl: z.string().optional().nullable(),
+  isFeatured: z.boolean().optional(),
 });
 
 export async function createArticle(data: z.infer<typeof articleSchema>) {
   const session = await requireAdmin();
   
   const validated = articleSchema.parse(data);
+
+  if (validated.isFeatured) {
+    await prisma.article.updateMany({
+      where: { isFeatured: true },
+      data: { isFeatured: false },
+    });
+  }
 
   const article = await prisma.article.create({
     data: {
@@ -38,6 +49,10 @@ export async function createArticle(data: z.infer<typeof articleSchema>) {
       categoryId: validated.categoryId,
       metaTitle: validated.metaTitle,
       metaDescription: validated.metaDescription,
+      guestAuthorName: validated.guestAuthorName,
+      guestAuthorBio: validated.guestAuthorBio,
+      guestAuthorUrl: validated.guestAuthorUrl,
+      isFeatured: validated.isFeatured || false,
       ...(validated.status === "PUBLISHED" ? { publishedAt: new Date() } : {}),
       ...(validated.tags && validated.tags.length > 0
         ? {
@@ -82,6 +97,13 @@ export async function updateArticle(id: string, data: Partial<z.infer<typeof art
     updateData.publishedAt = new Date();
   } else if (data.status === "UNPUBLISHED" || data.status === "DRAFT") {
     updateData.publishedAt = null;
+  }
+
+  if (data.isFeatured === true) {
+    await prisma.article.updateMany({
+      where: { isFeatured: true, id: { not: id } },
+      data: { isFeatured: false },
+    });
   }
 
   if (data.tags) {
@@ -141,15 +163,47 @@ export async function updateArticle(id: string, data: Partial<z.infer<typeof art
 
   revalidatePath("/admin/articles");
   revalidatePath("/admin/articles/" + id);
-  revalidatePath("/dashboard/articles");
-  revalidatePath(`/dashboard/articles/${id}/edit`);
-  revalidatePath("/dashboard");
-  if (article.status === "PUBLISHED" || current.status === "PUBLISHED") {
+  if (article.status === "PUBLISHED" || current.status === "PUBLISHED" || article.isFeatured || current.isFeatured) {
     revalidatePath("/");
     revalidatePath("/articles");
   }
 
   return article;
+}
+
+export async function setFeaturedArticle(id: string) {
+  await requireAdmin();
+
+  // Atomically unset any previous featured article and set this article as featured
+  await prisma.$transaction([
+    prisma.article.updateMany({
+      where: { isFeatured: true },
+      data: { isFeatured: false },
+    }),
+    prisma.article.update({
+      where: { id },
+      data: { isFeatured: true },
+    }),
+  ]);
+
+  revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath("/admin/articles");
+  return { success: true };
+}
+
+export async function removeFeaturedArticle(id: string) {
+  await requireAdmin();
+
+  await prisma.article.update({
+    where: { id },
+    data: { isFeatured: false },
+  });
+
+  revalidatePath("/");
+  revalidatePath("/articles");
+  revalidatePath("/admin/articles");
+  return { success: true };
 }
 
 export async function deleteArticle(id: string) {

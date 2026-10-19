@@ -2,8 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/auth";
 import Link from "next/link";
 import { format } from "date-fns";
-import { Plus, Sparkles, ExternalLink, Pencil, Trash2 } from "lucide-react";
-import { deleteArticle } from "@/app/actions/articles";
+import { Plus, Sparkles, ExternalLink, Pencil, Trash2, Star } from "lucide-react";
+import { deleteArticle, setFeaturedArticle, removeFeaturedArticle } from "@/app/actions/articles";
 import { ArticleStatus } from "@prisma/client";
 
 export default async function AdminArticlesPage({
@@ -22,17 +22,14 @@ export default async function AdminArticlesPage({
     where.title = { contains: search, mode: "insensitive" };
   }
 
-  const [articles, pendingCount] = await Promise.all([
-    prisma.article.findMany({
-      where,
-      orderBy: { createdAt: "desc" },
-      include: {
-        author: { select: { name: true, email: true } },
-        category: { select: { name: true } },
-      },
-    }),
-    prisma.article.count({ where: { status: ArticleStatus.PENDING_REVIEW } }),
-  ]);
+  const articles = await prisma.article.findMany({
+    where,
+    orderBy: [{ isFeatured: "desc" }, { createdAt: "desc" }],
+    include: {
+      author: { select: { name: true, email: true } },
+      category: { select: { name: true } },
+    },
+  });
 
   return (
     <div className="flex flex-col gap-6">
@@ -40,7 +37,7 @@ export default async function AdminArticlesPage({
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Articles</h1>
           <p className="text-muted-foreground mt-1">
-            Manage your career blog posts, review guest submissions, and edit publications.
+            Manage your career blog posts, select homepage featured articles, and edit publications.
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -65,12 +62,12 @@ export default async function AdminArticlesPage({
       <div className="flex flex-wrap gap-2 border-b border-border pb-3">
         {[
           { label: "All", value: undefined },
-          { label: "Pending Review", value: "PENDING_REVIEW", count: pendingCount, highlight: true },
           { label: "Published", value: "PUBLISHED" },
           { label: "Drafts", value: "DRAFT" },
+          { label: "Archived", value: "ARCHIVED" },
+          { label: "Pending Review", value: "PENDING_REVIEW" },
           { label: "Changes Requested", value: "CHANGES_REQUESTED" },
           { label: "Rejected", value: "REJECTED" },
-          { label: "Archived", value: "ARCHIVED" },
         ].map((tab) => {
           const isActive = status === tab.value || (!status && !tab.value);
           const href = tab.value ? `/admin/articles?status=${tab.value}` : "/admin/articles";
@@ -85,17 +82,6 @@ export default async function AdminArticlesPage({
               }`}
             >
               <span>{tab.label}</span>
-              {typeof tab.count === "number" && tab.count > 0 && (
-                <span
-                  className={`text-[11px] px-1.5 py-0.2 rounded-full font-bold ${
-                    isActive
-                      ? "bg-amber-400 text-slate-950"
-                      : "bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300 dark:border-amber-800"
-                  }`}
-                >
-                  {tab.count}
-                </span>
-              )}
             </Link>
           );
         })}
@@ -126,13 +112,19 @@ export default async function AdminArticlesPage({
                 articles.map((article) => (
                   <tr key={article.id} className="hover:bg-muted/30 transition-colors">
                     <td className="px-6 py-4 font-medium text-foreground max-w-md">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <Link
                           href={`/admin/articles/${article.id}/edit`}
                           className="hover:underline font-semibold text-foreground line-clamp-1"
                         >
                           {article.title}
                         </Link>
+                        {article.isFeatured && (
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300 dark:border-amber-800 shrink-0">
+                            <Star className="h-3 w-3 fill-amber-500 text-amber-500" />
+                            Featured
+                          </span>
+                        )}
                         {article.isAIGenerated && (
                           <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-950/60 dark:text-purple-300 shrink-0">
                             <Sparkles className="h-3 w-3" />
@@ -151,9 +143,9 @@ export default async function AdminArticlesPage({
                           article.status === "PUBLISHED"
                             ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300"
                             : article.status === "PENDING_REVIEW"
-                            ? "bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300 dark:border-amber-800"
+                            ? "bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300"
                             : article.status === "CHANGES_REQUESTED"
-                            ? "bg-orange-100 text-orange-900 dark:bg-orange-950/60 dark:text-orange-300 border border-orange-300 dark:border-orange-800"
+                            ? "bg-orange-100 text-orange-900 dark:bg-orange-950/60 dark:text-orange-300"
                             : article.status === "REJECTED"
                             ? "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300"
                             : article.status === "DRAFT"
@@ -165,21 +157,50 @@ export default async function AdminArticlesPage({
                       </span>
                     </td>
                     <td className="px-6 py-4 text-muted-foreground">
-                      {article.author?.name || article.author?.email || "Admin"}
+                      {article.guestAuthorName || article.author?.name || article.author?.email || "Admin"}
                     </td>
                     <td className="px-6 py-4 text-muted-foreground whitespace-nowrap">
                       {format(new Date(article.createdAt), "MMM d, yyyy")}
                     </td>
                     <td className="px-6 py-4 text-right whitespace-nowrap">
                       <div className="flex items-center justify-end gap-2">
-                        {article.status === "PENDING_REVIEW" && (
-                          <Link
-                            href={`/admin/articles/${article.id}/edit`}
-                            className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-amber-600 text-white hover:bg-amber-700 transition-colors shadow-xs cursor-pointer"
+                        {/* Featured Action Toggle */}
+                        {article.isFeatured ? (
+                          <form
+                            action={async () => {
+                              "use server";
+                              await removeFeaturedArticle(article.id);
+                            }}
+                            className="inline"
                           >
-                            Review Submission
-                          </Link>
-                        )}
+                            <button
+                              type="submit"
+                              className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-bold rounded-lg bg-amber-100 text-amber-900 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-300 dark:border-amber-800 hover:bg-amber-200 transition-colors cursor-pointer"
+                              title="Currently featured. Click to remove from homepage hero."
+                            >
+                              <Star className="h-3.5 w-3.5 fill-amber-500 text-amber-500" />
+                              <span>Featured</span>
+                            </button>
+                          </form>
+                        ) : article.status === "PUBLISHED" ? (
+                          <form
+                            action={async () => {
+                              "use server";
+                              await setFeaturedArticle(article.id);
+                            }}
+                            className="inline"
+                          >
+                            <button
+                              type="submit"
+                              className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg text-muted-foreground hover:text-amber-700 hover:bg-amber-50 dark:hover:bg-amber-950/30 border border-border transition-colors cursor-pointer"
+                              title="Set as Homepage Featured Article"
+                            >
+                              <Star className="h-3.5 w-3.5" />
+                              <span>Feature</span>
+                            </button>
+                          </form>
+                        ) : null}
+
                         {article.status === "PUBLISHED" && (
                           <Link
                             href={`/articles/${article.slug}`}

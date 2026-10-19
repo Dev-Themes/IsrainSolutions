@@ -49,6 +49,25 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: "/publish",
+        destination: "/write-for-us",
+        permanent: true,
+      },
+      {
+        source: "/signup",
+        destination: "/write-for-us",
+        permanent: false,
+      },
+      {
+        source: "/dashboard/:path*",
+        destination: "/write-for-us",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

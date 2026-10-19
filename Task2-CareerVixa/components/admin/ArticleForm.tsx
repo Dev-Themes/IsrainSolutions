@@ -24,6 +24,10 @@ const articleSchema = z.object({
   metaDescription: z.string().optional().nullable(),
   tags: z.array(z.string()).optional(),
   reviewNotes: z.string().optional().nullable(),
+  guestAuthorName: z.string().optional().nullable(),
+  guestAuthorBio: z.string().optional().nullable(),
+  guestAuthorUrl: z.string().optional().nullable(),
+  isFeatured: z.boolean().optional(),
 });
 
 type ArticleFormData = z.infer<typeof articleSchema>;
@@ -35,10 +39,16 @@ export default function ArticleForm({ initialData, categories, tags }: { initial
 
   const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm<ArticleFormData>({
     resolver: zodResolver(articleSchema as any),
-    defaultValues: initialData || {
-      status: ArticleStatus.DRAFT,
-      tags: [],
-    },
+    defaultValues: initialData
+      ? {
+          ...initialData,
+          isFeatured: initialData.isFeatured ?? false,
+        }
+      : {
+          status: ArticleStatus.DRAFT,
+          tags: [],
+          isFeatured: false,
+        },
   });
 
   const content = watch("content");
@@ -167,6 +177,23 @@ export default function ArticleForm({ initialData, categories, tags }: { initial
               </select>
             </div>
 
+            <div className="flex items-center justify-between p-3 rounded-lg border border-border-default bg-bg-surface-subtle">
+              <div className="pr-2">
+                <label htmlFor="isFeatured" className="block text-xs font-bold text-text-heading cursor-pointer">
+                  Featured Article
+                </label>
+                <p className="text-[11px] text-text-muted">
+                  Feature in the top hero showcase on homepage.
+                </p>
+              </div>
+              <input
+                id="isFeatured"
+                type="checkbox"
+                {...register("isFeatured")}
+                className="w-4 h-4 rounded border-border-default text-brand-primary focus:ring-brand-primary cursor-pointer shrink-0"
+              />
+            </div>
+
             <div>
               <label className="block text-xs font-semibold text-text-heading mb-1.5">
                 Editorial Review Notes <span className="text-[11px] text-text-muted">(Feedback to Contributor)</span>
@@ -178,53 +205,6 @@ export default function ArticleForm({ initialData, categories, tags }: { initial
                 placeholder="Required when requesting changes or leaving feedback for author..."
               />
             </div>
-
-            {/* Quick Action Decision Panel for Review Queue */}
-            {initialData?.status === "PENDING_REVIEW" && (
-              <div className="pt-2 border-t border-border-default flex flex-col gap-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-text-muted">
-                  Quick Decision Actions
-                </span>
-                <div className="grid grid-cols-1 gap-2">
-                    <button
-                    type="button"
-                    disabled={isLoading}
-                    onClick={() => {
-                      setValue("status", ArticleStatus.PUBLISHED);
-                      handleSubmit(onSubmit)();
-                    }}
-                    className="w-full inline-flex items-center justify-center rounded-lg text-xs font-bold bg-emerald-600 text-white hover:bg-emerald-700 min-h-[40px] px-3 transition-colors shadow-xs cursor-pointer"
-                  >
-                    Approve &amp; Publish Immediately
-                  </button>
-
-                  <button
-                    type="button"
-                    disabled={isLoading}
-                    onClick={() => {
-                      setValue("status", ArticleStatus.CHANGES_REQUESTED);
-                      handleSubmit(onSubmit)();
-                    }}
-                    className="w-full inline-flex items-center justify-center rounded-lg text-xs font-bold border border-orange-300 dark:border-orange-800 text-orange-700 dark:text-orange-300 hover:bg-orange-50 dark:hover:bg-orange-950/30 min-h-[40px] px-3 transition-colors cursor-pointer"
-                  >
-                    Request Author Changes
-                  </button>
-
-                  <button
-                    type="button"
-                    disabled={isLoading}
-                    onClick={() => {
-                      setValue("status", ArticleStatus.REJECTED);
-                      handleSubmit(onSubmit)();
-                    }}
-                    className="w-full inline-flex items-center justify-center rounded-lg text-xs font-bold border border-rose-300 dark:border-rose-800 text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 min-h-[40px] px-3 transition-colors cursor-pointer"
-                  >
-                    Reject Submission
-                  </button>
-                </div>
-              </div>
-            )}
-
             <button
               type="submit"
               disabled={isLoading}
@@ -329,6 +309,54 @@ export default function ArticleForm({ initialData, categories, tags }: { initial
                 className="w-full flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
                 placeholder="https://..."
               />
+            </div>
+          </div>
+
+          {/* Guest Author Attribution Panel */}
+          <div className="p-4 border rounded-md bg-muted/10 space-y-4">
+            <div>
+              <h3 className="font-medium text-sm text-text-heading">Guest Author Attribution</h3>
+              <p className="text-[11px] text-muted-foreground mt-0.5">
+                Optional. Use when publishing an article contributed by an external guest author.
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-text-heading mb-1">
+                Guest Author Name
+              </label>
+              <input
+                {...register("guestAuthorName")}
+                className="w-full flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                placeholder="e.g. Jane Doe"
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-text-heading mb-1">
+                Author Biography
+              </label>
+              <textarea
+                {...register("guestAuthorBio")}
+                rows={3}
+                className="w-full flex rounded-md border border-input bg-background p-3 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring resize-none"
+                placeholder="Short professional biography..."
+              />
+            </div>
+
+            <div>
+              <label className="block text-xs font-semibold text-text-heading mb-1">
+                Verified Profile URL
+              </label>
+              <input
+                {...register("guestAuthorUrl")}
+                type="url"
+                className="w-full flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                placeholder="https://linkedin.com/in/janedoe"
+              />
+              <p className="text-[11px] text-muted-foreground mt-1">
+                Approved LinkedIn, GitHub, or professional website.
+              </p>
             </div>
           </div>
         </div>

@@ -33,7 +33,7 @@ export default function LoginPage() {
         if (session?.user?.role === "ADMIN") {
           router.push("/admin");
         } else {
-          router.push("/dashboard");
+          router.push("/");
         }
         router.refresh();
       }
@@ -142,12 +142,12 @@ export default function LoginPage() {
           </div>
 
           <div className="text-center text-xs text-text-muted pt-2 border-t border-border-default">
-            <span>Don&apos;t have an account? </span>
+            <span>Looking to contribute an article? </span>
             <Link
-              href="/signup"
+              href="/write-for-us"
               className="font-semibold text-brand-primary hover:underline"
             >
-              Sign up
+              Write for Us
             </Link>
           </div>
         </form>

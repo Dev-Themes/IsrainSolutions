@@ -20,7 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/publish`,
+      url: `${baseUrl}/write-for-us`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
@@ -40,30 +40,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // 2. Dynamic Categories
-  const categories = await prisma.category.findMany({
-    select: { slug: true, updatedAt: true },
-  });
-
-  const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${baseUrl}/category/${cat.slug}`,
-    lastModified: cat.updatedAt,
-    changeFrequency: "weekly",
-    priority: 0.7,
-  }));
+  let categoryRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const categories = await prisma.category.findMany({
+      select: { slug: true, updatedAt: true },
+    });
+    categoryRoutes = categories.map((cat) => ({
+      url: `${baseUrl}/category/${cat.slug}`,
+      lastModified: cat.updatedAt,
+      changeFrequency: "weekly",
+      priority: 0.7,
+    }));
+  } catch (error) {
+    console.warn("Sitemap: Failed to query categories from database, continuing with static routes.", error);
+  }
 
   // 3. Published Articles
-  const articles = await prisma.article.findMany({
-    where: { status: "PUBLISHED" },
-    select: { slug: true, updatedAt: true, publishedAt: true },
-    orderBy: { publishedAt: "desc" },
-  });
-
-  const articleRoutes: MetadataRoute.Sitemap = articles.map((art) => ({
-    url: `${baseUrl}/articles/${art.slug}`,
-    lastModified: art.updatedAt || art.publishedAt || new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+  let articleRoutes: MetadataRoute.Sitemap = [];
+  try {
+    const articles = await prisma.article.findMany({
+      where: { status: "PUBLISHED" },
+      select: { slug: true, updatedAt: true, publishedAt: true },
+      orderBy: { publishedAt: "desc" },
+    });
+    articleRoutes = articles.map((art) => ({
+      url: `${baseUrl}/articles/${art.slug}`,
+      lastModified: art.updatedAt || art.publishedAt || new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }));
+  } catch (error) {
+    console.warn("Sitemap: Failed to query articles from database, continuing with static routes.", error);
+  }
 
   return [...staticRoutes, ...categoryRoutes, ...articleRoutes];
 }

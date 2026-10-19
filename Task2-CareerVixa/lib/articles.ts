@@ -57,7 +57,10 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
         description: dbArticle.metaDescription || dbArticle.summary || dbArticle.title,
         category: dbArticle.category?.name || "Career Development",
         tags: dbArticle.tags.map((t) => t.name),
-        author: dbArticle.author?.name || "CareerVixa Team",
+        author: dbArticle.guestAuthorName || dbArticle.author?.name || "CareerVixa Team",
+        guestAuthorName: dbArticle.guestAuthorName,
+        guestAuthorBio: dbArticle.guestAuthorBio,
+        guestAuthorUrl: dbArticle.guestAuthorUrl,
         publishedAt: dbArticle.publishedAt || dbArticle.createdAt,
         updatedAt: dbArticle.updatedAt,
         heroImage: {
@@ -72,7 +75,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
           "Actionable steps you can implement today.",
           "Comprehensive insights backed by live research.",
         ],
-        featured: false,
+        featured: dbArticle.isFeatured ?? false,
       });
 
       return {
@@ -84,6 +87,9 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
         originalSourceUrl: dbArticle.originalSourceUrl,
         viewsCount: dbArticle.viewsCount,
         clicksCount: dbArticle.clicksCount,
+        guestAuthorName: dbArticle.guestAuthorName,
+        guestAuthorBio: dbArticle.guestAuthorBio,
+        guestAuthorUrl: dbArticle.guestAuthorUrl,
       };
     }
 
@@ -120,7 +126,10 @@ export async function getAllArticles(): Promise<Article[]> {
         description: dbArticle.metaDescription || dbArticle.summary || dbArticle.title,
         category: dbArticle.category?.name || "Career Development",
         tags: dbArticle.tags.map((t) => t.name),
-        author: dbArticle.author?.name || "CareerVixa Team",
+        author: dbArticle.guestAuthorName || dbArticle.author?.name || "CareerVixa Team",
+        guestAuthorName: dbArticle.guestAuthorName,
+        guestAuthorBio: dbArticle.guestAuthorBio,
+        guestAuthorUrl: dbArticle.guestAuthorUrl,
         publishedAt: dbArticle.publishedAt || dbArticle.createdAt,
         updatedAt: dbArticle.updatedAt,
         heroImage: {
@@ -135,7 +144,7 @@ export async function getAllArticles(): Promise<Article[]> {
           "Actionable steps you can implement today.",
           "Comprehensive insights backed by live research.",
         ],
-        featured: false,
+        featured: dbArticle.isFeatured ?? false,
       });
 
       articles.push({
@@ -143,6 +152,13 @@ export async function getAllArticles(): Promise<Article[]> {
         content: dbArticle.content,
         readTime: calculateReadTime(dbArticle.content),
         isDbArticle: true,
+        promotionalUrl: dbArticle.promotionalUrl,
+        originalSourceUrl: dbArticle.originalSourceUrl,
+        viewsCount: dbArticle.viewsCount,
+        clicksCount: dbArticle.clicksCount,
+        guestAuthorName: dbArticle.guestAuthorName,
+        guestAuthorBio: dbArticle.guestAuthorBio,
+        guestAuthorUrl: dbArticle.guestAuthorUrl,
       });
     }
   } catch (error) {

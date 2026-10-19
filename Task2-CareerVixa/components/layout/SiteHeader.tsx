@@ -115,7 +115,7 @@ export function SiteHeader({ user }: { user?: any }) {
 
             {/* Contributor Direct Action */}
             <Link
-              href="/publish"
+              href="/write-for-us"
               className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold text-brand-primary-text bg-brand-soft hover:bg-brand-soft/80 border border-brand-primary/20 transition-all hover:-translate-y-0.5 min-h-[40px] shrink-0 whitespace-nowrap"
             >
               <PenTool className="w-3.5 h-3.5" />
@@ -149,23 +149,16 @@ export function SiteHeader({ user }: { user?: any }) {
                       </span>
                     </div>
 
-                    <Link
-                      href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
-                      className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-text-heading hover:bg-bg-surface-subtle transition-colors"
-                      onClick={() => setIsUserMenuOpen(false)}
-                    >
-                      <LayoutDashboard className="w-3.5 h-3.5 text-text-muted" />
-                      <span>{user.role === "ADMIN" ? "Admin CMS Hub" : "Contributor Dashboard"}</span>
-                    </Link>
-
-                    <Link
-                      href="/dashboard/settings"
-                      className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-text-heading hover:bg-bg-surface-subtle transition-colors"
-                      onClick={() => setIsUserMenuOpen(false)}
-                    >
-                      <Settings className="w-3.5 h-3.5 text-text-muted" />
-                      <span>Account Settings</span>
-                    </Link>
+                    {user.role === "ADMIN" && (
+                      <Link
+                        href="/admin"
+                        className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-text-heading hover:bg-bg-surface-subtle transition-colors"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      >
+                        <LayoutDashboard className="w-3.5 h-3.5 text-text-muted" />
+                        <span>Admin CMS Hub</span>
+                      </Link>
+                    )}
 
                     <div className="border-t border-border-default my-1" />
 
@@ -179,22 +172,7 @@ export function SiteHeader({ user }: { user?: any }) {
                   </div>
                 )}
               </div>
-            ) : (
-              <div className="flex items-center gap-2.5 shrink-0">
-                <Link
-                  href="/login"
-                  className="text-xs font-bold text-text-heading hover:text-brand-primary-text px-3 py-2 rounded-lg transition-colors min-h-[40px] flex items-center"
-                >
-                  Log In
-                </Link>
-                <Link
-                  href="/signup"
-                  className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-xs font-bold text-white bg-brand-btn-fill hover:bg-brand-btn-hover shadow-sm transition-all hover:shadow min-h-[40px]"
-                >
-                  Sign Up
-                </Link>
-              </div>
-            )}
+            ) : null}
           </div>
 
           {/* Mobile & Tablet Header Elements (Below 1280px) */}
@@ -203,9 +181,9 @@ export function SiteHeader({ user }: { user?: any }) {
 
             {user && (
               <Link
-                href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
+                href={user.role === "ADMIN" ? "/admin" : "/"}
                 className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-text-heading hover:text-brand-primary-text rounded-lg"
-                aria-label="Dashboard"
+                aria-label="Admin Dashboard"
               >
                 <UserIcon className="w-5 h-5" />
               </Link>
@@ -282,7 +260,7 @@ export function SiteHeader({ user }: { user?: any }) {
 
               <div className="pt-3 border-t border-border-default">
                 <Link
-                  href="/publish"
+                  href="/write-for-us"
                   className="flex items-center gap-2 px-3.5 py-3 rounded-lg text-xs font-bold text-brand-primary-text bg-brand-soft border border-brand-primary/20 min-h-[44px]"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -292,26 +270,19 @@ export function SiteHeader({ user }: { user?: any }) {
               </div>
             </div>
 
-            {/* Bottom Auth Section */}
-            <div className="pt-6 border-t border-border-default flex flex-col gap-2.5">
-              {!user ? (
-                <div className="grid grid-cols-2 gap-2">
+            {/* Bottom Auth Section (Authenticated Only) */}
+            {user && (
+              <div className="pt-6 border-t border-border-default flex flex-col gap-2.5">
+                {user.role === "ADMIN" && (
                   <Link
-                    href="/login"
-                    className="flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-bold border border-border-default text-text-heading hover:bg-surface-subtle min-h-[44px]"
+                    href="/admin"
+                    className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-lg text-xs font-semibold bg-brand-soft text-brand-primary-text border border-brand-primary/20 w-full min-h-[44px]"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Log In
+                    <LayoutDashboard className="w-4 h-4" />
+                    <span>Admin CMS Hub</span>
                   </Link>
-                  <Link
-                    href="/signup"
-                    className="flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-bold text-white bg-brand-btn-fill hover:bg-brand-btn-hover min-h-[44px]"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              ) : (
+                )}
                 <button
                   onClick={() => signOut()}
                   className="flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-lg text-xs font-semibold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 w-full min-h-[44px]"
@@ -319,8 +290,8 @@ export function SiteHeader({ user }: { user?: any }) {
                   <LogOut className="w-4 h-4" />
                   <span>Sign Out</span>
                 </button>
-              )}
-            </div>
+              </div>
+            )}
           </nav>
         </div>,
         document.body
