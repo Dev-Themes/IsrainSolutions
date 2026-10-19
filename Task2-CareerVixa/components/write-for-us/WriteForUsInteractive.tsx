@@ -28,11 +28,9 @@ export function PitchTemplateCard({ email, templateText }: PitchTemplateCardProp
           <span className="text-xs font-bold uppercase tracking-wider text-text-heading">
             Recommended Pitch Format
           </span>
-          {email && (
-            <span className="hidden sm:inline-block text-[11px] font-mono text-brand-primary-text bg-brand-soft px-2 py-0.5 rounded border border-brand-primary/20">
-              {email}
-            </span>
-          )}
+          <span className="hidden sm:inline-block text-[11px] font-semibold text-brand-primary-text bg-brand-soft px-2 py-0.5 rounded border border-brand-primary/20">
+            Structured Pitch Template
+          </span>
         </div>
         <button
           onClick={handleCopy}
@@ -88,7 +86,7 @@ export function CopyEmailButton({ email }: { email: string }) {
       ) : (
         <>
           <Copy className="w-3.5 h-3.5 text-text-muted" />
-          <span>Copy Email Address ({email})</span>
+          <span>Copy Email</span>
         </>
       )}
     </button>

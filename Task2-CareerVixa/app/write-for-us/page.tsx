@@ -215,7 +215,7 @@ Thank you for your consideration,
               className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-brand-btn-fill text-white font-bold text-sm shadow-md shadow-brand-primary/20 hover:opacity-95 transition-all hover:-translate-y-0.5 min-h-[44px]"
             >
               <Mail className="w-4 h-4" />
-              <span>Pitch an Article ({editorialEmail})</span>
+              <span>Email Now</span>
             </a>
 
             <a
@@ -539,7 +539,7 @@ Thank you for your consideration,
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-brand-btn-fill text-white font-bold text-sm shadow-md shadow-brand-primary/20 hover:opacity-95 transition-all hover:-translate-y-0.5 min-h-[44px]"
             >
               <Send className="w-4 h-4" />
-              <span>Email Pitch to {editorialEmail}</span>
+              <span>Email Now</span>
             </a>
 
             <CopyEmailButton email={editorialEmail} />
