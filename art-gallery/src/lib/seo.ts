@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { siteConfig } from "./site-config";
 import { Locale, PortfolioProject } from "@/types/portfolio";
+import { ProductProject } from "@/types/products";
 
 interface PageMetaOptions {
   title?: string;
@@ -19,7 +20,6 @@ export function constructMetadata({
 }: PageMetaOptions = {}): Metadata {
   const siteUrl = siteConfig.url;
   const canonicalUrl = `${siteUrl}/${locale}${path ? `/${path}` : ""}`;
-  const otherLocale = locale === "fr" ? "en" : "fr";
 
   const pageTitle = title
     ? `${title} — ${siteConfig.name}`
@@ -107,6 +107,28 @@ export function generateCreativeWorkSchema(project: PortfolioProject, locale: Lo
     },
     copyrightYear: project.year,
     genre: project.category,
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
+}
+
+export function generateProductCreativeWorkSchema(product: ProductProject, locale: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: `${product.brand} — ${product.title}`,
+    headline: product.tagline[locale],
+    description: product.summary[locale],
+    image: product.coverImage,
+    creator: {
+      "@type": "Organization",
+      name: siteConfig.name,
+    },
+    copyrightYear: product.year,
+    genre: product.category,
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,

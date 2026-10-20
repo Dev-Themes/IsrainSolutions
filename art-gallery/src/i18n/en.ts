@@ -1,6 +1,7 @@
 export const en = {
   nav: {
     work: "WORK",
+    products: "PRODUCTS",
     about: "STUDIO",
     contact: "CONTACT",
     lang: "EN",
@@ -57,15 +58,35 @@ export const en = {
       },
     ],
   },
+  productsPage: {
+    eyebrow: "SELECTED PRODUCT CONCEPTS — 2026",
+    heroHeading: "PRODUCTS.",
+    heroSubtext:
+      "We explore the space where products, culture, and design meet. From everyday objects to extraordinary ideas, we create visual experiences that give products character and meaning.",
+    allProducts: "All Product Concepts",
+    viewProject: "VIEW PROJECT",
+    backToProducts: "Back to Products",
+    speculativeBadge: "Speculative Design Concept",
+    overviewTitle: "01. Concept & Intent",
+    artDirectionTitle: "02. Creative Direction & Materials",
+    paletteSubtitle: "Chromatic resonance palette",
+    galleryTitle: "03. Visual Gallery & Details",
+    specificationsTitle: "04. Specifications & Engineering",
+    materialsLabel: "Selected Materials",
+    specsLabel: "Technical Specifications",
+    innovationLabel: "Design Innovation",
+    relatedTitle: "Further Product Explorations",
+    nextProduct: "Next Concept",
+    prevProduct: "Previous Concept",
+    lightboxAria: "Expand product image",
+  },
   about: {
     heroHeading: "STUDIO.",
     introText: "More than an agency. A space where ideas take shape. We imagine identities, moving images and cultural experiences.",
-    // Section 1: Philosophy
     philosophyTag: "01. PHILOSOPHY",
     philosophyTitle: "Our Philosophy",
     philosophySubtitle: "The art of radical reduction",
     philosophyText: "We believe in radical minimalism, where every form, every contrast, and every second of visual rhythm must carry sincere intent and contemporary cultural resonance.",
-    // Section 2: Approach
     approachTag: "02. OUR APPROACH",
     approachTitle: "Our Creative Approach",
     approachSubtitle: "From sculptural intuition to architectural precision",
@@ -87,7 +108,6 @@ export const en = {
         desc: "Artisanal refinement, exceptional craftsmanship, and surgical deployment across all mediums.",
       },
     ],
-    // Section 3: What We Do (Disciplines)
     disciplinesTag: "03. DISCIPLINES / WHAT WE DO",
     disciplinesTitle: "What We Do",
     disciplinesSubtitle: "Artistic disciplines & contemporary craft",
@@ -99,7 +119,6 @@ export const en = {
       { title: "Moving Image & Film", desc: "Manifesto films, cinematographic direction, and kinetic visual narratives." },
       { title: "Digital Experience", desc: "Editorial web experiences crafted without architectural compromise." },
     ],
-    // Section 4: Values & Pillars
     valuesTag: "04. PILLARS / VALUES",
     valuesTitle: "Our Pillars",
     values: [
@@ -155,6 +174,7 @@ export const en = {
   },
   footer: {
     work: "Work",
+    products: "Products",
     about: "Studio",
     contact: "Contact",
     privacy: "Privacy",

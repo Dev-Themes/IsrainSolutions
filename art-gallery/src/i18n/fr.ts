@@ -1,6 +1,7 @@
 export const fr = {
   nav: {
     work: "TRAVAUX",
+    products: "PRODUITS",
     about: "STUDIO",
     contact: "CONTACT",
     lang: "FR",
@@ -57,15 +58,35 @@ export const fr = {
       },
     ],
   },
+  productsPage: {
+    eyebrow: "SELECTED PRODUCT CONCEPTS — 2026",
+    heroHeading: "PRODUCTS.",
+    heroSubtext:
+      "Nous explorons la rencontre entre les produits, la culture et le design. Des objets du quotidien aux idées extraordinaires, nous créons des expériences visuelles qui donnent du sens et du caractère.",
+    allProducts: "Tous les Concepts Produits",
+    viewProject: "VOIR LE PROJET",
+    backToProducts: "Retour aux Produits",
+    speculativeBadge: "Concept de Design Spéculatif",
+    overviewTitle: "01. Concept & Intention",
+    artDirectionTitle: "02. Direction Artistique & Matières",
+    paletteSubtitle: "Palette de résonance chromatique",
+    galleryTitle: "03. Galerie Visuelle & Détails",
+    specificationsTitle: "04. Spécifications & Ingénierie",
+    materialsLabel: "Matériaux Sélectionnés",
+    specsLabel: "Spécifications Techniques",
+    innovationLabel: "Innovation de Conception",
+    relatedTitle: "Autres Explorations Produits",
+    nextProduct: "Concept Suivant",
+    prevProduct: "Concept Précédent",
+    lightboxAria: "Agrandir l'image produit",
+  },
   about: {
     heroHeading: "STUDIO.",
     introText: "Plus qu'une agence. Un espace où les idées prennent forme. Nous imaginons des identités, des images et des expériences culturelles.",
-    // Section 1: Philosophy
     philosophyTag: "01. PHILOSOPHIE",
     philosophyTitle: "Notre Philosophie",
     philosophySubtitle: "L'art du dépouillement radical",
     philosophyText: "Nous croyons en un minimalisme radical, où chaque forme, chaque contraste et chaque seconde d'image doit porter une intention sincère et une résonance culturelle contemporaine.",
-    // Section 2: Approach
     approachTag: "02. NOTRE DÉMARCHE",
     approachTitle: "Notre Approche Créative",
     approachSubtitle: "De l'intuition plastique à la rigueur architecturale",
@@ -87,7 +108,6 @@ export const fr = {
         desc: "Finalisation artisanale, fabrication d'exception et déploiement millimétré sur tous supports.",
       },
     ],
-    // Section 3: What We Do (Disciplines)
     disciplinesTag: "03. SAVOIR-FAIRE / WHAT WE DO",
     disciplinesTitle: "Ce Que Nous Faisons",
     disciplinesSubtitle: "Disciplines artistiques & artisanat contemporain",
@@ -99,7 +119,6 @@ export const fr = {
       { title: "Image en Mouvement", desc: "Films manifestes, direction de la photographie et narrations cinématiques." },
       { title: "Expérience Digitale", desc: "Interfaces éditoriales sans compromis architectural ou esthétique." },
     ],
-    // Section 4: Values & Pillars
     valuesTag: "04. PILIERS / VALUES",
     valuesTitle: "Nos Piliers",
     values: [
@@ -155,6 +174,7 @@ export const fr = {
   },
   footer: {
     work: "Travaux",
+    products: "Produits",
     about: "Studio",
     contact: "Contact",
     privacy: "Confidentialité",

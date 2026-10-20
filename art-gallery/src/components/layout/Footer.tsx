@@ -30,6 +30,14 @@ export function Footer({ locale }: FooterProps) {
             </li>
             <li>
               <Link
+                href={`/${locale}/products`}
+                className="text-[#B8B8B8] hover:text-[#78E6BF] transition-colors"
+              >
+                {dict.footer.products}
+              </Link>
+            </li>
+            <li>
+              <Link
                 href={`/${locale}/about`}
                 className="text-[#B8B8B8] hover:text-[#F7D85B] transition-colors"
               >

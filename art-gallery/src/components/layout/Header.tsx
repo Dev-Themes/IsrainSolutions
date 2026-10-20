@@ -53,7 +53,10 @@ export function Header({ locale }: HeaderProps) {
   }, [isMobileMenuOpen]);
 
   // Determine active route
-  const isWorkActive = pathname === `/${locale}` || pathname.startsWith(`/${locale}/work`);
+  const isWorkActive =
+    (pathname === `/${locale}` || pathname === `/${locale}/work` || pathname.startsWith(`/${locale}/work/`)) &&
+    !pathname.startsWith(`/${locale}/products`);
+  const isProductsActive = pathname.startsWith(`/${locale}/products`);
   const isAboutActive = pathname.startsWith(`/${locale}/about`);
   const isContactActive = pathname.startsWith(`/${locale}/contact`);
 
@@ -76,7 +79,7 @@ export function Header({ locale }: HeaderProps) {
 
         {/* Desktop Navigation Links with Artistic Multicolor Underlines */}
         <nav
-          className="hidden md:flex items-center space-x-8 lg:space-x-12 text-xs uppercase tracking-[0.2em] font-medium"
+          className="hidden md:flex items-center space-x-6 lg:space-x-10 text-xs uppercase tracking-[0.2em] font-medium"
           aria-label={dict.nav.menuAria}
         >
           {/* WORK — Electric Coral Accent (#FF665C) */}
@@ -90,6 +93,21 @@ export function Header({ locale }: HeaderProps) {
             <span
               className={`absolute bottom-0 left-0 h-[2px] bg-[#FF665C] transition-all duration-300 ease-out ${
                 isWorkActive ? "w-full" : "w-0 group-hover:w-full"
+              }`}
+            />
+          </Link>
+
+          {/* PRODUCTS — Mint Green Accent (#78E6BF) */}
+          <Link
+            href={`/${locale}/products`}
+            className={`group relative py-1.5 transition-colors duration-200 ${
+              isProductsActive ? "text-[#FFFFFF]" : "text-[#B8B8B8] hover:text-[#FFFFFF]"
+            }`}
+          >
+            <span>{dict.nav.products}</span>
+            <span
+              className={`absolute bottom-0 left-0 h-[2px] bg-[#78E6BF] transition-all duration-300 ease-out ${
+                isProductsActive ? "w-full" : "w-0 group-hover:w-full"
               }`}
             />
           </Link>
@@ -176,6 +194,15 @@ export function Header({ locale }: HeaderProps) {
               >
                 <span>{dict.nav.work}</span>
                 {isWorkActive && <span className="w-1.5 h-1.5 rounded-full bg-[#FF665C]" />}
+              </Link>
+              <Link
+                href={`/${locale}/products`}
+                className={`py-2.5 flex items-center justify-between border-b border-[#1f1f1f] transition-colors ${
+                  isProductsActive ? "text-[#78E6BF] font-medium" : "text-[#B8B8B8] hover:text-[#78E6BF]"
+                }`}
+              >
+                <span>{dict.nav.products}</span>
+                {isProductsActive && <span className="w-1.5 h-1.5 rounded-full bg-[#78E6BF]" />}
               </Link>
               <Link
                 href={`/${locale}/about`}
