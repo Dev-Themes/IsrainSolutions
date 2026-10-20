@@ -27,7 +27,7 @@ export function ConcentricGraphic({ className = "", size = 320 }: ConcentricGrap
         {/* Static Background Base */}
         <circle cx="200" cy="200" r="198" fill="#000000" stroke="#1f1f1f" strokeWidth="1" />
 
-        {/* Static Crosshairs / Measuring Graticules */}
+        {/* Static Crosshairs / Measuring Graticules anchored at fixed axle */}
         <line
           x1="10"
           y1="200"
@@ -52,12 +52,19 @@ export function ConcentricGraphic({ className = "", size = 320 }: ConcentricGrap
         {/* Outer Reference Guideline */}
         <circle cx="200" cy="200" r="185" stroke="#1f1f1f" strokeWidth="1" strokeDasharray="1 8" />
 
-        {/* CONTINUOUS ROTATING ORBIT GROUP (22s loop, accelerates to 13s on hover) */}
+        {/* CONTINUOUS ROTATING ORBIT GROUP (All circles rotate at the fixed central axle 200, 200) */}
         <g
           className="animate-hero-orbit origin-center"
-          style={{ transformOrigin: "200px 200px" }}
+          style={{ transformBox: "view-box", transformOrigin: "200px 200px" }}
         >
           {/* Ring 1 (r=175) — Electric Coral Accent & Dash Segment */}
+          <circle
+            cx="200"
+            cy="200"
+            r="175"
+            stroke="#292929"
+            strokeWidth="1"
+          />
           {/* Coral Arc (Quarter top-right) */}
           <path
             d="M 200 25 A 175 175 0 0 1 375 200"
@@ -145,7 +152,7 @@ export function ConcentricGraphic({ className = "", size = 320 }: ConcentricGrap
           {/* Ring 6 (r=30) — Crisp White Center Orbit */}
           <circle cx="200" cy="200" r="30" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="3 3" />
 
-          {/* Radial Astronomical Tick Cluster (Asymmetric dial markers) */}
+          {/* Radial Astronomical Tick Cluster (Centered relative to fixed axle) */}
           <g id="dial-ticks" stroke="#FFFFFF" strokeWidth="1.5" strokeOpacity="0.75">
             <line x1="200" y1="20" x2="200" y2="30" />
             <line x1="215" y1="21" x2="213" y2="31" />
@@ -160,19 +167,9 @@ export function ConcentricGraphic({ className = "", size = 320 }: ConcentricGrap
             <line x1="71" y1="215" x2="81" y2="213" />
             <line x1="74" y1="230" x2="84" y2="227" />
           </g>
-
-          {/* Orbiting Satellite Node 1 (Coral) on Ring 1 */}
-          <circle cx="375" cy="200" r="5" fill="#FF665C" />
-          <circle cx="375" cy="200" r="8" stroke="#FF665C" strokeWidth="1" strokeOpacity="0.5" />
-
-          {/* Orbiting Satellite Node 2 (Vibrant Yellow) on Ring 2 */}
-          <circle cx="200" cy="55" r="4" fill="#F7D85B" />
-
-          {/* Orbiting Satellite Node 3 (Electric Blue) on Ring 3 */}
-          <circle cx="200" cy="315" r="3.5" fill="#6298FF" />
         </g>
 
-        {/* Fixed Center Core Pinpoint Aperture */}
+        {/* Fixed Center Core Pinpoint Axle */}
         <circle cx="200" cy="200" r="10" fill="#E8D49B" />
         <circle cx="200" cy="200" r="5" fill="#050505" />
         <circle cx="200" cy="200" r="2" fill="#FFFFFF" />

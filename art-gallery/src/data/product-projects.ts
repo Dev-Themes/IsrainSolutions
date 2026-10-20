@@ -129,15 +129,15 @@ export const productProjects: ProductProject[] = [
     accentColor: "#78E6BF",
     featured: false,
     layout: "standard",
-    coverImage: "https://images.unsplash.com/photo-1608248597359-250529d20120?auto=format&fit=crop&w=1600&q=80",
+    coverImage: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1600&q=80",
     galleryImages: [
-      "https://images.unsplash.com/photo-1608248597359-250529d20120?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1600&q=80",
       "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1600&q=80",
       "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=1600&q=80",
     ],
     imageDetails: [
       {
-        src: "https://images.unsplash.com/photo-1608248597359-250529d20120?auto=format&fit=crop&w=1600&q=80",
+        src: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1600&q=80",
         alt: {
           fr: "Flacon compte-gouttes AURA SKIN en verre dépoli sur socle minéral",
           en: "AURA SKIN frosted glass dropper bottle on mineral plinth",

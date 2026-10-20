@@ -229,13 +229,28 @@ async function runTests() {
     const hasSpecs = await page.getByText("Spécifications").or(page.getByText("Specifications")).first().isVisible();
     assert(hasSpecs, `Technical Specifications section is visible`);
 
-    // 9. Test English Products Page
-    console.log(`\n--- 10. Testing English Products Page (/en/products) ---`);
+    // 9. Test English Products Page & Tactile Simplicity Image
+    console.log(`\n--- 10. Testing English Products Page & Tactile Simplicity ---`);
     await page.goto(`${BASE_URL}/en/products`, { waitUntil: "networkidle" });
     const enHtmlLang = await page.getAttribute("html", "lang");
     assert(enHtmlLang === "en", `English locale HTML lang attribute is "en"`);
     const enEyebrow = page.getByText("SELECTED PRODUCT CONCEPTS").first();
     assert(await enEyebrow.isVisible(), `English eyebrow text rendered correctly`);
+
+    // Verify Tactile Simplicity (AURA SKIN) image renders successfully
+    const tactileCard = page.locator('article:has-text("Tactile Simplicity")');
+    assert(await tactileCard.isVisible(), `Tactile Simplicity card is visible`);
+    const tactileImg = tactileCard.locator("img").first();
+    const isTactileImgLoaded = await tactileImg.evaluate((img) => img.complete && img.naturalWidth > 0);
+    assert(isTactileImgLoaded, `Tactile Simplicity (AURA SKIN) image loaded fast with naturalWidth > 0`);
+
+    // Visit AURA SKIN case study directly
+    await page.goto(`${BASE_URL}/fr/products/aura-skin`, { waitUntil: "networkidle" });
+    const auraTitle = await page.locator("h1").textContent();
+    assert(auraTitle.includes("Tactile Simplicity"), `AURA SKIN case study loaded: "${auraTitle}"`);
+    const auraHeroImg = page.locator("article img").first();
+    const isAuraHeroLoaded = await auraHeroImg.evaluate((img) => img.complete && img.naturalWidth > 0);
+    assert(isAuraHeroLoaded, `AURA SKIN case study hero image loaded successfully with naturalWidth > 0`);
 
     // 10. Strict Responsive & No-Overflow Verification
     console.log(`\n--- 11. Strict Responsive & No Horizontal Overflow Testing ---`);
