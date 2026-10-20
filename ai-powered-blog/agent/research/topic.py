@@ -24,10 +24,13 @@ def select_topic(existing_topics: List[str]) -> str:
     Current Calendar Year: {current_year}.
 
     Propose ONE highly engaging, original, and actionable article topic relevant to professionals.
-    It MUST NOT be too similar to any of these recently published topics:
+    It MUST NOT be duplicate or substantially similar to any of these recently published topics:
     {existing_topics_str}
 
-    Focus on practical advice, contemporary industry trends in {current_year}, or actionable steps for professionals.
+    Topic Uniqueness Rules:
+    - Never propose a topic that shares the same search intent, audience, or central question as an existing article, even with different phrasing.
+    - Differentiate broad trend topics from deep technical/practical topics.
+    - Focus on practical frameworks, actionable advice, contemporary industry trends in {current_year}, or high-value professional workflows.
     """
 
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("OPENAI_API_KEY")

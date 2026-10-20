@@ -1,12 +1,14 @@
 import { validateArticleContent } from "@/lib/validation/content";
 import { formatInTimeZone } from "date-fns-tz";
 import { prisma } from "@/lib/prisma";
+import { resolveUniqueAutonomousTopic } from "./topic-uniqueness";
 
 interface GenerateArticleParams {
   topic: string;
   keywords?: string[];
   instructions?: string;
   timezone?: string;
+  isAutonomous?: boolean;
 }
 
 export interface GeneratedArticleData {
@@ -103,24 +105,40 @@ async function performResearch(
 
 /**
  * Robust article generation engine supporting Gemini & OpenAI with automatic failover,
- * dynamic temporal context (current year and date), flexible structure, and internal cross-linking.
+ * dynamic temporal context (current year and date), flexible structure, topic uniqueness safeguards,
+ * long-form editorial standards (2,000–2,800 words), and internal cross-linking.
  */
 export async function generateCareerArticle(params: GenerateArticleParams): Promise<GeneratedArticleData> {
-  const fullTopic = params.topic.trim();
-  if (fullTopic.length < 5) {
-    throw new Error("Please provide a topic with at least 5 characters.");
-  }
-
   const timezone = params.timezone || "Asia/Karachi";
   const currentYear = formatInTimeZone(new Date(), timezone, "yyyy");
   const currentDate = formatInTimeZone(new Date(), timezone, "MMMM d, yyyy");
 
-  // 1. If AGENT_URL is set, attempt the external Python agent service first
+  let fullTopic = params.topic.trim();
+  if (fullTopic.length < 5) {
+    throw new Error("Please provide a topic with at least 5 characters.");
+  }
+
+  // 1. Autonomous Topic Uniqueness Resolution & Deduplication Safeguard
+  const isAutonomous = params.isAutonomous ?? Boolean(params.timezone);
+  if (isAutonomous) {
+    try {
+      const uniqueTopicResult = await resolveUniqueAutonomousTopic({
+        preferredTopic: fullTopic,
+        timezone,
+      });
+      fullTopic = uniqueTopicResult.topic;
+    } catch (topicErr: any) {
+      console.warn("[Autonomous Publisher] Topic uniqueness resolution encountered:", topicErr.message);
+      throw topicErr;
+    }
+  }
+
+  // 2. If AGENT_URL is set, attempt the external Python agent service first
   if (process.env.AGENT_URL) {
     try {
       const agentUrl = process.env.AGENT_URL.replace(/\/$/, "");
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 30000);
+      const timeout = setTimeout(() => controller.abort(), 35000);
 
       const res = await fetch(`${agentUrl}/generate`, {
         method: "POST",
@@ -140,7 +158,7 @@ export async function generateCareerArticle(params: GenerateArticleParams): Prom
     }
   }
 
-  // 2. Perform live research (Strict: No unverified static fallback URLs!)
+  // 3. Perform live research (Strict: No unverified static fallback URLs!)
   const research = await performResearch(fullTopic);
   if (!research || research.length < 2) {
     throw new Error(
@@ -158,7 +176,7 @@ export async function generateCareerArticle(params: GenerateArticleParams): Prom
     contextStr += `URL: ${r.url}\nContent Snippet: ${r.content}\n`;
   });
 
-  // 3. Fetch 2-4 published CareerVixa articles for natural internal linking
+  // 4. Fetch 2-4 published CareerVixa articles for natural internal linking
   let internalLinksGuide = "";
   try {
     const publishedArticles = await prisma.article.findMany({
@@ -176,7 +194,7 @@ export async function generateCareerArticle(params: GenerateArticleParams): Prom
     console.warn("Could not query existing articles for internal linking:", err);
   }
 
-  // 4. Construct Prompt with Dynamic Year, Flexible Structure & Editorial Standards
+  // 5. Construct Prompt with Dynamic Year, 2,000-2,800 Word Editorial Standard & Flexible Structure
   let extraGuidance = "";
   if (params.keywords && params.keywords.length > 0) {
     extraGuidance += ` Focus specifically on these target domains/keywords: ${params.keywords.join(", ")}.`;
@@ -189,6 +207,32 @@ export async function generateCareerArticle(params: GenerateArticleParams): Prom
 
 Write an authoritative, exhaustive, and deeply practical master guide on the topic: "${fullTopic}".${extraGuidance}
 
+EDITORIAL QUALITY & DEPTH REQUIREMENTS (MANDATORY):
+- Word Count Standard: Approximately 2,000 to 2,800 words (aiming for 9 to 13 minutes of substantial reading time).
+- Professional Tone: Natural, authoritative, internationally understandable English. Deliver concrete methodologies, verified data-backed insights, and real-world clarity. Avoid superficial summaries, generic filler, artificial repetition, or conversational padding.
+- Avoid Generic AI Openings: Do NOT begin with phrases like "In today's fast-paced world...", "In recent years...", or "Whether you are a seasoned professional or...".
+
+ARTICLE CONTENT STRUCTURE & SECTIONS:
+1. Headline: Generate a clear, search-relevant, non-clickbait headline strictly under 65 characters. Do NOT use an <h1> tag in the content body (the site template renders the article title in <h1> automatically).
+2. Focused Introduction (120 to 200 words):
+   - Hook the reader with macro workplace context and why this topic matters right now.
+   - Establish who this guide serves and clearly state what readers will master.
+3. Key Takeaways Section:
+   - Provide 3 to 5 high-impact, actionable takeaways reflecting actual conclusions in the guide.
+   - Format: <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl my-4"><strong>Key Takeaways:</strong><ul><li>...</li></ul></div>
+4. Main Body Sections (6 to 10 meaningful <h2> headings):
+   - Organize around 6 to 10 well-developed <h2> sections tailored specifically to the subject.
+   - Choose relevant section types: Conceptual foundations, How the system/concept works, Why it matters, Step-by-step implementation, Real-world applications & scenarios, Practical frameworks, Semantic comparison tables (<table class="w-full text-sm">), Career & workplace implications, Required competencies, Risks & high-stakes mistakes to avoid, and Future developments.
+   - Include <h3> subsections within deeper sections to structure complex sub-topics.
+   - Clearly label any hypothetical scenarios as hypothetical.
+   - Include dialogue scripts or negotiation counter-offers in <blockquote> where applicable.
+5. Actionable Next Steps Conclusion:
+   - Synthesize the central strategic insight and provide a clear, practical immediate next step for the reader. Avoid simply restating the article.
+6. Frequently Asked Questions (FAQ):
+   - Include 3 to 5 genuine, non-repetitive reader questions with authoritative, useful answers.
+7. References & Source Citations (<h2>References & Source Citations</h2>):
+   - Unordered list (<ul>) of clickable source links: <a href="URL" target="_blank" rel="noopener noreferrer">Source Title/Domain</a> based strictly on the verified research context below.
+
 TEMPORAL & FRESHNESS CONTEXT:
 - Reference Date: ${currentDate}
 - Current Calendar Year: ${currentYear}
@@ -198,20 +242,6 @@ FACTUAL INTEGRITY:
 - Ground all statistics, salaries, laws, and market dynamics in the verified research below.
 - Do NOT fabricate quotes, statistics, or sources.
 - Never invent citations.
-
-EDITORIAL & STRUCTURE STANDARDS:
-- Depth: Substantial, exhaustive guide (approximately 1,200 to 2,500 words). Avoid generic intros, repetitive advice, or filler padding.
-- Heading Hierarchy: Do NOT include an <h1> tag in the content HTML body (the site template renders the main title in <h1> automatically).
-- Layout & Intent Adaptation:
-  * Begin directly with an engaging 1-2 paragraph lead introduction answering the core reader question.
-  * Include a concise Key Takeaways section (wrap in <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl my-4"><strong>Key Takeaways:</strong><ul>...</ul></div>).
-  * Structure content into logically ordered <h2> sections and <h3> subsections.
-  * Tables (<table class="w-full text-sm">) are encouraged for comparisons, compensation benchmarks, or timelines ONLY where they genuinely clarify data.
-  * Provide copy-paste templates or dialogue scripts in <blockquote> where applicable.
-  * Address 3-4 subtle Common Mistakes or Pitfalls.
-  * Provide an FAQ section with 3-4 genuine reader questions.
-  * Conclude with an actionable Next Steps conclusion.
-  * End with <h2>References & Source Citations</h2> containing an unordered list (<ul>) of clickable source links: <a href="URL" target="_blank" rel="noopener noreferrer">Source Title/Domain</a>.
 
 ${internalLinksGuide}
 
@@ -230,7 +260,7 @@ Return ONLY a valid JSON object matching this schema:
   "sources": ${JSON.stringify(sources)}
 }`;
 
-  // 5. Synthesize with Gemini or OpenAI
+  // 6. Synthesize with Gemini or OpenAI
   const geminiKey = process.env.GEMINI_API_KEY;
   const openaiKey = process.env.OPENAI_API_KEY;
 
@@ -243,13 +273,13 @@ Return ONLY a valid JSON object matching this schema:
   let rawJsonText: string | null = null;
   let lastFailureReason = "";
 
-  // Try Gemini models first
+  // Try Gemini models first (with sufficient token ceiling for 2,000–2,800 word guide)
   if (geminiKey) {
     const geminiModels = ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.8-flash"];
     for (const model of geminiModels) {
       try {
         const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 50000);
+        const timeout = setTimeout(() => controller.abort(), 75000);
 
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiKey}`, {
           method: "POST",
@@ -259,6 +289,8 @@ Return ONLY a valid JSON object matching this schema:
             contents: [{ parts: [{ text: prompt }] }],
             generationConfig: {
               responseMimeType: "application/json",
+              maxOutputTokens: 8192,
+              temperature: 0.7,
             },
           }),
         });
@@ -285,7 +317,7 @@ Return ONLY a valid JSON object matching this schema:
   if (!rawJsonText && openaiKey) {
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 50000);
+      const timeout = setTimeout(() => controller.abort(), 75000);
 
       const res = await fetch("https://api.openai.com/v1/chat/completions", {
         method: "POST",
@@ -297,6 +329,7 @@ Return ONLY a valid JSON object matching this schema:
         body: JSON.stringify({
           model: "gpt-4o-mini",
           response_format: { type: "json_object" },
+          max_tokens: 8192,
           messages: [
             {
               role: "system",

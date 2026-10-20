@@ -1,17 +1,27 @@
 import { prisma } from "@/lib/prisma";
 import { GeneratedArticle, validateArticleContent } from "../validation/content";
 import { hasPublishedToday } from "../automation/lock";
-import { resolveWorkplaceImage } from "./images";
+import { resolveWorkplaceImage, resolveUniqueWorkplaceImage, WorkplaceImage } from "./images";
+import { checkSemanticSimilarity } from "../ai/topic-uniqueness";
 
 /**
- * Publishes an AI-generated article into the database after rigorous validation.
+ * Publishes an AI-generated article into the database after rigorous validation,
+ * pre-publish topic uniqueness verification, and cover image uniqueness enforcement.
  * Uses atomic transaction for article creation and audit logging.
  *
  * @param rawArticle The unvalidated article data from the generation engine
  * @param adminId The ID of the verified Admin or Platform Editorial user
  * @param ignoreLock Bypass flag reserved strictly for manual Admin generation
+ * @param options Explicit configuration for autonomous vs manual publishing
  */
-export async function publishAIArticle(rawArticle: any, adminId: string, ignoreLock = false) {
+export async function publishAIArticle(
+  rawArticle: any,
+  adminId: string,
+  ignoreLock = false,
+  options?: { isAutonomous?: boolean }
+) {
+  const isAutonomous = options?.isAutonomous ?? !ignoreLock;
+
   // 1. Check duplicate locks (bypassed only for explicit manual Admin generation)
   if (!ignoreLock) {
     const alreadyPublished = await hasPublishedToday();
@@ -23,15 +33,50 @@ export async function publishAIArticle(rawArticle: any, adminId: string, ignoreL
   // 2. Validate, sanitize content, and verify layout
   const validatedArticle = validateArticleContent(rawArticle);
 
-  // 3. Resolve curated, topic-matched workplace stock image with alt metadata
-  const resolvedImage = resolveWorkplaceImage(validatedArticle.title);
-
-  // 4. Resolve default or topic matching category
+  // 3. Resolve default or topic matching category
   let matchedCategory = await prisma.category.findFirst({
     where: { name: { contains: "Career", mode: "insensitive" } },
   });
   if (!matchedCategory) {
     matchedCategory = await prisma.category.findFirst();
+  }
+
+  // 4. Autonomous Safeguards: Topic & Cover Image Uniqueness
+  let resolvedImage: WorkplaceImage;
+
+  if (isAutonomous) {
+    // 4A. Mandatory Pre-Publish Topic Uniqueness Safeguard (Section 5.5)
+    const existingPublishedArticles = await prisma.article.findMany({
+      where: { status: "PUBLISHED" },
+      select: { id: true, title: true, summary: true, slug: true },
+      orderBy: { publishedAt: "desc" },
+    });
+
+    const topicCheck = await checkSemanticSimilarity(validatedArticle.title, existingPublishedArticles);
+    if (topicCheck.isDuplicate) {
+      throw new Error(
+        `Pre-publish topic uniqueness safeguard rejected article: "${validatedArticle.title}" substantially duplicates existing published article "${topicCheck.overlappingTitle}". Reason: ${topicCheck.reason}`
+      );
+    }
+
+    // 4B. Mandatory Image Uniqueness Safeguard (Section 6)
+    const publishedImages = await prisma.article.findMany({
+      where: {
+        status: "PUBLISHED",
+        coverImage: { not: null },
+      },
+      select: { coverImage: true },
+    });
+
+    const usedImageUrls = publishedImages.map((a) => a.coverImage).filter(Boolean);
+    resolvedImage = resolveUniqueWorkplaceImage({
+      title: validatedArticle.title,
+      category: matchedCategory?.name,
+      usedImageUrls,
+    });
+  } else {
+    // Manual Admin Generation: Preserves existing behavior without blocking manual CMS workflows
+    resolvedImage = resolveWorkplaceImage(validatedArticle.title, matchedCategory?.name);
   }
 
   // 5. Ensure unique slug

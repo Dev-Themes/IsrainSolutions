@@ -44,8 +44,9 @@ def generate_article_content(topic: str, research_data: List[Dict[str, Any]], ti
     - Freshness Rule: Discuss the current year ({current_year}) ONLY when relevant to modern hiring dynamics, compensation shifts, active recruitment trends, or emerging skills. Never invent current-year statistics. Distinguish evergreen career fundamentals from time-sensitive data. Do NOT blindly append "{current_year}" to the headline unless it is an explicit annual outlook or trend report.
 
     MANDATORY LENGTH & DEPTH STANDARD:
-    - Target length: 1,200 to 2,500 words of rich, comprehensive, actionable guidance.
-    - Avoid superficial summaries, repetitive padding, or generic filler. Deliver concrete methodologies, data-backed perspectives, and ready-to-use professional scripts.
+    - Target length: Approximately 2,000 to 2,800 words (aiming for 9 to 13 minutes of substantial reading time).
+    - Professional Tone: Natural, authoritative, internationally understandable English. Deliver concrete methodologies, verified data-backed insights, and real-world clarity.
+    - Avoid superficial summaries, repetitive padding, or generic filler. Avoid generic AI openings like "In today's fast-paced world...".
 
     FACTUAL INTEGRITY:
     - Ground all factual assertions, industry statistics, and compensation benchmarks in the provided research data.
@@ -53,20 +54,17 @@ def generate_article_content(topic: str, research_data: List[Dict[str, Any]], ti
 
     REQUIRED ARTICLE STRUCTURE (Format using clean semantic HTML for content body):
     - IMPORTANT: Do NOT include an <h1> tag in the content HTML body (the site template renders the main title in <h1> automatically).
-    - Begin directly with an engaging 1-2 paragraph lead introduction answering the core reader question.
-    - Include a concise Key Takeaways section:
+    - Begin directly with an engaging, focused 1-2 paragraph lead introduction (120 to 200 words) answering the core reader question, establishing why it matters now, and what readers will learn.
+    - Include a concise Key Takeaways section (3-5 bullet points):
       <div class="bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl my-4">
         <strong>Key Takeaways:</strong>
         <ul>...</ul>
       </div>
-    - Adapt the layout to the search intent:
-      * Roadmaps/Career Shifts: Phased chronological roadmap + skills matrix.
-      * Interviews/Dialogues: Key questions + word-for-word scripts in <blockquote>.
-      * Resumes/Portfolios: Structural breakdowns + before/after examples + checklists.
-      * Salary/Compensation: Real benchmark tables (<table class="w-full text-sm">) + negotiation scripts.
-    - Common Pitfalls & High-Stakes Mistakes to Avoid (3-4 subtle blunders).
-    - Frequently Asked Questions (FAQ) with 3-4 genuine reader questions.
-    - Actionable Next Steps Conclusion.
+    - Main Sections: Organize around 6 to 10 meaningful <h2> headings tailored to the specific topic (conceptual foundations, how the system works, practical examples, frameworks, semantic comparison tables with <table class="w-full text-sm">, career implications, required skills, high-stakes mistakes to avoid, and future developments).
+    - Include <h3> subsections where necessary to organize complex sub-topics.
+    - Provide dialogue scripts or negotiation counter-offers in <blockquote> where applicable.
+    - Frequently Asked Questions (FAQ) with 3-5 genuine, high-value reader questions.
+    - Actionable Next Steps Conclusion summarizing key strategic insights and immediate practical actions.
     - End with <h2>References & Source Citations</h2> containing an unordered list (<ul>) of clickable source links: <a href="URL" target="_blank" rel="noopener noreferrer">Source Title/Domain</a> based strictly on the verified research context.
 
     Research Context:
