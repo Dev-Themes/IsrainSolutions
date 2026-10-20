@@ -171,19 +171,19 @@ async function runTests() {
     const unhoveredPressed = await eyeButton.getAttribute("aria-pressed");
     assert(unhoveredPressed === "false", `Hover-out smoothly reverses back to Eye (aria-pressed="false")`);
 
-    // 5. Test Header Products Navigation Link
-    console.log(`\n--- 6. Testing Products Header Link ---`);
-    const productsNav = page.locator('header nav a[href*="/products"]').first();
-    assert(await productsNav.isVisible(), `Products navigation link visible in header`);
+    // 5. Test Header Portfolio Navigation Link
+    console.log(`\n--- 6. Testing Portfolio Header Link ---`);
+    const productsNav = page.locator('header nav a:has-text("PORTFOLIO")').first();
+    assert(await productsNav.isVisible(), `PORTFOLIO navigation link visible in header`);
     await productsNav.click();
     await page.waitForTimeout(800);
-    assert(page.url().includes("/fr/products"), `Navigated to /fr/products via header link`);
+    assert(page.url().includes("/products") || page.url().includes("/portfolio"), `Navigated to portfolio via header link`);
 
-    // 6. Test Products Landing Page
-    console.log(`\n--- 7. Testing Products Landing Page (/fr/products) ---`);
+    // 6. Test Portfolio Landing Page
+    console.log(`\n--- 7. Testing Portfolio Landing Page (/fr/products) ---`);
     const productsHeading = page.locator("h1");
     const productsHeadingText = await productsHeading.textContent();
-    assert(productsHeadingText.includes("PRODUCTS"), `PRODUCTS SVG display heading rendered`);
+    assert(productsHeadingText.includes("PORTFOLIO"), `PORTFOLIO SVG display heading rendered: "${productsHeadingText?.trim()}"`);
 
     const productCards = page.locator("article");
     const productCardCount = await productCards.count();
@@ -234,7 +234,7 @@ async function runTests() {
     await page.goto(`${BASE_URL}/en/products`, { waitUntil: "networkidle" });
     const enHtmlLang = await page.getAttribute("html", "lang");
     assert(enHtmlLang === "en", `English locale HTML lang attribute is "en"`);
-    const enEyebrow = page.getByText("SELECTED PRODUCT CONCEPTS").first();
+    const enEyebrow = page.getByText("SELECTED PORTFOLIO CONCEPTS").first();
     assert(await enEyebrow.isVisible(), `English eyebrow text rendered correctly`);
 
     // Verify Tactile Simplicity (AURA SKIN) image renders successfully

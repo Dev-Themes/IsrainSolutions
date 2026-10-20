@@ -1,7 +1,7 @@
 export const fr = {
   nav: {
     work: "TRAVAUX",
-    products: "PRODUITS",
+    products: "PORTFOLIO",
     about: "STUDIO",
     contact: "CONTACT",
     lang: "FR",
@@ -59,13 +59,13 @@ export const fr = {
     ],
   },
   productsPage: {
-    eyebrow: "SELECTED PRODUCT CONCEPTS — 2026",
-    heroHeading: "PRODUCTS.",
+    eyebrow: "SÉLECTION CONCEPTS PORTFOLIO — 2026",
+    heroHeading: "PORTFOLIO.",
     heroSubtext:
       "Nous explorons la rencontre entre les produits, la culture et le design. Des objets du quotidien aux idées extraordinaires, nous créons des expériences visuelles qui donnent du sens et du caractère.",
-    allProducts: "Tous les Concepts Produits",
+    allProducts: "Tous les Concepts Portfolio",
     viewProject: "VOIR LE PROJET",
-    backToProducts: "Retour aux Produits",
+    backToProducts: "Retour au Portfolio",
     speculativeBadge: "Concept de Design Spéculatif",
     overviewTitle: "01. Concept & Intention",
     artDirectionTitle: "02. Direction Artistique & Matières",
@@ -75,10 +75,10 @@ export const fr = {
     materialsLabel: "Matériaux Sélectionnés",
     specsLabel: "Spécifications Techniques",
     innovationLabel: "Innovation de Conception",
-    relatedTitle: "Autres Explorations Produits",
+    relatedTitle: "Autres Explorations Portfolio",
     nextProduct: "Concept Suivant",
     prevProduct: "Concept Précédent",
-    lightboxAria: "Agrandir l'image produit",
+    lightboxAria: "Agrandir l'image portfolio",
   },
   about: {
     heroHeading: "STUDIO.",
@@ -174,7 +174,7 @@ export const fr = {
   },
   footer: {
     work: "Travaux",
-    products: "Produits",
+    products: "Portfolio",
     about: "Studio",
     contact: "Contact",
     privacy: "Confidentialité",

@@ -1,7 +1,7 @@
 export const en = {
   nav: {
     work: "WORK",
-    products: "PRODUCTS",
+    products: "PORTFOLIO",
     about: "STUDIO",
     contact: "CONTACT",
     lang: "EN",
@@ -59,13 +59,13 @@ export const en = {
     ],
   },
   productsPage: {
-    eyebrow: "SELECTED PRODUCT CONCEPTS — 2026",
-    heroHeading: "PRODUCTS.",
+    eyebrow: "SELECTED PORTFOLIO CONCEPTS — 2026",
+    heroHeading: "PORTFOLIO.",
     heroSubtext:
       "We explore the space where products, culture, and design meet. From everyday objects to extraordinary ideas, we create visual experiences that give products character and meaning.",
-    allProducts: "All Product Concepts",
+    allProducts: "All Portfolio Concepts",
     viewProject: "VIEW PROJECT",
-    backToProducts: "Back to Products",
+    backToProducts: "Back to Portfolio",
     speculativeBadge: "Speculative Design Concept",
     overviewTitle: "01. Concept & Intent",
     artDirectionTitle: "02. Creative Direction & Materials",
@@ -75,10 +75,10 @@ export const en = {
     materialsLabel: "Selected Materials",
     specsLabel: "Technical Specifications",
     innovationLabel: "Design Innovation",
-    relatedTitle: "Further Product Explorations",
+    relatedTitle: "Further Portfolio Explorations",
     nextProduct: "Next Concept",
     prevProduct: "Previous Concept",
-    lightboxAria: "Expand product image",
+    lightboxAria: "Expand portfolio image",
   },
   about: {
     heroHeading: "STUDIO.",
@@ -119,7 +119,7 @@ export const en = {
       { title: "Moving Image & Film", desc: "Manifesto films, cinematographic direction, and kinetic visual narratives." },
       { title: "Digital Experience", desc: "Editorial web experiences crafted without architectural compromise." },
     ],
-    valuesTag: "04. PILLARS / VALUES",
+    valuesTag: "04. PILIERS / VALUES",
     valuesTitle: "Our Pillars",
     values: [
       {
@@ -174,7 +174,7 @@ export const en = {
   },
   footer: {
     work: "Work",
-    products: "Products",
+    products: "Portfolio",
     about: "Studio",
     contact: "Contact",
     privacy: "Privacy",

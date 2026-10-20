@@ -21,7 +21,7 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "products",
-    title: validLocale === "fr" ? "Campagnes Produits & Directions Artistiques" : "Product Campaigns & Creative Direction",
+    title: validLocale === "fr" ? "Portfolio — Directions Artistiques" : "Portfolio — Creative Direction",
     description: dict.productsPage.heroSubtext,
   });
 }

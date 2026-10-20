@@ -14,6 +14,26 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/:locale/portfolio",
+        destination: "/:locale/products",
+      },
+      {
+        source: "/:locale/portfolio/:slug*",
+        destination: "/:locale/products/:slug*",
+      },
+      {
+        source: "/portfolio",
+        destination: "/fr/products",
+      },
+      {
+        source: "/portfolio/:slug*",
+        destination: "/fr/products/:slug*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
