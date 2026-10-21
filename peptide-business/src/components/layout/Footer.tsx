@@ -27,7 +27,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-background-secondary border-t border-border mt-20 text-xs text-foreground-muted transition-colors duration-200">
+    <footer className="bg-background-secondary border-t border-border mt-20 text-sm text-foreground-muted transition-colors duration-200">
       <div className="container-custom py-14 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand Info */}
@@ -40,7 +40,7 @@ export default function Footer() {
                 Peptide Lab
               </span>
             </div>
-            <p className="text-foreground-muted text-xs leading-relaxed max-w-sm">
+            <p className="text-foreground-muted text-sm leading-relaxed max-w-sm">
               An editorial, catalog-focused showcase dedicated to cosmetic peptide ingredients, molecular descriptors, and direct inquiry communication for qualified formulators.
             </p>
             <div className="pt-2">
@@ -123,7 +123,7 @@ export default function Footer() {
               <li>
                 <button
                   onClick={handleResetAge}
-                  className="text-left text-xs text-accent hover:underline focus-visible:underline"
+                  className="text-left text-sm text-accent hover:underline focus-visible:underline"
                 >
                   Reset Age Confirmation (Test)
                 </button>
@@ -150,14 +150,14 @@ export default function Footer() {
 
         {/* Regulatory & Formulation Disclaimer */}
         <div className="mt-12 pt-8 border-t border-border/80 space-y-4">
-          <div className="bg-surface border border-border rounded-xl p-4 sm:p-5 text-[11px] leading-relaxed text-foreground-muted shadow-xs">
-            <strong className="text-foreground font-semibold block mb-1">
+          <div className="bg-surface border border-border rounded-xl p-4 sm:p-5 text-xs sm:text-[13px] leading-relaxed text-foreground-muted shadow-xs">
+            <strong className="text-foreground font-semibold block mb-1 text-xs sm:text-[13px]">
               Regulatory Notice &amp; Disclaimer:
             </strong>
             The peptide compounds and specifications presented on this website are intended exclusively for cosmetic raw ingredient formulation, research, and technical evaluation. These items are not finished pharmaceutical products and are not intended to diagnose, treat, cure, mitigate, or prevent any disease or medical condition. No direct online checkout or consumer dispensing is conducted through this site. All commercial inquiries are reviewed subject to applicable regional laws and compliance requirements.
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-foreground-muted/80">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-foreground-muted/80">
             <p>&copy; {currentYear} Peptide Ingredients Lab. All catalog specifications subject to batch verification.</p>
             <div className="flex items-center gap-4">
               <span>Editorial Peptide Showcase</span>

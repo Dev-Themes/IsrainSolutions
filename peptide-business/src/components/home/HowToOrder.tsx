@@ -100,7 +100,7 @@ export default function HowToOrder() {
                       <h3 className="font-display font-medium text-lg text-foreground">
                         {stage.title}
                       </h3>
-                      <p className="text-xs text-foreground-muted leading-relaxed">
+                      <p className="text-sm text-foreground-muted leading-relaxed">
                         {stage.description}
                       </p>
                     </div>
