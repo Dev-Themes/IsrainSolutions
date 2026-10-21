@@ -26,9 +26,9 @@ export default function ProductCard({
   const inDossier = hasItem(product.id);
 
   return (
-    <article className="group relative flex flex-col bg-[#222C26] border border-[#354239] rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:border-accent/50 w-full min-w-0">
+    <article className="group relative flex flex-col bg-surface border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:border-accent/50 w-full min-w-0">
       {/* Product Image Surface - Prominently Displayed with Minimum Height */}
-      <div className="relative aspect-[4/3] w-full min-h-[220px] bg-[#19211D] overflow-hidden">
+      <div className="relative aspect-[4/3] w-full min-h-[220px] bg-surface-alt overflow-hidden">
         <Image
           src={product.image}
           alt={product.imageAlt}
@@ -38,11 +38,11 @@ export default function ProductCard({
           loading="lazy"
         />
         {/* Subtle bottom shadow gradient to elevate text */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#222C26] via-[#222C26]/20 to-transparent opacity-60 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent opacity-60 pointer-events-none" />
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5">
-          <span className="editorial-badge bg-[#19211D]/90 backdrop-blur-md text-[10px] text-accent font-mono font-medium border-[#354239]">
+          <span className="editorial-badge bg-surface/90 backdrop-blur-md text-[10px] text-accent font-mono font-medium border-border">
             {product.category}
           </span>
         </div>
@@ -55,7 +55,7 @@ export default function ProductCard({
             className={`absolute top-3 right-3 z-10 inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[11px] font-medium transition-all shadow-xs ${
               isCompared
                 ? "bg-accent text-white font-semibold"
-                : "bg-[#19211D]/90 text-foreground-secondary hover:text-foreground border border-[#354239] backdrop-blur-md"
+                : "bg-surface/90 text-foreground-secondary hover:text-foreground border border-border backdrop-blur-md"
             }`}
             title="Toggle side-by-side comparison"
           >
@@ -68,7 +68,7 @@ export default function ProductCard({
         <button
           type="button"
           onClick={() => onOpenQuickView(product)}
-          className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#19211D]/95 backdrop-blur-md text-xs font-medium text-foreground hover:bg-[#222C26] shadow-md transition-all duration-150 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 border border-[#354239]"
+          className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface/95 backdrop-blur-md text-xs font-medium text-foreground hover:bg-surface-alt shadow-md transition-all duration-150 opacity-90 sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 border border-border"
           aria-label={`Quick view specifications for ${product.name}`}
         >
           <Eye className="w-3.5 h-3.5 text-accent" />
@@ -105,7 +105,7 @@ export default function ProductCard({
           {/* Sequence Motif Pill */}
           {product.sequence && (
             <div className="pt-1">
-              <span className="text-[10px] font-mono text-accent bg-[#19211D] border border-[#354239] px-2 py-0.5 rounded truncate block max-w-full">
+              <span className="text-[10px] font-mono text-accent bg-surface-alt border border-border px-2 py-0.5 rounded truncate block max-w-full">
                 Motif: {product.sequence}
               </span>
             </div>
@@ -113,7 +113,7 @@ export default function ProductCard({
         </div>
 
         {/* Specification Micro-Metrics */}
-        <div className="pt-2 border-t border-[#354239] grid grid-cols-2 gap-2 text-[11px]">
+        <div className="pt-2 border-t border-border grid grid-cols-2 gap-2 text-[11px]">
           <div className="min-w-0">
             <span className="text-foreground-muted block text-[10px] uppercase font-mono tracking-wider">Formula</span>
             <span className="font-mono text-foreground font-medium truncate block">
@@ -139,7 +139,7 @@ export default function ProductCard({
               className={`inline-flex items-center justify-center gap-1.5 px-2.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-all text-center min-w-0 ${
                 inDossier
                   ? "bg-accent/20 border-accent text-accent"
-                  : "border-[#354239] bg-[#19211D] text-foreground hover:bg-[#151B18] hover:border-accent/40"
+                  : "border-border bg-surface text-foreground hover:bg-surface-alt hover:border-accent/40"
               }`}
               title="Add to multi-item batch inquiry dossier"
             >
@@ -150,7 +150,7 @@ export default function ProductCard({
             {/* Product Details Link */}
             <Link
               href={`/products/${product.slug}`}
-              className="inline-flex items-center justify-center gap-1 px-2.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border border-[#354239] bg-[#19211D] text-foreground hover:bg-[#151B18] hover:text-accent hover:border-accent/40 transition-all text-center min-w-0"
+              className="inline-flex items-center justify-center gap-1 px-2.5 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border border-border bg-surface text-foreground hover:bg-surface-alt hover:text-accent hover:border-accent/40 transition-all text-center min-w-0"
               title={`View technical specifications for ${product.name}`}
             >
               <span className="truncate">Details</span>
@@ -163,7 +163,7 @@ export default function ProductCard({
             href={telegramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full inline-flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-lg bg-accent hover:bg-accent-hover text-[#101513] font-bold transition-all shadow-sm text-center min-w-0 group/inquire"
+            className="w-full inline-flex items-center justify-center gap-2 px-3 py-2.5 text-xs font-semibold uppercase tracking-wider rounded-lg bg-btn-primary hover:bg-btn-primary-hover text-btn-primary-text font-bold transition-all shadow-sm text-center min-w-0 group/inquire"
             aria-label={`Inquire about ${product.name} on Telegram`}
           >
             <Send className="w-3.5 h-3.5 shrink-0 transition-transform group-hover/inquire:translate-x-0.5" />

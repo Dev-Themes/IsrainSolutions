@@ -3,22 +3,47 @@
 @tailwind utilities;
 
 :root {
-  /* Premium Dark Scientific Luxury Design Tokens */
-  --background: #101513;
-  --background-secondary: #19211D;
-  --surface: #222C26;
-  --surface-alt: #151B18;
-  --surface-card: #222C26;
-  --foreground: #F3F2EB;
-  --foreground-secondary: #A8B2A8;
-  --foreground-muted: #86938A;
-  --accent: #A5BC91;
-  --accent-hover: #B8CCA4;
-  --accent-light: rgba(165, 188, 145, 0.12);
-  --accent-teal: #77B7AA;
-  --border: #354239;
-  --border-subtle: #243028;
-  --editorial-contrast: #EAECE4;
+  /* Light Theme Color Palette */
+  --background: #F8FAFC;
+  --background-secondary: #EEF2F7;
+  --surface: #FFFFFF;
+  --surface-alt: #E9F0F8;
+  --surface-card: #FFFFFF;
+  --foreground: #0F172A;
+  --foreground-secondary: #334155;
+  --foreground-muted: #475569;
+  --accent: #1D4ED8;
+  --accent-hover: #1E40AF;
+  --accent-light: rgba(29, 78, 216, 0.08);
+  --accent-teal: #0284C7;
+  --border: #CBD5E1;
+  --border-subtle: #E2E8F0;
+  --editorial-contrast: #0F172A;
+  --btn-primary: #1D4ED8;
+  --btn-primary-hover: #1E40AF;
+  --btn-primary-text: #FFFFFF;
+}
+
+.dark {
+  /* Dark Theme Color Palette */
+  --background: #0B1220;
+  --background-secondary: #111C2E;
+  --surface: #172438;
+  --surface-alt: #1E3047;
+  --surface-card: #172438;
+  --foreground: #F1F5F9;
+  --foreground-secondary: #CBD5E1;
+  --foreground-muted: #A6B4C7;
+  --accent: #60A5FA;
+  --accent-hover: #93C5FD;
+  --accent-light: rgba(96, 165, 250, 0.12);
+  --accent-teal: #38BDF8;
+  --border: #334155;
+  --border-subtle: #1E293B;
+  --editorial-contrast: #F1F5F9;
+  --btn-primary: #2563EB;
+  --btn-primary-hover: #1D4ED8;
+  --btn-primary-text: #FFFFFF;
 }
 
 @layer base {
@@ -43,6 +68,7 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     background-color: var(--background);
     color: var(--foreground);
+    transition: background-color 200ms ease, color 200ms ease;
   }
 
   /* Accessible focus styling */
@@ -86,14 +112,14 @@
   font-weight: 600;
   padding: 0.25rem 0.625rem;
   border-radius: 9999px;
-  background-color: var(--surface);
+  background-color: var(--surface-alt);
   color: var(--accent);
   border: 1px solid var(--border);
 }
 
-/* Subtle dark glow accent */
+/* Subtle navy/blue glow accent */
 .dark-glow {
-  box-shadow: 0 0 25px -5px rgba(165, 188, 145, 0.15);
+  box-shadow: 0 0 25px -5px rgba(96, 165, 250, 0.2);
 }
 
 /* Reduced motion preference */

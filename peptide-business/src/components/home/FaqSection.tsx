@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Plus, Minus, HelpCircle, Send, ArrowRight } from "lucide-react";
+import { Plus, Minus, Send, ArrowRight } from "lucide-react";
 import { FAQS } from "@/data/faq";
 
 export default function FaqSection() {
@@ -13,7 +13,7 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faqs" className="py-20 sm:py-24 lg:py-28 bg-[#151B18] border-y border-[#354239]/60">
+    <section id="faqs" className="py-20 sm:py-24 lg:py-28 bg-background border-y border-border transition-colors duration-200">
       <div className="container-custom max-w-4xl space-y-12 sm:space-y-16">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -38,8 +38,8 @@ export default function FaqSection() {
                 key={faq.id}
                 className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
                   isOpen
-                    ? "bg-[#222C26] border-accent/50 shadow-md"
-                    : "bg-[#19211D] border-[#354239] hover:border-[#354239]/90"
+                    ? "bg-surface border-accent/50 shadow-md"
+                    : "bg-surface border-border hover:border-accent/40"
                 }`}
               >
                 <h3>
@@ -58,7 +58,7 @@ export default function FaqSection() {
                       className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center border transition-all duration-200 ${
                         isOpen
                           ? "bg-accent text-white border-accent rotate-180"
-                          : "bg-[#222C26] border-[#354239] text-foreground-muted group-hover:border-accent/40 group-hover:text-foreground"
+                          : "bg-surface-alt border-border text-foreground-muted group-hover:border-accent/40 group-hover:text-foreground"
                       }`}
                       aria-hidden="true"
                     >
@@ -87,7 +87,7 @@ export default function FaqSection() {
                         isOpen ? "opacity-100" : "opacity-0"
                       }`}
                     >
-                      <div className="border-t border-[#354239]/70 pt-3.5">
+                      <div className="border-t border-border/70 pt-3.5">
                         {faq.answer}
                       </div>
                     </div>
@@ -99,7 +99,7 @@ export default function FaqSection() {
         </div>
 
         {/* Telegram inquiry reminder below FAQs */}
-        <div className="text-center p-6 rounded-2xl bg-[#19211D] border border-[#354239] max-w-lg mx-auto space-y-2">
+        <div className="text-center p-6 rounded-2xl bg-surface border border-border max-w-lg mx-auto space-y-2 shadow-xs">
           <p className="text-xs text-foreground-muted">
             Have a question not addressed in our documentation?
           </p>

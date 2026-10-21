@@ -6,6 +6,7 @@ import AnnouncementBar from "@/components/layout/AnnouncementBar";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { DossierProvider } from "@/lib/dossier-context";
+import { ThemeProvider } from "@/lib/theme-context";
 import InquiryDossierDrawer from "@/components/layout/InquiryDossierDrawer";
 
 const fontSans = Inter({
@@ -23,7 +24,7 @@ const fontDisplay = DM_Sans({
 export const metadata: Metadata = constructMetadata();
 
 export const viewport: Viewport = {
-  themeColor: "#101513",
+  themeColor: "#0B1220",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -38,8 +39,17 @@ export default function RootLayout({
   const webSiteSchema = generateWebsiteSchema();
 
   return (
-    <html lang="en" className={`${fontSans.variable} ${fontDisplay.variable} scroll-smooth`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${fontSans.variable} ${fontDisplay.variable} dark scroll-smooth`}
+    >
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('theme');var d=true;if(s==='dark'){d=true}else if(s==='light'){d=false}else{var m=window.matchMedia('(prefers-color-scheme: light)');d=!(m&&m.matches)}var r=document.documentElement;if(d){r.classList.add('dark');r.classList.remove('light')}else{r.classList.add('light');r.classList.remove('dark')}}catch(e){document.documentElement.classList.add('dark')}})();`,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
@@ -50,22 +60,24 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen flex flex-col font-sans bg-background text-foreground antialiased selection:bg-accent/25 selection:text-foreground">
-        <DossierProvider>
-          {/* Announcement Bar in normal document flow */}
-          <AnnouncementBar />
+        <ThemeProvider>
+          <DossierProvider>
+            {/* Announcement Bar in normal document flow */}
+            <AnnouncementBar />
 
-          {/* Header sits naturally below banner and becomes sticky on scroll */}
-          <Header />
+            {/* Header sits naturally below banner and becomes sticky on scroll */}
+            <Header />
 
-          <InquiryDossierDrawer />
+            <InquiryDossierDrawer />
 
-          {/* Main Content */}
-          <div className="flex-1">
-            {children}
-          </div>
+            {/* Main Content */}
+            <div className="flex-1">
+              {children}
+            </div>
 
-          <Footer />
-        </DossierProvider>
+            <Footer />
+          </DossierProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

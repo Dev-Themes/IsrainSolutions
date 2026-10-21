@@ -22,7 +22,7 @@ const STAGES = [
     title: "Define Parameters",
     image: "/images/steps/step-review.webp",
     description:
-      "Determine your pilot batch volume and target active concentration using our Formulation Studio, or compile multiple candidate peptides into your Inquiry Dossier.",
+      "Determine your pilot batch volume and target active concentration, or compile candidate peptides into your Inquiry Dossier for bundled review.",
     highlight: "Batch Size & Concentration",
   },
   {
@@ -41,7 +41,7 @@ export default function HowToOrder() {
   const telegramUrl = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/REPLACE_WITH_ACTUAL_USERNAME";
 
   return (
-    <section id="how-to-inquire" className="py-20 sm:py-24 lg:py-28 bg-[#151B18] border-y border-[#354239]/60">
+    <section id="how-to-inquire" className="py-20 sm:py-24 lg:py-28 bg-background-secondary border-y border-border transition-colors duration-200">
       <div className="container-custom space-y-14 sm:space-y-16">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -68,21 +68,21 @@ export default function HowToOrder() {
               return (
                 <div
                   key={stage.number}
-                  className="relative group rounded-2xl border border-[#354239] bg-[#222C26] p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-accent/50 hover:-translate-y-1 shadow-lg"
+                  className="relative group rounded-2xl border border-border bg-surface p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:border-accent/50 hover:-translate-y-1 shadow-sm hover:shadow-lg"
                 >
                   <div className="space-y-4">
                     {/* Top Stage Node Header */}
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-[#19211D] border border-accent/40 text-accent flex items-center justify-center font-mono font-bold text-base shadow-sm group-hover:bg-accent group-hover:text-white transition-colors duration-200">
+                      <div className="w-12 h-12 rounded-xl bg-surface-alt border border-accent/40 text-accent flex items-center justify-center font-mono font-bold text-base shadow-xs group-hover:bg-accent group-hover:text-white transition-colors duration-200">
                         {stage.number}
                       </div>
-                      <div className="w-9 h-9 rounded-lg bg-[#19211D] border border-[#354239] flex items-center justify-center text-foreground-muted group-hover:text-accent transition-colors">
+                      <div className="w-9 h-9 rounded-lg bg-surface-alt border border-border flex items-center justify-center text-foreground-muted group-hover:text-accent transition-colors">
                         <Icon className="w-4 h-4" />
                       </div>
                     </div>
 
                     {/* Step Visual Photograph */}
-                    <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-[#19211D] border border-[#354239] shadow-inner">
+                    <div className="relative aspect-[16/10] w-full rounded-xl overflow-hidden bg-surface-alt border border-border shadow-inner">
                       <Image
                         src={stage.image}
                         alt={stage.title}
@@ -90,7 +90,7 @@ export default function HowToOrder() {
                         sizes="(max-width: 768px) 100vw, 30vw"
                         className="object-cover group-hover:scale-104 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#222C26]/80 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent pointer-events-none" />
                     </div>
 
                     <div className="space-y-1.5">
@@ -107,7 +107,7 @@ export default function HowToOrder() {
                   </div>
 
                   {/* Stage Footer Badge */}
-                  <div className="pt-4 mt-4 border-t border-[#354239]/80 flex items-center justify-between text-xs">
+                  <div className="pt-4 mt-4 border-t border-border/80 flex items-center justify-between text-xs">
                     <span className="text-[11px] font-mono text-foreground-muted flex items-center gap-1.5">
                       <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0" />
                       {stage.highlight}
@@ -128,7 +128,7 @@ export default function HowToOrder() {
             href={telegramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 px-8 py-4 text-xs font-semibold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover rounded-xl transition-all duration-150 shadow-md hover:shadow-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="inline-flex items-center gap-2.5 px-8 py-4 text-xs font-semibold uppercase tracking-wider text-btn-primary-text bg-btn-primary hover:bg-btn-primary-hover rounded-xl transition-all duration-150 shadow-md hover:shadow-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Send className="w-4 h-4" />
             <span>Start an Inquiry on Telegram</span>

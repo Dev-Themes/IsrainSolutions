@@ -30,7 +30,7 @@ export default function Hero() {
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5">
               <Link
                 href="#products"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-background bg-accent hover:bg-accent-hover rounded-xl transition-all duration-150 shadow-md hover:shadow-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-btn-primary-text bg-btn-primary hover:bg-btn-primary-hover rounded-xl transition-all duration-150 shadow-md hover:shadow-accent/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               >
                 <span>Browse Products</span>
                 <ArrowRight className="w-4 h-4" />
@@ -62,7 +62,7 @@ export default function Hero() {
 
           {/* Right Column: Visually Dominant Editorial Photograph (~55%) */}
           <div className="lg:col-span-7 relative">
-            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/11] min-h-[340px] sm:min-h-[440px] lg:min-h-[500px] rounded-2xl overflow-hidden border border-[#354239] shadow-2xl bg-[#19211D]">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/11] min-h-[340px] sm:min-h-[440px] lg:min-h-[500px] rounded-2xl overflow-hidden border border-border shadow-2xl bg-surface">
               <Image
                 src="/images/hero/hero-peptides.webp"
                 alt="Luxury cosmetic peptide ingredient vessels on dark stone surface with warm ambient lighting"
@@ -73,11 +73,11 @@ export default function Hero() {
               />
 
               {/* Subtle dark film gradient overlays for integrated atmosphere without darkening photo excessively */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#101513] via-transparent to-transparent opacity-60 pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#101513]/50 via-transparent to-transparent hidden lg:block pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-background/50 via-transparent to-transparent hidden lg:block pointer-events-none" />
 
               {/* Editorial Caption Badge Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-xl bg-[#222C26]/90 backdrop-blur-md border border-[#354239] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+              <div className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 p-4 rounded-xl bg-surface/95 dark:bg-surface/90 backdrop-blur-md border border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shadow-lg">
                 <div>
                   <span className="text-[10px] uppercase font-mono tracking-wider text-accent font-semibold block">
                     Analytical Batch Standard
@@ -87,7 +87,7 @@ export default function Hero() {
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] font-mono px-2.5 py-1 rounded bg-[#19211D] border border-[#354239] text-foreground-secondary">
+                  <span className="text-[11px] font-mono px-2.5 py-1 rounded bg-background-secondary border border-border text-foreground-secondary">
                     ISO-Compliant Reference Data
                   </span>
                 </div>

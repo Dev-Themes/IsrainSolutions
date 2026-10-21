@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { ShieldAlert, CheckCircle2, ArrowRight, RotateCcw, ShieldCheck } from "lucide-react";
+import { ShieldAlert, CheckCircle2, ArrowRight, RotateCcw } from "lucide-react";
 
 interface AgeVerificationClientProps {
   returnUrl: string;
@@ -56,16 +56,16 @@ export default function AgeVerificationClient({ returnUrl }: AgeVerificationClie
   };
 
   return (
-    <main className="min-h-screen bg-[#101513] flex flex-col justify-center items-center px-4 py-8 sm:px-6 relative overflow-hidden">
+    <main className="min-h-screen bg-background flex flex-col justify-center items-center px-4 py-8 sm:px-6 relative overflow-hidden transition-colors duration-200">
       {/* Ambient background glow */}
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-[#77B7AA]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Verification Card */}
-      <div className="relative z-10 w-full max-w-lg mx-auto bg-[#222C26] border border-[#354239] rounded-2xl p-6 sm:p-10 shadow-2xl transition-all duration-200">
+      <div className="relative z-10 w-full max-w-lg mx-auto bg-surface border border-border rounded-2xl p-6 sm:p-10 shadow-2xl transition-all duration-200">
         {/* Editorial Brand Monogram / Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#19211D] border border-accent/40 text-accent mb-4 shadow-sm">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-surface-alt border border-accent/40 text-accent mb-4 shadow-sm">
             <span className="font-display font-bold text-xl tracking-wider">PI</span>
           </div>
           <span className="block text-xs font-mono font-semibold uppercase tracking-widest text-accent mb-1">
@@ -78,7 +78,7 @@ export default function AgeVerificationClient({ returnUrl }: AgeVerificationClie
 
         {status === "denied" ? (
           <div className="text-center animate-fade-in" role="alert" aria-live="polite">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-amber-950/40 border border-amber-800/50 text-amber-400 mb-4">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-amber-900/20 border border-amber-500/40 text-amber-600 dark:text-amber-400 mb-4">
               <ShieldAlert className="w-6 h-6" />
             </div>
             <h2 className="text-xl font-medium text-foreground mb-3 font-display">
@@ -89,7 +89,7 @@ export default function AgeVerificationClient({ returnUrl }: AgeVerificationClie
             </p>
             <button
               onClick={handleReset}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs uppercase tracking-wider font-semibold rounded-lg border border-[#354239] bg-[#19211D] text-foreground hover:bg-[#151B18] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 text-xs uppercase tracking-wider font-semibold rounded-lg border border-border bg-surface-alt text-foreground hover:bg-background-secondary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <RotateCcw className="w-4 h-4" />
               Re-select Confirmation
@@ -101,7 +101,7 @@ export default function AgeVerificationClient({ returnUrl }: AgeVerificationClie
               Welcome. This website provides technical data, ingredient profiles, and an inquiry platform intended for commercial formulation research and industry professionals.
             </p>
 
-            <div className="bg-[#19211D] border border-[#354239] rounded-xl p-4 mb-6">
+            <div className="bg-surface-alt border border-border rounded-xl p-4 mb-6">
               <div className="flex items-start gap-3">
                 <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
                 <p className="text-xs text-foreground-muted leading-relaxed">
@@ -111,7 +111,7 @@ export default function AgeVerificationClient({ returnUrl }: AgeVerificationClie
             </div>
 
             {errorMessage && (
-              <p className="text-xs text-red-400 bg-red-950/40 border border-red-800/50 rounded-lg p-2.5 mb-4 text-center">
+              <p className="text-xs text-red-500 dark:text-red-400 bg-red-900/20 border border-red-500/40 rounded-lg p-2.5 mb-4 text-center">
                 {errorMessage}
               </p>
             )}
@@ -120,7 +120,7 @@ export default function AgeVerificationClient({ returnUrl }: AgeVerificationClie
               <button
                 onClick={handleConfirm}
                 disabled={status === "loading"}
-                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover rounded-xl transition-all duration-150 shadow-md hover:shadow-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60"
+                className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-btn-primary-text bg-btn-primary hover:bg-btn-primary-hover rounded-xl transition-all duration-150 shadow-md hover:shadow-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60"
               >
                 {status === "loading" ? "Verifying..." : "I am 18 or Older"}
                 {status !== "loading" && <ArrowRight className="w-4 h-4" />}
@@ -129,7 +129,7 @@ export default function AgeVerificationClient({ returnUrl }: AgeVerificationClie
               <button
                 onClick={handleDeny}
                 disabled={status === "loading"}
-                className="flex-1 inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-foreground-muted hover:text-foreground bg-[#19211D] hover:bg-[#151B18] rounded-xl border border-[#354239] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60"
+                className="flex-1 inline-flex items-center justify-center px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-foreground-muted hover:text-foreground bg-surface-alt hover:bg-background-secondary rounded-xl border border-border transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:opacity-60"
               >
                 I am Under 18
               </button>

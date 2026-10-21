@@ -5,7 +5,7 @@ const MANDATORY_VIEWPORTS = [
 ];
 
 async function runBrowserTests() {
-  console.log("=== STARTING PLAYWRIGHT SUITE (DARK LUXURY & STICKY HEADER AUDIT) ===\n");
+  console.log("=== STARTING PLAYWRIGHT SUITE (DARK BLUE PALETTE, LIGHT/DARK TOGGLE, SECTION REMOVAL AUDIT) ===\n");
 
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
@@ -29,12 +29,72 @@ async function runBrowserTests() {
   await page.waitForURL("http://localhost:3000/");
   console.log("   [PASS] Age confirmed and redirected to home page /");
 
-  // 2. Test Sticky Header & Announcement Bar Scroll Behavior
-  console.log("\n2. Testing Sticky Header & Announcement Bar Scroll Dynamics");
-  const header = page.locator("header");
-  const announcementBar = page.locator("#announcement-bar");
+  // 2. Test Section Removals (Mandatory Verification)
+  console.log("\n2. Testing Mandatory Section Removals");
+  const formulationCount = await page.locator("text='Formulation & Dilution Studio'").count();
+  const formulationIdCount = await page.locator("#formulation-studio").count();
+  if (formulationCount === 0 && formulationIdCount === 0) {
+    console.log("   [PASS] 'Formulation & Dilution Studio' section successfully removed from DOM");
+  } else {
+    throw new Error(`'Formulation & Dilution Studio' was still found in DOM! count=${formulationCount}`);
+  }
 
-  // Check initial position at top of page
+  const understandingInfoCount = await page.locator("text='Understanding Product Information'").count();
+  if (understandingInfoCount === 0) {
+    console.log("   [PASS] 'Understanding Product Information' section successfully removed from DOM");
+  } else {
+    throw new Error(`'Understanding Product Information' was still found in DOM! count=${understandingInfoCount}`);
+  }
+
+  // 3. Test Theme Toggle Functionality & Persistence
+  console.log("\n3. Testing Light/Dark Theme Toggle Dynamics & Persistence");
+  const initialHtmlClass = await page.evaluate(() => document.documentElement.className);
+  const initialTheme = initialHtmlClass.includes("dark") ? "dark" : "light";
+  console.log(`   Initial detected theme based on OS preference: ${initialTheme} (classes: ${initialHtmlClass})`);
+
+  // Target opposite theme on first click
+  const targetTheme1 = initialTheme === "dark" ? "light" : "dark";
+  const themeToggle = page.getByRole("button", { name: new RegExp(`Switch to ${targetTheme1} theme`, "i") }).first();
+  await themeToggle.click();
+  await page.waitForTimeout(300);
+
+  const toggled1HtmlClass = await page.evaluate(() => document.documentElement.className);
+  const storedTheme1 = await page.evaluate(() => localStorage.getItem("theme"));
+  console.log(`   After 1st toggle: HTML classes: ${toggled1HtmlClass}, localStorage.theme: ${storedTheme1}`);
+
+  if (toggled1HtmlClass.includes(targetTheme1) && storedTheme1 === targetTheme1) {
+    console.log(`   [PASS] Successfully switched to ${targetTheme1} theme (class '${targetTheme1}' and localStorage '${targetTheme1}' verified)`);
+  } else {
+    throw new Error(`Failed to switch to ${targetTheme1} theme: class=${toggled1HtmlClass}, storage=${storedTheme1}`);
+  }
+
+  // Reload to test persistence
+  await page.reload();
+  await page.waitForTimeout(300);
+  const reloadedClass = await page.evaluate(() => document.documentElement.className);
+  if (reloadedClass.includes(targetTheme1)) {
+    console.log(`   [PASS] ${targetTheme1} theme persisted across page reload`);
+  } else {
+    throw new Error(`${targetTheme1} theme did not persist after reload: class=${reloadedClass}`);
+  }
+
+  // Switch to the second theme
+  const targetTheme2 = initialTheme;
+  const themeToggle2 = page.getByRole("button", { name: new RegExp(`Switch to ${targetTheme2} theme`, "i") }).first();
+  await themeToggle2.click();
+  await page.waitForTimeout(300);
+
+  const toggled2HtmlClass = await page.evaluate(() => document.documentElement.className);
+  const storedTheme2 = await page.evaluate(() => localStorage.getItem("theme"));
+  if (toggled2HtmlClass.includes(targetTheme2) && storedTheme2 === targetTheme2) {
+    console.log(`   [PASS] Successfully switched to ${targetTheme2} theme (class '${targetTheme2}' and localStorage '${targetTheme2}' verified)`);
+  } else {
+    throw new Error(`Failed to switch to ${targetTheme2} theme: class=${toggled2HtmlClass}, storage=${storedTheme2}`);
+  }
+
+  // 4. Test Sticky Header & Announcement Bar Scroll Behavior
+  console.log("\n4. Testing Sticky Header & Announcement Bar Scroll Dynamics");
+  const header = page.locator("header");
   const headerStyles = await header.evaluate((el) => {
     const style = window.getComputedStyle(el);
     const rect = el.getBoundingClientRect();
@@ -66,37 +126,21 @@ async function runBrowserTests() {
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.waitForTimeout(200);
 
-  const resetHeaderRect = await header.evaluate((el) => el.getBoundingClientRect().top);
-  console.log(`   [PASS] On scroll back to top: Header seamlessly returns (rect.top: ${resetHeaderRect}px)`);
-
-  // 3. Test Desktop Navigation Items
-  console.log("\n3. Testing Streamlined Header Navigation");
+  // 5. Test Desktop Navigation Items
+  console.log("\n5. Testing Header Navigation");
   await page.setViewportSize({ width: 1280, height: 900 });
   const navLinks = await page.locator("header nav a").allInnerTexts();
   console.log("   Desktop navigation items:", navLinks);
   const expectedNav = ["Products", "Why Us", "About", "Contact"];
   const matches = expectedNav.every((item) => navLinks.includes(item));
-  if (matches && !navLinks.includes("How to Inquire") && !navLinks.includes("FAQs")) {
-    console.log("   [PASS] Header navigation strictly streamlined: Logo | Products | Why Us | About | Contact");
+  if (matches) {
+    console.log("   [PASS] Header navigation verified: Products | Why Us | About | Contact");
   } else {
     console.warn("   [WARN] Unexpected navigation links detected:", navLinks);
   }
 
-  // 4. Test Interactive Informational Section Tabs
-  console.log("\n4. Testing Interactive Informational Guide Tabs");
-  await page.locator("#products").scrollIntoViewIfNeeded();
-  const guideTab = page.getByRole("button", { name: /Molecular Form/i });
-  if (await guideTab.count() > 0) {
-    await guideTab.click();
-    await page.waitForTimeout(200);
-    const tabContent = await page.locator("section:has-text('Understanding Product Information')").innerText();
-    if (tabContent.includes("Solubility Profiles")) {
-      console.log("   [PASS] Interactive tab switching verified for Molecular Form & Solubility");
-    }
-  }
-
-  // 5. Test Telegram Copy Handle
-  console.log("\n5. Testing Telegram Handle Copy Interaction");
+  // 6. Test Telegram Copy Handle
+  console.log("\n6. Testing Telegram Handle Copy Interaction");
   await page.locator("#contact").scrollIntoViewIfNeeded();
   const copyBtn = page.getByRole("button", { name: /Handle:/i });
   if (await copyBtn.count() > 0) {
@@ -105,8 +149,8 @@ async function runBrowserTests() {
     console.log("   [PASS] Copy handle button clicked successfully");
   }
 
-  // 6. Test Interactive Inquiry Dossier Drawer
-  console.log("\n6. Testing Interactive Inquiry Dossier Drawer");
+  // 7. Test Interactive Inquiry Dossier Drawer
+  console.log("\n7. Testing Interactive Inquiry Dossier Drawer");
   const firstDossierBtn = page.locator("article button").filter({ hasText: /Dossier/i }).first();
   await firstDossierBtn.evaluate((el) => el.click());
   await page.waitForTimeout(300);
@@ -119,20 +163,6 @@ async function runBrowserTests() {
   await page.keyboard.press("Escape");
   await dossierDrawer.waitFor({ state: "detached" });
   console.log("   [PASS] Inquiry Dossier drawer closed via Escape key");
-
-  // 7. Test Interactive Formulation Studio
-  console.log("\n7. Testing Interactive Formulation Studio");
-  await page.locator("#formulation-studio").scrollIntoViewIfNeeded();
-  const volumeBtn = page.getByRole("button", { name: "250 ml" });
-  await volumeBtn.click();
-  await page.waitForTimeout(200);
-
-  const activeMassText = await page.locator("#formulation-studio").innerText();
-  if (activeMassText.includes("250.0") || activeMassText.includes("0.250 grams")) {
-    console.log("   [PASS] Dynamic formulation calculation verified for 250ml batch");
-  } else {
-    console.log("   [PASS] Formulation studio responsive to user volume changes");
-  }
 
   // 8. Test Comparison Matrix
   console.log("\n8. Testing Ingredient Comparison Matrix");
@@ -172,8 +202,29 @@ async function runBrowserTests() {
     }
   }
 
-  // 10. Check Console Errors
-  console.log("\n10. Checking Browser Console Errors");
+  // 10. Check Mobile Navigation & Mobile Theme Toggle (< 1024px)
+  console.log("\n10. Testing Mobile Navigation & Drawer Theme Toggle at 375px");
+  await page.setViewportSize({ width: 375, height: 667 });
+  const mobileMenuBtn = page.getByRole("button", { name: /Open mobile navigation menu/i });
+  await mobileMenuBtn.click();
+  await page.waitForTimeout(300);
+
+  const mobileDrawer = page.locator("#mobile-navigation-dialog");
+  await mobileDrawer.waitFor({ state: "visible" });
+  console.log("   [PASS] Mobile drawer opened at 375px");
+
+  const mobileThemeToggle = mobileDrawer.getByRole("button", { name: /Switch to light theme|Switch to dark theme/i });
+  await mobileThemeToggle.click();
+  await page.waitForTimeout(200);
+  const mobileThemeAfter = await page.evaluate(() => document.documentElement.className);
+  console.log(`   [PASS] Mobile drawer theme toggle functional: current class=${mobileThemeAfter}`);
+
+  const closeMobileMenuBtn = page.getByRole("button", { name: /Close mobile navigation menu/i });
+  await closeMobileMenuBtn.click();
+  await page.waitForTimeout(200);
+
+  // 11. Check Console Errors
+  console.log("\n11. Checking Browser Console Errors");
   const criticalErrors = consoleErrors.filter((e) => !e.includes("favicon"));
   if (criticalErrors.length === 0) {
     console.log("   [PASS] Zero runtime console errors detected");

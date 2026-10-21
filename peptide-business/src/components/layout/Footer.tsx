@@ -27,13 +27,13 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#101513] border-t border-[#354239]/80 mt-20 text-xs text-foreground-muted">
+    <footer className="bg-background-secondary border-t border-border mt-20 text-xs text-foreground-muted transition-colors duration-200">
       <div className="container-custom py-14 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
-              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-accent text-white font-display font-bold text-xs shadow-sm">
+              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-btn-primary text-btn-primary-text font-display font-bold text-xs shadow-sm">
                 PI
               </span>
               <span className="font-display font-medium text-lg tracking-tight text-foreground">
@@ -149,8 +149,8 @@ export default function Footer() {
         </div>
 
         {/* Regulatory & Formulation Disclaimer */}
-        <div className="mt-12 pt-8 border-t border-[#354239]/60 space-y-4">
-          <div className="bg-[#151B18] border border-[#354239] rounded-xl p-4 sm:p-5 text-[11px] leading-relaxed text-foreground-muted">
+        <div className="mt-12 pt-8 border-t border-border/80 space-y-4">
+          <div className="bg-surface border border-border rounded-xl p-4 sm:p-5 text-[11px] leading-relaxed text-foreground-muted shadow-xs">
             <strong className="text-foreground font-semibold block mb-1">
               Regulatory Notice &amp; Disclaimer:
             </strong>
@@ -185,10 +185,10 @@ export default function Footer() {
           onClick={() => setActiveModal(null)}
         >
           <div
-            className="bg-[#222C26] border border-[#354239] rounded-2xl p-6 sm:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl space-y-4 text-foreground"
+            className="bg-surface border border-border rounded-2xl p-6 sm:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto shadow-2xl space-y-4 text-foreground"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-[#354239] pb-3">
+            <div className="flex items-center justify-between border-b border-border pb-3">
               <h2 id="legal-modal-title" className="text-base font-semibold text-foreground flex items-center gap-2">
                 <FileText className="w-4 h-4 text-accent" />
                 {activeModal === "privacy" ? "Privacy Policy" : "Terms & Inquiry Guidelines"}
@@ -228,7 +228,7 @@ export default function Footer() {
             <div className="pt-2 flex justify-end">
               <button
                 onClick={() => setActiveModal(null)}
-                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg bg-[#19211D] hover:bg-[#151B18] text-foreground border border-[#354239] transition-colors"
+                className="px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-lg bg-surface-alt hover:bg-background-secondary text-foreground border border-border transition-colors"
               >
                 Close
               </button>

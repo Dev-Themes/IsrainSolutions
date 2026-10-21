@@ -90,7 +90,7 @@ export default function ProductCatalog({ initialProducts }: ProductCatalogProps)
               <button
                 type="button"
                 onClick={() => setIsCompareModalOpen(true)}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-accent text-background text-xs font-semibold uppercase tracking-wider shadow-sm hover:bg-accent-hover transition-colors"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-btn-primary text-btn-primary-text text-xs font-semibold uppercase tracking-wider shadow-sm hover:bg-btn-primary-hover transition-colors"
               >
                 <Scale className="w-3.5 h-3.5" />
                 <span>Compare ({comparedProducts.length})</span>
@@ -114,7 +114,7 @@ export default function ProductCatalog({ initialProducts }: ProductCatalogProps)
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by peptide, INCI, CAS, or sequence motif..."
-                className="w-full pl-10 pr-4 py-2.5 text-xs bg-surface border border-border rounded-lg text-foreground placeholder:text-foreground-muted/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all"
+                className="w-full pl-10 pr-4 py-2.5 text-xs bg-surface border border-border rounded-lg text-foreground placeholder:text-foreground-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-all"
               />
             </div>
 
@@ -134,7 +134,7 @@ export default function ProductCatalog({ initialProducts }: ProductCatalogProps)
                     onClick={() => setSelectedCategory(category)}
                     className={`shrink-0 px-3.5 py-2 text-xs font-medium rounded-lg transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                       isActive
-                        ? "bg-accent text-background font-bold shadow-xs"
+                        ? "bg-btn-primary text-btn-primary-text font-bold shadow-xs"
                         : "bg-surface border border-border text-foreground-secondary hover:text-foreground hover:bg-background-secondary"
                     }`}
                   >
@@ -175,7 +175,7 @@ export default function ProductCatalog({ initialProducts }: ProductCatalogProps)
             </div>
             <button
               onClick={handleResetFilters}
-              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-md bg-accent text-background font-bold hover:bg-accent-hover transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold uppercase tracking-wider rounded-md bg-btn-primary text-btn-primary-text font-bold hover:bg-btn-primary-hover transition-colors"
             >
               <RefreshCcw className="w-3.5 h-3.5" />
               <span>Reset Filters</span>
@@ -198,7 +198,7 @@ export default function ProductCatalog({ initialProducts }: ProductCatalogProps)
             <button
               type="button"
               onClick={() => setIsCompareModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-full bg-accent text-background text-xs font-bold uppercase tracking-wider hover:bg-accent-hover transition-colors"
+              className="px-3.5 py-1.5 rounded-full bg-btn-primary text-btn-primary-text text-xs font-bold uppercase tracking-wider hover:bg-btn-primary-hover transition-colors"
             >
               View Matrix
             </button>

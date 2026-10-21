@@ -13,14 +13,14 @@ export default async function Image() {
     (
       <div
         style={{
-          background: "#FAF9F6",
+          background: "#0B1220",
           width: "100%",
           height: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "60px 80px",
-          border: "12px solid #E5E5DF",
+          border: "12px solid #1E3047",
           fontFamily: "sans-serif",
         }}
       >
@@ -30,18 +30,19 @@ export default async function Image() {
               width: "48px",
               height: "48px",
               borderRadius: "8px",
-              background: "#242522",
-              color: "#FAF9F6",
+              background: "#1E3047",
+              color: "#60A5FA",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
               fontSize: "22px",
               fontWeight: "bold",
+              border: "1px solid #334155",
             }}
           >
             PI
           </div>
-          <span style={{ fontSize: "24px", fontWeight: "600", color: "#242522" }}>
+          <span style={{ fontSize: "24px", fontWeight: "600", color: "#F1F5F9" }}>
             Peptide Ingredients Lab
           </span>
         </div>
@@ -52,7 +53,7 @@ export default async function Image() {
               fontSize: "14px",
               letterSpacing: "3px",
               textTransform: "uppercase",
-              color: "#63735B",
+              color: "#60A5FA",
               fontWeight: "bold",
             }}
           >
@@ -62,7 +63,7 @@ export default async function Image() {
             style={{
               fontSize: "56px",
               fontWeight: "500",
-              color: "#242522",
+              color: "#F1F5F9",
               lineHeight: 1.15,
               margin: 0,
             }}
@@ -70,7 +71,7 @@ export default async function Image() {
             Peptide Ingredients, <br />
             Presented with Clarity.
           </h1>
-          <p style={{ fontSize: "20px", color: "#6D716B", maxWidth: "800px", margin: 0 }}>
+          <p style={{ fontSize: "20px", color: "#A6B4C7", maxWidth: "800px", margin: 0 }}>
             Structured chemical descriptors, CAS identifiers, and direct inquiry communication.
           </p>
         </div>
@@ -80,14 +81,14 @@ export default async function Image() {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            borderTop: "2px solid #E5E5DF",
+            borderTop: "2px solid #334155",
             paddingTop: "24px",
             fontSize: "16px",
-            color: "#6D716B",
+            color: "#A6B4C7",
           }}
         >
           <span>18+ Access Enforced Platform</span>
-          <span style={{ color: "#63735B", fontWeight: "600" }}>Direct Telegram Inquiries</span>
+          <span style={{ color: "#60A5FA", fontWeight: "600" }}>Direct Telegram Inquiries</span>
         </div>
       </div>
     ),

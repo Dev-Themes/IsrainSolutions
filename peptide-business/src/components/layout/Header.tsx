@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowUpRight, Send, FolderHeart, ShieldCheck, ChevronRight } from "lucide-react";
 import { useDossier } from "@/lib/dossier-context";
+import ThemeToggle from "./ThemeToggle";
 
 // Primary Navigation Links
 const NAV_LINKS = [
@@ -74,8 +75,8 @@ export default function Header() {
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           isScrolled
-            ? "bg-[#101513]/95 backdrop-blur-md border-b border-[#354239] shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
-            : "bg-[#101513]/90 backdrop-blur-xs border-b border-[#354239]/70"
+            ? "bg-background/95 backdrop-blur-md border-b border-border shadow-[0_8px_30px_rgba(0,0,0,0.08)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
+            : "bg-background/90 backdrop-blur-xs border-b border-border/70"
         }`}
       >
         <div className="container-custom">
@@ -86,7 +87,7 @@ export default function Header() {
               className="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-lg shrink-0 min-w-0"
               aria-label="Peptide Lab Home"
             >
-              <span className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[#19211D] border border-accent/40 text-accent font-display font-bold text-xs sm:text-sm transition-transform duration-200 group-hover:scale-105 group-hover:border-accent shadow-sm shrink-0">
+              <span className="flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-surface border border-accent/40 text-accent font-display font-bold text-xs sm:text-sm transition-transform duration-200 group-hover:scale-105 group-hover:border-accent shadow-sm shrink-0">
                 PI
               </span>
               <div className="flex flex-col min-w-0">
@@ -117,6 +118,9 @@ export default function Header() {
 
             {/* Right Action Controls: Responsive across 320px to large screens */}
             <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              {/* Light / Dark Mode Toggle */}
+              <ThemeToggle />
+
               {/* Inquiry Dossier Counter Button */}
               <button
                 type="button"
@@ -124,7 +128,7 @@ export default function Header() {
                 className={`inline-flex items-center gap-1.5 px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-semibold uppercase tracking-wider rounded-lg border transition-all ${
                   totalItems > 0
                     ? "bg-accent/20 border-accent text-accent font-bold shadow-xs"
-                    : "bg-[#19211D] border-[#354239] text-foreground-muted hover:text-foreground hover:bg-[#222C26]"
+                    : "bg-surface border-border text-foreground-muted hover:text-foreground hover:bg-background-secondary"
                 }`}
                 title="View your custom batch inquiry dossier"
                 aria-label={`Open inquiry dossier with ${totalItems} items`}
@@ -133,7 +137,7 @@ export default function Header() {
                 <span className="hidden md:inline font-mono">Dossier</span>
                 <span
                   className={`w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center text-[10px] font-mono font-bold ${
-                    totalItems > 0 ? "bg-accent text-white" : "bg-[#222C26] text-foreground-muted"
+                    totalItems > 0 ? "bg-accent text-white" : "bg-background-secondary text-foreground-muted"
                   }`}
                 >
                   {totalItems}
@@ -159,7 +163,7 @@ export default function Header() {
                 ref={toggleButtonRef}
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-2 text-foreground rounded-lg hover:bg-[#19211D] border border-[#354239] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-colors"
+                className="lg:hidden p-2 text-foreground rounded-lg hover:bg-surface border border-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent transition-colors"
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-navigation-dialog"
                 aria-label="Open mobile navigation menu"
@@ -186,16 +190,16 @@ export default function Header() {
           aria-modal="true"
           aria-label="Mobile Navigation Menu"
           ref={menuRef}
-          className="fixed inset-0 z-50 bg-[#101513]/98 backdrop-blur-2xl flex flex-col justify-between p-5 sm:p-8 lg:hidden animate-fade-in overflow-y-auto"
+          className="fixed inset-0 z-50 bg-background/98 backdrop-blur-2xl flex flex-col justify-between p-5 sm:p-8 lg:hidden animate-fade-in overflow-y-auto"
         >
           {/* Drawer Top Bar with Brand and Close Button */}
-          <div className="flex items-center justify-between border-b border-[#354239] pb-4">
+          <div className="flex items-center justify-between border-b border-border pb-4">
             <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center gap-2.5"
             >
-              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#19211D] border border-accent/40 text-accent font-display font-bold text-xs">
+              <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-surface border border-accent/40 text-accent font-display font-bold text-xs">
                 PI
               </span>
               <span className="font-display font-medium text-base text-foreground">
@@ -206,7 +210,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="p-2 rounded-lg text-foreground-muted hover:text-foreground hover:bg-[#19211D] border border-[#354239] transition-colors"
+              className="p-2 rounded-lg text-foreground-muted hover:text-foreground hover:bg-surface border border-border transition-colors"
               aria-label="Close mobile navigation menu"
             >
               <X className="w-5 h-5" />
@@ -223,7 +227,7 @@ export default function Header() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between text-lg sm:text-xl font-display font-medium text-foreground py-3 border-b border-[#354239]/60 hover:text-accent hover:border-accent/40 transition-colors group"
+                className="flex items-center justify-between text-lg sm:text-xl font-display font-medium text-foreground py-3 border-b border-border/60 hover:text-accent hover:border-accent/40 transition-colors group"
               >
                 <div className="flex items-center gap-3">
                   <span className="font-mono text-xs text-foreground-muted group-hover:text-accent">
@@ -236,21 +240,27 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Bottom Action Controls: Dossier & Telegram Direct Line */}
-          <div className="pt-6 border-t border-[#354239] space-y-3.5">
+          {/* Bottom Action Controls: Theme Switch, Dossier & Telegram Direct Line */}
+          <div className="pt-6 border-t border-border space-y-3.5">
+            {/* Mobile Theme Toggle Row */}
+            <div className="flex items-center justify-between px-4 py-3 rounded-xl bg-surface border border-border">
+              <span className="text-xs font-semibold uppercase tracking-wider text-foreground">Appearance</span>
+              <ThemeToggle showLabel />
+            </div>
+
             <button
               type="button"
               onClick={() => {
                 setMobileMenuOpen(false);
                 setIsDossierOpen(true);
               }}
-              className="w-full inline-flex items-center justify-between px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-foreground bg-[#19211D] border border-[#354239] hover:bg-[#222C26] rounded-xl transition-colors"
+              className="w-full inline-flex items-center justify-between px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-foreground bg-surface border border-border hover:bg-surface-alt rounded-xl transition-colors"
             >
               <div className="flex items-center gap-2.5">
                 <FolderHeart className="w-4 h-4 text-accent" />
                 <span>Inquiry Dossier</span>
               </div>
-              <span className="font-mono text-accent bg-[#222C26] px-2 py-0.5 rounded-full text-[11px] font-bold">
+              <span className="font-mono text-accent bg-surface-alt px-2 py-0.5 rounded-full text-[11px] font-bold">
                 {totalItems} Selected
               </span>
             </button>

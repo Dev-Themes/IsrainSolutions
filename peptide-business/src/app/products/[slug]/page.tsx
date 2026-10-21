@@ -9,7 +9,6 @@ import {
   FileText,
   Dna,
   AlertCircle,
-  FlaskConical,
 } from "lucide-react";
 import { PRODUCTS, getProductBySlug, getAllProductSlugs } from "@/data/products";
 import { constructMetadata, generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo";
@@ -73,7 +72,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <main className="py-8 sm:py-12 bg-[#101513] min-h-screen text-foreground">
+      <main className="py-8 sm:py-12 bg-background min-h-screen text-foreground transition-colors duration-200">
         <div className="container-custom space-y-8 sm:space-y-12">
           {/* Breadcrumb Navigation */}
           <nav aria-label="Breadcrumbs" className="flex items-center gap-2 text-xs text-foreground-muted">
@@ -94,7 +93,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Left: Product Image Surface (Pure laboratory & amber glass photography) */}
             <div className="lg:col-span-5 space-y-4">
-              <div className="relative aspect-square w-full min-h-[320px] sm:min-h-[420px] rounded-2xl bg-[#222C26] border border-[#354239] overflow-hidden shadow-xl">
+              <div className="relative aspect-square w-full min-h-[320px] sm:min-h-[420px] rounded-2xl bg-surface border border-border overflow-hidden shadow-xl">
                 <Image
                   src={product.image}
                   alt={product.imageAlt}
@@ -104,14 +103,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                   className="object-cover object-center"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="editorial-badge bg-[#222C26]/90 backdrop-blur-xs">
+                  <span className="editorial-badge bg-surface/90 backdrop-blur-xs">
                     {product.category}
                   </span>
                 </div>
               </div>
 
               {/* Informational assurance */}
-              <div className="p-4 rounded-xl bg-[#19211D] border border-[#354239] text-xs text-foreground-muted space-y-2">
+              <div className="p-4 rounded-xl bg-surface-alt border border-border text-xs text-foreground-muted space-y-2">
                 <div className="flex items-center gap-2 text-foreground font-medium">
                   <ShieldCheck className="w-4 h-4 text-accent" />
                   <span>Direct Inquiry Verification</span>
@@ -124,7 +123,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
             {/* Right: Product Details & Specs */}
             <div className="lg:col-span-7 space-y-6 sm:space-y-8">
-              <div className="space-y-2 border-b border-[#354239] pb-6">
+              <div className="space-y-2 border-b border-border pb-6">
                 <div className="flex items-center gap-3">
                   <span className="text-xs font-mono text-accent bg-accent/15 border border-accent/25 px-2.5 py-1 rounded">
                     {product.casNumber ? `CAS: ${product.casNumber}` : "Reference Batch"}
@@ -140,7 +139,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
                 {product.inciName && (
                   <p className="text-xs sm:text-sm font-mono text-foreground-muted">
-                    INCI: <span className="text-accent">{product.inciName}</span>
+                    INCI: <span className="text-accent font-semibold">{product.inciName}</span>
                   </p>
                 )}
               </div>
@@ -153,7 +152,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
               {/* Molecular Amino Acid Sequence Architecture */}
               {product.sequence && (
-                <div className="p-4 rounded-xl bg-[#222C26] border border-[#354239] space-y-3">
+                <div className="p-4 rounded-xl bg-surface border border-border space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold uppercase tracking-wider text-foreground flex items-center gap-1.5 font-mono">
                       <Dna className="w-4 h-4 text-accent" />
@@ -170,14 +169,14 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                           key={idx}
                           className={`px-2.5 py-1 rounded-md text-xs font-mono font-medium border flex items-center gap-1 ${
                             aa.type === "basic"
-                              ? "bg-blue-950/40 text-blue-300 border-blue-800/50"
+                              ? "bg-blue-900/30 text-blue-600 dark:text-blue-300 border-blue-500/40"
                               : aa.type === "acidic"
-                              ? "bg-red-950/40 text-red-300 border-red-800/50"
+                              ? "bg-red-900/20 text-red-600 dark:text-red-300 border-red-500/40"
                               : aa.type === "aromatic"
-                              ? "bg-amber-950/40 text-amber-300 border-amber-800/50"
+                              ? "bg-amber-900/20 text-amber-600 dark:text-amber-300 border-amber-500/40"
                               : aa.type === "terminal"
-                              ? "bg-purple-950/40 text-purple-300 border-purple-800/50"
-                              : "bg-[#19211D] text-foreground border-[#354239]"
+                              ? "bg-purple-900/20 text-purple-600 dark:text-purple-300 border-purple-500/40"
+                              : "bg-surface-alt text-foreground border-border"
                           }`}
                         >
                           <span>{aa.abbr}</span>
@@ -185,7 +184,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                         </div>
                       ))
                     ) : (
-                      <span className="font-mono text-xs text-foreground bg-[#19211D] px-3 py-1 rounded border border-[#354239]">
+                      <span className="font-mono text-xs text-foreground bg-surface-alt px-3 py-1 rounded border border-border">
                         {product.sequence}
                       </span>
                     )}
@@ -200,9 +199,9 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                   Technical Descriptors &amp; Parameters
                 </h2>
 
-                <div className="border border-[#354239] rounded-xl overflow-hidden bg-[#222C26] text-xs shadow-md">
+                <div className="border border-border rounded-xl overflow-hidden bg-surface text-xs shadow-md">
                   <table className="w-full border-collapse">
-                    <tbody className="divide-y divide-[#354239]">
+                    <tbody className="divide-y divide-border">
                       {product.casNumber && (
                         <tr>
                           <td className="py-3 px-4 font-medium text-foreground-muted w-2/5">CAS Registry Number</td>
@@ -210,19 +209,19 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                         </tr>
                       )}
                       {product.molecularFormula && (
-                        <tr className="bg-[#19211D]">
+                        <tr className="bg-surface-alt">
                           <td className="py-3 px-4 font-medium text-foreground-muted">Molecular Formula</td>
-                          <td className="py-3 px-4 font-mono text-foreground">{product.molecularFormula}</td>
+                          <td className="py-3 px-4 font-mono text-foreground font-semibold">{product.molecularFormula}</td>
                         </tr>
                       )}
                       {product.molecularWeight && (
                         <tr>
                           <td className="py-3 px-4 font-medium text-foreground-muted">Molecular Weight</td>
-                          <td className="py-3 px-4 font-mono text-foreground">{product.molecularWeight}</td>
+                          <td className="py-3 px-4 font-mono text-foreground font-semibold">{product.molecularWeight}</td>
                         </tr>
                       )}
                       {product.appearance && (
-                        <tr className="bg-[#19211D]">
+                        <tr className="bg-surface-alt">
                           <td className="py-3 px-4 font-medium text-foreground-muted">Physical Appearance</td>
                           <td className="py-3 px-4 text-foreground">{product.appearance}</td>
                         </tr>
@@ -234,9 +233,9 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                         </tr>
                       )}
                       {product.suggestedPh && (
-                        <tr className="bg-[#19211D]">
+                        <tr className="bg-surface-alt">
                           <td className="py-3 px-4 font-medium text-foreground-muted">Optimal Formulation pH</td>
-                          <td className="py-3 px-4 font-mono text-accent">{product.suggestedPh}</td>
+                          <td className="py-3 px-4 font-mono text-accent font-semibold">{product.suggestedPh}</td>
                         </tr>
                       )}
                       {product.storage && (
@@ -246,13 +245,13 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                         </tr>
                       )}
                       {product.suggestedUsage && (
-                        <tr className="bg-[#19211D]">
+                        <tr className="bg-surface-alt">
                           <td className="py-3 px-4 font-medium text-foreground-muted">Formulation Usage Level</td>
                           <td className="py-3 px-4 text-foreground">{product.suggestedUsage}</td>
                         </tr>
                       )}
                       {Object.entries(product.specifications).map(([key, value]) => (
-                        <tr key={key} className="bg-[#222C26]">
+                        <tr key={key} className="bg-surface">
                           <td className="py-3 px-4 font-medium text-foreground-muted">{key}</td>
                           <td className="py-3 px-4 text-foreground">{value}</td>
                         </tr>
@@ -264,13 +263,13 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
               {/* Formulation Cautions */}
               {product.incompatibilities && (
-                <div className="p-3.5 rounded-xl bg-amber-950/30 border border-amber-800/40 flex items-start gap-2 text-xs text-amber-300">
-                  <AlertCircle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+                <div className="p-3.5 rounded-xl bg-amber-900/20 border border-amber-500/40 flex items-start gap-2 text-xs text-amber-600 dark:text-amber-300">
+                  <AlertCircle className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-semibold block text-[11px] uppercase tracking-wider text-amber-300">
+                    <span className="font-semibold block text-[11px] uppercase tracking-wider text-amber-600 dark:text-amber-300">
                       Formulation Note:
                     </span>
-                    <span className="text-amber-200/90">Avoid mixing directly with {product.incompatibilities.join(", ")}.</span>
+                    <span className="text-amber-700 dark:text-amber-200/90">Avoid mixing directly with {product.incompatibilities.join(", ")}.</span>
                   </div>
                 </div>
               )}
@@ -292,7 +291,7 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
 
           {/* Related Ingredients */}
           {relatedProducts.length > 0 && (
-            <div className="pt-12 border-t border-[#354239] space-y-6">
+            <div className="pt-12 border-t border-border space-y-6">
               <div className="flex items-center justify-between">
                 <div>
                   <span className="editorial-badge">Related Compounds</span>
@@ -313,9 +312,9 @@ export default function ProductDetailPage({ params }: ProductPageProps) {
                   <Link
                     key={rel.id}
                     href={`/products/${rel.slug}`}
-                    className="p-4 rounded-xl bg-[#222C26] border border-[#354239] hover:border-accent/40 transition-colors flex items-center gap-4 group shadow-sm"
+                    className="p-4 rounded-xl bg-surface border border-border hover:border-accent/40 transition-colors flex items-center gap-4 group shadow-sm"
                   >
-                    <div className="relative w-16 h-16 rounded-lg bg-[#19211D] border border-[#354239] overflow-hidden shrink-0">
+                    <div className="relative w-16 h-16 rounded-lg bg-surface-alt border border-border overflow-hidden shrink-0">
                       <Image
                         src={rel.image}
                         alt={rel.imageAlt}

@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,6 +34,11 @@ const config: Config = {
         "surface-alt": "var(--surface-alt)",
         "surface-card": "var(--surface-card)",
         "editorial-contrast": "var(--editorial-contrast)",
+        btn: {
+          primary: "var(--btn-primary)",
+          "primary-hover": "var(--btn-primary-hover)",
+          "primary-text": "var(--btn-primary-text)",
+        },
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

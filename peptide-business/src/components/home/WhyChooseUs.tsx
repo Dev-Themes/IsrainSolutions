@@ -20,7 +20,7 @@ export default function WhyChooseUs() {
   const telegramHandle = process.env.NEXT_PUBLIC_TELEGRAM_HANDLE || "@PeptideIngredientsLab";
 
   return (
-    <section id="why-choose-us" className="py-20 sm:py-24 lg:py-28 bg-[#151B18] border-y border-[#354239]/60">
+    <section id="why-choose-us" className="py-20 sm:py-24 lg:py-28 bg-background-secondary border-y border-border transition-colors duration-200">
       <div className="container-custom space-y-12 sm:space-y-16">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
@@ -36,9 +36,9 @@ export default function WhyChooseUs() {
         {/* Asymmetrical Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 sm:gap-6">
           {/* Bento Card 1: Featured Large Laboratory Card (spans 7 cols on lg) */}
-          <div className="lg:col-span-7 relative group rounded-2xl overflow-hidden border border-[#354239] bg-[#222C26] p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-lg">
+          <div className="lg:col-span-7 relative group rounded-2xl overflow-hidden border border-border bg-surface p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-sm hover:shadow-lg">
             {/* Background Laboratory Imagery with moody dark overlay */}
-            <div className="absolute inset-0 z-0 opacity-40 group-hover:opacity-55 transition-opacity duration-500">
+            <div className="absolute inset-0 z-0 opacity-20 dark:opacity-40 group-hover:opacity-30 dark:group-hover:opacity-50 transition-opacity duration-500">
               <Image
                 src="/images/features/why-documentation.webp"
                 alt="Minimalist laboratory documentation workspace with precision glassware and specification sheets"
@@ -46,7 +46,7 @@ export default function WhyChooseUs() {
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#222C26] via-[#222C26]/75 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-transparent pointer-events-none" />
             </div>
 
             <div className="relative z-10 space-y-4">
@@ -68,16 +68,16 @@ export default function WhyChooseUs() {
             </div>
 
             {/* Analytical Metrics Bar */}
-            <div className="relative z-10 pt-8 mt-6 border-t border-[#354239]/80 grid grid-cols-3 gap-4">
+            <div className="relative z-10 pt-8 mt-6 border-t border-border/80 grid grid-cols-3 gap-4">
               <div>
                 <span className="text-lg sm:text-xl font-bold font-mono text-accent block">&ge;98%</span>
                 <span className="text-[10px] uppercase font-mono tracking-wider text-foreground-muted">HPLC Purity</span>
               </div>
-              <div className="border-l border-[#354239] pl-4">
+              <div className="border-l border-border pl-4">
                 <span className="text-lg sm:text-xl font-bold font-mono text-accent block">MS / NMR</span>
                 <span className="text-[10px] uppercase font-mono tracking-wider text-foreground-muted">Mass Verified</span>
               </div>
-              <div className="border-l border-[#354239] pl-4">
+              <div className="border-l border-border pl-4">
                 <span className="text-lg sm:text-xl font-bold font-mono text-accent block">COA</span>
                 <span className="text-[10px] uppercase font-mono tracking-wider text-foreground-muted">Lot Specific</span>
               </div>
@@ -85,8 +85,8 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Bento Card 2: Telegram Communication Card (spans 5 cols on lg) */}
-          <div className="lg:col-span-5 relative group rounded-2xl overflow-hidden border border-[#354239] bg-[#222C26] p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-lg">
-            <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+          <div className="lg:col-span-5 relative group rounded-2xl overflow-hidden border border-border bg-surface p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-sm hover:shadow-lg">
+            <div className="absolute inset-0 z-0 opacity-15 dark:opacity-20 group-hover:opacity-25 dark:group-hover:opacity-30 transition-opacity duration-500">
               <Image
                 src="/images/features/why-direct-contact.webp"
                 alt="Smartphone communication interface on stone desk beside peptide ingredient vial"
@@ -94,12 +94,12 @@ export default function WhyChooseUs() {
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#222C26] via-[#222C26]/85 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-transparent pointer-events-none" />
             </div>
 
             <div className="relative z-10 space-y-4">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-[#19211D] border border-[#354239] flex items-center justify-center text-accent">
+                <div className="w-10 h-10 rounded-xl bg-surface-alt border border-border flex items-center justify-center text-accent">
                   <Send className="w-5 h-5" />
                 </div>
                 {/* Live Pulse Indicator */}
@@ -122,13 +122,13 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Status Box */}
-              <div className="p-3.5 rounded-xl bg-[#19211D] border border-[#354239] space-y-1.5">
+              <div className="p-3.5 rounded-xl bg-surface-alt border border-border space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-foreground-muted">Average Response Time</span>
                   <span className="font-mono text-accent font-semibold">&lt; 15 Minutes</span>
                 </div>
                 <div className="text-[11px] text-foreground-muted font-mono truncate">
-                  Handle: <span className="text-foreground">{telegramHandle}</span>
+                  Handle: <span className="text-foreground font-semibold">{telegramHandle}</span>
                 </div>
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function WhyChooseUs() {
                 href={telegramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover rounded-lg transition-colors shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-semibold uppercase tracking-wider text-btn-primary-text bg-btn-primary hover:bg-btn-primary-hover rounded-lg transition-colors shadow-sm"
               >
                 <span>Open Direct Telegram Line</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -147,8 +147,8 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Bento Card 3: Discovery Card (spans 5 cols on lg) */}
-          <div className="lg:col-span-5 relative group rounded-2xl overflow-hidden border border-[#354239] bg-[#222C26] p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-lg">
-            <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-30 transition-opacity duration-500">
+          <div className="lg:col-span-5 relative group rounded-2xl overflow-hidden border border-border bg-surface p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-sm hover:shadow-lg">
+            <div className="absolute inset-0 z-0 opacity-15 dark:opacity-20 group-hover:opacity-25 dark:group-hover:opacity-30 transition-opacity duration-500">
               <Image
                 src="/images/features/why-product-information.webp"
                 alt="Unbranded cosmetic ingredient vial beside technical information sheet"
@@ -156,12 +156,12 @@ export default function WhyChooseUs() {
                 sizes="(max-width: 1024px) 100vw, 45vw"
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#222C26] via-[#222C26]/85 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/85 to-transparent pointer-events-none" />
             </div>
 
             <div className="relative z-10 space-y-4">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-[#19211D] border border-[#354239] flex items-center justify-center text-accent">
+                <div className="w-10 h-10 rounded-xl bg-surface-alt border border-border flex items-center justify-center text-accent">
                   <Search className="w-5 h-5" />
                 </div>
                 <span className="text-[11px] font-mono text-foreground-muted">03 / DISCOVERY</span>
@@ -184,7 +184,7 @@ export default function WhyChooseUs() {
                 {["Signal Peptides", "Carrier Peptides", "Neurotransmitter-Inhibiting", "Enzyme-Inhibiting"].map((tag) => (
                   <span
                     key={tag}
-                    className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-[#19211D] border border-[#354239] text-foreground-muted"
+                    className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-surface-alt border border-border text-foreground-secondary"
                   >
                     {tag}
                   </span>
@@ -204,10 +204,10 @@ export default function WhyChooseUs() {
           </div>
 
           {/* Bento Card 4: Transparency & CAS Data Card (spans 7 cols on lg) */}
-          <div className="lg:col-span-7 relative group rounded-2xl border border-[#354239] bg-[#222C26] p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-lg">
+          <div className="lg:col-span-7 relative group rounded-2xl border border-border bg-surface p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:border-accent/40 shadow-sm hover:shadow-lg">
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-[#19211D] border border-[#354239] flex items-center justify-center text-accent">
+                <div className="w-10 h-10 rounded-xl bg-surface-alt border border-border flex items-center justify-center text-accent">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <span className="text-[11px] font-mono text-foreground-muted">04 / TRANSPARENCY</span>
@@ -226,16 +226,16 @@ export default function WhyChooseUs() {
               </div>
 
               {/* Sample Molecular Preview Block */}
-              <div className="p-4 rounded-xl bg-[#19211D] border border-[#354239] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div className="p-4 rounded-xl bg-surface-alt border border-border flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
                 <div className="space-y-0.5">
                   <span className="text-[10px] uppercase font-mono text-foreground-muted">Sample Compound</span>
                   <p className="font-display font-medium text-foreground">Copper Tripeptide-1 (GHK-Cu)</p>
                 </div>
                 <div className="flex items-center gap-3 font-mono text-[11px]">
-                  <span className="px-2.5 py-1 rounded bg-[#222C26] border border-[#354239] text-accent">
+                  <span className="px-2.5 py-1 rounded bg-surface border border-border text-accent font-semibold">
                     CAS: 89030-95-5
                   </span>
-                  <span className="px-2.5 py-1 rounded bg-[#222C26] border border-[#354239] text-foreground">
+                  <span className="px-2.5 py-1 rounded bg-surface border border-border text-foreground font-semibold">
                     MW: 403.93 g/mol
                   </span>
                 </div>

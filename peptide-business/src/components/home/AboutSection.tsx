@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,12 +9,12 @@ export default function AboutSection() {
   const telegramUrl = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/REPLACE_WITH_ACTUAL_USERNAME";
 
   return (
-    <section id="about" className="py-20 sm:py-24 lg:py-28 bg-[#19211D] border-t border-[#354239]/60">
+    <section id="about" className="py-20 sm:py-24 lg:py-28 bg-background border-t border-border transition-colors duration-200">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           {/* Left: Realistic Laboratory Imagery with Analytical Overlay */}
           <div className="lg:col-span-5 relative">
-            <div className="relative aspect-[4/3] sm:aspect-[5/4] lg:aspect-[4/5] min-h-[360px] lg:min-h-[480px] rounded-2xl overflow-hidden bg-[#101513] border border-[#354239] shadow-2xl group">
+            <div className="relative aspect-[4/3] sm:aspect-[5/4] lg:aspect-[4/5] min-h-[360px] lg:min-h-[480px] rounded-2xl overflow-hidden bg-surface border border-border shadow-2xl group">
               <Image
                 src="/images/about/about-approach.webp"
                 alt="Modern cosmetic formulation workspace with amber apothecary bottles, glassware, and laboratory documentation"
@@ -20,10 +22,10 @@ export default function AboutSection() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 480px"
                 className="object-cover object-center group-hover:scale-102 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#101513] via-[#101513]/20 to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent pointer-events-none" />
 
               {/* Informative Floating Card */}
-              <div className="absolute bottom-4 left-4 right-4 bg-[#222C26]/90 backdrop-blur-md border border-[#354239] rounded-xl p-4 text-xs text-foreground-muted shadow-lg">
+              <div className="absolute bottom-4 left-4 right-4 bg-surface/95 dark:bg-surface/90 backdrop-blur-md border border-border rounded-xl p-4 text-xs text-foreground-muted shadow-lg">
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-[10px] uppercase font-mono tracking-wider font-semibold text-accent flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
@@ -61,22 +63,22 @@ export default function AboutSection() {
 
             {/* Editorial Stats / Key Principles Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
-              <div className="p-3.5 rounded-xl bg-[#222C26] border border-[#354239] space-y-1">
+              <div className="p-3.5 rounded-xl bg-surface border border-border space-y-1 shadow-xs">
                 <span className="text-lg font-bold font-mono text-accent block">100%</span>
                 <span className="text-[11px] font-medium text-foreground block">Verified CAS</span>
                 <span className="text-[10px] text-foreground-muted block">Indexed chemicals</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#222C26] border border-[#354239] space-y-1">
+              <div className="p-3.5 rounded-xl bg-surface border border-border space-y-1 shadow-xs">
                 <span className="text-lg font-bold font-mono text-accent block">Direct</span>
                 <span className="text-[11px] font-medium text-foreground block">Telegram Line</span>
                 <span className="text-[10px] text-foreground-muted block">Direct desk access</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#222C26] border border-[#354239] space-y-1">
+              <div className="p-3.5 rounded-xl bg-surface border border-border space-y-1 shadow-xs">
                 <span className="text-lg font-bold font-mono text-accent block">INCI</span>
                 <span className="text-[11px] font-medium text-foreground block">Compliant</span>
                 <span className="text-[10px] text-foreground-muted block">Standard labeling</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-[#222C26] border border-[#354239] space-y-1">
+              <div className="p-3.5 rounded-xl bg-surface border border-border space-y-1 shadow-xs">
                 <span className="text-lg font-bold font-mono text-accent block">HPLC</span>
                 <span className="text-[11px] font-medium text-foreground block">Purity Docs</span>
                 <span className="text-[10px] text-foreground-muted block">Available per lot</span>

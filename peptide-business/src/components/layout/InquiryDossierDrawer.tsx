@@ -67,12 +67,12 @@ export default function InquiryDossierDrawer() {
       <div
         ref={drawerRef}
         onClick={(e) => e.stopPropagation()}
-        className="bg-[#19211D] w-full max-w-md h-full shadow-2xl flex flex-col justify-between border-l border-[#354239] transition-transform duration-300"
+        className="bg-background w-full max-w-md h-full shadow-2xl flex flex-col justify-between border-l border-border transition-transform duration-300"
       >
         {/* Drawer Header */}
-        <div className="p-5 sm:p-6 border-b border-[#354239] flex items-center justify-between bg-[#19211D] sticky top-0 z-10">
+        <div className="p-5 sm:p-6 border-b border-border flex items-center justify-between bg-background sticky top-0 z-10">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#222C26] border border-accent/40 text-accent flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-surface border border-accent/40 text-accent flex items-center justify-center shadow-xs">
               <FolderHeart className="w-5 h-5" />
             </div>
             <div>
@@ -99,7 +99,7 @@ export default function InquiryDossierDrawer() {
             <button
               type="button"
               onClick={() => setIsDossierOpen(false)}
-              className="p-1.5 rounded-lg text-foreground-muted hover:text-foreground hover:bg-[#222C26] transition-colors"
+              className="p-1.5 rounded-lg text-foreground-muted hover:text-foreground hover:bg-surface transition-colors"
               aria-label="Close dossier drawer"
             >
               <X className="w-5 h-5" />
@@ -111,7 +111,7 @@ export default function InquiryDossierDrawer() {
         <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-4">
           {items.length === 0 ? (
             <div className="text-center py-16 px-4 space-y-3">
-              <div className="w-14 h-14 rounded-2xl bg-[#222C26] border border-[#354239] flex items-center justify-center mx-auto text-foreground-muted">
+              <div className="w-14 h-14 rounded-2xl bg-surface border border-border flex items-center justify-center mx-auto text-foreground-muted">
                 <FolderHeart className="w-7 h-7" />
               </div>
               <p className="font-display font-medium text-sm text-foreground">
@@ -126,10 +126,10 @@ export default function InquiryDossierDrawer() {
               {items.map((item) => (
                 <div
                   key={item.product.id}
-                  className="p-3.5 rounded-xl border border-[#354239] bg-[#222C26] flex flex-col gap-3 shadow-sm"
+                  className="p-3.5 rounded-xl border border-border bg-surface flex flex-col gap-3 shadow-xs"
                 >
                   <div className="flex items-start gap-3">
-                    <div className="relative w-14 h-14 rounded-lg bg-[#19211D] border border-[#354239] overflow-hidden shrink-0">
+                    <div className="relative w-14 h-14 rounded-lg bg-surface-alt border border-border overflow-hidden shrink-0">
                       <Image
                         src={item.product.image}
                         alt={item.product.imageAlt}
@@ -164,7 +164,7 @@ export default function InquiryDossierDrawer() {
                   </div>
 
                   {/* Batch Quantity Selector */}
-                  <div className="pt-2 border-t border-[#354239] flex items-center justify-between gap-2">
+                  <div className="pt-2 border-t border-border flex items-center justify-between gap-2">
                     <label htmlFor={`qty-${item.product.id}`} className="text-[10px] text-foreground-muted uppercase tracking-wider font-mono">
                       Scale:
                     </label>
@@ -172,10 +172,10 @@ export default function InquiryDossierDrawer() {
                       id={`qty-${item.product.id}`}
                       value={item.requestedQuantity}
                       onChange={(e) => updateQuantity(item.product.id, e.target.value)}
-                      className="text-xs bg-[#19211D] border border-[#354239] rounded-lg px-2 py-1 text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+                      className="text-xs bg-surface-alt border border-border rounded-lg px-2 py-1 text-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
                     >
                       {QUANTITY_OPTIONS.map((opt) => (
-                        <option key={opt} value={opt} className="bg-[#19211D] text-foreground">
+                        <option key={opt} value={opt} className="bg-surface text-foreground">
                           {opt}
                         </option>
                       ))}
@@ -189,13 +189,13 @@ export default function InquiryDossierDrawer() {
 
         {/* Drawer Footer Actions */}
         {items.length > 0 && (
-          <div className="p-5 sm:p-6 border-t border-[#354239] bg-[#151B18] space-y-3">
+          <div className="p-5 sm:p-6 border-t border-border bg-background-secondary space-y-3">
             <div className="flex items-center justify-between text-xs text-foreground">
               <span className="text-foreground-muted">Total Compounds Selected:</span>
               <span className="font-semibold font-mono text-accent">{items.length}</span>
             </div>
 
-            <div className="p-3 rounded-xl bg-[#222C26] border border-[#354239] text-[11px] text-foreground-muted flex items-start gap-2">
+            <div className="p-3 rounded-xl bg-surface border border-border text-[11px] text-foreground-muted flex items-start gap-2 shadow-xs">
               <CheckCircle2 className="w-3.5 h-3.5 text-accent shrink-0 mt-0.5" />
               <span>
                 All selected items and requested batch quantities will be bundled into a pre-filled Telegram inquiry message.
@@ -206,7 +206,7 @@ export default function InquiryDossierDrawer() {
               href={telegramBundleUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-md hover:shadow-accent/20"
+              className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-btn-primary-text bg-btn-primary hover:bg-btn-primary-hover rounded-xl transition-all shadow-md hover:shadow-accent/20"
             >
               <Send className="w-3.5 h-3.5" />
               <span>Inquire Batch via Telegram ({items.length})</span>

@@ -8,7 +8,7 @@ export default function AnnouncementBar() {
     <aside
       id="announcement-bar"
       aria-label="Announcement"
-      className="w-full bg-[#19211D] border-b border-[#354239] py-2 px-3 sm:px-4 text-xs tracking-wide text-foreground-secondary select-none"
+      className="w-full bg-background-secondary border-b border-border py-2 px-3 sm:px-4 text-xs tracking-wide text-foreground-secondary select-none transition-colors duration-200"
     >
       <div className="container-custom flex items-center justify-between gap-3 text-[11px] sm:text-xs">
         <div className="flex items-center gap-2 min-w-0">
@@ -24,7 +24,7 @@ export default function AnnouncementBar() {
             <ShieldCheck className="w-3.5 h-3.5 text-accent" />
             18+ Platform
           </span>
-          <span className="hidden md:inline text-[#354239]">|</span>
+          <span className="hidden md:inline text-border">|</span>
           <a
             href={telegramUrl}
             target="_blank"
