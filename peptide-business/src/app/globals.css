@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Premium Dark Scientific Luxury Design Tokens */
+  --background: #101513;
+  --background-secondary: #19211D;
+  --surface: #222C26;
+  --surface-alt: #151B18;
+  --surface-card: #222C26;
+  --foreground: #F3F2EB;
+  --foreground-secondary: #A8B2A8;
+  --foreground-muted: #86938A;
+  --accent: #A5BC91;
+  --accent-hover: #B8CCA4;
+  --accent-light: rgba(165, 188, 145, 0.12);
+  --accent-teal: #77B7AA;
+  --border: #354239;
+  --border-subtle: #243028;
+  --editorial-contrast: #EAECE4;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color: var(--foreground);
+    background-color: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+    max-width: 100vw;
+  }
+
+  body {
+    min-height: 100vh;
+    overflow-x: clip;
+    max-width: 100vw;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  /* Accessible focus styling */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Custom editorial utilities */
+.container-custom {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .container-custom {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-custom {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Editorial badge */
+.editorial-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  padding: 0.25rem 0.625rem;
+  border-radius: 9999px;
+  background-color: var(--surface);
+  color: var(--accent);
+  border: 1px solid var(--border);
+}
+
+/* Subtle dark glow accent */
+.dark-glow {
+  box-shadow: 0 0 25px -5px rgba(165, 188, 145, 0.15);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
