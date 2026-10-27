@@ -25,49 +25,29 @@ export function ProjectGallery({
 
   return (
     <div className="w-full">
-      {/* Visual Storytelling & Conceptual Narrative Section */}
-      <section className="w-full py-16 sm:py-24 border-b border-[#1f1f1f]">
-        <div className="container-forme">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 text-sm">
-            {/* Concept */}
-            <div className="border-t border-[#424242] pt-4">
-              <h2 className="text-xs uppercase font-mono tracking-[0.25em] text-[#E8D49B] mb-3">
-                01. {dict.project.conceptTitle}
-              </h2>
-              <p className="text-[#B8B8B8] leading-relaxed font-light">{details.concept}</p>
-            </div>
-
-            {/* Art Direction */}
-            <div className="border-t border-[#424242] pt-4">
-              <h2 className="text-xs uppercase font-mono tracking-[0.25em] text-[#E8D49B] mb-3">
-                02. {dict.project.artDirectionTitle}
-              </h2>
-              <p className="text-[#B8B8B8] leading-relaxed font-light">{details.artDirection}</p>
-            </div>
-
-            {/* Execution */}
-            <div className="border-t border-[#424242] pt-4">
-              <h2 className="text-xs uppercase font-mono tracking-[0.25em] text-[#E8D49B] mb-3">
-                03. {dict.project.executionTitle}
-              </h2>
-              <p className="text-[#B8B8B8] leading-relaxed font-light">{details.execution}</p>
-            </div>
-          </div>
+      <section className="section-space border-b border-[var(--border)]">
+        <div className="container-popart">
+          <p className="section-kicker mb-6">PopArt Agency / {locale === "fr" ? "LE PROJET" : "THE PROJECT"}</p>
+          <dl className="case-summary">
+            <div><dt>01 / {locale === "fr" ? "Le brief" : "The brief"}</dt><dd>{details.concept}</dd></div>
+            <div><dt>02 / {dict.project.artDirectionTitle}</dt><dd>{details.artDirection}</dd></div>
+            <div><dt>03 / {dict.project.executionTitle}</dt><dd>{details.execution}</dd></div>
+          </dl>
         </div>
       </section>
 
       {/* Additional Curated High Resolution Gallery Images */}
       {project.galleryImages.length > 1 && (
-        <section className="w-full py-16 sm:py-24 border-b border-[#1f1f1f]">
-          <div className="container-forme space-y-12 sm:space-y-16">
+        <section className="w-full py-16 sm:py-24 border-b border-[var(--border)]">
+          <div className="container-popart space-y-12 sm:space-y-16">
             {project.galleryImages.slice(1).map((imgUrl, idx) => (
               <div
                 key={imgUrl}
-                className="relative w-full h-[320px] sm:h-[480px] md:h-[620px] overflow-hidden bg-[#000000] border border-[#292929]"
+                className="relative w-full h-[320px] sm:h-[480px] md:h-[620px] overflow-hidden bg-[var(--background)] border border-[var(--border)]"
               >
                 <Image
                   src={imgUrl}
-                  alt={`${project.title} — Vue ${idx + 2}`}
+                  alt={`${project.title} — ${locale === "fr" ? "Vue" : "View"} ${idx + 2}`}
                   fill
                   quality={80}
                   sizes="(max-width: 640px) 100vw, (max-width: 1280px) 95vw, 1400px"
@@ -81,24 +61,24 @@ export function ProjectGallery({
 
       {/* Next Project Teaser */}
       {nextProject && (
-        <section className="w-full py-20 sm:py-28 bg-[#0a0a0a] border-b border-[#1f1f1f]">
-          <div className="container-forme flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <section className="w-full py-20 sm:py-28 bg-[var(--surface)] border-b border-[var(--border)]">
+          <div className="container-popart flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
-              <span className="text-xs uppercase tracking-[0.25em] font-mono text-[#717171] block mb-2">
+              <span className="text-xs uppercase tracking-[0.25em] font-mono text-[var(--subtle)] block mb-2">
                 {dict.project.nextProject}
               </span>
-              <h3 className="text-2xl sm:text-4xl font-medium tracking-tight text-[#FFFFFF]">
+              <h3 className="text-2xl sm:text-4xl font-medium tracking-tight text-[var(--foreground)]">
                 {nextProject.title}
               </h3>
-              <p className="text-sm font-light text-[#B8B8B8] mt-1">
+              <p className="text-sm font-normal text-[var(--muted)] mt-1">
                 [{nextProject.category}] — {nextProject.client}
               </p>
             </div>
 
             <Link
               href={`/${locale}/work/${nextProject.slug}`}
-              style={{ "--next-accent": nextProject.accentColor || "#E8D49B" } as React.CSSProperties}
-              className="inline-flex items-center gap-3 px-6 py-4 bg-[#FFFFFF] text-[#050505] hover:bg-[var(--next-accent)] transition-colors text-xs font-mono tracking-[0.2em] uppercase rounded-xs"
+              style={{ "--next-accent": "var(--accent)" } as React.CSSProperties}
+              className="inline-flex items-center gap-3 px-6 py-4 bg-[var(--inverse-surface)] text-[var(--inverse-foreground)] hover:bg-[var(--next-accent)] transition-colors text-xs font-mono tracking-[0.2em] uppercase rounded-xs"
             >
               <span>{locale === "fr" ? "Projet Suivant" : "Next Project"}</span>
               <ArrowRight size={16} />
@@ -110,19 +90,19 @@ export function ProjectGallery({
       {/* Related Projects Grid */}
       {relatedProjects.length > 0 && (
         <section className="w-full py-16 sm:py-24">
-          <div className="container-forme">
-            <h2 className="text-xs uppercase font-mono tracking-[0.25em] text-[#717171] mb-8">
+          <div className="container-popart">
+            <h2 className="text-xs uppercase font-mono tracking-[0.25em] text-[var(--subtle)] mb-8">
               {dict.project.relatedProjects}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {relatedProjects.map((rel) => {
-                const relAccent = rel.accentColor || "#E8D49B";
+                const relAccent = "var(--accent)";
                 return (
                   <Link
                     key={rel.id}
                     href={`/${locale}/work/${rel.slug}`}
                     style={{ "--rel-accent": relAccent } as React.CSSProperties}
-                    className="group block relative overflow-hidden bg-[#000000] border border-[#1f1f1f] hover:border-[var(--rel-accent)]/60 transition-colors"
+                    className="group block relative overflow-hidden bg-[var(--background)] border border-[var(--border)] hover:border-[var(--rel-accent)]/60 transition-colors"
                   >
                     <div className="relative h-64 sm:h-80 overflow-hidden">
                       <Image
@@ -142,7 +122,7 @@ export function ProjectGallery({
                           >
                             [{rel.category}]
                           </span>
-                          <h4 className="text-lg font-medium text-[#FFFFFF]">{rel.title}</h4>
+                          <h4 className="text-lg font-medium text-[var(--foreground)]">{rel.title}</h4>
                         </div>
                         <ArrowUpRight size={18} style={{ color: relAccent }} />
                       </div>

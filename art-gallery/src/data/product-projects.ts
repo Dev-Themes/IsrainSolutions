@@ -1,6 +1,6 @@
 import { ProductProject } from "@/types/products";
 
-export const productProjects: ProductProject[] = [
+const productConcepts: ProductProject[] = [
   {
     id: "prod-01",
     slug: "noir-edition",
@@ -1418,6 +1418,22 @@ export const productProjects: ProductProject[] = [
     },
   },
 ];
+
+// Original, brand-matched concept artwork is served locally. Gallery details are
+// crops from the same concept photograph, not unrelated commercial products.
+export const productProjects: ProductProject[] = productConcepts.map(product => {
+  const cover = `/images/products/${product.slug}.webp`;
+  const detail = `/images/products/${product.slug}-detail.webp`;
+  return {
+    ...product,
+    coverImage: cover,
+    galleryImages: [cover, detail],
+    imageDetails: [
+      { src: cover, alt: product.alt, caption: { fr: `${product.brand} — Étude de produit spéculative, direction visuelle PopArt Agency.`, en: `${product.brand} — Speculative product study, visual direction by PopArt Agency.` } },
+      { src: detail, alt: { fr: `${product.brand} — Détail de forme, lumière et matière`, en: `${product.brand} — Detail of form, light and material` }, caption: { fr: "Détail du visuel conceptuel : forme, lumière et matière.", en: "Detail crop from the concept visual: form, light and material." } },
+    ],
+  };
+});
 
 export function getProductBySlug(slug: string): ProductProject | undefined {
   return productProjects.find((p) => p.slug === slug);

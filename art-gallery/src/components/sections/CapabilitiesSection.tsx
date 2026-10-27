@@ -1,71 +1,43 @@
-"use client";
-
-import React from "react";
-import { Locale } from "@/types/portfolio";
+import Link from "next/link";
+import { ArrowUpRight, Plus } from "lucide-react";
+import { InteractiveSurface } from "@/components/branding/InteractiveSurface";
 import { getDictionary } from "@/i18n";
-import { motion } from "framer-motion";
+import type { Locale } from "@/types/portfolio";
 
-interface CapabilitiesSectionProps {
-  locale: Locale;
+const relatedWork = ["color-studies", "noise-visual-system", "motion-without-borders", "monolith-echoes", "form-follows-feeling", "the-art-of-presence"];
+
+function CapabilityGraphic({ index }: { index: number }) {
+  return <svg viewBox="0 0 240 160" fill="none" aria-hidden="true" className="capability-graphic">
+    {index === 0 && <g><circle cx="100" cy="80" r="58" fill="currentColor" /><circle cx="145" cy="80" r="40" fill="var(--cap-surface)" /><path d="M145 22V138M87 80H203" stroke="var(--foreground)" strokeWidth="1.5" /><circle cx="145" cy="80" r="11" fill="var(--foreground)" /></g>}
+    {index === 1 && <g><rect x="54" y="22" width="116" height="116" stroke="currentColor" strokeWidth="2" /><rect x="75" y="43" width="116" height="95" fill="currentColor" /><path d="M75 67H191M75 91H191M75 115H191" stroke="var(--cap-surface)" strokeWidth="2" /><circle cx="75" cy="43" r="10" fill="var(--foreground)" /></g>}
+    {index === 2 && <g><circle cx="120" cy="80" r="60" stroke="currentColor" strokeWidth="2" /><circle cx="120" cy="80" r="44" stroke="currentColor" strokeWidth="2" /><path d="M106 51L150 80L106 109Z" fill="currentColor" /><path d="M28 80H48M192 80H212" stroke="var(--foreground)" strokeWidth="2" /></g>}
+    {index === 3 && <g><path d="M48 40H192V126H48Z" stroke="currentColor" strokeWidth="2" /><path d="M78 40L92 24H148L162 40" stroke="currentColor" strokeWidth="2" /><circle cx="120" cy="82" r="31" fill="currentColor" /><circle cx="120" cy="82" r="15" fill="var(--cap-surface)" /><circle cx="174" cy="56" r="4" fill="currentColor" /><path d="M36 70V96M204 70V96" stroke="var(--foreground)" strokeWidth="2" /></g>}
+    {index === 4 && <g><rect x="42" y="28" width="156" height="104" rx="2" stroke="currentColor" strokeWidth="2" /><path d="M42 50H198M94 50V132" stroke="currentColor" strokeWidth="2" /><circle cx="54" cy="39" r="3" fill="currentColor" /><circle cx="65" cy="39" r="3" fill="currentColor" /><path d="M120 70L164 101L143 105L132 122Z" fill="currentColor" /></g>}
+    {index === 5 && <g><path d="M120 18L185 53V113L120 146L55 113V53Z" stroke="currentColor" strokeWidth="2" /><path d="M55 53L120 87L185 53M120 87V146M120 18V87" stroke="currentColor" strokeWidth="2" /><path d="M55 113L120 78L185 113" stroke="currentColor" strokeWidth="1" strokeDasharray="4 5" /><circle cx="120" cy="87" r="10" fill="currentColor" /></g>}
+  </svg>;
 }
 
-export function CapabilitiesSection({ locale }: CapabilitiesSectionProps) {
+export function CapabilitiesSection({ locale }: { locale: Locale }) {
   const dict = getDictionary(locale);
-
-  return (
-    <section className="w-full border-b border-[#1f1f1f] bg-[#000000] py-14 sm:py-20">
-      <div className="container-forme">
-        {/* Top Section Header: Tag & Bold Manifesto Heading */}
-        <div className="mb-10 sm:mb-14">
-          <span className="text-[10px] sm:text-xs uppercase font-mono tracking-[0.25em] text-[#F7D85B] block mb-3">
-            [{dict.home.capabilitiesTag}]
-          </span>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-light tracking-tight text-[#FFFFFF]">
-              {dict.home.manifestoTitle}
-            </h2>
-            <span className="text-xs sm:text-sm font-mono tracking-widest text-[#717171] uppercase">
-              {dict.home.manifestoSubtitle}
-            </span>
+  const copy = dict.home.capabilityUi;
+  return <section className="capabilities-section section-space" aria-labelledby="capabilities-title">
+    <div className="container-popart">
+      <div className="capabilities-heading"><div><p className="section-kicker">{dict.home.capabilitiesTag}</p><h2 id="capabilities-title">{dict.home.manifestoTitle}</h2></div><p>{copy.hint}</p></div>
+      <div className="capability-grid">
+        {dict.home.capabilities.map((item, index) => <details className={`capability-card capability-card-${index}`} name="popart-capabilities" key={item.number}>
+          <summary>
+            <InteractiveSurface className="capability-cover">
+              <span className="capability-top"><span>{item.number} / PopArt Agency</span><Plus size={19} className="capability-toggle" aria-hidden="true" /></span>
+              <CapabilityGraphic index={index} />
+              <span className="capability-title">{item.title}</span>
+              <span className="capability-prompt">{copy.explore}<ArrowUpRight size={17} aria-hidden="true" /></span>
+            </InteractiveSurface>
+          </summary>
+          <div className="capability-content"><p>{item.desc}</p><ul>{copy.deliverables[index].map(label => <li key={label}>{label}</li>)}</ul>
+            <Link href={`/${locale}/work/${relatedWork[index]}`} className="editorial-link" aria-label={`${copy.related} — ${item.title}`}>{copy.related}<ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
-        </div>
-
-        {/* 6 Capabilities Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {dict.home.capabilities.map((item) => (
-            <motion.div
-              key={item.number}
-              whileHover={{ y: -4 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              style={{ "--cap-color": item.color } as React.CSSProperties}
-              className="group p-6 sm:p-7 bg-[#050505] border border-[#1f1f1f] hover:border-[var(--cap-color)] transition-all duration-300 rounded-xs flex flex-col justify-between"
-            >
-              <div>
-                {/* Number & Color Accent Indicator */}
-                <div className="flex items-center justify-between mb-5">
-                  <span className="text-xs font-mono text-[#717171] group-hover:text-[var(--cap-color)] transition-colors">
-                    {item.number}
-                  </span>
-                  <span
-                    style={{ backgroundColor: item.color }}
-                    className="w-2 h-2 rounded-full opacity-60 group-hover:opacity-100 transition-opacity"
-                  />
-                </div>
-
-                {/* Capability Title */}
-                <h3 className="text-lg sm:text-xl font-medium text-[#FFFFFF] group-hover:text-[#FFFFFF] mb-2.5 tracking-tight">
-                  {item.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-xs sm:text-sm font-light text-[#B8B8B8] leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        </details>)}
       </div>
-    </section>
-  );
+    </div>
+  </section>;
 }

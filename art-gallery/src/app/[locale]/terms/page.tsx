@@ -32,32 +32,32 @@ export default async function TermsPage({
 
   return (
     <div className="w-full py-16 sm:py-24">
-      <div className="container-forme max-w-4xl">
+      <div className="container-popart max-w-4xl">
         <Link
           href={`/${validLocale}`}
-          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#B8B8B8] hover:text-[#E8D49B] transition-colors mb-12"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)] hover:text-[var(--accent)] transition-colors mb-12"
         >
           <ArrowLeft size={16} />
           <span>{dict.project.backToWork}</span>
         </Link>
 
-        <h1 className="text-3xl sm:text-5xl font-medium tracking-tight text-[#FFFFFF] mb-8">
+        <h1 className="text-3xl sm:text-5xl font-medium tracking-tight text-[var(--foreground)] mb-8">
           {dict.legal.termsTitle}
         </h1>
 
-        <div className="space-y-6 text-sm text-[#B8B8B8] font-light leading-relaxed border-t border-[#292929] pt-8">
+        <div className="space-y-6 text-sm text-[var(--muted)] font-light leading-relaxed border-t border-[var(--border)] pt-8">
           <p>
             {validLocale === "fr"
-              ? "FORME est une agence fictive d'art contemporain et de communication visuelle conçue dans le cadre d'une démonstration d'architecture web et de design éditorial haut de gamme."
-              : "FORME is a fictional contemporary art direction and visual communication studio created as an architectural showcase of high-end editorial web design."}
+              ? "PopArt Agency est une agence fictive d'art contemporain et de communication visuelle conçue dans le cadre d'une démonstration d'architecture web et de design éditorial haut de gamme."
+              : "PopArt Agency is a fictional contemporary art direction and visual communication studio created as an architectural showcase of high-end editorial web design."}
           </p>
           <p>
             {validLocale === "fr"
               ? "L'ensemble des visuels présentés au sein des études de cas sont des œuvres sous licence de libre diffusion artistique ou des créations conceptuelles originales. Tout usage sans mention préalable est proscrit."
               : "All visuals presented across case studies are openly licensed artistic works or original conceptual compositions. Any unauthorized redistribution without proper attribution is prohibited."}
           </p>
-          <p className="text-xs font-mono text-[#717171] pt-6">
-            © 2026 FORME Studio Créatif — Paris, France.
+          <p className="text-xs font-mono text-[var(--subtle)] pt-6">
+            © 2026 PopArt Agency Studio Créatif — Paris, France.
           </p>
         </div>
       </div>

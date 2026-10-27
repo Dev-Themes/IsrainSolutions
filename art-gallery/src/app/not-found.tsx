@@ -4,21 +4,21 @@ import { ArrowLeft } from "lucide-react";
 
 export default function RootNotFound() {
   return (
-    <html lang="fr" className="dark" suppressHydrationWarning>
-      <body className="bg-[#050505] text-[#FFFFFF] min-h-screen flex items-center justify-center p-6" suppressHydrationWarning>
+    <html lang="fr" data-theme="light" suppressHydrationWarning>
+      <body className="bg-[var(--background)] text-[var(--foreground)] min-h-screen flex items-center justify-center p-6" suppressHydrationWarning>
         <div className="text-center max-w-md">
-          <span className="text-xs uppercase font-mono tracking-[0.3em] text-[#E8D49B] block mb-4">
+          <span className="text-xs uppercase font-mono tracking-[0.3em] text-[var(--accent)] block mb-4">
             404
           </span>
-          <h1 className="text-4xl font-medium tracking-tight text-[#FFFFFF] mb-4">
+          <h1 className="text-4xl font-medium tracking-tight text-[var(--foreground)] mb-4">
             Page Introuvable
           </h1>
-          <p className="text-sm font-light text-[#B8B8B8] mb-8">
+          <p className="text-sm font-light text-[var(--muted)] mb-8">
             La page demandée n&apos;existe pas.
           </p>
           <Link
             href="/fr"
-            className="inline-flex items-center gap-2 px-5 py-3 bg-[#FFFFFF] text-[#050505] hover:bg-[#E8D49B] transition-colors text-xs font-mono uppercase tracking-wider"
+            className="inline-flex items-center gap-2 px-5 py-3 bg-[var(--inverse-surface)] text-[var(--inverse-foreground)] hover:bg-[var(--accent)] transition-colors text-xs font-mono uppercase tracking-wider"
           >
             <ArrowLeft size={14} />
             <span>Accueil / Home</span>

@@ -21,7 +21,7 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "products",
-    title: validLocale === "fr" ? "Portfolio — Directions Artistiques" : "Portfolio — Creative Direction",
+    title: validLocale === "fr" ? "Produits — Concepts & Direction Artistique" : "Products — Concepts & Creative Direction",
     description: dict.productsPage.heroSubtext,
   });
 }
@@ -37,7 +37,7 @@ export default async function ProductsPage({
   return (
     <div className="w-full">
       <ProductHero locale={validLocale} />
-      <div className="container-forme pt-12 sm:pt-16 pb-16 sm:pb-24">
+      <div className="container-popart pt-12 sm:pt-16 pb-16 sm:pb-24">
         <ProductGallery products={productProjects} locale={validLocale} />
       </div>
       <ContactSection locale={validLocale} />

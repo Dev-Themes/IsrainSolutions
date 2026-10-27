@@ -1,0 +1,22 @@
+﻿.hero {
+  --hero-header-height: 64px;
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: calc(100svh - var(--hero-header-height));
+  min-height: 320px;
+  overflow: hidden;
+  isolation: isolate;
+  background: #f8fafc;
+}
+.art { display: block; width: min(100%, 1560px); height: 100%; padding: clamp(8px, 3vw, 48px); box-sizing: border-box; }
+@media (min-width: 640px) { .hero { --hero-header-height: 80px; } }
+@media (max-height: 500px) and (min-width: 640px) { .hero { min-height: 230px; } }
+.controls { position: absolute; bottom: 18px; left: clamp(16px, 3.4vw, 56px); right: clamp(16px, 3.4vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font: 10px/1.4 var(--font-geist-mono), monospace; }
+.buttons { display: flex; gap: 8px; }
+.buttons button { min-height: 44px; min-width: 64px; padding: 8px 12px; border: 1px solid var(--border); border-radius: 100px; background: #ffffff90; cursor: pointer; transition: background .2s; }
+.buttons button:hover { background: #fff; }
+.buttons button:focus-visible { outline: 2px solid var(--brand-blue); outline-offset: 3px; }
+.art [data-glyph] { transition: fill .65s ease; }
+@media (max-width: 480px) { .hint { max-width: 140px; font-size: 9px; } .controls { bottom: 10px; } }
+@media (prefers-reduced-motion: reduce) { .hint { visibility: hidden; } .buttons button:last-child { display: none; } .art [data-glyph] { transition: none; } }

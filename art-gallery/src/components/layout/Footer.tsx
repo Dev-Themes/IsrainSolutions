@@ -14,16 +14,16 @@ export function Footer({ locale }: FooterProps) {
   const dict = getDictionary(locale);
 
   return (
-    <footer className="w-full bg-[#000000] text-[#FFFFFF] pt-16 sm:pt-24 pb-12 sm:pb-16 border-t border-[#292929]">
-      <div className="container-forme">
+    <footer className="popart-footer w-full bg-[var(--background)] text-[var(--foreground)] pt-16 sm:pt-24 pb-12 sm:pb-16 border-t border-[var(--border)]">
+      <div className="container-popart">
         {/* Upper Navigation & Metadata Region */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 mb-16 sm:mb-24 text-xs sm:text-sm font-light tracking-[0.2em] uppercase">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 mb-16 sm:mb-24 text-xs sm:text-sm font-normal tracking-[0.2em] uppercase">
           {/* Main Navigation */}
           <ul className="space-y-3">
             <li>
               <Link
-                href={`/${locale}`}
-                className="text-[#B8B8B8] hover:text-[#FF665C] transition-colors"
+                href={`/${locale}/work`}
+                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
               >
                 {dict.footer.work}
               </Link>
@@ -31,7 +31,7 @@ export function Footer({ locale }: FooterProps) {
             <li>
               <Link
                 href={`/${locale}/products`}
-                className="text-[#B8B8B8] hover:text-[#78E6BF] transition-colors"
+                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
               >
                 {dict.footer.products}
               </Link>
@@ -39,7 +39,7 @@ export function Footer({ locale }: FooterProps) {
             <li>
               <Link
                 href={`/${locale}/about`}
-                className="text-[#B8B8B8] hover:text-[#F7D85B] transition-colors"
+                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
               >
                 {dict.footer.about}
               </Link>
@@ -47,7 +47,7 @@ export function Footer({ locale }: FooterProps) {
             <li>
               <Link
                 href={`/${locale}/contact`}
-                className="text-[#B8B8B8] hover:text-[#6298FF] transition-colors"
+                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
               >
                 {dict.footer.contact}
               </Link>
@@ -59,7 +59,7 @@ export function Footer({ locale }: FooterProps) {
             <li>
               <Link
                 href={`/${locale}/privacy`}
-                className="text-[#B8B8B8] hover:text-[#FFFFFF] transition-colors"
+                className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
               >
                 {dict.footer.privacy}
               </Link>
@@ -67,7 +67,7 @@ export function Footer({ locale }: FooterProps) {
             <li>
               <Link
                 href={`/${locale}/cookies`}
-                className="text-[#B8B8B8] hover:text-[#FFFFFF] transition-colors"
+                className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
               >
                 {dict.footer.cookies}
               </Link>
@@ -75,7 +75,7 @@ export function Footer({ locale }: FooterProps) {
             <li>
               <Link
                 href={`/${locale}/terms`}
-                className="text-[#B8B8B8] hover:text-[#FFFFFF] transition-colors"
+                className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
               >
                 {dict.footer.terms}
               </Link>
@@ -83,9 +83,9 @@ export function Footer({ locale }: FooterProps) {
           </ul>
 
           {/* Copyright Metadata */}
-          <div className="col-span-2 md:col-span-1 text-left md:text-right text-[#B8B8B8] tracking-widest">
-            <p>© 2026 FORME</p>
-            <p className="text-[11px] text-[#717171] mt-1 normal-case tracking-normal">
+          <div className="col-span-2 md:col-span-1 text-left md:text-right text-[var(--muted)] tracking-widest">
+            <p>© 2026 PopArt Agency</p>
+            <p className="text-[11px] text-[var(--subtle)] mt-1 normal-case tracking-normal">
               Studio Créatif — Paris
             </p>
           </div>
@@ -94,20 +94,20 @@ export function Footer({ locale }: FooterProps) {
         {/* Center: Interactive Abstract Eye to Brand Wordmark Animation */}
         <div className="w-full flex flex-col items-center justify-center my-12 sm:my-20">
           <EyeToWordmark ariaLabel={dict.footer.symbolAria} />
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[#717171] mt-4 select-none">
+          <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--subtle)] mt-4 select-none">
             {locale === "fr" ? "Survoler ou toucher pour révéler" : "Hover or tap to reveal"}
           </p>
         </div>
 
         {/* Bottom Byline */}
-        <div className="w-full pt-10 border-t border-[#1f1f1f] flex flex-col sm:flex-row items-center justify-between text-xs text-[#717171] tracking-[0.18em] uppercase gap-4">
+        <div className="w-full pt-10 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--subtle)] tracking-[0.18em] uppercase gap-4">
           <p>{dict.footer.byline}</p>
           <div className="flex items-center space-x-6 text-[11px]">
             <a
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#FF665C] transition-colors"
+              className="hover:text-[var(--accent)] transition-colors"
             >
               Instagram
             </a>
@@ -115,7 +115,7 @@ export function Footer({ locale }: FooterProps) {
               href="https://behance.net"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#F7D85B] transition-colors"
+              className="hover:text-[var(--accent)] transition-colors"
             >
               Behance
             </a>
@@ -123,7 +123,7 @@ export function Footer({ locale }: FooterProps) {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#6298FF] transition-colors"
+              className="hover:text-[var(--accent)] transition-colors"
             >
               LinkedIn
             </a>

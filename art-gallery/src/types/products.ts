@@ -1,4 +1,4 @@
-import { Locale, ProjectLocalizedText } from "./portfolio";
+import { ProjectLocalizedText } from "./portfolio";
 
 export interface ProductImage {
   src: string;

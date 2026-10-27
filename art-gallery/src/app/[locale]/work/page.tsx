@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { WorkHero } from "@/components/sections/WorkHero";
+import { CapabilitiesSection } from "@/components/sections/CapabilitiesSection";
 import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
 import { projects } from "@/data/projects";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -18,7 +19,11 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "work",
-    title: validLocale === "fr" ? "Tous les Projets — Galerie" : "All Projects — Gallery",
+    title: validLocale === "fr" ? "Travaux & Direction Artistique" : "Work & Art Direction",
+    description:
+      validLocale === "fr"
+        ? "Explorez l'ensemble des projets et réalisations du Studio PopArt Agency : direction artistique, identité visuelle, photographie et scénographie."
+        : "Explore the complete portfolio of PopArt Agency Studio: art direction, visual identity, fine art photography, moving image, and spatial design.",
   });
 }
 
@@ -32,10 +37,18 @@ export default async function WorkPage({
 
   return (
     <div className="w-full">
+      {/* Work Intro Hero Section */}
       <WorkHero locale={validLocale} />
-      <div className="container-forme pt-12 sm:pt-16">
+
+      {/* Capabilities Section ('WE MAKE IDEAS VISIBLE.') */}
+      <CapabilitiesSection locale={validLocale} />
+
+      {/* Main Portfolio Grid Gallery */}
+      <div className="container-popart pt-12 sm:pt-16">
         <PortfolioGrid projects={projects} locale={validLocale} />
       </div>
+
+      {/* Contact Section */}
       <ContactSection locale={validLocale} />
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useCallback, useRef, useState } from "react";
+import React, { useEffect, useRef, useSyncExternalStore } from "react";
+import { useSwipeNavigation } from "@/hooks/useSwipeNavigation";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,13 +32,17 @@ export function PortfolioLightbox({
   triggerRef,
 }: PortfolioLightboxProps) {
   const dict = getDictionary(locale);
+  const swipe = useSwipeNavigation(onPrev, onNext);
+  const handlers = useRef({ onClose, onPrev, onNext });
+  useEffect(() => { handlers.current = { onClose, onPrev, onNext }; }, [onClose, onPrev, onNext]);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   // Lock body scroll and manage keyboard events
   useEffect(() => {
@@ -54,13 +59,13 @@ export function PortfolioLightbox({
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         e.preventDefault();
-        onClose();
+        handlers.current.onClose();
       } else if (e.key === "ArrowLeft") {
         e.preventDefault();
-        onPrev();
+        handlers.current.onPrev();
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        onNext();
+        handlers.current.onNext();
       } else if (e.key === "Tab") {
         // Focus trap inside dialog
         if (!dialogRef.current) return;
@@ -82,34 +87,35 @@ export function PortfolioLightbox({
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    const triggerElem = triggerRef?.current;
 
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
-      // Restore focus to trigger element
-      triggerRef?.current?.focus();
+      triggerElem?.focus();
     };
-  }, [isOpen, onClose, onPrev, onNext, triggerRef]);
+  }, [isOpen, triggerRef]);
 
   if (!isOpen || !project || !mounted) return null;
 
   const currentImage = project.galleryImages[currentImageIndex] || project.coverImage;
   const totalImages = project.galleryImages.length || 1;
-  const accent = project.accentColor || "#E8D49B";
+  const accent = project.accentColor || "#F87966";
   const closeLabel = locale === "fr" ? "Fermer" : "Close";
 
   return createPortal(
     <AnimatePresence>
       <div
         ref={dialogRef}
+        {...swipe}
         role="dialog"
         aria-modal="true"
-        aria-label={`${project.title} — Vue Agrandie`}
+        aria-label={`${project.title} — ${locale === "fr" ? "Vue agrandie" : "Image preview"}`}
         style={{ zIndex: 9999 }}
-        className="fixed inset-0 flex flex-col items-center justify-between p-3 sm:p-6 md:p-8 bg-[#050505]/95 backdrop-blur-xl"
+        className="lightbox-frame fixed inset-0 flex flex-col items-center justify-between p-3 sm:p-6 md:p-8 bg-[var(--background)]/95 backdrop-blur-xl"
         onClick={(e) => {
           if (e.target === e.currentTarget) {
-            onClose();
+            handlers.current.onClose();
           }
         }}
       >
@@ -119,7 +125,7 @@ export function PortfolioLightbox({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="absolute inset-0 bg-[#000000]/80 pointer-events-none"
+          className="absolute inset-0 bg-[var(--background)]/80 pointer-events-none"
         />
 
         {/* ========================================================================= */}
@@ -129,12 +135,12 @@ export function PortfolioLightbox({
           {/* Left: Category Badge & Project Title */}
           <div className="flex items-center gap-2 sm:gap-3 min-w-0 pr-2">
             <span
-              style={{ color: accent, borderColor: `${accent}60` }}
+              style={{ borderColor: accent }}
               className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-mono border px-2.5 py-1 rounded-xs shrink-0"
             >
               [{project.category.toUpperCase()}]
             </span>
-            <span className="text-xs sm:text-sm font-light text-[#B8B8B8] truncate hidden sm:inline">
+            <span className="text-xs sm:text-sm font-normal text-[var(--muted)] truncate hidden sm:inline">
               {project.title} • {project.year}
             </span>
           </div>
@@ -144,7 +150,7 @@ export function PortfolioLightbox({
             ref={closeButtonRef}
             type="button"
             onClick={onClose}
-            className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-[#1a1a1a] hover:bg-[#292929] border border-[#424242] hover:border-[#FF665C] text-[#FFFFFF] hover:text-[#FF665C] transition-all duration-200 shadow-xl focus-visible:ring-2 focus-visible:ring-[#FF665C] active:scale-95 shrink-0 cursor-pointer"
+            className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full bg-[var(--surface-raised)] hover:bg-[var(--surface-alt)] border border-[var(--border)] hover:border-[var(--accent)] text-[var(--foreground)] hover:text-[var(--accent)] transition-all duration-200 shadow-xl focus-visible:ring-2 focus-visible:ring-[var(--accent)] active:scale-95 shrink-0 cursor-pointer"
             aria-label={dict.lightbox.close}
             title={dict.lightbox.close}
           >
@@ -172,7 +178,7 @@ export function PortfolioLightbox({
                 src={currentImage}
                 alt={project.alt[locale]}
                 fill
-                priority
+                preload
                 quality={80}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1200px"
                 className="object-contain"
@@ -186,7 +192,7 @@ export function PortfolioLightbox({
               <button
                 type="button"
                 onClick={onPrev}
-                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-[#121212]/85 text-[#FFFFFF] hover:text-[var(--modal-accent)] hover:bg-[#202020] border border-[#333333] transition-colors focus-visible:ring-1 focus-visible:ring-[#E8D49B]"
+                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-[var(--surface-raised)]/95 text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--surface-alt)] border border-[var(--border)] transition-colors focus-visible:ring-1 focus-visible:ring-[var(--accent)]"
                 style={{ "--modal-accent": accent } as React.CSSProperties}
                 aria-label={dict.lightbox.previous}
                 title={dict.lightbox.previous}
@@ -197,7 +203,7 @@ export function PortfolioLightbox({
               <button
                 type="button"
                 onClick={onNext}
-                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-[#121212]/85 text-[#FFFFFF] hover:text-[var(--modal-accent)] hover:bg-[#202020] border border-[#333333] transition-colors focus-visible:ring-1 focus-visible:ring-[#E8D49B]"
+                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-[var(--surface-raised)]/95 text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--surface-alt)] border border-[var(--border)] transition-colors focus-visible:ring-1 focus-visible:ring-[var(--accent)]"
                 style={{ "--modal-accent": accent } as React.CSSProperties}
                 aria-label={dict.lightbox.next}
                 title={dict.lightbox.next}
@@ -211,37 +217,37 @@ export function PortfolioLightbox({
         {/* ========================================================================= */}
         {/* BOTTOM EDITORIAL PLAQUE & SECONDARY CLOSE BUTTON                          */}
         {/* ========================================================================= */}
-        <div className="w-full max-w-6xl bg-[#0a0a0a]/95 backdrop-blur-md border border-[#292929] p-3 sm:p-5 rounded-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 z-20 pointer-events-auto shrink-0 shadow-2xl">
+        <div className="w-full max-w-6xl bg-[var(--surface)]/95 backdrop-blur-md border border-[var(--border)] p-3 sm:p-5 rounded-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-3 sm:gap-4 z-20 pointer-events-auto shrink-0 shadow-2xl">
           <div className="flex-1 min-w-0 pr-2">
             <div className="flex items-center gap-2 mb-1">
               <span
-                style={{ color: accent }}
+                style={{ color: "var(--foreground)" }}
                 className="text-[10px] uppercase font-mono tracking-widest"
               >
                 [{project.category.toUpperCase()}]
               </span>
-              <span className="text-xs text-[#717171] font-mono">• {project.client} ({project.year})</span>
+              <span className="text-xs text-[var(--subtle)] font-mono">• {project.client} ({project.year})</span>
             </div>
-            <h2 className="text-sm sm:text-lg md:text-xl font-medium tracking-tight text-[#FFFFFF] truncate">
+            <h2 className="text-sm sm:text-lg md:text-xl font-medium tracking-tight text-[var(--foreground)] truncate">
               {project.title}
             </h2>
             {/* Short brief description of the image as requested */}
-            <p className="text-xs sm:text-sm text-[#D4D4D4] font-light mt-1 leading-relaxed max-w-2xl line-clamp-2 sm:line-clamp-none">
+            <p className="text-xs sm:text-sm text-[var(--muted)] font-normal mt-1 leading-relaxed max-w-2xl line-clamp-2 sm:line-clamp-none">
               {project.caption ? project.caption[locale] : project.description[locale]}
             </p>
           </div>
 
           {/* Action buttons: Image Counter + Case Study Link + Secondary Close Button */}
-          <div className="flex items-center gap-2 sm:gap-3 w-full md:w-auto justify-between md:justify-end shrink-0 pt-2 md:pt-0 border-t border-[#1f1f1f] md:border-t-0">
+          <div className="flex items-center gap-2 sm:gap-3 w-full md:w-auto justify-between md:justify-end shrink-0 pt-2 md:pt-0 border-t border-[var(--border)] md:border-t-0">
             {totalImages > 1 && (
-              <span className="text-[11px] font-mono text-[#D4D4D4] bg-[#1a1a1a] px-2.5 py-1.5 rounded-xs border border-[#333333]">
+              <span className="text-[11px] font-mono text-[var(--muted)] bg-[var(--surface-raised)] px-2.5 py-1.5 rounded-xs border border-[var(--border)]">
                 {currentImageIndex + 1} / {totalImages}
               </span>
             )}
             <Link
               href={`/${locale}/work/${project.slug}`}
               onClick={onClose}
-              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] text-[#050505] bg-[#E8D49B] hover:bg-[#FFFFFF] font-medium transition-colors px-3 sm:px-4 py-2 rounded-xs shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] text-[var(--foreground)] bg-[var(--surface-blue)] hover:bg-[var(--inverse-surface)] hover:text-[var(--inverse-foreground)] font-medium transition-colors px-3 sm:px-4 py-2 rounded-xs shrink-0"
             >
               <span>{dict.lightbox.viewDetails}</span>
               <ArrowUpRight size={14} />
@@ -250,7 +256,7 @@ export function PortfolioLightbox({
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] font-mono text-[#B8B8B8] hover:text-[#FFFFFF] border border-[#424242] hover:border-[#FFFFFF] bg-[#1a1a1a] px-3 py-2 rounded-xs transition-colors shrink-0 cursor-pointer"
+              className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] font-mono text-[var(--muted)] hover:text-[var(--foreground)] border border-[var(--border)] hover:border-[var(--foreground)] bg-[var(--surface-raised)] px-3 py-2 rounded-xs transition-colors shrink-0 cursor-pointer"
               aria-label={dict.lightbox.close}
             >
               <X size={14} />

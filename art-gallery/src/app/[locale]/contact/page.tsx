@@ -18,8 +18,8 @@ export async function generateMetadata({
     title: validLocale === "fr" ? "Contact & Collaborations — Paris" : "Contact & Collaborations — Paris",
     description:
       validLocale === "fr"
-        ? "Initiez une collaboration artistique avec le Studio FORME à Paris. Direction artistique, identité visuelle et projets culturels."
-        : "Initiate an artistic collaboration with FORME Studio in Paris. Art direction, visual identity and cultural commissions.",
+        ? "Initiez une collaboration artistique avec le Studio PopArt Agency à Paris. Direction artistique, identité visuelle et projets culturels."
+        : "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions.",
   });
 }
 

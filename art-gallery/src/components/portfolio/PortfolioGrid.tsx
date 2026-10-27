@@ -58,15 +58,15 @@ export function PortfolioGrid({ projects, locale }: PortfolioGridProps) {
   }, [activeProject, projects]);
 
   return (
-    <section className="w-full pb-20 sm:pb-32" aria-label="Portfolio Galerie">
+    <section className="w-full pb-20 sm:pb-32" aria-label={locale === "fr" ? "Galerie de projets" : "Project gallery"}>
       {/* 2-Column Responsive Grid with narrow gutters and alternating full-width feature cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+      <div className="product-grid">
         {projects.map((project, idx) => (
           <PortfolioCard
             key={project.id}
             project={project}
             locale={locale}
-            priority={idx < 4}
+            priority={idx === 0}
             onOpenLightbox={handleOpenLightbox}
           />
         ))}

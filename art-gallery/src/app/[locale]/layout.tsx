@@ -1,22 +1,28 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { defaultLocale, locales, isValidLocale } from "@/i18n/config";
 import { Locale } from "@/types/portfolio";
-import { constructMetadata, generateOrganizationSchema } from "@/lib/seo";
+import { constructMetadata, generateOrganizationSchema, generateWebsiteSchema } from "@/lib/seo";
 import "@/app/globals.css";
+import { SitePreferences } from "@/components/providers/SitePreferences";
 
-const geistSans = Geist({
+const GeistSans = localFont({
+  src: "../../fonts/Geist-Latin-Variable.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-geist-sans",
-  subsets: ["latin"],
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const GeistMono = localFont({
+  src: "../../fonts/GeistMono-Latin-Variable.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-geist-mono",
-  subsets: ["latin"],
+  preload: false,
   display: "swap",
 });
 
@@ -43,29 +49,32 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   const validLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
-  const orgSchema = generateOrganizationSchema();
+  const siteSchemas = [generateOrganizationSchema(), generateWebsiteSchema()];
 
   return (
     <html
       lang={validLocale}
-      className={`${geistSans.variable} ${geistMono.variable} dark scroll-smooth`}
+      data-theme="light"
+      className={`${GeistSans.variable} ${GeistMono.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <meta name="theme-color" content="#050505" />
+        <meta name="theme-color" content="#fbfcfd" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchemas).replace(/</g, "\\u003c") }}
         />
       </head>
       <body
         suppressHydrationWarning
-        className="bg-[#050505] text-[#FFFFFF] min-h-screen flex flex-col font-sans selection:bg-[#E8D49B] selection:text-[#050505] overflow-x-hidden"
+        className="min-h-screen flex flex-col font-sans overflow-x-hidden"
       >
+        <SitePreferences>
+        <a className="skip-link" href="#main-content">{validLocale === "fr" ? "Aller au contenu" : "Skip to content"}</a>
         <Header locale={validLocale} />
-        <main className="flex-1 w-full overflow-x-hidden pt-16 sm:pt-20">{children}</main>
+        <main id="main-content" tabIndex={-1} className="flex-1 w-full overflow-x-hidden pt-16 sm:pt-20">{children}</main>
         <Footer locale={validLocale} />
+        </SitePreferences>
       </body>
     </html>
   );

@@ -1,14 +1,14 @@
 import { SiteConfig } from "@/types/portfolio";
 
 export const siteConfig: SiteConfig = {
-  name: "FORME",
+  name: "PopArt Agency",
   descriptor: "Studio Créatif",
   description: {
-    fr: "FORME est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières.",
-    en: "FORME is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders.",
+    fr: "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières.",
+    en: "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders.",
   },
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://forme-studio.example",
-  email: "hello@forme.example",
+  url: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://israin-solutions.vercel.app").origin,
+  email: "hello@popart.example",
   location: "Paris, France",
   collaboration: {
     fr: "Collaborations Internationales",
@@ -32,13 +32,13 @@ export const brandColors = {
   primaryText: "#FFFFFF",
   secondaryText: "#B8B8B8",
   contactBackground: "#292929",
-  accent: "#E8D49B",
+  accent: "#F87966",
   subtleBorder: "#424242",
   // Artistic Multicolor Accent Tokens (80/20 balance)
-  electricCoral: "#FF665C",
-  vibrantYellow: "#F7D85B",
-  electricBlue: "#6298FF",
-  mintGreen: "#78E6BF",
-  softLavender: "#BA9CFF",
+  electricCoral: "#F87966",
+  vibrantYellow: "#1440FF",
+  electricBlue: "#1440FF",
+  mintGreen: "#FF9B70",
+  softLavender: "#8F2F45",
   charcoal: "#292929",
 };

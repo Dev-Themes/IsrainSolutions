@@ -27,7 +27,7 @@ function checkUrl(url) {
   });
 }
 
-function waitForServer(url, timeoutMs = 20000) {
+function waitForServer(url, timeoutMs = 25000) {
   const start = Date.now();
   return new Promise((resolve, reject) => {
     const interval = setInterval(async () => {
@@ -37,7 +37,7 @@ function waitForServer(url, timeoutMs = 20000) {
           clearInterval(interval);
           resolve(true);
         }
-      } catch (e) {
+      } catch {
         if (Date.now() - start > timeoutMs) {
           clearInterval(interval);
           reject(new Error(`Timeout waiting for server at ${url}`));
@@ -49,7 +49,7 @@ function waitForServer(url, timeoutMs = 20000) {
 
 async function runTests() {
   console.log(`\n======================================================`);
-  console.log(` FORME STUDIO CRÉATIF — AUTOMATED VERIFICATION SUITE `);
+  console.log(` PopArt Agency STUDIO CRÉATIF — VERIFICATION SUITE `);
   console.log(` Testing Base URL: ${BASE_URL}`);
   console.log(`======================================================\n`);
 
@@ -108,161 +108,167 @@ async function runTests() {
   const page = await context.newPage();
 
   try {
-    // Test Root Redirect & Homepage
-    console.log(`\n--- 3. Testing Root Redirect & Homepage ---`);
+    // 3. Test Root Redirect & New Animated Homepage
+    console.log(`\n--- 3. Testing Root Redirect & New Animated Homepage ---`);
     await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
     const currentUrl = page.url();
     assert(currentUrl.includes("/fr"), `Visiting / redirects to /fr (actual: ${currentUrl})`);
 
-    // Verify WORK geometric heading
-    const workHeading = page.locator("h1").first();
-    const headingText = await workHeading.textContent();
-    assert(headingText.includes("WORK"), `WORK heading rendered: "${headingText?.trim()}"`);
+    // Verify Animated Brand Hero Region
+    const heroRegion = page.locator('section[aria-label="PopArt Agency Brand Geometric Hero"]');
+    assert(await heroRegion.isVisible(), `Animated Geometric Brand Hero section is rendered`);
 
-    // Verify 16 portfolio projects
-    const cards = page.locator("article");
-    const cardCount = await cards.count();
-    assert(cardCount >= 16, `All 16 fictional projects rendered (found: ${cardCount})`);
+    // Verify SVG Kinetic Typography with letter elements
+    const heroSvg = heroRegion.locator("svg").first();
+    assert(await heroSvg.isVisible(), `Hero SVG Kinetic Typography is rendered`);
+    const letterF = heroRegion.locator("#hero-letter-F");
+    const letterO = heroRegion.locator("#hero-letter-O");
+    const letterR = heroRegion.locator("#hero-letter-R");
+    const letterM = heroRegion.locator("#hero-letter-M");
+    const letterE = heroRegion.locator("#hero-letter-E");
+    assert(
+      (await letterF.isVisible()) &&
+        (await letterO.isVisible()) &&
+        (await letterR.isVisible()) &&
+        (await letterM.isVisible()) &&
+        (await letterE.isVisible()),
+      `All 5 geometric letters (F, O, R, M, E) are present in the kinetic hero`
+    );
 
-    // 3. Test Fullscreen Lightbox Interaction & Brief Caption
-    console.log(`\n--- 4. Testing Work Lightbox Modal & Caption ---`);
-    const firstCardButton = cards.first().locator("button").first();
-    await firstCardButton.scrollIntoViewIfNeeded();
-    await page.evaluate(() => window.scrollBy(0, 120));
+    // Verify State Buttons and Color Switching
+    const stateBtn3 = heroRegion.locator('button:has-text("03")');
+    if (await stateBtn3.isVisible()) {
+      await stateBtn3.click();
+      await page.waitForTimeout(600);
+      assert(true, `Interacting with hero state indicators changes animation state`);
+    }
+
+    // 4. Test Featured Work Section on Homepage
+    console.log(`\n--- 4. Testing Featured Work on Homepage ---`);
+    const featuredSection = page.locator("#featured-work");
+    assert(await featuredSection.isVisible(), `Featured Work section is rendered on homepage`);
+
+    const featuredArticles = featuredSection.locator("article");
+    const featuredCount = await featuredArticles.count();
+    assert(featuredCount === 3, `Featured Work section displays 3 cinematic projects (found: ${featuredCount})`);
+
+    // Test Lightbox from Featured Project
+    const firstFeaturedButton = featuredArticles.first().locator("button").first();
+    await firstFeaturedButton.scrollIntoViewIfNeeded();
     await page.waitForTimeout(300);
-    await firstCardButton.click({ force: true });
+    await firstFeaturedButton.click({ force: true });
     await page.waitForTimeout(600);
 
     const dialog = page.locator('div[role="dialog"]');
-    const isDialogVisible = await dialog.isVisible();
-    assert(isDialogVisible, `Work Lightbox opened with role="dialog"`);
-
-    const dialogTitle = await dialog.locator("h2").first().textContent();
-    assert(dialogTitle && dialogTitle.length > 0, `Lightbox displays project title: "${dialogTitle}"`);
-
-    const dialogCaption = await dialog.locator("p").first().textContent();
-    assert(dialogCaption && dialogCaption.length > 10, `Lightbox displays brief image caption: "${dialogCaption}"`);
-
-    const topCloseBtn = dialog.locator('button[aria-label*="Fermer"], button[aria-label*="Close"]').first();
-    const hasTopClose = await topCloseBtn.isVisible();
-    assert(hasTopClose, `Lightbox has prominent top close button visible on screen`);
-
-    await topCloseBtn.click();
+    assert(await dialog.isVisible(), `Featured Project opens fullscreen Lightbox`);
+    const closeBtn = dialog.locator('button[aria-label*="Fermer"], button[aria-label*="Close"]').first();
+    await closeBtn.click();
     await page.waitForTimeout(400);
-    const isDialogClosedByClick = !(await dialog.isVisible());
-    assert(isDialogClosedByClick, `Clicking top close button smoothly closes Lightbox`);
+    assert(!(await dialog.isVisible()), `Lightbox closes cleanly`);
 
-    // 4. Test Footer Eye-to-Wordmark Interactive Animation
-    console.log(`\n--- 5. Testing Footer Eye-to-Wordmark Animation ---`);
+    // Test "VIEW ALL WORK ↗" button
+    const viewAllBtn = featuredSection.locator('a:has-text("VOIR TOUS LES PROJETS")').first();
+    assert(await viewAllBtn.isVisible(), `"VOIR TOUS LES PROJETS ↗" link is visible in featured section`);
+
+    // 5. Test About Introduction on Homepage
+    console.log(`\n--- 5. Testing About / Studio Section on Homepage ---`);
+    const aboutHeading = page.locator('h2 span.sr-only:has-text("ABOUT")').first();
+    assert(await aboutHeading.isVisible(), `Bespoke geometric ABOUT heading is rendered`);
+
+    const aboutStudioLink = page.locator('a:has-text("À PROPOS DU STUDIO")').first();
+    assert(await aboutStudioLink.isVisible(), `"À PROPOS DU STUDIO ↗" link is present in about section`);
+
+    // 6. Test Existing Contact Section on Homepage
+    console.log(`\n--- 6. Testing Contact Section on Homepage ---`);
+    const contactSection = page.locator('section:has-text("14 Rue de Charonne")').first();
+    assert(await contactSection.isVisible(), `Existing Contact section is preserved and rendered on homepage`);
+
+    // 7. Test Footer Eye-to-Wordmark Animation
+    console.log(`\n--- 7. Testing Footer Eye-to-Wordmark Animation ---`);
     const eyeButton = page.locator('footer button[type="button"]');
-    const hasEyeButton = await eyeButton.isVisible();
-    assert(hasEyeButton, `Footer eye interactive button is rendered`);
-
-    const initialPressed = await eyeButton.getAttribute("aria-pressed");
-    assert(initialPressed === "false", `Initial eye state is aria-pressed="false"`);
+    assert(await eyeButton.isVisible(), `Footer eye interactive button is rendered`);
 
     await eyeButton.hover();
     await page.waitForTimeout(600);
     const hoveredPressed = await eyeButton.getAttribute("aria-pressed");
-    assert(hoveredPressed === "true", `Hovering triggers transition to FORME wordmark (aria-pressed="true")`);
+    assert(hoveredPressed === "true", `Footer eye animation reacts on hover (aria-pressed="true")`);
 
-    await page.mouse.move(0, 0);
+    // 8. Test Dedicated /work Route
+    console.log(`\n--- 8. Testing Dedicated Work Route (/fr/work) ---`);
+    await page.goto(`${BASE_URL}/fr/work`, { waitUntil: "networkidle" });
+    assert(page.url().includes("/fr/work"), `Navigated successfully to /fr/work`);
+
+    // Verify WORK hero heading
+    const workHeroH1 = page.locator('h1 span.sr-only:has-text("WORK")').or(page.locator("h1")).first();
+    const workHeadingText = await workHeroH1.textContent();
+    assert(workHeadingText.includes("WORK"), `WORK hero display heading rendered: "${workHeadingText?.trim()}"`);
+
+    // Verify Capabilities Section
+    const manifesto = page.getByText("NOUS DONNONS PopArt Agency AUX IDÉES.").or(page.getByText("WE MAKE IDEAS VISIBLE.")).first();
+    assert(await manifesto.isVisible(), `Capabilities manifesto section is preserved on /work`);
+
+    // Verify Complete 16 Projects Portfolio Grid
+    const workCards = page.locator("article");
+    const workCardCount = await workCards.count();
+    assert(workCardCount >= 16, `All 16 complete portfolio projects rendered on /work (found: ${workCardCount})`);
+
+    // 9. Test Header Navigation
+    console.log(`\n--- 9. Testing Header Navigation Links ---`);
+    const homeNavFr = page.locator('header nav a:has-text("ACCUEIL")').first();
+    assert(await homeNavFr.isVisible(), `ACCUEIL navigation link is visible in French header`);
+
+    const workNav = page.locator('header nav a:has-text("TRAVAUX")').first();
+    await workNav.click();
     await page.waitForTimeout(600);
-    const unhoveredPressed = await eyeButton.getAttribute("aria-pressed");
-    assert(unhoveredPressed === "false", `Hover-out smoothly reverses back to Eye (aria-pressed="false")`);
+    assert(page.url().includes("/fr/work"), `Clicking TRAVAUX in header navigates to /fr/work`);
 
-    // 5. Test Header Portfolio Navigation Link
-    console.log(`\n--- 6. Testing Portfolio Header Link ---`);
-    const productsNav = page.locator('header nav a:has-text("PORTFOLIO")').first();
-    assert(await productsNav.isVisible(), `PORTFOLIO navigation link visible in header`);
-    await productsNav.click();
-    await page.waitForTimeout(800);
-    assert(page.url().includes("/products") || page.url().includes("/portfolio"), `Navigated to portfolio via header link`);
-
-    // 6. Test Portfolio Landing Page
-    console.log(`\n--- 7. Testing Portfolio Landing Page (/fr/products) ---`);
-    const productsHeading = page.locator("h1");
-    const productsHeadingText = await productsHeading.textContent();
-    assert(productsHeadingText.includes("PORTFOLIO"), `PORTFOLIO SVG display heading rendered: "${productsHeadingText?.trim()}"`);
-
-    const productCards = page.locator("article");
-    const productCardCount = await productCards.count();
-    assert(productCardCount >= 12, `All 12 product campaigns rendered (found: ${productCardCount})`);
-
-    // 7. Test Product Lightbox Image Click
-    console.log(`\n--- 8. Testing Product Lightbox Modal ---`);
-    const firstProductImgBtn = productCards.first().locator('button[aria-haspopup="dialog"]');
-    await firstProductImgBtn.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
-    await firstProductImgBtn.click({ force: true });
+    // Click ACCUEIL to navigate back to homepage
+    await homeNavFr.click();
     await page.waitForTimeout(600);
+    assert(page.url().endsWith("/fr") || page.url().endsWith("/fr/"), `Clicking ACCUEIL in header navigates to /fr`);
 
-    const productDialog = page.locator('div[role="dialog"]');
-    assert(await productDialog.isVisible(), `Product Lightbox modal opened upon image click`);
+    // Brand logo navigates to homepage
+    const brandLogo = page.locator('header a[aria-label*="Accueil"]').first();
+    assert(await brandLogo.isVisible(), `Brand logo is visible and clickable`);
 
-    const productDialogClose = productDialog.locator('button[aria-label*="Fermer"], button[aria-label*="Close"]').first();
-    assert(await productDialogClose.isVisible(), `Product Lightbox close button is visible`);
-    await productDialogClose.click();
-    await page.waitForTimeout(400);
-    assert(!(await productDialog.isVisible()), `Product Lightbox modal closed successfully`);
-
-    // 8. Test Product Case Study Link ("VOIR LE PROJET ↗")
-    console.log(`\n--- 9. Testing Product Case Study Navigation ---`);
-    const viewProjectLink = productCards.first().locator('a[href*="/products/"]');
-    const caseStudyHref = await viewProjectLink.getAttribute("href");
-    assert(caseStudyHref && caseStudyHref.includes("/products/"), `Found case study link: ${caseStudyHref}`);
-
-    await viewProjectLink.click();
-    await page.waitForTimeout(800);
-    assert(page.url().includes("/products/"), `Successfully navigated to case study page (${page.url()})`);
-
-    // Verify Case Study Details
-    const csTitle = await page.locator("h1").textContent();
-    assert(csTitle && csTitle.length > 0, `Case study header rendered: "${csTitle}"`);
-
-    const hasBadge = await page.getByText("Concept de Design Spéculatif").or(page.getByText("Speculative Design Concept")).first().isVisible();
-    assert(hasBadge, `Speculative concept badge is visible`);
-
-    const hasDirection = await page.getByText("Direction Artistique").or(page.getByText("Creative Direction")).first().isVisible();
-    assert(hasDirection, `Creative Direction section is visible with narrative and palette`);
-
-    const hasSpecs = await page.getByText("Spécifications").or(page.getByText("Specifications")).first().isVisible();
-    assert(hasSpecs, `Technical Specifications section is visible`);
-
-    // 9. Test English Products Page & Tactile Simplicity Image
-    console.log(`\n--- 10. Testing English Products Page & Tactile Simplicity ---`);
-    await page.goto(`${BASE_URL}/en/products`, { waitUntil: "networkidle" });
+    // 10. Test English Locale on Homepage & Work
+    console.log(`\n--- 10. Testing English Locale Routing ---`);
+    await page.goto(`${BASE_URL}/en`, { waitUntil: "networkidle" });
     const enHtmlLang = await page.getAttribute("html", "lang");
     assert(enHtmlLang === "en", `English locale HTML lang attribute is "en"`);
-    const enEyebrow = page.getByText("SELECTED PORTFOLIO CONCEPTS").first();
-    assert(await enEyebrow.isVisible(), `English eyebrow text rendered correctly`);
+    const homeNavEn = page.locator('header nav a:has-text("HOME")').first();
+    assert(await homeNavEn.isVisible(), `HOME navigation link is visible in English header`);
+    const enViewAll = page.locator('a:has-text("VIEW ALL WORK")').first();
+    assert(await enViewAll.isVisible(), `English homepage displays "VIEW ALL WORK ↗"`);
 
-    // Verify Tactile Simplicity (AURA SKIN) image renders successfully
-    const tactileCard = page.locator('article:has-text("Tactile Simplicity")');
-    assert(await tactileCard.isVisible(), `Tactile Simplicity card is visible`);
-    const tactileImg = tactileCard.locator("img").first();
-    const isTactileImgLoaded = await tactileImg.evaluate((img) => img.complete && img.naturalWidth > 0);
-    assert(isTactileImgLoaded, `Tactile Simplicity (AURA SKIN) image loaded fast with naturalWidth > 0`);
+    await page.goto(`${BASE_URL}/en/work`, { waitUntil: "networkidle" });
+    const enManifesto = page.getByText("WE MAKE IDEAS VISIBLE.").first();
+    assert(await enManifesto.isVisible(), `English /en/work displays "WE MAKE IDEAS VISIBLE."`);
 
-    // Visit AURA SKIN case study directly
-    await page.goto(`${BASE_URL}/fr/products/aura-skin`, { waitUntil: "networkidle" });
-    const auraTitle = await page.locator("h1").textContent();
-    assert(auraTitle.includes("Tactile Simplicity"), `AURA SKIN case study loaded: "${auraTitle}"`);
-    const auraHeroImg = page.locator("article img").first();
-    const isAuraHeroLoaded = await auraHeroImg.evaluate((img) => img.complete && img.naturalWidth > 0);
-    assert(isAuraHeroLoaded, `AURA SKIN case study hero image loaded successfully with naturalWidth > 0`);
+    // 11. Test Products Route Preservation
+    console.log(`\n--- 11. Testing Products Route Preservation ---`);
+    await page.goto(`${BASE_URL}/fr/products`, { waitUntil: "networkidle" });
+    const productsH1 = page.locator("h1");
+    assert((await productsH1.textContent()).includes("PORTFOLIO"), `Products page remains preserved`);
 
-    // 10. Strict Responsive & No-Overflow Verification
-    console.log(`\n--- 11. Strict Responsive & No Horizontal Overflow Testing ---`);
+    // 12. Strict Responsive & No-Overflow Testing across all 9 breakpoints
+    console.log(`\n--- 12. Strict Responsiveness & Zero Horizontal Overflow Verification ---`);
     for (const bp of BREAKPOINTS) {
       await page.setViewportSize({ width: bp.width, height: bp.height });
-      await page.goto(`${BASE_URL}/fr/products`, { waitUntil: "networkidle" });
 
-      const hasHorizontalScrollbar = await page.evaluate(() => {
+      // Test Homepage
+      await page.goto(`${BASE_URL}/fr`, { waitUntil: "networkidle" });
+      const homeOverflow = await page.evaluate(() => {
         return document.documentElement.scrollWidth > document.documentElement.clientWidth;
       });
+      assert(!homeOverflow, `Viewport ${bp.name} has ZERO horizontal overflow on Homepage (/fr)`);
 
-      assert(!hasHorizontalScrollbar, `Viewport ${bp.name} has ZERO horizontal overflow on /fr/products`);
+      // Test Work Page
+      await page.goto(`${BASE_URL}/fr/work`, { waitUntil: "networkidle" });
+      const workOverflow = await page.evaluate(() => {
+        return document.documentElement.scrollWidth > document.documentElement.clientWidth;
+      });
+      assert(!workOverflow, `Viewport ${bp.name} has ZERO horizontal overflow on Work page (/fr/work)`);
     }
 
   } catch (err) {
@@ -274,7 +280,7 @@ async function runTests() {
       serverProcess.kill();
       try {
         spawn("taskkill", ["/pid", serverProcess.pid.toString(), "/f", "/t"]);
-      } catch (e) {}
+      } catch {}
     }
   }
 

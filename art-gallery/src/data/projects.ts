@@ -1,6 +1,7 @@
 import { PortfolioProject } from "@/types/portfolio";
+import workImageManifest from "./work-image-manifest.json";
 
-export const projects: PortfolioProject[] = [
+const projectEntries: PortfolioProject[] = [
   {
     id: "01",
     slug: "color-studies",
@@ -722,6 +723,15 @@ export const projects: PortfolioProject[] = [
     },
   },
 ];
+
+// Local copies of the same approved photos. Names, descriptions and composition
+// remain unchanged; rendering no longer depends on a third-party image origin.
+const localImage = (image: string) => workImageManifest[image as keyof typeof workImageManifest] || image;
+export const projects: PortfolioProject[] = projectEntries.map(project => ({
+  ...project,
+  coverImage: localImage(project.coverImage),
+  galleryImages: project.galleryImages.map(localImage),
+}));
 
 export function getProjectBySlug(slug: string): PortfolioProject | undefined {
   return projects.find((project) => project.slug === slug);

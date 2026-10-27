@@ -18,8 +18,8 @@ export async function generateMetadata({
     title: validLocale === "fr" ? "Studio — Philosophie & Savoir-faire" : "Studio — Philosophy & Capabilities",
     description:
       validLocale === "fr"
-        ? "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio FORME."
-        : "More than an agency. A space where ideas take shape. Explore FORME Studio's manifesto, disciplines and creative leadership.",
+        ? "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio PopArt Agency."
+        : "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership.",
   });
 }
 
