@@ -25,11 +25,15 @@ export async function generateMetadata({
 
 export default async function ContactPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ offer?: string | string[] }>;
 }) {
   const { locale } = await params;
   const validLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
 
-  return <ContactSection locale={validLocale} as="h1" />;
+  const query = await searchParams;
+  const offer = typeof query.offer === "string" && ["2", "3", "5"].includes(query.offer) ? Number(query.offer) : undefined;
+  return <ContactSection locale={validLocale} as="h1" offer={offer} />;
 }

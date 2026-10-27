@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Locale } from "@/types/portfolio";
-import { getDictionary } from "@/i18n";
 import { GeometricHeading } from "@/components/branding/GeometricHeading";
 import { ConcentricGraphic } from "@/components/branding/ConcentricGraphic";
 import { motion } from "framer-motion";
@@ -12,7 +11,6 @@ interface WorkHeroProps {
 }
 
 export function WorkHero({ locale }: WorkHeroProps) {
-  const dict = getDictionary(locale);
 
   return (
     <section className="relative w-full pt-12 sm:pt-20 md:pt-28 pb-14 sm:pb-20 border-b border-[var(--border)] overflow-hidden">
@@ -30,7 +28,7 @@ export function WorkHero({ locale }: WorkHeroProps) {
               transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-xl lg:text-2xl font-normal text-[var(--muted)] max-w-2xl leading-relaxed tracking-normal"
             >
-              {dict.home.heroSubtext}
+              {locale === "fr" ? "Des produits qui prennent vie. Découvrez nos publicités conceptuelles : beauté, audio et parfum, chacun avec son propre univers." : "Products, brought to life. Explore our original concept ads for beauty, audio and fragrance. Each with a world of its own."}
             </motion.p>
           </div>
 

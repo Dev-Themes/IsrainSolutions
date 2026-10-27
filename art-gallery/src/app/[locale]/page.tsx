@@ -1,12 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
-import { PopArtGraphic } from "@/components/sections/PopArtGraphic";
 import { PackageSection } from "@/components/sections/PackageSection";
 import { HeroAnimated } from "@/components/sections/HeroAnimated";
 import { FeaturedWorkSection } from "@/components/sections/FeaturedWorkSection";
 import { HomeAboutSection } from "@/components/sections/HomeAboutSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { projects } from "@/data/projects";
+import { workSamples } from "@/data/work-samples";
 import { defaultLocale, isValidLocale } from "@/i18n/config";
 import { Locale } from "@/types/portfolio";
 import { constructMetadata } from "@/lib/seo";
@@ -24,12 +23,12 @@ export async function generateMetadata({
     path: "",
     title:
       validLocale === "fr"
-        ? "Studio Créatif, Direction Artistique & Expériences Visuelles"
-        : "Creative Studio, Art Direction & Visual Experiences",
+        ? "Publicités Vidéo Produit & Studio Créatif"
+        : "Product Video Ads & Creative Studio",
     description:
       validLocale === "fr"
-        ? "Studio créatif indépendant explorant la direction artistique, les identités visuelles, la narration cinématique et le design expérimental. Découvrez nos réalisations et notre vision."
-        : "An independent creative studio exploring art direction, visual identities, cinematic storytelling, and experimental design. Discover our selected work and creative vision.",
+        ? "Découvrez nos films produit et nos offres de 2, 3 ou 5 vidéos publicitaires. Des directions créatives distinctes pour mettre votre produit en scène."
+        : "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life.",
   });
 }
 
@@ -43,18 +42,17 @@ export default async function HomePage({
 
   return (
     <div className="w-full">
-      {/* 1. Animated Geometric Brand Hero (4-State Multicolor Transitions & Kinetic Typography) */}
+      {/* Animated geometric brand identity. */}
       <HeroAnimated locale={validLocale} />
-      <PopArtGraphic locale={validLocale} />
 
-      {/* 2. Featured Work Section (Selected Large Cinematic Photographic Projects) */}
-      <FeaturedWorkSection projects={projects} locale={validLocale} />
+      {/* Product films open directly in the shared media viewer. */}
+      <FeaturedWorkSection projects={workSamples} locale={validLocale} />
 
-      {/* 3. About / Studio Introduction (Experimental Typography & Agency Manifesto) */}
+      {/* Launch offers and studio introduction. */}
       <PackageSection locale={validLocale} />
       <HomeAboutSection locale={validLocale} />
 
-      {/* 4. Existing Contact Section (Reused as specified) */}
+      {/* Project enquiries. */}
       <ContactSection locale={validLocale} />
     </div>
   );

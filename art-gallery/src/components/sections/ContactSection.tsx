@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/site-config";
 import { GeometricHeading } from "@/components/branding/GeometricHeading";
 import { InteractiveSurface } from "@/components/branding/InteractiveSurface";
 
-export function ContactSection({ locale, as = "h2" }: { locale: Locale; as?: "h1" | "h2" }) {
+export function ContactSection({ locale, as = "h2", offer }: { locale: Locale; as?: "h1" | "h2"; offer?: number }) {
   const dict = getDictionary(locale);
   const copy = dict.contact.interaction;
   const [topic, setTopic] = useState(0);
@@ -18,7 +18,8 @@ export function ContactSection({ locale, as = "h2" }: { locale: Locale; as?: "h1
     const timer = setTimeout(() => setCopyState("idle"), 3500);
     return () => clearTimeout(timer);
   }, [copyState]);
-  const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`PopArt Agency — ${copy.topics[topic]}`)}`;
+  const offerLabel = offer ? `${offer} ${locale === "fr" ? "vidéos produit" : "product videos"}` : "";
+  const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`PopArt Agency — ${offerLabel ? `${offerLabel} / ` : ""}${copy.topics[topic]}`)}`;
   const socials = [{ name: "Facebook", url: "https://facebook.com" }, ...siteConfig.socials];
 
   return <section className="popart-contact contact-experience dark-section section-space" aria-label={dict.contact.heroHeading}>
@@ -36,6 +37,7 @@ export function ContactSection({ locale, as = "h2" }: { locale: Locale; as?: "h1
         </div>
         <InteractiveSurface className="contact-project-panel">
           <div className="contact-panel-top"><span className="section-kicker">PopArt Agency / 0{topic + 1}</span><svg className="contact-orbit" viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle cx="40" cy="40" r="34" stroke="currentColor" /><circle cx="40" cy="40" r="24" stroke="currentColor" /><path d="M40 6A34 34 0 0 1 74 40H40Z" fill="currentColor" /><circle cx="40" cy="40" r="8" fill="var(--surface-raised)" /></svg></div>
+          {offer && <p className="contact-selected-offer">{locale === "fr" ? "Votre formule" : "Your package"}: {offerLabel}</p>}
           <fieldset className="contact-topics"><legend>{copy.topicLabel}</legend><div>{copy.topics.map((label, index) => <button type="button" key={label} aria-pressed={topic === index} onClick={() => setTopic(index)}><span>{label}</span><span className="topic-indicator" aria-hidden="true" /></button>)}</div></fieldset>
           <p className="contact-panel-note">{copy.emailHint}</p>
           <a href={emailHref} className="contact-start">{copy.start}<ArrowUpRight size={24} aria-hidden="true" /></a>
