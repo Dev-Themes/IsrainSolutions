@@ -9,6 +9,10 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 const base = process.env.REVIEW_BASE_URL || "http://localhost:3000";
 const review = path.resolve(scriptDirectory, "../.animation-review");
+const clientManifest = JSON.parse(fs.readFileSync(path.resolve(scriptDirectory, "../src/data/client-video-manifest.json"), "utf8"));
+const totalFilms = clientManifest.length;
+const sourceFiles = fs.readdirSync(path.resolve(scriptDirectory, "../public/videos")).filter(name => /\.(mp4|webm|mov|m4v)$/i.test(name));
+assert.deepEqual(new Set(sourceFiles), new Set(clientManifest.map(item => item.source)), "Every video must be represented in the gallery");
 
 (async () => {
   fs.mkdirSync(review, { recursive: true });
@@ -38,7 +42,7 @@ const review = path.resolve(scriptDirectory, "../.animation-review");
       const oldMovie = await movie.elementHandle();
       // Switching creative stops the preceding player and preserves the dialog.
       await dialog.getByRole("button", { name: locale === "fr" ? "Création suivante" : "Next creative" }).click();
-      await page.waitForFunction(() => document.querySelector("dialog video")?.videoHeight === 960);
+      await page.waitForFunction(() => document.querySelector("dialog video")?.videoHeight === 1280);
       assert.equal(await oldMovie.evaluate(video => video.paused), true);
       await dialog.locator("video").evaluate(video => video.play());
       await page.waitForFunction(() => document.querySelector("dialog video")?.currentTime > .3);
@@ -49,7 +53,7 @@ const review = path.resolve(scriptDirectory, "../.animation-review");
       assert.notEqual(await page.evaluate(() => document.body.style.overflow), "hidden");
       await page.goto(`${base}/${locale}/work`, { waitUntil: "networkidle" });
       assert.equal(await page.locator(".capabilities-section").count(), 0);
-      assert.equal(await page.locator(".work-media-trigger").count(), 3);
+      assert.equal(await page.locator(".work-media-trigger").count(), totalFilms);
       assert.equal(await page.locator('a[href*="/work/"]').count(), 0);
       await page.goto(`${base}/${locale}/contact?offer=5`, { waitUntil: "networkidle" });
       assert.ok((await page.locator(".contact-selected-offer").innerText()).includes("5"));
@@ -61,24 +65,38 @@ const review = path.resolve(scriptDirectory, "../.animation-review");
       assert.equal(new URL(page.url()).hash, "#packages");
       console.log(`${locale}: offers, lazy video loading, playback, portrait media, close/focus, enquiries and redirects pass`);
     }
-    for (const slug of ["aura-skin", "soniq-lab", "noir-edition"]) {
-      await page.goto(`${base}/en/work`, { waitUntil: "networkidle" });
-      const index = ["aura-skin", "soniq-lab", "noir-edition"].indexOf(slug);
+    await page.goto(`${base}/en/work`, { waitUntil: "networkidle" });
+    const beforePlayback = videoRequests;
+    assert.equal(await page.locator(".work-media-trigger").count(), totalFilms);
+    for (let index = 0; index < clientManifest.length; index++) {
+      const item = clientManifest[index];
       await page.locator(".work-media-trigger").nth(index).click();
-      const video = page.locator("dialog video");
-      await video.evaluate(element => element.play());
-      await page.waitForFunction(() => document.querySelector("dialog video")?.currentTime > .3);
-      const info = await video.evaluate(element => ({ duration: element.duration, width: element.videoWidth, height: element.videoHeight, controls: element.controls }));
-      assert.ok(info.duration >= 9.5 && info.duration <= 11, `${slug}: invalid duration ${info.duration}`);
-      assert.equal(info.controls, true);
-      await video.evaluate(element => { element.pause(); element.currentTime = 8.4; });
-      await page.waitForFunction(() => !document.querySelector("dialog video").seeking);
-      await video.screenshot({ path: path.join(review, `${slug}-end-card.png`) });
-      console.log(`${slug}: ${info.width}x${info.height}, ${info.duration.toFixed(2)} seconds, decodes and seeks`);
+      const movie = page.locator("dialog video");
+      await movie.evaluate(video => video.play());
+      await page.waitForFunction(() => document.querySelector("dialog video")?.currentTime > .1);
+      const actual = await movie.evaluate(video => ({ width: video.videoWidth, height: video.videoHeight, duration: video.duration, source: decodeURIComponent(video.currentSrc.split("/").at(-1)) }));
+      assert.equal(actual.width, item.width, item.id);
+      assert.equal(actual.height, item.height, item.id);
+      assert.ok(Math.abs(actual.duration - item.duration) < .2, item.id);
+      assert.equal(actual.source, item.source, item.id);
+      await page.keyboard.press("Escape");
+      console.log(`Client film ${index + 1}/${clientManifest.length}: ${item.id} plays`);
     }
-    await page.keyboard.press("Escape");
+    assert.ok(videoRequests > beforePlayback);
+    const filters = page.getByRole("group", { name: "Filter films" });
+    for (const label of ["Beauty", "Lifestyle", "Fashion", "Fragrance", "Motion"]) {
+      const button = filters.getByRole("button", { name: new RegExp(label) });
+      await button.click();
+      assert.equal(await button.getAttribute("aria-pressed"), "true");
+      assert.ok(await page.locator(".work-media-trigger").count() > 0);
+      await page.locator(".work-media-trigger").first().click();
+      assert.ok((await page.locator("dialog .work-viewer-navigation").innerText()).includes("1 /"));
+      await page.keyboard.press("Escape");
+    }
+    await filters.getByRole("button", { name: /All films/ }).click();
+    assert.equal(await page.locator(".work-media-trigger").count(), totalFilms);
     await page.emulateMedia({ reducedMotion: "reduce" });
-    for (const width of [390, 768, 1440]) {
+    for (const width of [375, 390, 640, 768, 1024, 1440]) {
       await page.setViewportSize({ width, height: 900 });
       await page.goto(`${base}/en`, { waitUntil: "networkidle" });
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false, `Overflow at ${width}`);

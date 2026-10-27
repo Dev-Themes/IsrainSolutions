@@ -51,6 +51,6 @@ With the development server running, run `node scripts/verify-experience.mjs`. T
 
 Original product concept imagery and prompt documentation: `docs/product-imagery.md`. Production assets are in `public/images/products`.
 
-The approved Work photography is also self-hosted in `public/images/work`. Its original source URLs and local mappings are recorded in `src/data/work-image-manifest.json`. Run `node scripts/cache-work-images.mjs` only when adding or updating Work source photos; this requires network access, while normal builds and rendering do not.
+The Work gallery uses only the 27 client videos in `public/videos`, indexed by `src/data/client-video-manifest.json`. Selected thumbnails are self-hosted in `public/videos/posters`. Rebuild them with `node scripts/prepare-client-posters.mjs` while the local site is running. Development scripts, documentation and review artifacts are excluded from Vercel uploads by `.vercelignore`.
 
 The supplied `public/Brand Asset/white-theme-logo.png` is used on light surfaces without a backing container. Run `node scripts/prepare-light-brand-assets.mjs` to regenerate its display assets. Header navigation measures its available space and switches to a hamburger only when the full links do not fit.

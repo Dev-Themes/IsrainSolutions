@@ -1,0 +1,550 @@
+[
+  {
+    "id": "foldeat-fresh-perspective",
+    "thumbnailTime": 1.1168,
+    "thumbnailFit": "cover",
+    "source": "lunch box.mp4",
+    "brand": "FOLDEAT",
+    "title": {
+      "en": "A fresh perspective",
+      "fr": "Une nouvelle idée du déjeuner"
+    },
+    "group": "lifestyle",
+    "category": {
+      "en": "Product film",
+      "fr": "Film produit"
+    },
+    "width": 3816,
+    "height": 2160,
+    "duration": 13.955011,
+    "posterTime": 9.07075715,
+    "frame": 3,
+    "featured": true
+  },
+  {
+    "id": "ricinus-hair-ritual",
+    "source": "Ricinus_ad_sound_effects.mp4",
+    "brand": "RICINUS",
+    "title": {
+      "en": "The hair ritual",
+      "fr": "Le rituel du cheveu"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Haircare",
+      "fr": "Soin capillaire"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 20,
+    "posterTime": 17,
+    "frame": 4,
+    "featured": true
+  },
+  {
+    "id": "mos-soft-focus",
+    "source": "mos_concealer_ad_v1_9x16.mp4",
+    "brand": "MOS",
+    "title": {
+      "en": "A little soft focus",
+      "fr": "La beauté en douceur"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Beauty / Product film",
+      "fr": "Beauté / Film produit"
+    },
+    "width": 720,
+    "height": 1272,
+    "duration": 14.666667,
+    "posterTime": 9.53333355,
+    "frame": 3,
+    "featured": true
+  },
+  {
+    "id": "tmb-everyday-bottle",
+    "source": "TMB_ad_with_sound.mp4",
+    "brand": "TMB",
+    "title": {
+      "en": "Take it anywhere",
+      "fr": "À emporter partout"
+    },
+    "group": "lifestyle",
+    "category": {
+      "en": "Drinkware",
+      "fr": "Gourdes & accessoires"
+    },
+    "width": 720,
+    "height": 1272,
+    "duration": 18.25,
+    "posterTime": 15.5125,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "typology-roseglow",
+    "source": "_10-10-2026 6-36-56 PM 图个点子.mp4",
+    "brand": "TYPOLOGY",
+    "title": {
+      "en": "A drop of rose",
+      "fr": "Une goutte de rose"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Skincare",
+      "fr": "Soin de la peau"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 11.796042,
+    "posterTime": 7.6674273,
+    "frame": 3,
+    "featured": false
+  },
+  {
+    "id": "miu-miu-pages",
+    "source": "Video Project.mp4",
+    "brand": "MIU MIU",
+    "title": {
+      "en": "Between the pages",
+      "fr": "Entre les pages"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Accessories",
+      "fr": "Accessoires"
+    },
+    "width": 1920,
+    "height": 1080,
+    "duration": 16.5,
+    "posterTime": 14.025,
+    "frame": 4,
+    "featured": false,
+    "posterCrop": {
+      "left": 656,
+      "top": 0,
+      "width": 608,
+      "height": 1080
+    }
+  },
+  {
+    "id": "gentle-monster-bloom",
+    "source": "短视频推荐｜创意cg-GENTLE MONSTER 1-20-2026 2-37-03 PM 图个点子.mp4",
+    "brand": "GENTLE MONSTER",
+    "title": {
+      "en": "A different kind of bloom",
+      "fr": "Une autre façon de fleurir"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Eyewear / CGI",
+      "fr": "Lunettes / CGI"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 28.675238,
+    "posterTime": 24.3739523,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "burberry-trench-details",
+    "source": "_9-26-2026 1-01-31 PM 图个点子.mp4",
+    "brand": "BURBERRY",
+    "title": {
+      "en": "A study in details",
+      "fr": "L'art du détail"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Fashion / Details",
+      "fr": "Mode / Détails"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 16.299002,
+    "posterTime": 7.334550900000001,
+    "frame": 2,
+    "featured": false
+  },
+  {
+    "id": "hermes-watercolour",
+    "source": "_10-13-2026 2-26-48 PM 图个点子.mp4",
+    "brand": "HERMÈS",
+    "title": {
+      "en": "A garden in watercolour",
+      "fr": "Un jardin à l'aquarelle"
+    },
+    "group": "fragrance",
+    "category": {
+      "en": "Fragrance",
+      "fr": "Parfum"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 13.929116,
+    "posterTime": 11.8397486,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "glossier-pocket-ritual",
+    "source": "_10-12-2026 6-43-08 AM 图个点子.mp4",
+    "brand": "GLOSSIER",
+    "title": {
+      "en": "Good things, pocket-sized",
+      "fr": "Un petit format, un grand effet"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Beauty",
+      "fr": "Beauté"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 9.424444,
+    "posterTime": 2.356111,
+    "frame": 1,
+    "featured": false
+  },
+  {
+    "id": "balenciaga-black-bag",
+    "source": "短视频推荐｜创意cg-Balenciaga 12-31-2025 10-40-10 AM 图个点子.mp4",
+    "brand": "BALENCIAGA",
+    "title": {
+      "en": "Out of the ordinary",
+      "fr": "Hors de l'ordinaire"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Accessories / CGI",
+      "fr": "Accessoires / CGI"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 5.059093,
+    "posterTime": 4.3002290499999996,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "loewe-pistachio",
+    "source": "_8-16-2026 1-39-57 PM 图个点子.mp4",
+    "brand": "LOEWE",
+    "title": {
+      "en": "Pistachio, reimagined",
+      "fr": "La pistache réinventée"
+    },
+    "group": "lifestyle",
+    "category": {
+      "en": "Home fragrance",
+      "fr": "Parfum d'intérieur"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 15.090113,
+    "posterTime": 12.826596050000001,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "pero-pattern-play",
+    "source": "短视频推荐｜创意实拍-DOT. p é r o TIE 12-22-2025 10-57-05 AM 图个点子.mp4",
+    "brand": "PÉRO",
+    "title": {
+      "en": "Pattern in play",
+      "fr": "Le motif en mouvement"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Fashion / Stop motion",
+      "fr": "Mode / Animation"
+    },
+    "width": 720,
+    "height": 900,
+    "duration": 23.590068,
+    "posterTime": 15.3335442,
+    "frame": 3,
+    "featured": false
+  },
+  {
+    "id": "aesop-daily-ritual",
+    "source": "_9-18-2026 8-00-52 AM 图个点子.mp4",
+    "brand": "AESOP",
+    "title": {
+      "en": "An everyday ritual",
+      "fr": "Le rituel quotidien"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Grooming",
+      "fr": "Soin & rasage"
+    },
+    "width": 720,
+    "height": 900,
+    "duration": 15.046531,
+    "posterTime": 3.76163275,
+    "frame": 1,
+    "featured": false
+  },
+  {
+    "id": "balenciaga-objects",
+    "source": "_8-14-2026 4-18-07 PM 图个点子.mp4",
+    "brand": "BALENCIAGA",
+    "title": {
+      "en": "Objects of desire",
+      "fr": "Objets de désir"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Accessories / CGI",
+      "fr": "Accessoires / CGI"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 16.111791,
+    "posterTime": 7.25030595,
+    "frame": 2,
+    "featured": false
+  },
+  {
+    "id": "bogdao-mineral",
+    "source": "_8-19-2026 12-00-35 PM 图个点子.mp4",
+    "brand": "BOGDAO",
+    "title": {
+      "en": "The quiet essentials",
+      "fr": "Les essentiels, simplement"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Skincare",
+      "fr": "Soin de la peau"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 15.786712,
+    "posterTime": 3.946678,
+    "frame": 1,
+    "featured": false
+  },
+  {
+    "id": "loewe-apple-transformation",
+    "source": "短视频推荐｜创意cg-LOEWE 1-1-2026 7-54-22 AM 图个点子.mp4",
+    "brand": "LOEWE",
+    "title": {
+      "en": "An unexpected transformation",
+      "fr": "Une transformation inattendue"
+    },
+    "group": "lifestyle",
+    "category": {
+      "en": "Product / CGI",
+      "fr": "Produit / CGI"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 5.778912,
+    "posterTime": 4.9120752,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "footwear-new-perspective",
+    "source": "_10-8-2026 1-11-53 PM 图个点子.mp4",
+    "brand": "FOOTWEAR EDIT",
+    "title": {
+      "en": "A new perspective",
+      "fr": "Une autre perspective"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Footwear / CGI",
+      "fr": "Chaussures / CGI"
+    },
+    "width": 720,
+    "height": 900,
+    "duration": 9.192245,
+    "posterTime": 4.13651025,
+    "frame": 2,
+    "featured": false
+  },
+  {
+    "id": "hm-beauty-colour",
+    "source": "短视频推荐｜创意实拍-hmbeauty 12-19-2025 2-04-08 PM 图个点子.mp4",
+    "brand": "H&M BEAUTY",
+    "title": {
+      "en": "A little more colour",
+      "fr": "Un peu plus de couleur"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Beauty / Editorial",
+      "fr": "Beauté / Éditorial"
+    },
+    "width": 720,
+    "height": 900,
+    "duration": 24.563855,
+    "posterTime": 11.05373475,
+    "frame": 2,
+    "featured": false
+  },
+  {
+    "id": "stop-motion-soft-world",
+    "source": "短视频推荐｜创意定格 12-25-2025 1-04-21 PM 图个点子.mp4",
+    "brand": "STOP-MOTION EDIT",
+    "title": {
+      "en": "A softer world",
+      "fr": "Un monde plus doux"
+    },
+    "group": "motion",
+    "category": {
+      "en": "Stop motion",
+      "fr": "Animation en volume"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 28.837778,
+    "posterTime": 24.5121113,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "fashion-floral-story",
+    "source": "_9-14-2026 8-01-13 AM 图个点子.mp4",
+    "brand": "FASHION EDIT",
+    "title": {
+      "en": "The making of a silhouette",
+      "fr": "Naissance d'une silhouette"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Fashion / Editorial",
+      "fr": "Mode / Éditorial"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 23.334649,
+    "posterTime": 1.86677192,
+    "frame": 0,
+    "featured": false
+  },
+  {
+    "id": "burberry-table-play",
+    "source": "_9-29-2026 1-47-37 PM 图个点子.mp4",
+    "brand": "BURBERRY",
+    "title": {
+      "en": "A playful kind of classic",
+      "fr": "Un classique qui s'amuse"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Accessories / Still life",
+      "fr": "Accessoires / Nature morte"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 10.074603,
+    "posterTime": 2.51865075,
+    "frame": 1,
+    "featured": false
+  },
+  {
+    "id": "beauty-gloss-closeup",
+    "source": "_8-15-2026 12-53-12 PM 图个点子.mp4",
+    "brand": "BEAUTY EDIT",
+    "title": {
+      "en": "Gloss, up close",
+      "fr": "Le gloss en détail"
+    },
+    "group": "beauty",
+    "category": {
+      "en": "Beauty / Macro",
+      "fr": "Beauté / Macro"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 15.124042,
+    "posterTime": 1.20992336,
+    "frame": 0,
+    "featured": false
+  },
+  {
+    "id": "petit-violet-puzzle",
+    "source": "_10-21-2026 6-24-20 AM 图个点子.mp4",
+    "brand": "PETIT VIOLET",
+    "title": {
+      "en": "The missing piece",
+      "fr": "La pièce manquante"
+    },
+    "group": "fragrance",
+    "category": {
+      "en": "Fragrance",
+      "fr": "Parfum"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 11.817551,
+    "posterTime": 10.04491835,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "rollie-set-your-alarms",
+    "source": "短视频推荐｜拼贴动画-Set your alarms 12-14-2025 7-10-25 AM 图个点子.mp4",
+    "brand": "ROLLIE × SHEET SOCIETY",
+    "title": {
+      "en": "Set your alarms",
+      "fr": "À vos réveils"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Footwear / Collage",
+      "fr": "Chaussures / Collage"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 8.114708,
+    "posterTime": 3.6516186000000004,
+    "frame": 2,
+    "featured": false
+  },
+  {
+    "id": "summer-in-motion",
+    "source": "_10-14-2026 1-01-15 PM 图个点子.mp4",
+    "brand": "LIFESTYLE EDIT",
+    "title": {
+      "en": "A summer state of mind",
+      "fr": "Un air d'été"
+    },
+    "group": "fashion",
+    "category": {
+      "en": "Lifestyle film",
+      "fr": "Film lifestyle"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 15.322313,
+    "posterTime": 13.023966049999999,
+    "frame": 4,
+    "featured": false
+  },
+  {
+    "id": "motion-unexpected-evening",
+    "source": "_9-17-2026 7-46-04 AM 图个点子.mp4",
+    "brand": "MOTION EDIT",
+    "title": {
+      "en": "An unexpected evening",
+      "fr": "Une soirée inattendue"
+    },
+    "group": "motion",
+    "category": {
+      "en": "Motion / Editorial",
+      "fr": "Motion / Éditorial"
+    },
+    "width": 720,
+    "height": 1280,
+    "duration": 13.069977,
+    "posterTime": 1.04559816,
+    "frame": 0,
+    "featured": false
+  }
+]

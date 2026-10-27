@@ -6,6 +6,7 @@ import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Locale } from "@/types/portfolio";
 import type { WorkSample } from "@/types/work";
+import { workTitle, workLabel } from "@/lib/work-media";
 
 interface Props {
   project: WorkSample | null;
@@ -51,7 +52,7 @@ export function PortfolioLightbox({ project, isOpen, locale, onClose, onPrev, on
 
   if (!mounted || !isOpen || !project) return null;
   const close = locale === "fr" ? "Fermer" : "Close";
-  return createPortal(<dialog ref={dialog} className="work-viewer dark-section" aria-label={`${project.brand} — ${project.title}`}
+  return createPortal(<dialog ref={dialog} className="work-viewer dark-section" aria-label={`${project.brand} — ${workTitle(project, locale)}`}
     onCancel={event => { event.preventDefault(); handlers.current.onClose(); }}
     onClick={event => { if (event.target === event.currentTarget) handlers.current.onClose(); }}
     onKeyDown={event => {
@@ -61,13 +62,13 @@ export function PortfolioLightbox({ project, isOpen, locale, onClose, onPrev, on
       if (total > 1 && event.key === "ArrowRight") { event.preventDefault(); handlers.current.onNext(); }
     }}>
     <div className="work-viewer-layout">
-      <header className="work-viewer-top"><span>{project.brand} / {locale === "fr" ? "Film conceptuel" : "Concept ad"}</span><button type="button" autoFocus onClick={onClose} aria-label={close}>{close}<X size={20} aria-hidden="true" /></button></header>
+      <header className="work-viewer-top"><span>{project.brand} / {workLabel(project, locale)}</span><button type="button" autoFocus onClick={onClose} aria-label={close}>{close}<X size={20} aria-hidden="true" /></button></header>
       <div className="work-viewer-media" key={project.id}>
-        {project.media.type === "video" ? <video ref={video} controls playsInline preload="metadata" src={project.media.src} poster={project.media.poster} width={project.media.width} height={project.media.height} aria-label={project.title}>
+        {project.media.type === "video" ? <video ref={video} controls playsInline preload="metadata" src={project.media.src} poster={project.media.poster} width={project.media.width} height={project.media.height} aria-label={workTitle(project, locale)}>
           {locale === "fr" ? "Votre navigateur ne peut pas lire ce film." : "Your browser cannot play this film."} <a href={project.media.src}>{locale === "fr" ? "Ouvrir le film" : "Open the film"}</a>
         </video> : <Image src={project.media.src} alt={project.alt[locale]} width={project.media.width} height={project.media.height} unoptimized={project.media.type === "gif"} className="work-viewer-image" />}
       </div>
-      <footer className="work-viewer-bottom"><div><h2>{project.title}</h2><p>{project.description[locale]}</p></div>
+      <footer className="work-viewer-bottom"><div><h2>{workTitle(project, locale)}</h2><p>{project.description[locale]}</p></div>
         {total > 1 && <nav className="work-viewer-navigation" aria-label="Films">
           <button type="button" onClick={onPrev} aria-label={locale === "fr" ? "Création précédente" : "Previous creative"}><ChevronLeft size={22} /></button>
           <span>{position + 1} / {total}</span>

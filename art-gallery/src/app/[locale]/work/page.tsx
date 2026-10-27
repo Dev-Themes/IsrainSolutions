@@ -21,8 +21,8 @@ export async function generateMetadata({
     title: validLocale === "fr" ? "Films Produit & Publicités Vidéo" : "Product Films & Video Ads",
     description:
       validLocale === "fr"
-        ? "Découvrez nos publicités conceptuelles pour la beauté, l'audio et le parfum. Cliquez sur une miniature pour voir le film sans quitter la galerie."
-        : "Watch our original concept ads for beauty, audio and fragrance. Open any thumbnail to play the film without leaving the gallery.",
+        ? "Découvrez notre sélection de films produit : beauté, mode, parfum et lifestyle. Filtrez la collection et regardez chaque film sans quitter la galerie."
+        : "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery.",
   });
 }
 

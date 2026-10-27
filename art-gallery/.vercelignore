@@ -1,0 +1,10 @@
+/.animation-review
+/node_modules
+/.next
+/.git
+/docs
+/scripts
+/AGENTS.md
+/*.log
+/*.tsbuildinfo
+/.env.example
