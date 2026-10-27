@@ -421,3 +421,38 @@ button, a, select { -webkit-tap-highlight-color: transparent; }
 .popart-wordmark { display: inline-flex; flex-direction: column; align-items: flex-start; color: var(--foreground); font-size: clamp(28px, 3vw, 42px); font-weight: 900; line-height: .9; letter-spacing: -.065em; }
 .popart-agency { margin-top: .55em; font-size: .24em; font-weight: 600; letter-spacing: .28em; line-height: 1; }
 .popart-wordmark-reveal { font-size: clamp(64px, 12vw, 130px); }
+
+/* Local dark surfaces frame the work and the invitation to collaborate. */
+.dark-section {
+  color-scheme: dark;
+  --background: #161616;
+  --foreground: #fffdfc;
+  --surface: #202020;
+  --surface-alt: #303030;
+  --surface-raised: #242424;
+  --muted: #c3bdbb;
+  --subtle: #afa7a5;
+  --border: #484240;
+  --accent: var(--brand-coral);
+  --inverse-surface: #fffdfc;
+  --inverse-foreground: #161616;
+  background: var(--background);
+  color: var(--foreground);
+}
+.dark-section ::selection { background: var(--brand-coral); color: #161616; }
+.dark-section .project-pointer-label { color: #fffdfc; }
+#featured-work.dark-section .project-card-body { border-top-color: var(--border); }
+#featured-work.dark-section .project-card:nth-child(3) { --work-accent: var(--brand-coral); }
+.dark-section.contact-experience .contact-project-panel { border-top-color: var(--accent); }
+.dark-section.contact-experience .contact-orbit { color: var(--accent); }
+.dark-section.contact-experience .contact-email:hover,
+.dark-section.contact-experience .contact-copy:hover,
+.dark-section.contact-experience .contact-socials a:hover { color: var(--accent); }
+.dark-section.contact-experience .contact-topics button[aria-pressed="true"] {
+  background: var(--surface-alt);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.dark-section.contact-experience .contact-topics button:hover { border-color: var(--accent); }
+.dark-section.contact-experience .contact-start { color: #fffdfc; }
+.dark-section.contact-experience .contact-start:hover { background: var(--accent); color: #161616; }

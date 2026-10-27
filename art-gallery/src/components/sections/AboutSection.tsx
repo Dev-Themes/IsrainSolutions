@@ -103,7 +103,7 @@ export function AboutSection({ locale }: AboutSectionProps) {
       </section>
 
       {/* 03. What We Do (Disciplines) */}
-      <section className="w-full py-20 sm:py-28 border-b border-[var(--border)] bg-[var(--background)]">
+      <section className="dark-section w-full py-20 sm:py-28 border-b border-[var(--border)] bg-[var(--background)]">
         <div className="container-popart">
           <div className="mb-12 sm:mb-16">
             <span className="text-xs uppercase font-mono tracking-[0.25em] text-[var(--accent)] block mb-2">

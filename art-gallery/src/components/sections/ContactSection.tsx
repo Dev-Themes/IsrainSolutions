@@ -21,7 +21,7 @@ export function ContactSection({ locale, as = "h2" }: { locale: Locale; as?: "h1
   const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`PopArt Agency — ${copy.topics[topic]}`)}`;
   const socials = [{ name: "Facebook", url: "https://facebook.com" }, ...siteConfig.socials];
 
-  return <section className="popart-contact contact-experience section-space" aria-label={dict.contact.heroHeading}>
+  return <section className="popart-contact contact-experience dark-section section-space" aria-label={dict.contact.heroHeading}>
     <div className="container-popart">
       <div className="contact-eyebrow"><span className="section-kicker">{copy.eyebrow}</span><span>{dict.contact.collaborations}</span></div>
       <div className="contact-main">

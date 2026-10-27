@@ -15,7 +15,7 @@ export function FeaturedWorkSection({ projects, locale }: { projects: PortfolioP
   const [index, setIndex] = useState(0);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const open = (project: PortfolioProject, ref: RefObject<HTMLButtonElement | null>) => { setSelected(project); setIndex(0); trigger.current = ref.current; };
-  return <section id="featured-work" className="section-space border-b border-[var(--border)]">
+  return <section id="featured-work" className="dark-section section-space border-b border-[var(--border)]">
     <div className="container-popart">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10 sm:mb-14">
         <div><p className="section-kicker mb-3">{dict.home.featuredTag}</p><h2 className="section-title">{dict.home.featuredHeading}</h2></div>

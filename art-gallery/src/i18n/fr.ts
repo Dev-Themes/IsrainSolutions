@@ -16,7 +16,7 @@ export const fr = {
     heroSubtext: "Nous créons des histoires visuelles qui font avancer la culture. Art, images et idées sans frontières.",
     allProjects: "Projets Sélectionnés",
     viewProject: "Découvrir le projet",
-    manifestoTitle: "NOUS DONNONS PopArt Agency AUX IDÉES.",
+    manifestoTitle: "NOUS DONNONS VIE AUX IDÉES.",
     manifestoSubtitle: "WE MAKE IDEAS VISIBLE.",
     capabilitiesTag: "01. CAPABILITÉS & EXPERTISE",
     capabilitiesHeading: "Champs d'intervention artistique",
