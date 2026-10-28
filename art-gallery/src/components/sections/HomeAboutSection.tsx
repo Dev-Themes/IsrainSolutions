@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import { InteractiveSurface } from "@/components/branding/InteractiveSurface";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
@@ -9,7 +10,7 @@ export function HomeAboutSection({ locale }: { locale: Locale }) {
   return <section className="studio-teaser section-space">
     <div className="container-popart studio-teaser-grid">
       <div>
-        <p className="section-kicker mb-6">03 / {locale === "fr" ? "LE STUDIO" : "THE STUDIO"}</p>
+        <p className="section-kicker mb-6">03 / {ui(locale, "LE STUDIO", "THE STUDIO")}</p>
         <h2>{dict.home.manifestoTitle}</h2>
         <Link href={`/${locale}/about`} className="editorial-link mt-8">{dict.home.aboutLink}<ArrowUpRight size={18} aria-hidden="true" /></Link>
       </div>

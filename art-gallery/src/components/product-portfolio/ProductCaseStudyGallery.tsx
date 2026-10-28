@@ -1,4 +1,6 @@
 "use client";
+import { productCategory, productTitle } from "@/lib/product-text";
+import { ui } from "@/i18n/ui";
 
 import React, { useState, useCallback, useRef } from "react";
 import Image from "next/image";
@@ -77,15 +79,15 @@ export function ProductCaseStudyGallery({
     <div className="w-full">
       <div className="container-popart">
         <dl className="case-summary">
-          <div><dt>{locale === "fr" ? "Le brief" : "The brief"}</dt><dd>{product.summary[locale]}</dd></div>
-          <div><dt>{locale === "fr" ? "La direction" : "The direction"}</dt><dd>{creativeData.narrative}</dd></div>
-          <div><dt>{locale === "fr" ? "Le projet" : "The study"}</dt><dd>PopArt Agency / {product.brand}<br />{product.category} / {product.year}<br />{dict.productsPage.speculativeBadge}</dd></div>
+          <div><dt>{ui(locale, "Le brief", "The brief")}</dt><dd>{product.summary[locale]}</dd></div>
+          <div><dt>{ui(locale, "La direction", "The direction")}</dt><dd>{creativeData.narrative}</dd></div>
+          <div><dt>{ui(locale, "Le projet", "The study")}</dt><dd>PopArt Agency / {product.brand}<br />{productCategory(product, locale)} / {product.year}<br />{dict.productsPage.speculativeBadge}</dd></div>
         </dl>
-        <nav className="case-navigation" aria-label={locale === "fr" ? "Dans cette étude" : "In this case study"}>
-          <a href="#concept">01 / {locale === "fr" ? "Concept" : "Concept"}</a>
-          <a href="#direction">02 / {locale === "fr" ? "Direction artistique" : "Art direction"}</a>
-          <a href="#gallery">03 / {locale === "fr" ? "Images" : "Imagery"}</a>
-          <a href="#design">04 / {locale === "fr" ? "Détails" : "Design details"}</a>
+        <nav className="case-navigation" aria-label={ui(locale, "Dans cette étude", "In this case study")}>
+          <a href="#concept">01 / {ui(locale, "Concept", "Concept")}</a>
+          <a href="#direction">02 / {ui(locale, "Direction artistique", "Art direction")}</a>
+          <a href="#gallery">03 / {ui(locale, "Images", "Imagery")}</a>
+          <a href="#design">04 / {ui(locale, "Détails", "Design details")}</a>
         </nav>
       </div>
       {/* ========================================================================= */}
@@ -160,7 +162,7 @@ export function ProductCaseStudyGallery({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 border-t border-[var(--border)]">
             <div className="space-y-2">
               <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--accent)]">
-                {locale === "fr" ? "TYPOGRAPHIE" : "TYPOGRAPHY"}
+                {ui(locale, "TYPOGRAPHIE", "TYPOGRAPHY")}
               </span>
               <p className="text-sm sm:text-base text-[var(--muted)] font-normal leading-relaxed">
                 {creativeData.typography}
@@ -168,7 +170,7 @@ export function ProductCaseStudyGallery({
             </div>
             <div className="space-y-2">
               <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--accent)]">
-                {locale === "fr" ? "MATIÈRES & TOUCHER" : "MATERIALS & TOUCH"}
+                {ui(locale, "MATIÈRES & TOUCHER", "MATERIALS & TOUCH")}
               </span>
               <p className="text-sm sm:text-base text-[var(--muted)] font-normal leading-relaxed">
                 {creativeData.materials}
@@ -176,7 +178,7 @@ export function ProductCaseStudyGallery({
             </div>
             <div className="space-y-2">
               <span className="text-[11px] font-mono uppercase tracking-widest text-[var(--accent)]">
-                {locale === "fr" ? "DIRECTION PHOTOGRAPHIQUE" : "PHOTOGRAPHIC DIRECTION"}
+                {ui(locale, "DIRECTION PHOTOGRAPHIQUE", "PHOTOGRAPHIC DIRECTION")}
               </span>
               <p className="text-sm sm:text-base text-[var(--muted)] font-normal leading-relaxed">
                 {creativeData.photography}
@@ -197,11 +199,11 @@ export function ProductCaseStudyGallery({
                 {dict.productsPage.galleryTitle}
               </span>
               <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--foreground)]">
-                {product.brand} — {product.title}
+                {product.brand} — {productTitle(product, locale)}
               </h2>
             </div>
             <span className="text-xs font-mono text-[var(--subtle)] hidden sm:inline">
-              {product.galleryImages.length} {locale === "fr" ? "images du concept" : "concept images"}
+              {product.galleryImages.length} {ui(locale, "images du concept", "concept images")}
             </span>
           </div>
 
@@ -297,7 +299,7 @@ export function ProductCaseStudyGallery({
               {dict.productsPage.specificationsTitle}
             </span>
             <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--foreground)]">
-              {locale === "fr" ? "Ingénierie & Rigueur Matérielle" : "Engineering & Material Rigor"}
+              {ui(locale, "Ingénierie & Rigueur Matérielle", "Engineering & Material Rigor")}
             </h2>
           </div>
 
@@ -374,7 +376,7 @@ export function ProductCaseStudyGallery({
                 </div>
               </div>
               <span className="text-xs font-mono text-[var(--subtle)] hidden md:inline">
-                [{prevProduct.category}]
+                [{productCategory(prevProduct, locale)}]
               </span>
             </Link>
 
@@ -393,7 +395,7 @@ export function ProductCaseStudyGallery({
               </div>
               <div className="flex items-center gap-4">
                 <span className="text-xs font-mono text-[var(--subtle)] hidden md:inline">
-                  [{nextProduct.category}]
+                  [{productCategory(nextProduct, locale)}]
                 </span>
                 <ArrowRight
                   size={18}
@@ -416,7 +418,7 @@ export function ProductCaseStudyGallery({
                 {dict.productsPage.relatedTitle}
               </span>
               <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-[var(--foreground)]">
-                {locale === "fr" ? "Poursuivre la découverte" : "Continue Exploring"}
+                {ui(locale, "Poursuivre la découverte", "Continue Exploring")}
               </h2>
             </div>
 

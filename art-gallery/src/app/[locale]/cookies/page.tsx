@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -17,7 +18,7 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "cookies",
-    title: validLocale === "fr" ? "Gestion des Cookies" : "Cookie Policy",
+    title: ui(validLocale, "Gestion des Cookies", "Cookie Policy"),
   });
 }
 
@@ -47,14 +48,10 @@ export default async function CookiesPage({
 
         <div className="space-y-6 text-sm text-[var(--muted)] font-light leading-relaxed border-t border-[var(--border)] pt-8">
           <p>
-            {validLocale === "fr"
-              ? "Ce site web utilise uniquement les mécanismes techniques strictement nécessaires à la navigation et à la mémorisation de votre langue de consultation (Français ou Anglais)."
-              : "This website strictly uses essential technical mechanisms required for navigation and remembering your language selection (French or English)."}
+            {ui(validLocale, "Ce site web utilise uniquement les mécanismes techniques strictement nécessaires à la navigation et à la mémorisation de votre langue de consultation (Roumain, Français ou Anglais).", "This website strictly uses essential technical mechanisms required for navigation and remembering your language selection (Romanian, French or English).")}
           </p>
           <p>
-            {validLocale === "fr"
-              ? "Aucun traceur tiers, pixel publicitaire ou outil invasif d'analyse comportementale n'est déployé sur cette plateforme."
-              : "No third-party trackers, advertising pixels, or invasive behavioral telemetry are deployed across this platform."}
+            {ui(validLocale, "Aucun traceur tiers, pixel publicitaire ou outil invasif d'analyse comportementale n'est déployé sur cette plateforme.", "No third-party trackers, advertising pixels, or invasive behavioral telemetry are deployed across this platform.")}
           </p>
           <p className="text-xs font-mono text-[var(--subtle)] pt-6">
             © 2026 PopArt Agency Studio Créatif — Paris.

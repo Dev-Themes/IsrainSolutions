@@ -1,4 +1,5 @@
 ﻿"use client";
+import { ui } from "@/i18n/ui";
 
 import { useEffect, useState } from "react";
 import { ArrowUpRight, Check, Copy } from "lucide-react";
@@ -18,7 +19,7 @@ export function ContactSection({ locale, as = "h2", offer }: { locale: Locale; a
     const timer = setTimeout(() => setCopyState("idle"), 3500);
     return () => clearTimeout(timer);
   }, [copyState]);
-  const offerLabel = offer ? `${offer} ${locale === "fr" ? "vidéos produit" : "product videos"}` : "";
+  const offerLabel = offer ? `${offer} ${ui(locale, "vidéos produit", "product videos")}` : "";
   const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`PopArt Agency — ${offerLabel ? `${offerLabel} / ` : ""}${copy.topics[topic]}`)}`;
   const socials = [{ name: "Facebook", url: "https://facebook.com" }, ...siteConfig.socials];
 
@@ -37,14 +38,14 @@ export function ContactSection({ locale, as = "h2", offer }: { locale: Locale; a
         </div>
         <InteractiveSurface className="contact-project-panel">
           <div className="contact-panel-top"><span className="section-kicker">PopArt Agency / 0{topic + 1}</span><svg className="contact-orbit" viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle cx="40" cy="40" r="34" stroke="currentColor" /><circle cx="40" cy="40" r="24" stroke="currentColor" /><path d="M40 6A34 34 0 0 1 74 40H40Z" fill="currentColor" /><circle cx="40" cy="40" r="8" fill="var(--surface-raised)" /></svg></div>
-          {offer && <p className="contact-selected-offer">{locale === "fr" ? "Votre formule" : "Your package"}: {offerLabel}</p>}
+          {offer && <p className="contact-selected-offer">{ui(locale, "Votre formule", "Your package")}: {offerLabel}</p>}
           <fieldset className="contact-topics"><legend>{copy.topicLabel}</legend><div>{copy.topics.map((label, index) => <button type="button" key={label} aria-pressed={topic === index} onClick={() => setTopic(index)}><span>{label}</span><span className="topic-indicator" aria-hidden="true" /></button>)}</div></fieldset>
           <p className="contact-panel-note">{copy.emailHint}</p>
           <a href={emailHref} className="contact-start">{copy.start}<ArrowUpRight size={24} aria-hidden="true" /></a>
         </InteractiveSurface>
       </div>
       <div className="contact-bottom">
-        <div><h3>{copy.workWithUs}</h3><address><p>14 Rue de Charonne, {locale === "fr" ? "Étage 4" : "Floor 4"}</p><p>75011 Paris, France</p></address></div>
+        <div><h3>{copy.workWithUs}</h3><address><p>14 Rue de Charonne, {ui(locale, "Étage 4", "Floor 4")}</p><p>75011 Paris, {locale === "ro" ? "Franța" : "France"}</p></address></div>
         <div className="contact-hours"><p>{dict.contact.hoursNote}</p><span>{dict.contact.location}</span></div>
         <nav className="contact-socials" aria-label={copy.socialLabel}>{socials.map(social => <a href={social.url} key={social.name} target="_blank" rel="noopener noreferrer"><span>{social.name}</span><ArrowUpRight size={16} aria-hidden="true" /></a>)}</nav>
       </div>

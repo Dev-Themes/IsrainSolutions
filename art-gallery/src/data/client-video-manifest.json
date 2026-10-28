@@ -7,12 +7,14 @@
     "brand": "FOLDEAT",
     "title": {
       "en": "A fresh perspective",
-      "fr": "Une nouvelle idée du déjeuner"
+      "fr": "Une nouvelle idée du déjeuner",
+      "ro": "O perspectivă proaspătă"
     },
     "group": "lifestyle",
     "category": {
       "en": "Product film",
-      "fr": "Film produit"
+      "fr": "Film produit",
+      "ro": "Film de produs"
     },
     "width": 3816,
     "height": 2160,
@@ -27,12 +29,14 @@
     "brand": "RICINUS",
     "title": {
       "en": "The hair ritual",
-      "fr": "Le rituel du cheveu"
+      "fr": "Le rituel du cheveu",
+      "ro": "Ritualul îngrijirii părului"
     },
     "group": "beauty",
     "category": {
       "en": "Haircare",
-      "fr": "Soin capillaire"
+      "fr": "Soin capillaire",
+      "ro": "Îngrijirea părului"
     },
     "width": 720,
     "height": 1280,
@@ -47,12 +51,14 @@
     "brand": "MOS",
     "title": {
       "en": "A little soft focus",
-      "fr": "La beauté en douceur"
+      "fr": "La beauté en douceur",
+      "ro": "Frumusețe în lumină blândă"
     },
     "group": "beauty",
     "category": {
       "en": "Beauty / Product film",
-      "fr": "Beauté / Film produit"
+      "fr": "Beauté / Film produit",
+      "ro": "Frumusețe / Film de produs"
     },
     "width": 720,
     "height": 1272,
@@ -67,12 +73,14 @@
     "brand": "TMB",
     "title": {
       "en": "Take it anywhere",
-      "fr": "À emporter partout"
+      "fr": "À emporter partout",
+      "ro": "Ia-o cu tine oriunde"
     },
     "group": "lifestyle",
     "category": {
       "en": "Drinkware",
-      "fr": "Gourdes & accessoires"
+      "fr": "Gourdes & accessoires",
+      "ro": "Sticle și accesorii"
     },
     "width": 720,
     "height": 1272,
@@ -87,12 +95,14 @@
     "brand": "TYPOLOGY",
     "title": {
       "en": "A drop of rose",
-      "fr": "Une goutte de rose"
+      "fr": "Une goutte de rose",
+      "ro": "O picătură de roz"
     },
     "group": "beauty",
     "category": {
       "en": "Skincare",
-      "fr": "Soin de la peau"
+      "fr": "Soin de la peau",
+      "ro": "Îngrijirea pielii"
     },
     "width": 720,
     "height": 1280,
@@ -107,12 +117,14 @@
     "brand": "MIU MIU",
     "title": {
       "en": "Between the pages",
-      "fr": "Entre les pages"
+      "fr": "Entre les pages",
+      "ro": "Printre pagini"
     },
     "group": "fashion",
     "category": {
       "en": "Accessories",
-      "fr": "Accessoires"
+      "fr": "Accessoires",
+      "ro": "Accesorii"
     },
     "width": 1920,
     "height": 1080,
@@ -133,12 +145,14 @@
     "brand": "GENTLE MONSTER",
     "title": {
       "en": "A different kind of bloom",
-      "fr": "Une autre façon de fleurir"
+      "fr": "Une autre façon de fleurir",
+      "ro": "Un alt fel de înflorire"
     },
     "group": "fashion",
     "category": {
       "en": "Eyewear / CGI",
-      "fr": "Lunettes / CGI"
+      "fr": "Lunettes / CGI",
+      "ro": "Ochelari / Grafică 3D"
     },
     "width": 720,
     "height": 1280,
@@ -153,12 +167,14 @@
     "brand": "BURBERRY",
     "title": {
       "en": "A study in details",
-      "fr": "L'art du détail"
+      "fr": "L'art du détail",
+      "ro": "Arta detaliului"
     },
     "group": "fashion",
     "category": {
       "en": "Fashion / Details",
-      "fr": "Mode / Détails"
+      "fr": "Mode / Détails",
+      "ro": "Modă / Detalii"
     },
     "width": 720,
     "height": 1280,
@@ -173,12 +189,14 @@
     "brand": "HERMÈS",
     "title": {
       "en": "A garden in watercolour",
-      "fr": "Un jardin à l'aquarelle"
+      "fr": "Un jardin à l'aquarelle",
+      "ro": "O grădină în acuarelă"
     },
     "group": "fragrance",
     "category": {
       "en": "Fragrance",
-      "fr": "Parfum"
+      "fr": "Parfum",
+      "ro": "Parfumuri"
     },
     "width": 720,
     "height": 1280,
@@ -193,12 +211,14 @@
     "brand": "GLOSSIER",
     "title": {
       "en": "Good things, pocket-sized",
-      "fr": "Un petit format, un grand effet"
+      "fr": "Un petit format, un grand effet",
+      "ro": "Lucruri frumoase, în format mic"
     },
     "group": "beauty",
     "category": {
       "en": "Beauty",
-      "fr": "Beauté"
+      "fr": "Beauté",
+      "ro": "Frumusețe"
     },
     "width": 720,
     "height": 1280,
@@ -213,12 +233,14 @@
     "brand": "BALENCIAGA",
     "title": {
       "en": "Out of the ordinary",
-      "fr": "Hors de l'ordinaire"
+      "fr": "Hors de l'ordinaire",
+      "ro": "Dincolo de obișnuit"
     },
     "group": "fashion",
     "category": {
       "en": "Accessories / CGI",
-      "fr": "Accessoires / CGI"
+      "fr": "Accessoires / CGI",
+      "ro": "Accesorii / Grafică 3D"
     },
     "width": 720,
     "height": 1280,
@@ -233,12 +255,14 @@
     "brand": "LOEWE",
     "title": {
       "en": "Pistachio, reimagined",
-      "fr": "La pistache réinventée"
+      "fr": "La pistache réinventée",
+      "ro": "Fisticul, reimaginat"
     },
     "group": "lifestyle",
     "category": {
       "en": "Home fragrance",
-      "fr": "Parfum d'intérieur"
+      "fr": "Parfum d'intérieur",
+      "ro": "Parfumuri pentru casă"
     },
     "width": 720,
     "height": 1280,
@@ -253,12 +277,14 @@
     "brand": "PÉRO",
     "title": {
       "en": "Pattern in play",
-      "fr": "Le motif en mouvement"
+      "fr": "Le motif en mouvement",
+      "ro": "Jocul imprimeurilor"
     },
     "group": "fashion",
     "category": {
       "en": "Fashion / Stop motion",
-      "fr": "Mode / Animation"
+      "fr": "Mode / Animation",
+      "ro": "Modă / Animație cadru cu cadru"
     },
     "width": 720,
     "height": 900,
@@ -273,12 +299,14 @@
     "brand": "AESOP",
     "title": {
       "en": "An everyday ritual",
-      "fr": "Le rituel quotidien"
+      "fr": "Le rituel quotidien",
+      "ro": "Un ritual de zi cu zi"
     },
     "group": "beauty",
     "category": {
       "en": "Grooming",
-      "fr": "Soin & rasage"
+      "fr": "Soin & rasage",
+      "ro": "Îngrijire și bărbierit"
     },
     "width": 720,
     "height": 900,
@@ -293,12 +321,14 @@
     "brand": "BALENCIAGA",
     "title": {
       "en": "Objects of desire",
-      "fr": "Objets de désir"
+      "fr": "Objets de désir",
+      "ro": "Obiecte ale dorinței"
     },
     "group": "fashion",
     "category": {
       "en": "Accessories / CGI",
-      "fr": "Accessoires / CGI"
+      "fr": "Accessoires / CGI",
+      "ro": "Accesorii / Grafică 3D"
     },
     "width": 720,
     "height": 1280,
@@ -313,12 +343,14 @@
     "brand": "BOGDAO",
     "title": {
       "en": "The quiet essentials",
-      "fr": "Les essentiels, simplement"
+      "fr": "Les essentiels, simplement",
+      "ro": "Esențialele, în liniște"
     },
     "group": "beauty",
     "category": {
       "en": "Skincare",
-      "fr": "Soin de la peau"
+      "fr": "Soin de la peau",
+      "ro": "Îngrijirea pielii"
     },
     "width": 720,
     "height": 1280,
@@ -333,12 +365,14 @@
     "brand": "LOEWE",
     "title": {
       "en": "An unexpected transformation",
-      "fr": "Une transformation inattendue"
+      "fr": "Une transformation inattendue",
+      "ro": "O transformare neașteptată"
     },
     "group": "lifestyle",
     "category": {
       "en": "Product / CGI",
-      "fr": "Produit / CGI"
+      "fr": "Produit / CGI",
+      "ro": "Produs / Grafică 3D"
     },
     "width": 720,
     "height": 1280,
@@ -353,12 +387,14 @@
     "brand": "FOOTWEAR EDIT",
     "title": {
       "en": "A new perspective",
-      "fr": "Une autre perspective"
+      "fr": "Une autre perspective",
+      "ro": "O nouă perspectivă"
     },
     "group": "fashion",
     "category": {
       "en": "Footwear / CGI",
-      "fr": "Chaussures / CGI"
+      "fr": "Chaussures / CGI",
+      "ro": "Încălțăminte / Grafică 3D"
     },
     "width": 720,
     "height": 900,
@@ -373,12 +409,14 @@
     "brand": "H&M BEAUTY",
     "title": {
       "en": "A little more colour",
-      "fr": "Un peu plus de couleur"
+      "fr": "Un peu plus de couleur",
+      "ro": "Un strop de culoare în plus"
     },
     "group": "beauty",
     "category": {
       "en": "Beauty / Editorial",
-      "fr": "Beauté / Éditorial"
+      "fr": "Beauté / Éditorial",
+      "ro": "Frumusețe / Editorial"
     },
     "width": 720,
     "height": 900,
@@ -393,12 +431,14 @@
     "brand": "STOP-MOTION EDIT",
     "title": {
       "en": "A softer world",
-      "fr": "Un monde plus doux"
+      "fr": "Un monde plus doux",
+      "ro": "O lume mai blândă"
     },
     "group": "motion",
     "category": {
       "en": "Stop motion",
-      "fr": "Animation en volume"
+      "fr": "Animation en volume",
+      "ro": "Animație cadru cu cadru"
     },
     "width": 720,
     "height": 1280,
@@ -413,12 +453,14 @@
     "brand": "FASHION EDIT",
     "title": {
       "en": "The making of a silhouette",
-      "fr": "Naissance d'une silhouette"
+      "fr": "Naissance d'une silhouette",
+      "ro": "Nașterea unei siluete"
     },
     "group": "fashion",
     "category": {
       "en": "Fashion / Editorial",
-      "fr": "Mode / Éditorial"
+      "fr": "Mode / Éditorial",
+      "ro": "Modă / Editorial"
     },
     "width": 720,
     "height": 1280,
@@ -433,12 +475,14 @@
     "brand": "BURBERRY",
     "title": {
       "en": "A playful kind of classic",
-      "fr": "Un classique qui s'amuse"
+      "fr": "Un classique qui s'amuse",
+      "ro": "Un clasic jucăuș"
     },
     "group": "fashion",
     "category": {
       "en": "Accessories / Still life",
-      "fr": "Accessoires / Nature morte"
+      "fr": "Accessoires / Nature morte",
+      "ro": "Accesorii / Natură statică"
     },
     "width": 720,
     "height": 1280,
@@ -453,12 +497,14 @@
     "brand": "BEAUTY EDIT",
     "title": {
       "en": "Gloss, up close",
-      "fr": "Le gloss en détail"
+      "fr": "Le gloss en détail",
+      "ro": "Luciul, în prim-plan"
     },
     "group": "beauty",
     "category": {
       "en": "Beauty / Macro",
-      "fr": "Beauté / Macro"
+      "fr": "Beauté / Macro",
+      "ro": "Frumusețe / Macro"
     },
     "width": 720,
     "height": 1280,
@@ -473,12 +519,14 @@
     "brand": "PETIT VIOLET",
     "title": {
       "en": "The missing piece",
-      "fr": "La pièce manquante"
+      "fr": "La pièce manquante",
+      "ro": "Piesa lipsă"
     },
     "group": "fragrance",
     "category": {
       "en": "Fragrance",
-      "fr": "Parfum"
+      "fr": "Parfum",
+      "ro": "Parfumuri"
     },
     "width": 720,
     "height": 1280,
@@ -493,12 +541,14 @@
     "brand": "ROLLIE × SHEET SOCIETY",
     "title": {
       "en": "Set your alarms",
-      "fr": "À vos réveils"
+      "fr": "À vos réveils",
+      "ro": "Pune-ți alarma"
     },
     "group": "fashion",
     "category": {
       "en": "Footwear / Collage",
-      "fr": "Chaussures / Collage"
+      "fr": "Chaussures / Collage",
+      "ro": "Încălțăminte / Colaj"
     },
     "width": 720,
     "height": 1280,
@@ -513,12 +563,14 @@
     "brand": "LIFESTYLE EDIT",
     "title": {
       "en": "A summer state of mind",
-      "fr": "Un air d'été"
+      "fr": "Un air d'été",
+      "ro": "O stare de vară"
     },
     "group": "fashion",
     "category": {
       "en": "Lifestyle film",
-      "fr": "Film lifestyle"
+      "fr": "Film lifestyle",
+      "ro": "Film despre viața cotidiană"
     },
     "width": 720,
     "height": 1280,
@@ -533,12 +585,14 @@
     "brand": "MOTION EDIT",
     "title": {
       "en": "An unexpected evening",
-      "fr": "Une soirée inattendue"
+      "fr": "Une soirée inattendue",
+      "ro": "O seară neașteptată"
     },
     "group": "motion",
     "category": {
       "en": "Motion / Editorial",
-      "fr": "Motion / Éditorial"
+      "fr": "Motion / Éditorial",
+      "ro": "Animație / Editorial"
     },
     "width": 720,
     "height": 1280,

@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import { WorkHero } from "@/components/sections/WorkHero";
@@ -18,11 +19,9 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "work",
-    title: validLocale === "fr" ? "Films Produit & Publicités Vidéo" : "Product Films & Video Ads",
+    title: ui(validLocale, "Films Produit & Publicités Vidéo", "Product Films & Video Ads"),
     description:
-      validLocale === "fr"
-        ? "Découvrez notre sélection de films produit : beauté, mode, parfum et lifestyle. Filtrez la collection et regardez chaque film sans quitter la galerie."
-        : "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery.",
+      ui(validLocale, "Découvrez notre sélection de films produit : beauté, mode, parfum et lifestyle. Filtrez la collection et regardez chaque film sans quitter la galerie.", "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery."),
   });
 }
 
@@ -40,7 +39,7 @@ export default async function WorkPage({
       <WorkHero locale={validLocale} />
 
       {/* Main Portfolio Grid Gallery */}
-      <section className="dark-section section-space" aria-label={validLocale === "fr" ? "Films produit" : "Product films"}>
+      <section className="dark-section section-space" aria-label={ui(validLocale, "Films produit", "Product films")}>
         <div className="container-popart"><PortfolioGrid projects={workSamples} locale={validLocale} /></div>
       </section>
 

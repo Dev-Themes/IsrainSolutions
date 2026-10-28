@@ -1,4 +1,4 @@
-import type { ProjectLocalizedText } from "./portfolio";
+import type { Locale } from "./portfolio";
 
 export type WorkGroup = "beauty" | "lifestyle" | "fashion" | "fragrance" | "motion";
 
@@ -9,13 +9,14 @@ export type WorkMedia =
 export interface WorkSample {
   id: string;
   title: string;
-  localizedTitle?: ProjectLocalizedText;
+  localizedTitle?: Record<Locale, string>;
   brand: string;
+  localizedBrand?: Record<Locale, string>;
   group?: WorkGroup;
   origin?: "concept" | "selection";
-  category: ProjectLocalizedText;
-  description: ProjectLocalizedText;
-  alt: ProjectLocalizedText;
+  category: Record<Locale, string>;
+  description: Record<Locale, string>;
+  alt: Record<Locale, string>;
   media: WorkMedia;
   featured: boolean;
   layout: "wide" | "standard";

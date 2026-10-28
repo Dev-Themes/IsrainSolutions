@@ -1,6 +1,9 @@
 import { ProductProject } from "@/types/products";
+import { romanianProducts } from "./product-ro";
 
-const productConcepts: ProductProject[] = [
+type Bilingual<T> = T extends (infer Item)[] ? Bilingual<Item>[] : T extends object ? { [Key in keyof T as Key extends "ro" ? never : Key]: Bilingual<T[Key]> } : T;
+
+const productConcepts: Bilingual<ProductProject>[] = [
   {
     id: "prod-01",
     slug: "noir-edition",
@@ -1422,15 +1425,28 @@ const productConcepts: ProductProject[] = [
 // Original, brand-matched concept artwork is served locally. Gallery details are
 // crops from the same concept photograph, not unrelated commercial products.
 export const productProjects: ProductProject[] = productConcepts.map(product => {
+  const ro = romanianProducts[product.slug];
   const cover = `/images/products/${product.slug}.webp`;
   const detail = `/images/products/${product.slug}-detail.webp`;
   return {
     ...product,
+    localizedTitle: { ro: ro.title, fr: product.title, en: product.title },
+    localizedCategory: { ro: ro.category, fr: product.category, en: product.category },
+    alt: { ...product.alt, ro: ro.alt },
+    tagline: { ...product.tagline, ro: ro.tagline },
+    summary: { ...product.summary, ro: ro.summary },
+    concept: { ...product.concept, ro: { headline: ro.headline, paragraphs: ro.paragraphs } },
+    creativeDirection: { ...product.creativeDirection, ro: {
+      narrative: ro.narrative,
+      palette: product.creativeDirection.en.palette.map((swatch, index) => ({ hex: swatch.hex, name: ro.colors[index][0], role: ro.colors[index][1] })),
+      typography: ro.typography, materials: ro.materials, photography: ro.photography,
+    } },
+    designDetails: { ...product.designDetails, ro: { materialsList: ro.materialsList, specifications: ro.specifications, innovationNote: ro.innovationNote } },
     coverImage: cover,
     galleryImages: [cover, detail],
     imageDetails: [
-      { src: cover, alt: product.alt, caption: { fr: `${product.brand} — Étude de produit spéculative, direction visuelle PopArt Agency.`, en: `${product.brand} — Speculative product study, visual direction by PopArt Agency.` } },
-      { src: detail, alt: { fr: `${product.brand} — Détail de forme, lumière et matière`, en: `${product.brand} — Detail of form, light and material` }, caption: { fr: "Détail du visuel conceptuel : forme, lumière et matière.", en: "Detail crop from the concept visual: form, light and material." } },
+      { src: cover, alt: { ...product.alt, ro: ro.alt }, caption: { ro: `${product.brand} — Studiu speculativ de produs, sub direcția vizuală PopArt Agency.`, fr: `${product.brand} — Étude de produit spéculative, direction visuelle PopArt Agency.`, en: `${product.brand} — Speculative product study, visual direction by PopArt Agency.` } },
+      { src: detail, alt: { ro: `${product.brand} — Detaliu de formă, lumină și material`, fr: `${product.brand} — Détail de forme, lumière et matière`, en: `${product.brand} — Detail of form, light and material` }, caption: { ro: "Detaliu din imaginea conceptuală: formă, lumină și material.", fr: "Détail du visuel conceptuel : forme, lumière et matière.", en: "Detail crop from the concept visual: form, light and material." } },
     ],
   };
 });

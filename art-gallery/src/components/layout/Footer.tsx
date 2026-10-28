@@ -1,4 +1,5 @@
 "use client";
+import { ui } from "@/i18n/ui";
 
 import React from "react";
 import Link from "next/link";
@@ -86,7 +87,7 @@ export function Footer({ locale }: FooterProps) {
           <div className="col-span-2 md:col-span-1 text-left md:text-right text-[var(--muted)] tracking-widest">
             <p>© 2026 PopArt Agency</p>
             <p className="text-[11px] text-[var(--subtle)] mt-1 normal-case tracking-normal">
-              Studio Créatif — Paris
+              {locale === "ro" ? "Studio de creație — Paris" : "Studio Créatif — Paris"}
             </p>
           </div>
         </div>
@@ -95,7 +96,7 @@ export function Footer({ locale }: FooterProps) {
         <div className="w-full flex flex-col items-center justify-center my-12 sm:my-20">
           <EyeToWordmark ariaLabel={dict.footer.symbolAria} />
           <p className="text-[10px] tracking-[0.3em] uppercase text-[var(--subtle)] mt-4 select-none">
-            {locale === "fr" ? "Survoler ou toucher pour révéler" : "Hover or tap to reveal"}
+            {ui(locale, "Survoler ou toucher pour révéler", "Hover or tap to reveal")}
           </p>
         </div>
 

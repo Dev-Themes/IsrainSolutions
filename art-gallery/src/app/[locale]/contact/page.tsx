@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import { defaultLocale, isValidLocale } from "@/i18n/config";
@@ -15,11 +16,9 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "contact",
-    title: validLocale === "fr" ? "Contact & Collaborations — Paris" : "Contact & Collaborations — Paris",
+    title: ui(validLocale, "Contact & Collaborations — Paris", "Contact & Collaborations — Paris"),
     description:
-      validLocale === "fr"
-        ? "Initiez une collaboration artistique avec le Studio PopArt Agency à Paris. Direction artistique, identité visuelle et projets culturels."
-        : "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions.",
+      ui(validLocale, "Initiez une collaboration artistique avec le Studio PopArt Agency à Paris. Direction artistique, identité visuelle et projets culturels.", "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions."),
   });
 }
 

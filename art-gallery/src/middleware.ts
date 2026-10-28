@@ -27,8 +27,9 @@ export function middleware(request: NextRequest) {
   }
 
   // If top-level route like / or /work or /about or /contact without locale prefix
-  // Redirect to default locale /fr...
-  const redirectUrl = new URL(`/${defaultLocale}${pathname === "/" ? "" : pathname}`, request.url);
+  // Redirect to the configured default language (Romanian).
+  const redirectUrl = request.nextUrl.clone();
+  redirectUrl.pathname = `/${defaultLocale}${pathname === "/" ? "" : pathname}`;
   return NextResponse.redirect(redirectUrl);
 }
 

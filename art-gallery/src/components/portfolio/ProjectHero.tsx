@@ -75,7 +75,7 @@ export function ProjectHero({ project, locale }: ProjectHeroProps) {
         >
           <Image
             src={project.coverImage}
-            alt={project.alt[locale]}
+            alt={project.alt[locale] ?? project.alt.en}
             fill
             preload
             quality={80}

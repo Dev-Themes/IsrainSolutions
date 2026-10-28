@@ -21,7 +21,7 @@ export function ProjectGallery({
   locale,
 }: ProjectGalleryProps) {
   const dict = getDictionary(locale);
-  const details = project.details[locale];
+  const details = project.details[locale] ?? project.details.en;
 
   return (
     <div className="w-full">
@@ -107,7 +107,7 @@ export function ProjectGallery({
                     <div className="relative h-64 sm:h-80 overflow-hidden">
                       <Image
                         src={rel.coverImage}
-                        alt={rel.alt[locale]}
+                        alt={rel.alt[locale] ?? rel.alt.en}
                         fill
                         quality={80}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"

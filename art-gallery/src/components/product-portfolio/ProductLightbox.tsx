@@ -1,4 +1,6 @@
 "use client";
+import { productTitle, productCategory } from "@/lib/product-text";
+import { ui } from "@/i18n/ui";
 
 import React, { useEffect, useRef, useSyncExternalStore } from "react";
 import { useSwipeNavigation } from "@/hooks/useSwipeNavigation";
@@ -107,7 +109,7 @@ export function ProductLightbox({
   };
   const totalImages = product.galleryImages.length || 1;
   const accent = product.accentColor || "#FF9B70";
-  const closeLabel = locale === "fr" ? "Fermer" : "Close";
+  const closeLabel = ui(locale, "Fermer", "Close");
 
   return createPortal(
     <AnimatePresence>
@@ -116,7 +118,7 @@ export function ProductLightbox({
         {...swipe}
         role="dialog"
         aria-modal="true"
-        aria-label={`${product.brand} — ${product.title} — ${locale === "fr" ? "Aperçu" : "Preview"}`}
+        aria-label={`${product.brand} — ${productTitle(product, locale)} — ${ui(locale, "Aperçu", "Preview")}`}
         style={{ zIndex: 9999 }}
         className="lightbox-frame fixed inset-0 flex flex-col items-center justify-between p-3 sm:p-6 md:p-8 bg-[var(--background)]/95 backdrop-blur-xl"
         onClick={(e) => {
@@ -142,10 +144,10 @@ export function ProductLightbox({
               style={{ borderColor: accent }}
               className="text-[10px] sm:text-xs uppercase tracking-[0.2em] font-mono border px-2.5 py-1 rounded-xs shrink-0"
             >
-              [{product.category.toUpperCase()}]
+              [{productCategory(product, locale).toUpperCase()}]
             </span>
             <span className="text-xs sm:text-sm font-normal text-[var(--muted)] truncate hidden sm:inline">
-              <strong className="text-[var(--foreground)] font-medium">{product.brand}</strong> — {product.title} • {product.year}
+              <strong className="text-[var(--foreground)] font-medium">{product.brand}</strong> — {productTitle(product, locale)} • {product.year}
             </span>
           </div>
 
@@ -222,7 +224,7 @@ export function ProductLightbox({
             <div className="flex-1 min-w-0 pr-2">
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-xs sm:text-sm font-medium text-[var(--foreground)] truncate">
-                  {product.brand} — {product.title}
+                  {product.brand} — {productTitle(product, locale)}
                 </span>
                 {totalImages > 1 && (
                   <span className="text-[10px] font-mono text-[var(--subtle)] bg-[var(--surface-raised)] px-2 py-0.5 rounded-full shrink-0">

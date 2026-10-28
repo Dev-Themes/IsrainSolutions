@@ -1,11 +1,13 @@
-export type Locale = "fr" | "en";
+export type Locale = "ro" | "fr" | "en";
 
 export interface ProjectLocalizedText {
+  ro?: string;
   fr: string;
   en: string;
 }
 
 export interface ProjectDetails {
+  ro?: { concept: string; artDirection: string; execution: string };
   fr: {
     concept: string;
     artDirection: string;

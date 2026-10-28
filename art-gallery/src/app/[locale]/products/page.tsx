@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import { ProductHero } from "@/components/product-portfolio/ProductHero";
@@ -21,7 +22,7 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "products",
-    title: validLocale === "fr" ? "Produits — Concepts & Direction Artistique" : "Products — Concepts & Creative Direction",
+    title: ui(validLocale, "Produits — Concepts & Direction Artistique", "Products — Concepts & Creative Direction"),
     description: dict.productsPage.heroSubtext,
   });
 }

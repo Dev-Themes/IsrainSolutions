@@ -6,7 +6,7 @@ export const fr = {
     about: "STUDIO",
     contact: "CONTACT",
     lang: "FR",
-    langSwitchAria: "Basculer vers la langue anglaise",
+    langSwitchAria: "Changer la langue",
     menuAria: "Menu de navigation principal",
     openMenu: "Ouvrir le menu",
     closeMenu: "Fermer le menu",

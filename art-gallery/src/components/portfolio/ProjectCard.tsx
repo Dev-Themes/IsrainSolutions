@@ -1,4 +1,5 @@
 "use client";
+import { ui } from "@/i18n/ui";
 
 import { useRef, type RefObject } from "react";
 import Image from "next/image";
@@ -17,13 +18,13 @@ interface ProjectCardProps {
 export function ProjectCard({ href, image, alt, title, label, category, year, description, wide = false, priority = false, locale, onPreview }: ProjectCardProps) {
   const trigger = useRef<HTMLButtonElement>(null);
   return <article className={`project-card ${wide ? "project-card-wide" : ""}`}>
-    <Link href={href} className="project-card-image" aria-label={`${locale === "fr" ? "Découvrir" : "Explore"} ${title}`}>
-      <InteractiveSurface className="project-image-surface" label={locale === "fr" ? "VOIR" : "VIEW"}>
+    <Link href={href} className="project-card-image" aria-label={`${ui(locale, "Découvrir", "Explore")} ${title}`}>
+      <InteractiveSurface className="project-image-surface" label={ui(locale, "VOIR", "VIEW")}>
       <Image src={image} alt={alt} fill preload={priority} quality={80}
         sizes={wide ? "(max-width: 1600px) 94vw, 1500px" : "(max-width: 767px) 94vw, (max-width: 1600px) 46vw, 740px"} />
       </InteractiveSurface>
     </Link>
-    <button ref={trigger} type="button" className="project-card-preview" aria-haspopup="dialog" aria-label={`${locale === "fr" ? "Aperçu des images" : "Preview images"} — ${title}`} onClick={() => onPreview(trigger)}>
+    <button ref={trigger} type="button" className="project-card-preview" aria-haspopup="dialog" aria-label={`${ui(locale, "Aperçu des images", "Preview images")} — ${title}`} onClick={() => onPreview(trigger)}>
       <Maximize2 size={17} aria-hidden="true" />
     </button>
     <div className="project-card-body">
@@ -32,7 +33,7 @@ export function ProjectCard({ href, image, alt, title, label, category, year, de
       {description && <p className="mt-3 text-sm leading-relaxed text-[var(--muted)] max-w-[60ch]">{description}</p>}
       <div className="flex flex-wrap items-center justify-between gap-3 mt-5">
         <span className="section-kicker !text-[var(--subtle)]">{label}</span>
-        <Link href={href} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium">{locale === "fr" ? "Étude de cas" : "Case study"}<ArrowUpRight size={16} aria-hidden="true" /></Link>
+        <Link href={href} className="inline-flex min-h-11 items-center gap-2 text-sm font-medium">{ui(locale, "Étude de cas", "Case study")}<ArrowUpRight size={16} aria-hidden="true" /></Link>
       </div>
     </div>
   </article>;

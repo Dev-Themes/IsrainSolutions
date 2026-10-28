@@ -4,6 +4,7 @@ export const siteConfig: SiteConfig = {
   name: "PopArt Agency",
   descriptor: "Studio Créatif",
   description: {
+    ro: "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe.",
     fr: "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières.",
     en: "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders.",
   },
@@ -11,6 +12,7 @@ export const siteConfig: SiteConfig = {
   email: "hello@popart.example",
   location: "Paris, France",
   collaboration: {
+    ro: "Colaborări internaționale",
     fr: "Collaborations Internationales",
     en: "Worldwide Collaborations",
   },

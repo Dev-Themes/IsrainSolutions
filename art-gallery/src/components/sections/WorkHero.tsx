@@ -1,4 +1,5 @@
 "use client";
+import { ui } from "@/i18n/ui";
 
 import React from "react";
 import { Locale } from "@/types/portfolio";
@@ -19,7 +20,7 @@ export function WorkHero({ locale }: WorkHeroProps) {
           {/* Left Column: Massive Experimental WORK Typography & Subtext */}
           <div className="lg:col-span-8 flex flex-col justify-center">
             {/* Custom SVG Geometric Striped Lettering */}
-            <GeometricHeading text={locale === "fr" ? "PROJETS" : "WORK"} as="h1" className="mb-6 sm:mb-8" />
+            <GeometricHeading text={ui(locale, "PROJETS", "WORK")} as="h1" className="mb-6 sm:mb-8" />
 
             {/* Intro Copy */}
             <motion.p
@@ -28,7 +29,7 @@ export function WorkHero({ locale }: WorkHeroProps) {
               transition={{ duration: 0.5, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-xl lg:text-2xl font-normal text-[var(--muted)] max-w-2xl leading-relaxed tracking-normal"
             >
-              {locale === "fr" ? "Des produits qui prennent vie. Beauté, mode, parfum et objets du quotidien : explorez notre sélection de films. Chaque film, son univers." : "Products, brought to life. Beauty, fashion, fragrance and everyday objects. Explore our film selection, each with a world of its own."}
+              {ui(locale, "Des produits qui prennent vie. Beauté, mode, parfum et objets du quotidien : explorez notre sélection de films. Chaque film, son univers.", "Products, brought to life. Beauty, fashion, fragrance and everyday objects. Explore our film selection, each with a world of its own.")}
             </motion.p>
           </div>
 

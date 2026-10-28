@@ -1,4 +1,5 @@
 "use client";
+import { ui } from "@/i18n/ui";
 
 import { useEffect, useId, useRef, useState } from 'react';
 import type { Locale } from '@/types/portfolio';
@@ -140,7 +141,7 @@ export function HeroAnimated({ locale }: { locale: Locale }) {
     };
   }, [id]);
 
-  return <section ref={root} className={styles.hero} aria-label={locale === 'fr' ? 'PopArt Agency — Identité en mouvement' : 'PopArt Agency — Brand in motion'}>
+  return <section ref={root} className={styles.hero} aria-label={ui(locale, 'PopArt Agency — Identité en mouvement', 'PopArt Agency — Brand in motion')}>
     <h1 className="sr-only">PopArt Agency</h1>
     <svg viewBox="0 0 1040 600" className={styles.art} aria-hidden="true">
       <defs>
@@ -159,10 +160,10 @@ export function HeroAnimated({ locale }: { locale: Locale }) {
       </g>)}
     </svg>
     <div className={styles.controls}>
-      <span className={styles.hint}>{locale === 'fr' ? 'Explorez les formes · Touchez pour remixer' : 'Explore the shapes · Tap to remix'}</span>
+      <span className={styles.hint}>{ui(locale, 'Explorez les formes · Touchez pour remixer', 'Explore the shapes · Tap to remix')}</span>
       <div className={styles.buttons}>
-        <button type="button" onClick={() => actions.current.remix()}>{locale === 'fr' ? 'Remixer' : 'Remix'} <span aria-hidden="true">↗</span></button>
-        <button type="button" aria-pressed={paused} onClick={() => actions.current.pause()}>{paused ? (locale === 'fr' ? 'Reprendre' : 'Resume') : (locale === 'fr' ? 'Pause' : 'Pause')}</button>
+        <button type="button" onClick={() => actions.current.remix()}>{ui(locale, 'Remixer', 'Remix')} <span aria-hidden="true">↗</span></button>
+        <button type="button" aria-pressed={paused} onClick={() => actions.current.pause()}>{paused ? (ui(locale, 'Reprendre', 'Resume')) : (ui(locale, 'Pause', 'Pause'))}</button>
       </div>
     </div>
   </section>;

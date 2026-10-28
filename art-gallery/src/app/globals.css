@@ -67,6 +67,8 @@ button, a, select { -webkit-tap-highlight-color: transparent; }
 .nav-link:hover, .nav-link[aria-current="page"] { color: var(--foreground); text-decoration: underline; text-underline-offset: 8px; text-decoration-color: var(--accent); }
 .header-control { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 44px; flex-shrink: 0; border-radius: 6px; color: var(--foreground); }
 .header-control:hover { background: var(--surface-alt); }
+.language-select { min-height: 44px; min-width: 62px; padding: 8px 6px; background: transparent; color: var(--foreground); border: 1px solid var(--border); border-radius: 3px; cursor: pointer; }
+.language-select option { background: var(--background); color: var(--foreground); }
 .mobile-navigation { display: flex; flex-direction: column; max-height: calc(100svh - 80px); overflow-y: auto; padding-block: 16px 28px; border-top: 1px solid var(--border); }
 .mobile-navigation .nav-link { min-height: 48px; font-size: 18px; }
 .brand-logo-art { display: inline-flex; flex-shrink: 0; }
@@ -534,7 +536,7 @@ button, a, select { -webkit-tap-highlight-color: transparent; }
 .premium-offer-signature { --card-paper: #181b29; --card-ink: #fff9f0; --card-muted: #c4c3ce; --card-line: #444552; --accent: #ffb199; transform: translateY(-16px); box-shadow: 0 22px 55px #08218b4a; border-color: #5d6dca; }
 .premium-card-top { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
 .premium-card-top > p { font: 8px/1.6 var(--font-geist-mono),monospace; letter-spacing: .07em; }
-.premium-card-top > span { display: inline-flex; align-items: center; justify-content: center; gap: 5px; border: 1px solid var(--card-line); border-radius: 20px; padding: 5px 9px; font-size: 9px; white-space: nowrap; }
+.premium-card-top > span { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 1px solid var(--card-line); border-radius: 22px; padding: 8px 12px; font-size: 13px; font-weight: 600; line-height: 1.35; text-align: center; }
 .premium-offer-signature .premium-card-top > span { color: #202125; background: #ffc7ae; border-color: #ffc7ae; }
 .premium-film-art { position: relative; height: 186px; margin-block: 32px 20px; }
 .premium-film-count { position: absolute; inset: -24px auto auto -8px; font-size: 176px; font-weight: 600; line-height: 1; letter-spacing: -.11em; color: var(--card-ink); opacity: .055; user-select: none; }
@@ -553,12 +555,12 @@ button, a, select { -webkit-tap-highlight-color: transparent; }
 .premium-offers .video-offer-price { position: relative; margin-top: auto; border-top: 1px solid var(--card-line); padding-block: 24px 0; }
 .premium-price-label { display: flex; justify-content: space-between; align-items: center; gap: 8px; font: 8px/1.5 var(--font-geist-mono),monospace; letter-spacing: .04em; }
 .premium-price-label > span:first-child { color: var(--card-muted); }
-.premium-price-label > span:last-child { color: #8f2f45; border: 1px solid #dfc9bd; border-radius: 2px; padding: 3px 5px; }
-.premium-offer-signature .premium-price-label > span:last-child { color: #ffc7ae; border-color: #66514c; }
+.premium-price-label > span:last-child { color: #8f2f45; background: #f6e6dc; border: 1px solid #cdb0a0; border-radius: 3px; padding: 8px 10px; font: 600 16px/1.4 var(--font-geist-sans),sans-serif; letter-spacing: 0; }
+.premium-offer-signature .premium-price-label > span:last-child { color: #202125; background: #ffc7ae; border-color: #ffc7ae; }
 .premium-price-main { display: flex; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-top: 14px; }
 .premium-price-main > strong { font-size: clamp(3.8rem,5.2vw,5.3rem); line-height: 1.1; font-weight: 500; letter-spacing: -.075em; }
 .premium-price-main small { font-size: 19px; font-weight: 400; letter-spacing: -.02em; margin-left: 8px; }
-.premium-price-main > del { color: var(--card-muted); font-size: 12px; }
+.premium-price-main > del { color: var(--card-muted); font-size: clamp(22px,2vw,26px); font-weight: 500; text-decoration-thickness: 2px; text-decoration-color: currentColor; }
 .video-offer-price > p, .premium-price-per-film { color: var(--card-muted); font-size: 10px; margin-top: 7px; line-height: 1.5; }
 .premium-price-per-film { position: absolute; right: 0; bottom: 0; }
 .premium-offer-cta { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 15px 16px; margin-top: 30px; background: var(--card-ink); color: var(--card-paper); font: 9px/1.5 var(--font-geist-mono),monospace; letter-spacing: .05em; transition: background .2s; }

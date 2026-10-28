@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { locales } from "@/i18n/config";
 import { Menu, X } from "lucide-react";
 import { BrandLogo } from "@/components/branding/BrandLogo";
 import { getDictionary } from "@/i18n";
@@ -10,6 +11,7 @@ import type { Locale } from "@/types/portfolio";
 
 export function Header({ locale }: { locale: Locale }) {
   const pathname = usePathname() || "";
+  const router = useRouter();
   const dict = getDictionary(locale);
   const [open, setOpen] = useState(false);
   const [fits, setFits] = useState<boolean | null>(null);
@@ -19,8 +21,6 @@ export function Header({ locale }: { locale: Locale }) {
   const measurement = useRef<HTMLDivElement>(null);
   const [previousPath, setPreviousPath] = useState(pathname);
   if (previousPath !== pathname) { setPreviousPath(pathname); setOpen(false); }
-  const otherLocale = locale === "fr" ? "en" : "fr";
-  const switchHref = pathname.replace(`/${locale}`, `/${otherLocale}`) || `/${otherLocale}`;
   const items = [
     { href: `/${locale}`, label: dict.nav.home },
     { href: `/${locale}/work`, label: dict.nav.work },
@@ -69,7 +69,11 @@ export function Header({ locale }: { locale: Locale }) {
       </nav>
       <div className="header-actions">
         <div ref={controls} className="header-utilities">
-          <Link className="header-control font-mono text-xs" href={switchHref} hrefLang={otherLocale} aria-label={dict.nav.langSwitchAria}>{otherLocale.toUpperCase()}</Link>
+          <select className="language-select font-mono text-xs" value={locale} aria-label={dict.nav.langSwitchAria} onChange={event => {
+            const next = event.target.value;
+            const path = pathname.replace(new RegExp(`^/${locale}(?=/|$)`), `/${next}`);
+            router.push(`${path}${window.location.search}${window.location.hash}`);
+          }}>{locales.map(language => <option value={language} key={language} lang={language}>{language.toUpperCase()}</option>)}</select>
         </div>
         <button type="button" className="header-control navigation-toggle" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? dict.nav.closeMenu : dict.nav.openMenu}>
           {open ? <X size={21} /> : <Menu size={21} />}

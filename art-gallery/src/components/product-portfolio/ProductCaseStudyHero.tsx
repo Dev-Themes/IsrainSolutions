@@ -1,4 +1,5 @@
 "use client";
+import { productCategory, productTitle } from "@/lib/product-text";
 
 import React from "react";
 import Image from "next/image";
@@ -48,7 +49,7 @@ export function ProductCaseStudyHero({ product, locale }: ProductCaseStudyHeroPr
               style={{ color: accent, borderColor: "color-mix(in srgb, var(--accent) 60%, transparent)" }}
               className="text-[10px] sm:text-xs uppercase tracking-[0.22em] font-mono border px-3 py-1 rounded-xs"
             >
-              [{product.category.toUpperCase()}]
+              [{productCategory(product, locale).toUpperCase()}]
             </span>
             <span className="text-xs font-mono text-[var(--subtle)] tracking-wider">
               {product.brand} • {product.year}
@@ -56,7 +57,7 @@ export function ProductCaseStudyHero({ product, locale }: ProductCaseStudyHeroPr
           </div>
 
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-[var(--foreground)] mb-4 sm:mb-6">
-            {product.title}
+            {productTitle(product, locale)}
           </h1>
 
           <p className="text-base sm:text-xl text-[var(--muted)] font-normal leading-relaxed max-w-3xl">

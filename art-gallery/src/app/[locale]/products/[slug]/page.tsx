@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -7,6 +8,7 @@ import { Locale } from "@/types/portfolio";
 import { constructMetadata, generateProductCreativeWorkSchema } from "@/lib/seo";
 import { ProductCaseStudyHero } from "@/components/product-portfolio/ProductCaseStudyHero";
 import { ProductCaseStudyGallery } from "@/components/product-portfolio/ProductCaseStudyGallery";
+import { productTitle } from "@/lib/product-text";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) =>
@@ -29,18 +31,16 @@ export async function generateMetadata({
   if (!product) {
     return constructMetadata({
       locale: validLocale,
-      title: validLocale === "fr" ? "Produit Introuvable" : "Product Not Found",
+      title: ui(validLocale, "Produit Introuvable", "Product Not Found"),
       description:
-        validLocale === "fr"
-          ? "Cette campagne produit n'existe pas dans nos archives."
-          : "This product campaign does not exist in our archives.",
+        ui(validLocale, "Cette campagne produit n'existe pas dans nos archives.", "This product campaign does not exist in our archives."),
     });
   }
 
   return constructMetadata({
     locale: validLocale,
     path: `products/${product.slug}`,
-    title: `${product.brand} — ${product.title}`,
+    title: `${product.brand} — ${productTitle(product, validLocale)}`,
     description: product.summary[validLocale],
     ogImage: product.coverImage,
   });

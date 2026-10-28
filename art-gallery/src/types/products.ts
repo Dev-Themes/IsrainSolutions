@@ -2,7 +2,7 @@ import { ProjectLocalizedText } from "./portfolio";
 
 export interface ProductImage {
   src: string;
-  alt: ProjectLocalizedText;
+  alt: ProjectLocalizedText & { ro: string };
   caption?: ProjectLocalizedText;
 }
 
@@ -29,6 +29,8 @@ export interface ProductProject {
   slug: string;
   brand: string;
   title: string;
+  localizedTitle?: { ro: string; fr: string; en: string };
+  localizedCategory?: { ro: string; fr: string; en: string };
   category: string;
   year: number;
   accentColor: string;
@@ -37,10 +39,11 @@ export interface ProductProject {
   coverImage: string;
   galleryImages: string[];
   imageDetails: ProductImage[];
-  alt: ProjectLocalizedText;
-  tagline: ProjectLocalizedText;
-  summary: ProjectLocalizedText;
+  alt: ProjectLocalizedText & { ro: string };
+  tagline: ProjectLocalizedText & { ro: string };
+  summary: ProjectLocalizedText & { ro: string };
   concept: {
+    ro: { headline: string; paragraphs: string[] };
     fr: {
       headline: string;
       paragraphs: string[];
@@ -51,10 +54,12 @@ export interface ProductProject {
     };
   };
   creativeDirection: {
+    ro: ProductCreativeDirection;
     fr: ProductCreativeDirection;
     en: ProductCreativeDirection;
   };
   designDetails: {
+    ro: ProductDesignDetails;
     fr: ProductDesignDetails;
     en: ProductDesignDetails;
   };

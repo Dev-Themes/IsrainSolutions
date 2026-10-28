@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -17,7 +18,7 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "terms",
-    title: validLocale === "fr" ? "Mentions Légales" : "Terms & Legal",
+    title: ui(validLocale, "Mentions Légales", "Terms & Legal"),
   });
 }
 
@@ -47,14 +48,10 @@ export default async function TermsPage({
 
         <div className="space-y-6 text-sm text-[var(--muted)] font-light leading-relaxed border-t border-[var(--border)] pt-8">
           <p>
-            {validLocale === "fr"
-              ? "PopArt Agency est une agence fictive d'art contemporain et de communication visuelle conçue dans le cadre d'une démonstration d'architecture web et de design éditorial haut de gamme."
-              : "PopArt Agency is a fictional contemporary art direction and visual communication studio created as an architectural showcase of high-end editorial web design."}
+            {ui(validLocale, "PopArt Agency est une agence fictive d'art contemporain et de communication visuelle conçue dans le cadre d'une démonstration d'architecture web et de design éditorial haut de gamme.", "PopArt Agency is a fictional contemporary art direction and visual communication studio created as an architectural showcase of high-end editorial web design.")}
           </p>
           <p>
-            {validLocale === "fr"
-              ? "L'ensemble des visuels présentés au sein des études de cas sont des œuvres sous licence de libre diffusion artistique ou des créations conceptuelles originales. Tout usage sans mention préalable est proscrit."
-              : "All visuals presented across case studies are openly licensed artistic works or original conceptual compositions. Any unauthorized redistribution without proper attribution is prohibited."}
+            {ui(validLocale, "L'ensemble des visuels présentés au sein des études de cas sont des œuvres sous licence de libre diffusion artistique ou des créations conceptuelles originales. Tout usage sans mention préalable est proscrit.", "All visuals presented across case studies are openly licensed artistic works or original conceptual compositions. Any unauthorized redistribution without proper attribution is prohibited.")}
           </p>
           <p className="text-xs font-mono text-[var(--subtle)] pt-6">
             © 2026 PopArt Agency Studio Créatif — Paris, France.

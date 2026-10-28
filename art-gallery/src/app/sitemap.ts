@@ -1,7 +1,7 @@
 ﻿import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { productProjects } from "@/data/product-projects";
-import { locales } from "@/i18n/config";
+import { locales, defaultLocale } from "@/i18n/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/work", "/products", "/about", "/contact", "/privacy", "/cookies", "/terms",
@@ -12,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: route === "" || route === "/work" || route === "/products" ? "weekly" as const : "monthly" as const,
     priority: route === "" ? 1 : route === "/work" || route === "/products" ? .9 : .7,
     alternates: {
-      languages: { fr: `${siteConfig.url}/fr${route}`, en: `${siteConfig.url}/en${route}`, "x-default": `${siteConfig.url}/fr${route}` },
+      languages: { ...Object.fromEntries(locales.map(language => [language, `${siteConfig.url}/${language}${route}`])), "x-default": `${siteConfig.url}/${defaultLocale}${route}` },
     },
   })));
 }

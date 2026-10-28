@@ -31,11 +31,11 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/portfolio",
-        destination: "/fr/products",
+        destination: "/ro/products",
       },
       {
         source: "/portfolio/:slug*",
-        destination: "/fr/products/:slug*",
+        destination: "/ro/products/:slug*",
       },
     ];
   },

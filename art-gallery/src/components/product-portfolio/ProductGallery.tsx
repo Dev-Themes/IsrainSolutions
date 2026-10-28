@@ -1,4 +1,5 @@
 "use client";
+import { ui } from "@/i18n/ui";
 
 import { useState, useCallback, useRef } from "react";
 import { ProductCard } from "./ProductCard";
@@ -7,11 +8,11 @@ import type { ProductProject } from "@/types/products";
 import type { Locale } from "@/types/portfolio";
 
 const FILTERS = [
-  { id: "all", en: "All products", fr: "Tous les produits", categories: [] },
-  { id: "beauty", en: "Beauty & packaging", fr: "Beauté & packaging", categories: ["Luxury Fragrance", "Skincare", "Sustainable Packaging"] },
-  { id: "objects", en: "Home & objects", fr: "Maison & objets", categories: ["Furniture", "Lighting Design", "Home Objects", "Stationery"] },
-  { id: "technology", en: "Technology", fr: "Technologie", categories: ["Audio Technology", "Wearable Technology"] },
-  { id: "accessories", en: "Accessories", fr: "Accessoires", categories: ["Watches", "Fashion Accessories", "Eyewear"] },
+  { id: "all", ro: "Toate produsele", en: "All products", fr: "Tous les produits", categories: [] },
+  { id: "beauty", ro: "Frumusețe și ambalaje", en: "Beauty & packaging", fr: "Beauté & packaging", categories: ["Luxury Fragrance", "Skincare", "Sustainable Packaging"] },
+  { id: "objects", ro: "Casă și obiecte", en: "Home & objects", fr: "Maison & objets", categories: ["Furniture", "Lighting Design", "Home Objects", "Stationery"] },
+  { id: "technology", ro: "Tehnologie", en: "Technology", fr: "Technologie", categories: ["Audio Technology", "Wearable Technology"] },
+  { id: "accessories", ro: "Accesorii", en: "Accessories", fr: "Accessoires", categories: ["Watches", "Fashion Accessories", "Eyewear"] },
 ];
 
 export function ProductGallery({ products, locale, showFilters = true }: { products: ProductProject[]; locale: Locale; showFilters?: boolean }) {
@@ -39,10 +40,10 @@ export function ProductGallery({ products, locale, showFilters = true }: { produ
   }
   return <>
     {showFilters && <>
-      <div className="product-filters" role="group" aria-label={locale === "fr" ? "Filtrer les produits" : "Filter products"}>
+      <div className="product-filters" role="group" aria-label={ui(locale, "Filtrer les produits", "Filter products")}>
         {FILTERS.map(item => <button key={item.id} type="button" className="filter-button" aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item[locale]}</button>)}
       </div>
-      <p className="text-sm text-[var(--muted)] mb-7" role="status" aria-live="polite">{visible.length} {locale === "fr" ? "concepts de produits" : "product concepts"}</p>
+      <p className="text-sm text-[var(--muted)] mb-7" role="status" aria-live="polite">{visible.length} {ui(locale, "concepts de produits", "product concepts")}</p>
     </>}
     <div className="product-grid">
       {displayed.map((product, index) => <ProductCard key={product.id} product={product} locale={locale} priority={showFilters && index === 0} onOpenLightbox={handleOpenLightbox} />)}

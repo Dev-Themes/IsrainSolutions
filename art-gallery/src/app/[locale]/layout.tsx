@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
@@ -49,7 +50,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   const validLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
-  const siteSchemas = [generateOrganizationSchema(), generateWebsiteSchema()];
+  const siteSchemas = [generateOrganizationSchema(validLocale), generateWebsiteSchema()];
 
   return (
     <html
@@ -70,7 +71,7 @@ export default async function LocaleLayout({
         className="min-h-screen flex flex-col font-sans overflow-x-hidden"
       >
         <SitePreferences>
-        <a className="skip-link" href="#main-content">{validLocale === "fr" ? "Aller au contenu" : "Skip to content"}</a>
+        <a className="skip-link" href="#main-content">{ui(validLocale, "Aller au contenu", "Skip to content")}</a>
         <Header locale={validLocale} />
         <main id="main-content" tabIndex={-1} className="flex-1 w-full overflow-x-hidden pt-16 sm:pt-20">{children}</main>
         <Footer locale={validLocale} />

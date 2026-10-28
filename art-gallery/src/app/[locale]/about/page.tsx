@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import { defaultLocale, isValidLocale } from "@/i18n/config";
@@ -15,11 +16,9 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "about",
-    title: validLocale === "fr" ? "Studio — Philosophie & Savoir-faire" : "Studio — Philosophy & Capabilities",
+    title: ui(validLocale, "Studio — Philosophie & Savoir-faire", "Studio — Philosophy & Capabilities"),
     description:
-      validLocale === "fr"
-        ? "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio PopArt Agency."
-        : "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership.",
+      ui(validLocale, "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio PopArt Agency.", "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership."),
   });
 }
 

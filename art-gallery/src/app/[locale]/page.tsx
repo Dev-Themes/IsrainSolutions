@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import { PackageSection } from "@/components/sections/PackageSection";
@@ -22,13 +23,9 @@ export async function generateMetadata({
     locale: validLocale,
     path: "",
     title:
-      validLocale === "fr"
-        ? "Publicités Vidéo Produit & Studio Créatif"
-        : "Product Video Ads & Creative Studio",
+      ui(validLocale, "Publicités Vidéo Produit & Studio Créatif", "Product Video Ads & Creative Studio"),
     description:
-      validLocale === "fr"
-        ? "Découvrez nos films produit et nos offres de 2, 3 ou 5 vidéos publicitaires. Des directions créatives distinctes pour mettre votre produit en scène."
-        : "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life.",
+      ui(validLocale, "Découvrez nos films produit et nos offres de 2, 3 ou 5 vidéos publicitaires. Des directions créatives distinctes pour mettre votre produit en scène.", "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life."),
   });
 }
 

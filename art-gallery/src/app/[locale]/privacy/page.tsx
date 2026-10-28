@@ -1,3 +1,4 @@
+import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -17,7 +18,7 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "privacy",
-    title: validLocale === "fr" ? "Politique de Confidentialité" : "Privacy Policy",
+    title: ui(validLocale, "Politique de Confidentialité", "Privacy Policy"),
   });
 }
 
@@ -47,14 +48,10 @@ export default async function PrivacyPage({
 
         <div className="space-y-6 text-sm text-[var(--muted)] font-light leading-relaxed border-t border-[var(--border)] pt-8">
           <p>
-            {validLocale === "fr"
-              ? "Le studio PopArt Agency attache une importance fondamentale à la préservation de la vie privée de ses visiteurs et collaborateurs. Nous ne collectons aucune donnée personnelle à des fins commerciales ou publicitaires."
-              : "PopArt Agency Studio places fundamental importance on preserving the privacy of our visitors and collaborators. We do not collect personal data for commercial or marketing tracking."}
+            {ui(validLocale, "Le studio PopArt Agency attache une importance fondamentale à la préservation de la vie privée de ses visiteurs et collaborateurs. Nous ne collectons aucune donnée personnelle à des fins commerciales ou publicitaires.", "PopArt Agency Studio places fundamental importance on preserving the privacy of our visitors and collaborators. We do not collect personal data for commercial or marketing tracking.")}
           </p>
           <p>
-            {validLocale === "fr"
-              ? "Les communications électroniques initiées vers hello@popart.example sont traitées dans la plus stricte confidentialité professionnelle et ne sont jamais transmises à des tiers sans accord explicite préalable."
-              : "Electronic communications initiated to hello@popart.example are handled under strict professional confidentiality and are never transmitted to third parties without prior explicit consent."}
+            {ui(validLocale, "Les communications électroniques initiées vers hello@popart.example sont traitées dans la plus stricte confidentialité professionnelle et ne sont jamais transmises à des tiers sans accord explicite préalable.", "Electronic communications initiated to hello@popart.example are handled under strict professional confidentiality and are never transmitted to third parties without prior explicit consent.")}
           </p>
           <p className="text-xs font-mono text-[var(--subtle)] pt-6">
             © 2026 PopArt Agency Studio Créatif — Paris.
