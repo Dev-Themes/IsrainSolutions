@@ -9,7 +9,7 @@ const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 const base = process.env.REVIEW_BASE_URL || "http://localhost:3000";
 const review = path.resolve(scriptDirectory, "../.animation-review");
-const clientManifest = JSON.parse(fs.readFileSync(path.resolve(scriptDirectory, "../src/data/client-video-manifest.json"), "utf8"));
+const clientManifest = JSON.parse(fs.readFileSync(path.resolve(scriptDirectory, "../src/content/media.config.json"), "utf8"));
 const totalFilms = clientManifest.length;
 const sourceFiles = fs.readdirSync(path.resolve(scriptDirectory, "../public/videos")).filter(name => /\.(mp4|webm|mov|m4v)$/i.test(name));
 assert.deepEqual(new Set(sourceFiles), new Set(clientManifest.map(item => item.source)), "Every video must be represented in the gallery");

@@ -1,0 +1,321 @@
+{
+  "offerPreviewIds": ["mos-soft-focus", "typology-roseglow", "tmb-everyday-bottle", "loewe-pistachio", "foldeat-fresh-perspective"],
+  "ro": {
+    "home": {
+      "heroHeading": "LUCRĂRI",
+      "heroSubtext": "Creăm povești vizuale care duc cultura mai departe. Direcție artistică, filme și idei fără granițe.",
+      "allProjects": "Proiecte selectate",
+      "viewProject": "Descoperă proiectul",
+      "manifestoTitle": "DĂM VIAȚĂ IDEILOR.",
+      "manifestoSubtitle": "DĂM VIAȚĂ IDEILOR.",
+      "capabilitiesTag": "01. COMPETENȚE ȘI EXPERTIZĂ",
+      "capabilitiesHeading": "Domenii de creație artistică",
+      "capabilityUi": {
+        "hint": "Explorează un domeniu și descoperă posibilitățile sale.",
+        "explore": "EXPLOREAZĂ DOMENIUL",
+        "related": "VEZI UN PROIECT",
+        "deliverables": [
+          [
+            "Concepte creative",
+            "Direcție vizuală",
+            "Universuri de campanie"
+          ],
+          [
+            "Sisteme vizuale",
+            "Tipografie",
+            "Ghiduri de identitate"
+          ],
+          [
+            "Filme de brand",
+            "Design animat",
+            "Povești vizuale"
+          ],
+          [
+            "Imagini editoriale",
+            "Fotografie artistică",
+            "Direcție fotografică"
+          ],
+          [
+            "Direcție artistică digitală",
+            "Sisteme interactive",
+            "Experiențe web"
+          ],
+          [
+            "Concepte spațiale",
+            "Instalații",
+            "Scenografie"
+          ]
+        ]
+      },
+      "capabilities": [
+        {
+          "number": "01",
+          "title": "Direcție artistică",
+          "desc": "Viziuni vizuale distincte, scenografii imersive și universuri estetice pentru branduri vizionare.",
+          "color": "#F87966"
+        },
+        {
+          "number": "02",
+          "title": "Identitate de brand",
+          "desc": "Sisteme grafice durabile, limbaje tipografice și identități vizuale personalizate.",
+          "color": "#1440FF"
+        },
+        {
+          "number": "03",
+          "title": "Film și animație",
+          "desc": "Filme-manifest, direcție cinematografică și povești vizuale în mișcare.",
+          "color": "#1440FF"
+        },
+        {
+          "number": "04",
+          "title": "Fotografie artistică",
+          "desc": "Serii editoriale de mari dimensiuni, texturi minerale, clarobscur și tiraje de artă în ediție limitată.",
+          "color": "#FF9B70"
+        },
+        {
+          "number": "05",
+          "title": "Experiențe digitale",
+          "desc": "Arhitecturi web editoriale, interacțiuni tactile și microanimații fluide.",
+          "color": "#8F2F45"
+        },
+        {
+          "number": "06",
+          "title": "Artă și instalații",
+          "desc": "Spații muzeale, sculpturi geometrice monumentale și scenografii de expoziție.",
+          "color": "#F87966"
+        }
+      ],
+      "heroTagline": "STUDIO DE CREAȚIE // DIRECȚIE ARTISTICĂ ȘI EXPERIENȚE VIZUALE",
+      "heroScrollPrompt": "DERULEAZĂ PENTRU A DESCOPERI",
+      "heroStateLabels": [
+        "01. ROȘU INTENS",
+        "02. ALBASTRU CIAN",
+        "03. ALBASTRU ELECTRIC",
+        "04. MONOCROM"
+      ],
+      "featuredTag": "01. PROIECTE REPREZENTATIVE",
+      "featuredHeading": "Lucrări selectate",
+      "featuredSubtitle": "Direcții cinematografice, identități modulare și experimente spațiale.",
+      "viewAllWork": "VEZI TOATE PROIECTELE ↗",
+      "exploreProject": "DESCOPERĂ STUDIUL DE CAZ ↗",
+      "aboutTag": "02. STUDIOUL",
+      "aboutHeading": "DESPRE NOI",
+      "aboutSubtitle": "Locul în care ideile prind formă.",
+      "aboutBody": "Mai mult decât o agenție. Un spațiu în care ideile prind formă. Imaginăm identități, filme și experiențe culturale. Credem într-un minimalism radical, în care fiecare formă, contrast și secundă de imagine exprimă o intenție sinceră și o rezonanță culturală contemporană.",
+      "aboutSupporting": "Fără formule prefabricate, îmbinăm rigoarea conceptuală elvețiană cu experimentarea formală îndrăzneață pentru a crea lucrări distincte și memorabile.",
+      "aboutLink": "DESPRE STUDIO ↗"
+    }
+  },
+  "fr": {
+    "home": {
+      "heroHeading": "WORK",
+      "heroSubtext": "Nous créons des histoires visuelles qui font avancer la culture. Art, images et idées sans frontières.",
+      "allProjects": "Projets Sélectionnés",
+      "viewProject": "Découvrir le projet",
+      "manifestoTitle": "NOUS DONNONS VIE AUX IDÉES.",
+      "manifestoSubtitle": "WE MAKE IDEAS VISIBLE.",
+      "capabilitiesTag": "01. CAPABILITÉS & EXPERTISE",
+      "capabilitiesHeading": "Champs d'intervention artistique",
+      "capabilityUi": {
+        "hint": "Explorez un domaine. Découvrez ses possibilités.",
+        "explore": "EXPLORER CE DOMAINE",
+        "related": "VOIR UN PROJET",
+        "deliverables": [
+          [
+            "Concepts créatifs",
+            "Direction visuelle",
+            "Univers de campagne"
+          ],
+          [
+            "Systèmes visuels",
+            "Typographie",
+            "Chartes de marque"
+          ],
+          [
+            "Films de marque",
+            "Motion design",
+            "Narration visuelle"
+          ],
+          [
+            "Images éditoriales",
+            "Photographie d’art",
+            "Direction photographique"
+          ],
+          [
+            "Direction artistique digitale",
+            "Systèmes interactifs",
+            "Expériences web"
+          ],
+          [
+            "Concepts spatiaux",
+            "Installations",
+            "Scénographie"
+          ]
+        ]
+      },
+      "capabilities": [
+        {
+          "number": "01",
+          "title": "Direction Artistique",
+          "desc": "Visions plastiques singulières, scénographies immersives et univers esthétiques pour marques avant-gardistes.",
+          "color": "#F87966"
+        },
+        {
+          "number": "02",
+          "title": "Identité de Marque",
+          "desc": "Systèmes graphiques pérennes, langages typographiques et chartes visuelles taillées sur-mesure.",
+          "color": "#1440FF"
+        },
+        {
+          "number": "03",
+          "title": "Film & Mouvement",
+          "desc": "Films manifestes, direction de la photographie argentique et narrations cinétiques contemporaines.",
+          "color": "#1440FF"
+        },
+        {
+          "number": "04",
+          "title": "Photographie d'Art",
+          "desc": "Séries grand format, textures minérales, clair-obscur radical et tirages d'exposition numérotés.",
+          "color": "#FF9B70"
+        },
+        {
+          "number": "05",
+          "title": "Expériences Digitales",
+          "desc": "Architecture web éditoriale, design d'interaction tactile et micro-animations fluides sans concession.",
+          "color": "#8F2F45"
+        },
+        {
+          "number": "06",
+          "title": "Art & Installations",
+          "desc": "Dispositifs spatiaux muséaux, sculptures géométriques monumentales et scénographies curatoriales.",
+          "color": "#F87966"
+        }
+      ],
+      "heroTagline": "STUDIO CRÉATIF // DIRECTION ARTISTIQUE & EXPÉRIENCES VISUELLES",
+      "heroScrollPrompt": "DÉFILER POUR DÉCOUVRIR",
+      "heroStateLabels": [
+        "01. ROUGE VIF",
+        "02. BLEU CYAN",
+        "03. BLEU ÉLECTRIQUE",
+        "04. MONOCHROME"
+      ],
+      "featuredTag": "01. PROJETS PHARES",
+      "featuredHeading": "Travaux Sélectionnés",
+      "featuredSubtitle": "Directions cinématiques, identités modulaires et expérimentations spatiales.",
+      "viewAllWork": "VOIR TOUS LES PROJETS ↗",
+      "exploreProject": "VOIR L'ÉTUDE DE CAS ↗",
+      "aboutTag": "02. LE STUDIO",
+      "aboutHeading": "ABOUT",
+      "aboutSubtitle": "L'espace où les idées prennent forme.",
+      "aboutBody": "Plus qu'une agence. Un espace où les idées prennent forme. Nous imaginons des identités, des images et des expériences culturelles. Nous croyons en un minimalisme radical, où chaque forme, chaque contraste et chaque seconde d'image doit porter une intention sincère et une résonance culturelle contemporaine.",
+      "aboutSupporting": "Sans formule préfabriquée, nous confrontons la rigueur conceptuelle suisse aux expérimentations formelles les plus audacieuses pour concevoir des œuvres singulières et mémorables.",
+      "aboutLink": "À PROPOS DU STUDIO ↗"
+    }
+  },
+  "en": {
+    "home": {
+      "heroHeading": "WORK",
+      "heroSubtext": "We make visual stories that move culture forward. Art direction, moving image and ideas without borders.",
+      "allProjects": "Selected Projects",
+      "viewProject": "Explore Project",
+      "manifestoTitle": "WE MAKE IDEAS VISIBLE.",
+      "manifestoSubtitle": "NOUS DONNONS PopArt Agency AUX IDÉES.",
+      "capabilitiesTag": "01. CAPABILITIES & EXPERTISE",
+      "capabilitiesHeading": "Fields of Artistic Practice",
+      "capabilityUi": {
+        "hint": "Explore a discipline. See where it can take you.",
+        "explore": "EXPLORE THE DISCIPLINE",
+        "related": "VIEW RELATED WORK",
+        "deliverables": [
+          [
+            "Creative concepts",
+            "Visual direction",
+            "Campaign worlds"
+          ],
+          [
+            "Identity systems",
+            "Typography",
+            "Brand guidelines"
+          ],
+          [
+            "Brand films",
+            "Motion design",
+            "Visual storytelling"
+          ],
+          [
+            "Editorial imagery",
+            "Art photography",
+            "Image direction"
+          ],
+          [
+            "Digital art direction",
+            "Interactive systems",
+            "Web experiences"
+          ],
+          [
+            "Spatial concepts",
+            "Installations",
+            "Exhibition design"
+          ]
+        ]
+      },
+      "capabilities": [
+        {
+          "number": "01",
+          "title": "Creative Direction",
+          "desc": "Singular visual visions, immersive scenographies and aesthetic universes crafted for forward-thinking brands.",
+          "color": "#F87966"
+        },
+        {
+          "number": "02",
+          "title": "Brand Identity",
+          "desc": "Enduring graphic systems, typographic languages and bespoke brand identities built to last.",
+          "color": "#1440FF"
+        },
+        {
+          "number": "03",
+          "title": "Film & Motion",
+          "desc": "Manifesto films, analog cinematography direction and kinetic visual storytelling.",
+          "color": "#1440FF"
+        },
+        {
+          "number": "04",
+          "title": "Fine Art Photography",
+          "desc": "Large-format editorial series, tactile mineral textures, radical chiaroscuro and limited edition art prints.",
+          "color": "#FF9B70"
+        },
+        {
+          "number": "05",
+          "title": "Digital Experiences",
+          "desc": "Editorial web architectures, tactile interaction design and fluid micro-animations without compromise.",
+          "color": "#8F2F45"
+        },
+        {
+          "number": "06",
+          "title": "Art & Installations",
+          "desc": "Museum spatial environments, monumental geometric sculptures and curatorial exhibition design.",
+          "color": "#F87966"
+        }
+      ],
+      "heroTagline": "STUDIO CRÉATIF // ART DIRECTION & VISUAL EXPERIENCES",
+      "heroScrollPrompt": "SCROLL TO EXPLORE",
+      "heroStateLabels": [
+        "01. BOLD RED",
+        "02. CYAN BLUE",
+        "03. ELECTRIC BLUE",
+        "04. MONOCHROME"
+      ],
+      "featuredTag": "01. FEATURED PROJECTS",
+      "featuredHeading": "Selected Work",
+      "featuredSubtitle": "Cinematic directions, modular identities and spatial experiments.",
+      "viewAllWork": "VIEW ALL WORK ↗",
+      "exploreProject": "EXPLORE CASE STUDY ↗",
+      "aboutTag": "02. THE STUDIO",
+      "aboutHeading": "ABOUT",
+      "aboutSubtitle": "The space where ideas take form.",
+      "aboutBody": "More than an agency. A space where ideas take shape. We imagine identities, moving images and cultural experiences. We believe in radical minimalism, where every form, every contrast, and every second of visual rhythm must carry sincere intent and contemporary cultural resonance.",
+      "aboutSupporting": "Free from prepackaged formulas, we marry Swiss conceptual discipline with fearless formal exploration to conceive singular, unforgettable work.",
+      "aboutLink": "ABOUT THE STUDIO ↗"
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "updated": "2026-10-29",
+  "editorialStatus": "Draft for business owner review. Confirm operator identity, real contact details, providers, retention and actual commercial arrangements before publication.",
+  "translations": {
+    "ro": {
+      "back": "Înapoi la început",
+      "label": "Informații legale",
+      "updatedLabel": "Ultima actualizare",
+      "contactLabel": "Pentru întrebări, contactează studioul.",
+      "title": "Politica de confidențialitate",
+      "intro": "Această pagină explică interacțiunile disponibile pe site și informațiile care pot fi implicate atunci când ne contactezi sau vizitezi site-ul.",
+      "sections": [
+        {
+          "heading": "Contact prin e-mail",
+          "paragraphs": [
+            "Butoanele de contact deschid aplicația ta de e-mail. Site-ul nu trimite automat mesajul și nu include un formular de cont sau de plată. Dacă ne scrii, ne transmiți adresa de e-mail și informațiile pe care alegi să le incluzi."
+          ]
+        },
+        {
+          "heading": "Informații din solicitări",
+          "paragraphs": [
+            "Informațiile din corespondență sunt folosite pentru a răspunde solicitării și pentru a discuta sau administra o posibilă colaborare. Evită să trimiți informații sensibile care nu sunt necesare proiectului."
+          ]
+        },
+        {
+          "heading": "Găzduire și servicii externe",
+          "paragraphs": [
+            "Încărcarea site-ului și a fișierelor sale implică transmiterea unor informații tehnice, precum adresa IP și date despre browser, către infrastructura de găzduire. Dacă urmezi un link extern sau trimiți un e-mail, se aplică și politicile serviciilor respective."
+          ]
+        },
+        {
+          "heading": "Întrebări despre date",
+          "paragraphs": [
+            "Contactează studioul pentru întrebări despre informațiile trimise sau pentru a solicita corectarea ori ștergerea acestora. Informațiile despre operator, furnizori, perioade de păstrare și temeiurile prelucrării trebuie confirmate de operator înainte de publicarea versiunii finale a acestei politici."
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "back": "Retour à l’accueil",
+      "label": "Informations légales",
+      "updatedLabel": "Dernière mise à jour",
+      "contactLabel": "Pour toute question, contactez le studio.",
+      "title": "Politique de confidentialité",
+      "intro": "Cette page explique les interactions proposées sur le site et les informations pouvant être concernées lorsque vous le consultez ou nous contactez.",
+      "sections": [
+        {
+          "heading": "Contact par e-mail",
+          "paragraphs": [
+            "Les boutons de contact ouvrent votre application de messagerie. Le site n’envoie pas automatiquement le message et ne propose pas de formulaire de compte ou de paiement. Si vous nous écrivez, vous nous transmettez votre adresse e-mail et les informations que vous choisissez d’inclure."
+          ]
+        },
+        {
+          "heading": "Informations dans les demandes",
+          "paragraphs": [
+            "Les informations contenues dans la correspondance servent à répondre à votre demande et à discuter ou gérer une éventuelle collaboration. Évitez d’envoyer des informations sensibles inutiles au projet."
+          ]
+        },
+        {
+          "heading": "Hébergement et services externes",
+          "paragraphs": [
+            "Le chargement du site et de ses fichiers transmet des informations techniques, comme l’adresse IP et des données sur le navigateur, à l’infrastructure d’hébergement. Les politiques des services concernés s’appliquent également si vous suivez un lien externe ou envoyez un e-mail."
+          ]
+        },
+        {
+          "heading": "Questions concernant vos données",
+          "paragraphs": [
+            "Contactez le studio pour toute question sur les informations envoyées ou pour demander leur correction ou suppression. L’identité du responsable, les prestataires, les durées de conservation et les bases de traitement doivent être confirmés par l’exploitant avant publication de la version définitive de cette politique."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "back": "Back to home",
+      "label": "Legal information",
+      "updatedLabel": "Last updated",
+      "contactLabel": "For questions, contact the studio.",
+      "title": "Privacy Policy",
+      "intro": "This page explains the interactions available on the website and the information that may be involved when you visit or contact us.",
+      "sections": [
+        {
+          "heading": "Email contact",
+          "paragraphs": [
+            "Contact buttons open your email application. The website does not automatically send the message and does not include an account or payment form. If you write to us, you share your email address and the information you choose to include."
+          ]
+        },
+        {
+          "heading": "Enquiry information",
+          "paragraphs": [
+            "Information in correspondence is used to respond to your enquiry and discuss or manage a possible collaboration. Avoid sending sensitive information that is unnecessary for the project."
+          ]
+        },
+        {
+          "heading": "Hosting and external services",
+          "paragraphs": [
+            "Loading the site and its files involves sending technical information, such as an IP address and browser details, to the hosting infrastructure. If you follow an external link or send an email, the respective services’ policies also apply."
+          ]
+        },
+        {
+          "heading": "Questions about your information",
+          "paragraphs": [
+            "Contact the studio with questions about information you have sent or to request its correction or deletion. The operator’s identity, providers, retention periods and grounds for processing must be confirmed by the operator before publishing the final version of this policy."
+          ]
+        }
+      ]
+    }
+  }
+}

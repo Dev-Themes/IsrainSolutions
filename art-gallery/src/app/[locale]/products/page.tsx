@@ -1,9 +1,7 @@
-import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
 import { ProductHero } from "@/components/product-portfolio/ProductHero";
-import { ProductGallery } from "@/components/product-portfolio/ProductGallery";
-import { productProjects } from "@/data/product-projects";
+import { ProductStills } from "@/components/product-portfolio/ProductStills";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { defaultLocale, isValidLocale } from "@/i18n/config";
 import { Locale } from "@/types/portfolio";
@@ -22,7 +20,7 @@ export async function generateMetadata({
   return constructMetadata({
     locale: validLocale,
     path: "products",
-    title: ui(validLocale, "Produits — Concepts & Direction Artistique", "Products — Concepts & Creative Direction"),
+    title: dict.nav.products,
     description: dict.productsPage.heroSubtext,
   });
 }
@@ -39,7 +37,7 @@ export default async function ProductsPage({
     <div className="w-full">
       <ProductHero locale={validLocale} />
       <div className="container-popart pt-12 sm:pt-16 pb-16 sm:pb-24">
-        <ProductGallery products={productProjects} locale={validLocale} />
+        <ProductStills locale={validLocale} />
       </div>
       <ContactSection locale={validLocale} />
     </div>

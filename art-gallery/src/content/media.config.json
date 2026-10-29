@@ -21,7 +21,13 @@
     "duration": 13.955011,
     "posterTime": 9.07075715,
     "frame": 3,
-    "featured": true
+    "featured": true,
+    "visible": true,
+    "brandLabel": {
+      "ro": "FOLDEAT",
+      "fr": "FOLDEAT",
+      "en": "FOLDEAT"
+    }
   },
   {
     "id": "ricinus-hair-ritual",
@@ -43,7 +49,13 @@
     "duration": 20,
     "posterTime": 17,
     "frame": 4,
-    "featured": true
+    "featured": true,
+    "visible": true,
+    "brandLabel": {
+      "ro": "RICINUS",
+      "fr": "RICINUS",
+      "en": "RICINUS"
+    }
   },
   {
     "id": "mos-soft-focus",
@@ -65,7 +77,13 @@
     "duration": 14.666667,
     "posterTime": 9.53333355,
     "frame": 3,
-    "featured": true
+    "featured": true,
+    "visible": true,
+    "brandLabel": {
+      "ro": "MOS",
+      "fr": "MOS",
+      "en": "MOS"
+    }
   },
   {
     "id": "tmb-everyday-bottle",
@@ -87,7 +105,13 @@
     "duration": 18.25,
     "posterTime": 15.5125,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "TMB",
+      "fr": "TMB",
+      "en": "TMB"
+    }
   },
   {
     "id": "typology-roseglow",
@@ -109,7 +133,13 @@
     "duration": 11.796042,
     "posterTime": 7.6674273,
     "frame": 3,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "TYPOLOGY",
+      "fr": "TYPOLOGY",
+      "en": "TYPOLOGY"
+    }
   },
   {
     "id": "miu-miu-pages",
@@ -137,6 +167,12 @@
       "top": 0,
       "width": 608,
       "height": 1080
+    },
+    "visible": true,
+    "brandLabel": {
+      "ro": "MIU MIU",
+      "fr": "MIU MIU",
+      "en": "MIU MIU"
     }
   },
   {
@@ -159,7 +195,13 @@
     "duration": 28.675238,
     "posterTime": 24.3739523,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "GENTLE MONSTER",
+      "fr": "GENTLE MONSTER",
+      "en": "GENTLE MONSTER"
+    }
   },
   {
     "id": "burberry-trench-details",
@@ -181,7 +223,13 @@
     "duration": 16.299002,
     "posterTime": 7.334550900000001,
     "frame": 2,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "BURBERRY",
+      "fr": "BURBERRY",
+      "en": "BURBERRY"
+    }
   },
   {
     "id": "hermes-watercolour",
@@ -203,7 +251,13 @@
     "duration": 13.929116,
     "posterTime": 11.8397486,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "HERMÈS",
+      "fr": "HERMÈS",
+      "en": "HERMÈS"
+    }
   },
   {
     "id": "glossier-pocket-ritual",
@@ -225,7 +279,13 @@
     "duration": 9.424444,
     "posterTime": 2.356111,
     "frame": 1,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "GLOSSIER",
+      "fr": "GLOSSIER",
+      "en": "GLOSSIER"
+    }
   },
   {
     "id": "balenciaga-black-bag",
@@ -247,7 +307,13 @@
     "duration": 5.059093,
     "posterTime": 4.3002290499999996,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "BALENCIAGA",
+      "fr": "BALENCIAGA",
+      "en": "BALENCIAGA"
+    }
   },
   {
     "id": "loewe-pistachio",
@@ -269,7 +335,13 @@
     "duration": 15.090113,
     "posterTime": 12.826596050000001,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "LOEWE",
+      "fr": "LOEWE",
+      "en": "LOEWE"
+    }
   },
   {
     "id": "pero-pattern-play",
@@ -291,7 +363,13 @@
     "duration": 23.590068,
     "posterTime": 15.3335442,
     "frame": 3,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "PÉRO",
+      "fr": "PÉRO",
+      "en": "PÉRO"
+    }
   },
   {
     "id": "aesop-daily-ritual",
@@ -313,7 +391,13 @@
     "duration": 15.046531,
     "posterTime": 3.76163275,
     "frame": 1,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "AESOP",
+      "fr": "AESOP",
+      "en": "AESOP"
+    }
   },
   {
     "id": "balenciaga-objects",
@@ -335,7 +419,13 @@
     "duration": 16.111791,
     "posterTime": 7.25030595,
     "frame": 2,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "BALENCIAGA",
+      "fr": "BALENCIAGA",
+      "en": "BALENCIAGA"
+    }
   },
   {
     "id": "bogdao-mineral",
@@ -357,7 +447,13 @@
     "duration": 15.786712,
     "posterTime": 3.946678,
     "frame": 1,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "BOGDAO",
+      "fr": "BOGDAO",
+      "en": "BOGDAO"
+    }
   },
   {
     "id": "loewe-apple-transformation",
@@ -379,7 +475,13 @@
     "duration": 5.778912,
     "posterTime": 4.9120752,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "LOEWE",
+      "fr": "LOEWE",
+      "en": "LOEWE"
+    }
   },
   {
     "id": "footwear-new-perspective",
@@ -401,7 +503,13 @@
     "duration": 9.192245,
     "posterTime": 4.13651025,
     "frame": 2,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "SELECȚIE DE ÎNCĂLȚĂMINTE",
+      "fr": "FOOTWEAR EDIT",
+      "en": "FOOTWEAR EDIT"
+    }
   },
   {
     "id": "hm-beauty-colour",
@@ -423,7 +531,13 @@
     "duration": 24.563855,
     "posterTime": 11.05373475,
     "frame": 2,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "H&M BEAUTY",
+      "fr": "H&M BEAUTY",
+      "en": "H&M BEAUTY"
+    }
   },
   {
     "id": "stop-motion-soft-world",
@@ -445,7 +559,13 @@
     "duration": 28.837778,
     "posterTime": 24.5121113,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "ANIMAȚIE CADRU CU CADRU",
+      "fr": "STOP-MOTION EDIT",
+      "en": "STOP-MOTION EDIT"
+    }
   },
   {
     "id": "fashion-floral-story",
@@ -467,7 +587,13 @@
     "duration": 23.334649,
     "posterTime": 1.86677192,
     "frame": 0,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "SELECȚIE DE MODĂ",
+      "fr": "FASHION EDIT",
+      "en": "FASHION EDIT"
+    }
   },
   {
     "id": "burberry-table-play",
@@ -489,7 +615,13 @@
     "duration": 10.074603,
     "posterTime": 2.51865075,
     "frame": 1,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "BURBERRY",
+      "fr": "BURBERRY",
+      "en": "BURBERRY"
+    }
   },
   {
     "id": "beauty-gloss-closeup",
@@ -511,7 +643,13 @@
     "duration": 15.124042,
     "posterTime": 1.20992336,
     "frame": 0,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "SELECȚIE DE FRUMUSEȚE",
+      "fr": "BEAUTY EDIT",
+      "en": "BEAUTY EDIT"
+    }
   },
   {
     "id": "petit-violet-puzzle",
@@ -533,7 +671,13 @@
     "duration": 11.817551,
     "posterTime": 10.04491835,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "PETIT VIOLET",
+      "fr": "PETIT VIOLET",
+      "en": "PETIT VIOLET"
+    }
   },
   {
     "id": "rollie-set-your-alarms",
@@ -555,7 +699,13 @@
     "duration": 8.114708,
     "posterTime": 3.6516186000000004,
     "frame": 2,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "ROLLIE × SHEET SOCIETY",
+      "fr": "ROLLIE × SHEET SOCIETY",
+      "en": "ROLLIE × SHEET SOCIETY"
+    }
   },
   {
     "id": "summer-in-motion",
@@ -577,7 +727,13 @@
     "duration": 15.322313,
     "posterTime": 13.023966049999999,
     "frame": 4,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "SELECȚIE COTIDIANĂ",
+      "fr": "LIFESTYLE EDIT",
+      "en": "LIFESTYLE EDIT"
+    }
   },
   {
     "id": "motion-unexpected-evening",
@@ -599,6 +755,12 @@
     "duration": 13.069977,
     "posterTime": 1.04559816,
     "frame": 0,
-    "featured": false
+    "featured": false,
+    "visible": true,
+    "brandLabel": {
+      "ro": "SELECȚIE DE ANIMAȚIE",
+      "fr": "MOTION EDIT",
+      "en": "MOTION EDIT"
+    }
   }
 ]

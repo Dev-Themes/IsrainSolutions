@@ -5,6 +5,7 @@
 /docs
 /scripts
 /AGENTS.md
+/CLIENT-EDITING-GUIDE.md
 /*.log
 /*.tsbuildinfo
 /.env.example

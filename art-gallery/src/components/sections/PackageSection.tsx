@@ -4,23 +4,23 @@ import Image from "next/image";
 import { ArrowUpRight, Check, Sparkles } from "lucide-react";
 import { videoOffers, formatOfferPrice } from "@/data/video-offers";
 import { workSamples } from "@/data/work-samples";
+import homeContent from "@/content/pages/home.config.json";
 import type { Locale } from "@/types/portfolio";
 
 export function PackageSection({ locale }: { locale: Locale }) {
-  const fr = locale === "fr";
-  const names = locale === "ro" ? ["PRIMUL CADRU", "SEMNĂTURA", "IMAGINEA COMPLETĂ"] : fr ? ["PREMIÈRE PRISE", "LA SIGNATURE", "LE GRAND JEU"] : ["THE FIRST TAKE", "THE SIGNATURE", "THE FULL PICTURE"];
-  const previews = ["mos-soft-focus", "typology-roseglow", "tmb-everyday-bottle", "loewe-pistachio", "foldeat-fresh-perspective"].map(id => {
-    const sample = workSamples.find(sample => sample.id === id)!;
-    return sample.media.thumbnail ?? sample.media.poster;
+  const previews = homeContent.offerPreviewIds.flatMap(id => {
+    const sample = workSamples.find(item => item.id === id);
+    return sample ? [sample.media.thumbnail ?? sample.media.poster] : [];
   });
+  if (!previews.length) previews.push(workSamples[0].media.poster);
   return <section id="packages" className="premium-offers video-offers section-space" aria-labelledby="packages-title">
     <svg className="premium-offer-orbit" viewBox="0 0 320 320" fill="none" aria-hidden="true"><circle cx="160" cy="160" r="150" /><circle cx="160" cy="160" r="110" /><circle cx="160" cy="160" r="70" /><path d="M0 160H320M160 0V320M47 47L273 273M47 273L273 47" /></svg>
     <div className="container-popart">
       <div className="premium-offer-eyebrow"><p>02 / {ui(locale, "L'ÉDITION CRÉATIVE", "THE CREATIVE EDIT")}</p><span><i />{ui(locale, "OFFRES DE LANCEMENT", "FOUNDING OFFERS")}</span></div>
       <div className="premium-offer-heading"><h2 id="packages-title"><span>{ui(locale, "Attirez", "Make them")}</span><em>{ui(locale, "tous les regards.", "look twice.")}</em></h2><div><Sparkles size={28} strokeWidth={1.2} aria-hidden="true" /><p>{ui(locale, "Votre produit mérite mieux qu'un simple défilement.", "Your product deserves more than a scroll.")}</p><span>{ui(locale, "Deux, trois ou cinq vidéos. Des idées distinctes. Une impression qui reste.", "Two, three or five videos. Distinct ideas. One lasting impression.")}</span></div></div>
       <div className="video-offer-grid">
-        {videoOffers.map((offer, index) => <article className={`video-offer premium-offer-card ${index === 1 ? "premium-offer-signature" : ""}`} key={offer.count}>
-          <div className="premium-card-top"><p>0{index + 1} / {names[index]}</p><span>{index === 1 && <Sparkles size={12} aria-hidden="true" />}{offer.badge[locale]}</span></div>
+        {videoOffers.map((offer, index) => <article className={`video-offer premium-offer-card ${offer.recommended ? "premium-offer-signature" : ""}`} key={offer.count}>
+          <div className="premium-card-top"><p>0{index + 1} / {offer.name[locale]}</p><span>{offer.recommended && <Sparkles size={12} aria-hidden="true" />}{offer.badge[locale]}</span></div>
           <div className="premium-film-art" aria-hidden="true"><span className="premium-film-count">0{offer.count}</span><div className="premium-film-stack">{Array.from({ length: offer.count }, (_, frame) => <span className="premium-film-frame" key={frame} style={{ "--frame": frame, "--frames": offer.count } as React.CSSProperties}><Image src={previews[(index + frame) % previews.length]} alt="" fill sizes="110px" quality={80} loading="eager" /><i>0{frame + 1}</i></span>)}</div><span className="premium-film-caption">POPART / {ui(locale, "FILMS PRODUIT", "PRODUCT FILMS")}</span></div>
           <h3>{offer.count}<span>{ui(locale, "vidéos", "videos")}</span></h3>
           <p className="premium-card-description">{offer.description[locale]}</p>

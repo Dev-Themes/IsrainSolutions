@@ -1,0 +1,71 @@
+{
+  "ro": {
+    "productsPage": {
+      "eyebrow": "PRODUSE ÎN PRIM-PLAN",
+      "heroHeading": "PRODUSE.",
+      "heroSubtext": "O selecție de imagini din filmele noastre de produs. Frumusețe, modă, parfumuri și obiecte cotidiene, surprinse într-un singur cadru.",
+      "allProducts": "Galerie de produse",
+      "viewProject": "VEZI PROIECTUL",
+      "backToProducts": "Înapoi la produse",
+      "speculativeBadge": "Concept de design speculativ",
+      "overviewTitle": "01. Concept și intenție",
+      "artDirectionTitle": "02. Direcție artistică și materiale",
+      "paletteSubtitle": "Paleta cromatică",
+      "galleryTitle": "03. Galerie vizuală și detalii",
+      "specificationsTitle": "04. Specificații și inginerie",
+      "materialsLabel": "Materiale selectate",
+      "specsLabel": "Specificații tehnice",
+      "innovationLabel": "Inovație în design",
+      "relatedTitle": "Alte studii de produs",
+      "nextProduct": "Conceptul următor",
+      "prevProduct": "Conceptul anterior",
+      "lightboxAria": "Mărește imaginea din portofoliu"
+    }
+  },
+  "fr": {
+    "productsPage": {
+      "eyebrow": "PLEIN CADRE SUR LES PRODUITS",
+      "heroHeading": "PRODUITS.",
+      "heroSubtext": "Une sélection d’images issues de nos films produit. Beauté, mode, parfums et objets du quotidien, saisis en une image.",
+      "allProducts": "Galerie de produits",
+      "viewProject": "VOIR LE PROJET",
+      "backToProducts": "Retour aux Produits",
+      "speculativeBadge": "Concept de Design Spéculatif",
+      "overviewTitle": "01. Concept & Intention",
+      "artDirectionTitle": "02. Direction Artistique & Matières",
+      "paletteSubtitle": "Palette de résonance chromatique",
+      "galleryTitle": "03. Galerie Visuelle & Détails",
+      "specificationsTitle": "04. Spécifications & Ingénierie",
+      "materialsLabel": "Matériaux Sélectionnés",
+      "specsLabel": "Spécifications Techniques",
+      "innovationLabel": "Innovation de Conception",
+      "relatedTitle": "Autres études de produits",
+      "nextProduct": "Concept Suivant",
+      "prevProduct": "Concept Précédent",
+      "lightboxAria": "Agrandir l'image portfolio"
+    }
+  },
+  "en": {
+    "productsPage": {
+      "eyebrow": "PRODUCTS IN FOCUS",
+      "heroHeading": "PRODUCTS.",
+      "heroSubtext": "A selection of stills from our product films. Beauty, fashion, fragrance and everyday objects, captured in a single frame.",
+      "allProducts": "Product gallery",
+      "viewProject": "VIEW PROJECT",
+      "backToProducts": "Back to Products",
+      "speculativeBadge": "Speculative Design Concept",
+      "overviewTitle": "01. Concept & Intent",
+      "artDirectionTitle": "02. Creative Direction & Materials",
+      "paletteSubtitle": "Chromatic resonance palette",
+      "galleryTitle": "03. Visual Gallery & Details",
+      "specificationsTitle": "04. Specifications & Engineering",
+      "materialsLabel": "Selected Materials",
+      "specsLabel": "Technical Specifications",
+      "innovationLabel": "Design Innovation",
+      "relatedTitle": "More product studies",
+      "nextProduct": "Next Concept",
+      "prevProduct": "Previous Concept",
+      "lightboxAria": "Expand portfolio image"
+    }
+  }
+}

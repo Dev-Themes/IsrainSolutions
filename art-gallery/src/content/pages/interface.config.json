@@ -1,0 +1,557 @@
+{
+  "Studio — Philosophy & Capabilities": {
+    "en": "Studio — Philosophy & Capabilities",
+    "ro": "Studio — Filozofie și competențe",
+    "fr": "Studio — Philosophie & Savoir-faire"
+  },
+  "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership.": {
+    "en": "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership.",
+    "ro": "Mai mult decât o agenție. Un spațiu în care ideile prind formă. Descoperă viziunea, domeniile și direcția creativă a studioului PopArt Agency.",
+    "fr": "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio PopArt Agency."
+  },
+  "Contact & Collaborations — Paris": {
+    "en": "Contact & Collaborations — Paris",
+    "ro": "Contact și colaborări — Paris",
+    "fr": "Contact & Collaborations — Paris"
+  },
+  "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions.": {
+    "en": "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions.",
+    "ro": "Începe o colaborare artistică cu studioul PopArt Agency din Paris. Direcție artistică, identitate vizuală și proiecte culturale.",
+    "fr": "Initiez une collaboration artistique avec le Studio PopArt Agency à Paris. Direction artistique, identité visuelle et projets culturels."
+  },
+  "Cookie Policy": {
+    "en": "Cookie Policy",
+    "ro": "Politica privind cookie-urile",
+    "fr": "Gestion des Cookies"
+  },
+  "This website strictly uses essential technical mechanisms required for navigation and remembering your language selection (Romanian, French or English).": {
+    "en": "This website strictly uses essential technical mechanisms required for navigation and remembering your language selection (Romanian, French or English).",
+    "ro": "Acest site folosește doar mecanismele tehnice esențiale pentru navigare și pentru selectarea limbii de afișare: română, franceză sau engleză.",
+    "fr": "Ce site web utilise uniquement les mécanismes techniques strictement nécessaires à la navigation et à la mémorisation de votre langue de consultation (Roumain, Français ou Anglais)."
+  },
+  "No third-party trackers, advertising pixels, or invasive behavioral telemetry are deployed across this platform.": {
+    "en": "No third-party trackers, advertising pixels, or invasive behavioral telemetry are deployed across this platform.",
+    "ro": "Această platformă nu utilizează instrumente de urmărire de la terți, pixeli publicitari sau sisteme invazive de analiză comportamentală.",
+    "fr": "Aucun traceur tiers, pixel publicitaire ou outil invasif d'analyse comportementale n'est déployé sur cette plateforme."
+  },
+  "Skip to content": {
+    "en": "Skip to content",
+    "ro": "Sari la conținut",
+    "fr": "Aller au contenu"
+  },
+  "Product Video Ads & Creative Studio": {
+    "en": "Product Video Ads & Creative Studio",
+    "ro": "Reclame video de produs și studio de creație",
+    "fr": "Publicités Vidéo Produit & Studio Créatif"
+  },
+  "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life.": {
+    "en": "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life.",
+    "ro": "Descoperă filmele noastre de produs și pachetele de 2, 3 sau 5 reclame video. Direcții creative distincte care dau viață produsului tău.",
+    "fr": "Découvrez nos films produit et nos offres de 2, 3 ou 5 vidéos publicitaires. Des directions créatives distinctes pour mettre votre produit en scène."
+  },
+  "Privacy Policy": {
+    "en": "Privacy Policy",
+    "ro": "Politica de confidențialitate",
+    "fr": "Politique de Confidentialité"
+  },
+  "PopArt Agency Studio places fundamental importance on preserving the privacy of our visitors and collaborators. We do not collect personal data for commercial or marketing tracking.": {
+    "en": "PopArt Agency Studio places fundamental importance on preserving the privacy of our visitors and collaborators. We do not collect personal data for commercial or marketing tracking.",
+    "ro": "Studioul PopArt Agency acordă o importanță fundamentală protejării confidențialității vizitatorilor și colaboratorilor săi. Nu colectăm date personale pentru urmărire comercială sau de marketing.",
+    "fr": "Le studio PopArt Agency attache une importance fondamentale à la préservation de la vie privée de ses visiteurs et collaborateurs. Nous ne collectons aucune donnée personnelle à des fins commerciales ou publicitaires."
+  },
+  "Electronic communications initiated to hello@popart.example are handled under strict professional confidentiality and are never transmitted to third parties without prior explicit consent.": {
+    "en": "Electronic communications initiated to hello@popart.example are handled under strict professional confidentiality and are never transmitted to third parties without prior explicit consent.",
+    "ro": "Comunicările electronice trimise la hello@popart.example sunt tratate cu strictă confidențialitate profesională și nu sunt transmise terților fără acordul explicit prealabil.",
+    "fr": "Les communications électroniques initiées vers hello@popart.example sont traitées dans la plus stricte confidentialité professionnelle et ne sont jamais transmises à des tiers sans accord explicite préalable."
+  },
+  "Products — Concepts & Creative Direction": {
+    "en": "Products — Concepts & Creative Direction",
+    "ro": "Produse — Concepte și direcție artistică",
+    "fr": "Produits — Concepts & Direction Artistique"
+  },
+  "Product Not Found": {
+    "en": "Product Not Found",
+    "ro": "Produsul nu a fost găsit",
+    "fr": "Produit Introuvable"
+  },
+  "This product campaign does not exist in our archives.": {
+    "en": "This product campaign does not exist in our archives.",
+    "ro": "Această campanie de produs nu există în arhiva noastră.",
+    "fr": "Cette campagne produit n'existe pas dans nos archives."
+  },
+  "Terms & Legal": {
+    "en": "Terms & Legal",
+    "ro": "Termeni și informații legale",
+    "fr": "Mentions Légales"
+  },
+  "PopArt Agency is a fictional contemporary art direction and visual communication studio created as an architectural showcase of high-end editorial web design.": {
+    "en": "PopArt Agency is a fictional contemporary art direction and visual communication studio created as an architectural showcase of high-end editorial web design.",
+    "ro": "PopArt Agency este un studio fictiv de direcție artistică contemporană și comunicare vizuală, creat pentru a ilustra o arhitectură web și un design editorial de înaltă calitate.",
+    "fr": "PopArt Agency est une agence fictive d'art contemporain et de communication visuelle conçue dans le cadre d'une démonstration d'architecture web et de design éditorial haut de gamme."
+  },
+  "All visuals presented across case studies are openly licensed artistic works or original conceptual compositions. Any unauthorized redistribution without proper attribution is prohibited.": {
+    "en": "All visuals presented across case studies are openly licensed artistic works or original conceptual compositions. Any unauthorized redistribution without proper attribution is prohibited.",
+    "ro": "Toate materialele vizuale prezentate în studiile de caz sunt lucrări artistice cu licență de distribuire liberă sau compoziții conceptuale originale. Redistribuirea neautorizată fără atribuirea corespunzătoare este interzisă.",
+    "fr": "L'ensemble des visuels présentés au sein des études de cas sont des œuvres sous licence de libre diffusion artistique ou des créations conceptuelles originales. Tout usage sans mention préalable est proscrit."
+  },
+  "PopArt Agency Creative Studio — Home": {
+    "en": "PopArt Agency Creative Studio — Home",
+    "ro": "Studioul de creație PopArt Agency — Acasă",
+    "fr": "PopArt Agency Studio Créatif — Accueil"
+  },
+  "Creative Studio": {
+    "en": "Creative Studio",
+    "ro": "Studio de creație",
+    "fr": "Studio Créatif"
+  },
+  "Hover or tap to reveal": {
+    "en": "Hover or tap to reveal",
+    "ro": "Treci cursorul sau apasă pentru a dezvălui",
+    "fr": "Survoler ou toucher pour révéler"
+  },
+  "Watch the film": {
+    "en": "Watch the film",
+    "ro": "Vezi filmul",
+    "fr": "Voir le film"
+  },
+  "View the creative": {
+    "en": "View the creative",
+    "ro": "Vezi creația",
+    "fr": "Voir la création"
+  },
+  "PLAY": {
+    "en": "PLAY",
+    "ro": "REDARE",
+    "fr": "VOIR"
+  },
+  "Product ad gallery": {
+    "en": "Product ad gallery",
+    "ro": "Galerie de reclame de produs",
+    "fr": "Galerie de publicités produit"
+  },
+  "Filter films": {
+    "en": "Filter films",
+    "ro": "Filtrează filmele",
+    "fr": "Filtrer les films"
+  },
+  "films to explore": {
+    "en": "films to explore",
+    "ro": "filme de descoperit",
+    "fr": "films à découvrir"
+  },
+  "Close": {
+    "en": "Close",
+    "ro": "Închide",
+    "fr": "Fermer"
+  },
+  "Your browser cannot play this film.": {
+    "en": "Your browser cannot play this film.",
+    "ro": "Browserul tău nu poate reda acest film.",
+    "fr": "Votre navigateur ne peut pas lire ce film."
+  },
+  "Open the film": {
+    "en": "Open the film",
+    "ro": "Deschide filmul",
+    "fr": "Ouvrir le film"
+  },
+  "Previous creative": {
+    "en": "Previous creative",
+    "ro": "Creația anterioară",
+    "fr": "Création précédente"
+  },
+  "Next creative": {
+    "en": "Next creative",
+    "ro": "Creația următoare",
+    "fr": "Création suivante"
+  },
+  "Explore": {
+    "en": "Explore",
+    "ro": "Descoperă",
+    "fr": "Découvrir"
+  },
+  "VIEW": {
+    "en": "VIEW",
+    "ro": "VEZI",
+    "fr": "VOIR"
+  },
+  "Preview images": {
+    "en": "Preview images",
+    "ro": "Previzualizează imaginile",
+    "fr": "Aperçu des images"
+  },
+  "Case study": {
+    "en": "Case study",
+    "ro": "Studiu de caz",
+    "fr": "Étude de cas"
+  },
+  "THE PROJECT": {
+    "en": "THE PROJECT",
+    "ro": "PROIECTUL",
+    "fr": "THE PROJECT"
+  },
+  "The brief": {
+    "en": "The brief",
+    "ro": "Descrierea proiectului",
+    "fr": "Le brief"
+  },
+  "View": {
+    "en": "View",
+    "ro": "Imagine",
+    "fr": "View"
+  },
+  "Next Project": {
+    "en": "Next Project",
+    "ro": "Proiectul următor",
+    "fr": "Next Project"
+  },
+  "YEAR": {
+    "en": "YEAR",
+    "ro": "AN",
+    "fr": "YEAR"
+  },
+  "PRODUCTS": {
+    "en": "PRODUCTS",
+    "ro": "PRODUSE",
+    "fr": "PRODUITS"
+  },
+  "The direction": {
+    "en": "The direction",
+    "ro": "Direcția artistică",
+    "fr": "La direction"
+  },
+  "The study": {
+    "en": "The study",
+    "ro": "Studiul",
+    "fr": "Le projet"
+  },
+  "In this case study": {
+    "en": "In this case study",
+    "ro": "În acest studiu de caz",
+    "fr": "Dans cette étude"
+  },
+  "Concept": {
+    "en": "Concept",
+    "ro": "Concept",
+    "fr": "Concept"
+  },
+  "Art direction": {
+    "en": "Art direction",
+    "ro": "Direcție artistică",
+    "fr": "Direction artistique"
+  },
+  "Imagery": {
+    "en": "Imagery",
+    "ro": "Imagini",
+    "fr": "Images"
+  },
+  "Design details": {
+    "en": "Design details",
+    "ro": "Detalii de design",
+    "fr": "Détails"
+  },
+  "TYPOGRAPHY": {
+    "en": "TYPOGRAPHY",
+    "ro": "TIPOGRAFIE",
+    "fr": "TYPOGRAPHIE"
+  },
+  "MATERIALS & TOUCH": {
+    "en": "MATERIALS & TOUCH",
+    "ro": "MATERIALE ȘI TEXTURI",
+    "fr": "MATIÈRES & TOUCHER"
+  },
+  "PHOTOGRAPHIC DIRECTION": {
+    "en": "PHOTOGRAPHIC DIRECTION",
+    "ro": "DIRECȚIE FOTOGRAFICĂ",
+    "fr": "DIRECTION PHOTOGRAPHIQUE"
+  },
+  "concept images": {
+    "en": "concept images",
+    "ro": "imagini de concept",
+    "fr": "images du concept"
+  },
+  "Engineering & Material Rigor": {
+    "en": "Engineering & Material Rigor",
+    "ro": "Inginerie și rigoarea materialelor",
+    "fr": "Ingénierie & Rigueur Matérielle"
+  },
+  "Continue Exploring": {
+    "en": "Continue Exploring",
+    "ro": "Continuă explorarea",
+    "fr": "Poursuivre la découverte"
+  },
+  "Filter products": {
+    "en": "Filter products",
+    "ro": "Filtrează produsele",
+    "fr": "Filtrer les produits"
+  },
+  "product concepts": {
+    "en": "product concepts",
+    "ro": "concepte de produs",
+    "fr": "concepts de produits"
+  },
+  "PRODUCT CONCEPTS": {
+    "en": "PRODUCT CONCEPTS",
+    "ro": "CONCEPTE DE PRODUS",
+    "fr": "CONCEPTS DE PRODUITS"
+  },
+  "Product identities, packaging and objects. Original concepts, art-directed by PopArt Agency.": {
+    "en": "Product identities, packaging and objects. Original concepts, art-directed by PopArt Agency.",
+    "ro": "Identități de produs, ambalaje și obiecte. Concepte originale, sub direcția artistică PopArt Agency.",
+    "fr": "Identités produits, packaging et objets. Des concepts originaux signés PopArt Agency."
+  },
+  "Preview": {
+    "en": "Preview",
+    "ro": "Previzualizare",
+    "fr": "Aperçu"
+  },
+  "product videos": {
+    "en": "product videos",
+    "ro": "videoclipuri de produs",
+    "fr": "vidéos produit"
+  },
+  "Your package": {
+    "en": "Your package",
+    "ro": "Pachetul tău",
+    "fr": "Votre formule"
+  },
+  "Floor 4": {
+    "en": "Floor 4",
+    "ro": "Etajul 4",
+    "fr": "Étage 4"
+  },
+  "PRODUCTS IN MOTION": {
+    "en": "PRODUCTS IN MOTION",
+    "ro": "PRODUSE ÎN MIȘCARE",
+    "fr": "LE PRODUIT EN MOUVEMENT"
+  },
+  "Short films. Lasting impressions.": {
+    "en": "Short films. Lasting impressions.",
+    "ro": "Filme scurte. Impresii de durată.",
+    "fr": "Petits films. Grand impact."
+  },
+  "From the first glance to the final frame. A selection of films that bring products to life.": {
+    "en": "From the first glance to the final frame. A selection of films that bring products to life.",
+    "ro": "De la prima privire la ultimul cadru. O selecție de filme care dau viață produselor.",
+    "fr": "Du premier regard à la dernière image. Découvrez une sélection de films qui donnent vie aux produits."
+  },
+  "films. More ways to stand out.": {
+    "en": "films. More ways to stand out.",
+    "ro": "de filme. Mai multe moduri de a ieși în evidență.",
+    "fr": "films. Autant de façons de se démarquer."
+  },
+  "EXPLORE THE COLLECTION": {
+    "en": "EXPLORE THE COLLECTION",
+    "ro": "EXPLOREAZĂ COLECȚIA",
+    "fr": "EXPLORER LA COLLECTION"
+  },
+  "PopArt Agency — Brand in motion": {
+    "en": "PopArt Agency — Brand in motion",
+    "ro": "PopArt Agency — Identitate în mișcare",
+    "fr": "PopArt Agency — Identité en mouvement"
+  },
+  "Explore the shapes · Tap to remix": {
+    "en": "Explore the shapes · Tap to remix",
+    "ro": "Explorează formele · Apasă pentru a le recombina",
+    "fr": "Explorez les formes · Touchez pour remixer"
+  },
+  "Remix": {
+    "en": "Remix",
+    "ro": "Recombină",
+    "fr": "Remixer"
+  },
+  "Resume": {
+    "en": "Resume",
+    "ro": "Continuă",
+    "fr": "Reprendre"
+  },
+  "Pause": {
+    "en": "Pause",
+    "ro": "Pauză",
+    "fr": "Pause"
+  },
+  "THE STUDIO": {
+    "en": "THE STUDIO",
+    "ro": "STUDIOUL",
+    "fr": "LE STUDIO"
+  },
+  "Discover PopArt Agency": {
+    "en": "Discover PopArt Agency",
+    "ro": "Descoperă PopArt Agency",
+    "fr": "Discover PopArt Agency"
+  },
+  "PopArt Agency. Identities, images and objects brought to life.": {
+    "en": "PopArt Agency. Identities, images and objects brought to life.",
+    "ro": "PopArt Agency. Identități, imagini și obiecte care prind viață.",
+    "fr": "PopArt Agency. Identities, images and objects brought to life."
+  },
+  "View work": {
+    "en": "View work",
+    "ro": "Vezi lucrările",
+    "fr": "View work"
+  },
+  "Explore products": {
+    "en": "Explore products",
+    "ro": "Descoperă produsele",
+    "fr": "Explore products"
+  },
+  "Scroll to selected work": {
+    "en": "Scroll to selected work",
+    "ro": "Derulează la lucrările selectate",
+    "fr": "Scroll to selected work"
+  },
+  "PRODUCT STUDIES": {
+    "en": "PRODUCT STUDIES",
+    "ro": "STUDII DE PRODUS",
+    "fr": "PRODUCT STUDIES"
+  },
+  "A different form of expression.": {
+    "en": "A different form of expression.",
+    "ro": "O altă formă de expresie.",
+    "fr": "A different form of expression."
+  },
+  "Packaging, objects and images. Explore our collection of original product concepts.": {
+    "en": "Packaging, objects and images. Explore our collection of original product concepts.",
+    "ro": "Ambalaje, obiecte și imagini. Descoperă colecția noastră de concepte originale de produs.",
+    "fr": "Packaging, objects and images. Explore our collection of original product concepts."
+  },
+  "Explore all products": {
+    "en": "Explore all products",
+    "ro": "Descoperă toate produsele",
+    "fr": "Explore all products"
+  },
+  "THE CREATIVE EDIT": {
+    "en": "THE CREATIVE EDIT",
+    "ro": "EDIȚIA CREATIVĂ",
+    "fr": "L'ÉDITION CRÉATIVE"
+  },
+  "FOUNDING OFFERS": {
+    "en": "FOUNDING OFFERS",
+    "ro": "OFERTE DE LANSARE",
+    "fr": "OFFRES DE LANCEMENT"
+  },
+  "Make them": {
+    "en": "Make them",
+    "ro": "Atrage",
+    "fr": "Attirez"
+  },
+  "look twice.": {
+    "en": "look twice.",
+    "ro": "toate privirile.",
+    "fr": "tous les regards."
+  },
+  "Your product deserves more than a scroll.": {
+    "en": "Your product deserves more than a scroll.",
+    "ro": "Produsul tău merită mai mult decât o privire în treacăt.",
+    "fr": "Votre produit mérite mieux qu'un simple défilement."
+  },
+  "Two, three or five videos. Distinct ideas. One lasting impression.": {
+    "en": "Two, three or five videos. Distinct ideas. One lasting impression.",
+    "ro": "Două, trei sau cinci videoclipuri. Idei distincte. O impresie de durată.",
+    "fr": "Deux, trois ou cinq vidéos. Des idées distinctes. Une impression qui reste."
+  },
+  "PRODUCT FILMS": {
+    "en": "PRODUCT FILMS",
+    "ro": "FILME DE PRODUS",
+    "fr": "FILMS PRODUIT"
+  },
+  "videos": {
+    "en": "videos",
+    "ro": "videoclipuri",
+    "fr": "vidéos"
+  },
+  "Distinct creative directions": {
+    "en": "Distinct creative directions",
+    "ro": "Direcții creative distincte",
+    "fr": "Des directions créatives distinctes"
+  },
+  "FOUNDING PRICE": {
+    "en": "FOUNDING PRICE",
+    "ro": "PREȚ DE LANSARE",
+    "fr": "TARIF DE LANCEMENT"
+  },
+  "SAVE ": {
+    "en": "SAVE ",
+    "ro": "ECONOMISEȘTI ",
+    "fr": "−"
+  },
+  "en-GB": {
+    "en": "en-GB",
+    "ro": "ro-RO",
+    "fr": "fr-FR"
+  },
+  "Original price": {
+    "en": "Original price",
+    "ro": "Preț inițial",
+    "fr": "Prix initial"
+  },
+  "per package": {
+    "en": "per package",
+    "ro": "per pachet",
+    "fr": "pour la formule"
+  },
+  "video": {
+    "en": "video",
+    "ro": "videoclip",
+    "fr": "vidéo"
+  },
+  "MAKE IT HAPPEN": {
+    "en": "MAKE IT HAPPEN",
+    "ro": "ALEGE ACEST PACHET",
+    "fr": "CHOISIR CETTE FORMULE"
+  },
+  "One product. Big ambitions. Let’s make something.": {
+    "en": "One product. Big ambitions. Let’s make something.",
+    "ro": "Un produs. Ambiții mari. Hai să creăm ceva.",
+    "fr": "Un produit. Une ambition. À nous de jouer."
+  },
+  "Prices in Romanian lei (RON). Billing frequency, schedule, deliverables and terms agreed before the project starts.": {
+    "en": "Prices in Romanian lei (RON). Billing frequency, schedule, deliverables and terms agreed before the project starts.",
+    "ro": "Prețuri în lei românești (RON). Frecvența facturării, calendarul, livrabilele și condițiile se stabilesc înainte de începerea proiectului.",
+    "fr": "Prix en lei roumains (RON). Fréquence, calendrier, livrables et conditions à convenir avant le lancement."
+  },
+  "IN FREE FORM": {
+    "en": "IN FREE FORM",
+    "ro": "ÎN FORMĂ LIBERĂ",
+    "fr": "IN FREE FORM"
+  },
+  "PopArt Agency composition: geometric lettering, a red disc, blue semicircle and black halftone.": {
+    "en": "PopArt Agency composition: geometric lettering, a red disc, blue semicircle and black halftone.",
+    "ro": "Compoziție PopArt Agency: litere geometrice, un disc roșu, un semicerc albastru și texturi negre punctate.",
+    "fr": "PopArt Agency composition: geometric lettering, a red disc, blue semicircle and black halftone."
+  },
+  "Art direction. Identity. Motion.": {
+    "en": "Art direction. Identity. Motion.",
+    "ro": "Direcție artistică. Identitate. Animație.",
+    "fr": "Art direction. Identity. Motion."
+  },
+  "REMIX THE FORM": {
+    "en": "REMIX THE FORM",
+    "ro": "RECOMPUNE FORMA",
+    "fr": "REMIX THE FORM"
+  },
+  "en_US": {
+    "en": "en_US",
+    "ro": "ro_RO",
+    "fr": "en_US"
+  },
+  "fr_FR": {
+    "en": "fr_FR",
+    "ro": "ro_RO",
+    "fr": "fr_FR"
+  },
+  "en-US": {
+    "en": "en-US",
+    "ro": "ro-RO",
+    "fr": "en-US"
+  },
+  "Selected film": {
+    "en": "Selected film",
+    "ro": "Film selectat",
+    "fr": "Film sélectionné"
+  },
+  "Studio concept": {
+    "en": "Studio concept",
+    "ro": "Concept de studio",
+    "fr": "Création studio"
+  }
+}

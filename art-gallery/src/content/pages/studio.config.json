@@ -1,0 +1,248 @@
+{
+  "ro": {
+    "about": {
+      "heroHeading": "STUDIO.",
+      "introText": "Mai mult decât o agenție. Un spațiu în care ideile prind formă. Imaginăm identități, filme și experiențe culturale.",
+      "philosophyTag": "01. FILOZOFIE",
+      "philosophyTitle": "Filozofia noastră",
+      "philosophySubtitle": "Arta esențializării radicale",
+      "philosophyText": "Credem într-un minimalism radical, în care fiecare formă, contrast și secundă de ritm vizual exprimă o intenție sinceră și o rezonanță culturală contemporană.",
+      "approachTag": "02. ABORDAREA NOASTRĂ",
+      "approachTitle": "Abordarea noastră creativă",
+      "approachSubtitle": "De la intuiția plastică la precizia arhitecturală",
+      "approachText": "Abordăm fiecare colaborare ca pe o cercetare curatorială. Fără formule prefabricate, îmbinăm disciplina conceptuală elvețiană cu explorarea formală îndrăzneață pentru a concepe lucrări distincte și memorabile.",
+      "approachSteps": [
+        {
+          "number": "01",
+          "title": "Imersiune și cercetare",
+          "desc": "Explorarea arhivelor, analiza semantică și definirea direcției plastice de bază."
+        },
+        {
+          "number": "02",
+          "title": "Experimentare formală",
+          "desc": "Explorarea materialelor, prototipuri tipografice și dialogul dintre umbră și lumină."
+        },
+        {
+          "number": "03",
+          "title": "Precizie și execuție",
+          "desc": "Rafinament artizanal, măiestrie și implementare atentă în toate mediile."
+        }
+      ],
+      "disciplinesTag": "03. DOMENII / CE FACEM",
+      "disciplinesTitle": "Ce facem",
+      "disciplinesSubtitle": "Discipline artistice și meșteșug contemporan",
+      "disciplines": [
+        {
+          "title": "Direcție artistică",
+          "desc": "Creăm viziuni plastice distincte și universuri estetice imersive."
+        },
+        {
+          "title": "Identitate vizuală",
+          "desc": "Construim sisteme grafice riguroase, durabile și personalizate."
+        },
+        {
+          "title": "Spațiu și scenografie",
+          "desc": "Instalații muzeale, pavilioane culturale și scenografii de expoziție."
+        },
+        {
+          "title": "Design editorial și tipografie",
+          "desc": "Monografii de artă, publicații personalizate și caractere tipografice experimentale."
+        },
+        {
+          "title": "Film și imagine în mișcare",
+          "desc": "Filme-manifest, direcție cinematografică și narațiuni vizuale dinamice."
+        },
+        {
+          "title": "Experiențe digitale",
+          "desc": "Experiențe web editoriale concepute fără compromisuri arhitecturale."
+        }
+      ],
+      "valuesTag": "04. PRINCIPII / VALORI",
+      "valuesTitle": "Principiile noastre",
+      "values": [
+        {
+          "name": "Îndrăzneală",
+          "enName": "Îndrăzneală",
+          "text": "Contestăm convențiile vizuale prin alegeri formale neașteptate, care lasă o impresie durabilă."
+        },
+        {
+          "name": "Corectitudine",
+          "enName": "Corectitudine",
+          "text": "Punem ascultarea reciprocă, disciplina meșteșugului și respectul pentru timpul creativ în centrul fiecărei colaborări."
+        },
+        {
+          "name": "Inteligență",
+          "enName": "Inteligență",
+          "text": "Căutăm precizia conceptuală, astfel încât fiecare gest artistic să își servească firesc scopul."
+        }
+      ],
+      "contactBannerTitle": "Hai să colaborăm",
+      "contactBannerText": "Ai în minte un proiect de artă, identitate sau amenajare? Începe un dialog cu studioul nostru.",
+      "contactBannerAction": "Contactează-ne"
+    }
+  },
+  "fr": {
+    "about": {
+      "heroHeading": "STUDIO.",
+      "introText": "Plus qu'une agence. Un espace où les idées prennent forme. Nous imaginons des identités, des images et des expériences culturelles.",
+      "philosophyTag": "01. PHILOSOPHIE",
+      "philosophyTitle": "Notre Philosophie",
+      "philosophySubtitle": "L'art du dépouillement radical",
+      "philosophyText": "Nous croyons en un minimalisme radical, où chaque forme, chaque contraste et chaque seconde d'image doit porter une intention sincère et une résonance culturelle contemporaine.",
+      "approachTag": "02. NOTRE DÉMARCHE",
+      "approachTitle": "Notre Approche Créative",
+      "approachSubtitle": "De l'intuition plastique à la rigueur architecturale",
+      "approachText": "Nous abordons chaque collaboration comme une recherche curatoriale. Sans formule préfabriquée, nous confrontons la rigueur conceptuelle suisse aux expérimentations formelles les plus audacieuses pour concevoir des œuvres singulières et mémorables.",
+      "approachSteps": [
+        {
+          "number": "01",
+          "title": "Immersion & Recherche",
+          "desc": "Exploration des archives, analyse sémantique et définition du parti-pris plastique fondamental."
+        },
+        {
+          "number": "02",
+          "title": "Expérimentation Formelle",
+          "desc": "Confrontation des matières, prototypage typographique et dialogue entre ombre et lumière."
+        },
+        {
+          "number": "03",
+          "title": "Précision & Exécution",
+          "desc": "Finalisation artisanale, fabrication d'exception et déploiement millimétré sur tous supports."
+        }
+      ],
+      "disciplinesTag": "03. SAVOIR-FAIRE / WHAT WE DO",
+      "disciplinesTitle": "Ce Que Nous Faisons",
+      "disciplinesSubtitle": "Disciplines artistiques & artisanat contemporain",
+      "disciplines": [
+        {
+          "title": "Direction Artistique",
+          "desc": "Conception de visions plastiques singulières et d'univers esthétiques immersifs."
+        },
+        {
+          "title": "Identité Visuelle",
+          "desc": "Création de systèmes graphiques pérennes, rigoureux et sur-mesure."
+        },
+        {
+          "title": "Scénographie & Espaces",
+          "desc": "Installations muséales, pavillons culturels et scénographies d'exposition."
+        },
+        {
+          "title": "Édition & Typographie",
+          "desc": "Monographies artistiques, livres d'art et caractères typographiques expérimentaux."
+        },
+        {
+          "title": "Image en Mouvement",
+          "desc": "Films manifestes, direction de la photographie et narrations cinématiques."
+        },
+        {
+          "title": "Expérience Digitale",
+          "desc": "Interfaces éditoriales sans compromis architectural ou esthétique."
+        }
+      ],
+      "valuesTag": "04. PILIERS / VALUES",
+      "valuesTitle": "Nos Piliers",
+      "values": [
+        {
+          "name": "Audace",
+          "enName": "Boldness",
+          "text": "Défier le statu quo visuel et proposer des partis-pris formels inattendus qui marquent durablement les esprits."
+        },
+        {
+          "name": "Équité",
+          "enName": "Fairness",
+          "text": "Placer l'écoute mutuelle, l'exigence artisanale et le respect du temps de création au cœur de chaque collaboration."
+        },
+        {
+          "name": "Clarté",
+          "enName": "Smartness",
+          "text": "Rechercher la précision conceptuelle absolue pour que chaque geste artistique s'aligne avec son propos."
+        }
+      ],
+      "contactBannerTitle": "Travaillons Ensemble",
+      "contactBannerText": "Vous avez un projet d'art, d'identité ou de scénographie ? Initiez un dialogue avec notre studio.",
+      "contactBannerAction": "Prendre Contact"
+    }
+  },
+  "en": {
+    "about": {
+      "heroHeading": "STUDIO.",
+      "introText": "More than an agency. A space where ideas take shape. We imagine identities, moving images and cultural experiences.",
+      "philosophyTag": "01. PHILOSOPHY",
+      "philosophyTitle": "Our Philosophy",
+      "philosophySubtitle": "The art of radical reduction",
+      "philosophyText": "We believe in radical minimalism, where every form, every contrast, and every second of visual rhythm must carry sincere intent and contemporary cultural resonance.",
+      "approachTag": "02. OUR APPROACH",
+      "approachTitle": "Our Creative Approach",
+      "approachSubtitle": "From sculptural intuition to architectural precision",
+      "approachText": "We approach each commission as curatorial research. Free from prepackaged formulas, we marry Swiss conceptual discipline with fearless formal exploration to conceive singular, unforgettable work.",
+      "approachSteps": [
+        {
+          "number": "01",
+          "title": "Immersion & Research",
+          "desc": "Archive excavation, semantic analysis, and defining the foundational plastic posture."
+        },
+        {
+          "number": "02",
+          "title": "Formal Experimentation",
+          "desc": "Material confrontation, typographic prototyping, and dialogue between shadow and light."
+        },
+        {
+          "number": "03",
+          "title": "Precision & Execution",
+          "desc": "Artisanal refinement, exceptional craftsmanship, and surgical deployment across all mediums."
+        }
+      ],
+      "disciplinesTag": "03. DISCIPLINES / WHAT WE DO",
+      "disciplinesTitle": "What We Do",
+      "disciplinesSubtitle": "Artistic disciplines & contemporary craft",
+      "disciplines": [
+        {
+          "title": "Art Direction",
+          "desc": "Crafting distinct plastic visions and immersive aesthetic universes."
+        },
+        {
+          "title": "Visual Identity",
+          "desc": "Building enduring, rigorous, bespoke graphic systems."
+        },
+        {
+          "title": "Spatial & Scenography",
+          "desc": "Museum installations, cultural pavilions, and exhibition scenographies."
+        },
+        {
+          "title": "Editorial & Typography",
+          "desc": "Art monographs, bespoke publications, and experimental typefaces."
+        },
+        {
+          "title": "Moving Image & Film",
+          "desc": "Manifesto films, cinematographic direction, and kinetic visual narratives."
+        },
+        {
+          "title": "Digital Experience",
+          "desc": "Editorial web experiences crafted without architectural compromise."
+        }
+      ],
+      "valuesTag": "04. PILIERS / VALUES",
+      "valuesTitle": "Our Pillars",
+      "values": [
+        {
+          "name": "Boldness",
+          "enName": "Boldness",
+          "text": "Challenging the visual status quo with unexpected formal commitments that leave enduring impressions."
+        },
+        {
+          "name": "Fairness",
+          "enName": "Fairness",
+          "text": "Placing mutual listening, craft discipline, and respect for creative time at the center of every collaboration."
+        },
+        {
+          "name": "Smartness",
+          "enName": "Smartness",
+          "text": "Pursuing absolute conceptual precision so that every artistic gesture aligns seamlessly with its purpose."
+        }
+      ],
+      "contactBannerTitle": "Let's Collaborate",
+      "contactBannerText": "Have an art, identity, or spatial project in mind? Initiate a dialogue with our studio.",
+      "contactBannerAction": "Get in Touch"
+    }
+  }
+}

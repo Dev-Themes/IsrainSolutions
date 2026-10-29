@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import navigation from "@/content/navigation.config.json";
 import { locales } from "@/i18n/config";
 import { Menu, X } from "lucide-react";
 import { BrandLogo } from "@/components/branding/BrandLogo";
@@ -21,13 +22,7 @@ export function Header({ locale }: { locale: Locale }) {
   const measurement = useRef<HTMLDivElement>(null);
   const [previousPath, setPreviousPath] = useState(pathname);
   if (previousPath !== pathname) { setPreviousPath(pathname); setOpen(false); }
-  const items = [
-    { href: `/${locale}`, label: dict.nav.home },
-    { href: `/${locale}/work`, label: dict.nav.work },
-    { href: `/${locale}/products`, label: dict.nav.products },
-    { href: `/${locale}/about`, label: dict.nav.about },
-    { href: `/${locale}/contact`, label: dict.nav.contact },
-  ];
+  const items = navigation.header.map(item => ({ href: `/${locale}${item.href}`, label: dict.nav[item.key as keyof typeof dict.nav] }));
 
   useEffect(() => {
     let frame = 0;

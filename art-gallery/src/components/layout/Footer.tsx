@@ -1,6 +1,8 @@
 "use client";
 import { ui } from "@/i18n/ui";
 
+import navigation from "@/content/navigation.config.json";
+import { siteConfig } from "@/lib/site-config";
 import React from "react";
 import Link from "next/link";
 import { Locale } from "@/types/portfolio";
@@ -19,75 +21,17 @@ export function Footer({ locale }: FooterProps) {
       <div className="container-popart">
         {/* Upper Navigation & Metadata Region */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-8 sm:gap-12 mb-16 sm:mb-24 text-xs sm:text-sm font-normal tracking-[0.2em] uppercase">
-          {/* Main Navigation */}
           <ul className="space-y-3">
-            <li>
-              <Link
-                href={`/${locale}/work`}
-                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-              >
-                {dict.footer.work}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/products`}
-                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-              >
-                {dict.footer.products}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/about`}
-                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-              >
-                {dict.footer.about}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/contact`}
-                className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-              >
-                {dict.footer.contact}
-              </Link>
-            </li>
+            {navigation.footer.map(item => <li key={item.key}><Link href={`/${locale}${item.href}`} className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{dict.footer[item.key as keyof typeof dict.footer]}</Link></li>)}
           </ul>
-
-          {/* Legal Pages */}
           <ul className="space-y-3">
-            <li>
-              <Link
-                href={`/${locale}/privacy`}
-                className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
-              >
-                {dict.footer.privacy}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/cookies`}
-                className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
-              >
-                {dict.footer.cookies}
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={`/${locale}/terms`}
-                className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
-              >
-                {dict.footer.terms}
-              </Link>
-            </li>
+            {navigation.legal.map(item => <li key={item.key}><Link href={`/${locale}${item.href}`} className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">{dict.footer[item.key as keyof typeof dict.footer]}</Link></li>)}
           </ul>
-
           {/* Copyright Metadata */}
           <div className="col-span-2 md:col-span-1 text-left md:text-right text-[var(--muted)] tracking-widest">
-            <p>© 2026 PopArt Agency</p>
+            <p>{siteConfig.copyright}</p>
             <p className="text-[11px] text-[var(--subtle)] mt-1 normal-case tracking-normal">
-              {locale === "ro" ? "Studio de creație — Paris" : "Studio Créatif — Paris"}
+              {siteConfig.footerDescriptor[locale]}
             </p>
           </div>
         </div>
@@ -103,31 +47,8 @@ export function Footer({ locale }: FooterProps) {
         {/* Bottom Byline */}
         <div className="w-full pt-10 border-t border-[var(--border)] flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--subtle)] tracking-[0.18em] uppercase gap-4">
           <p>{dict.footer.byline}</p>
-          <div className="flex items-center space-x-6 text-[11px]">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[var(--accent)] transition-colors"
-            >
-              Instagram
-            </a>
-            <a
-              href="https://behance.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[var(--accent)] transition-colors"
-            >
-              Behance
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[var(--accent)] transition-colors"
-            >
-              LinkedIn
-            </a>
+          <div className="flex flex-wrap justify-center gap-6 text-[11px]">
+            {siteConfig.socials.map(social => <a key={social.name} href={social.url} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)] transition-colors">{social.name}</a>)}
           </div>
         </div>
       </div>

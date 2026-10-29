@@ -1,0 +1,67 @@
+{
+  "copy": {
+    "WORK": {
+      "en": "WORK",
+      "ro": "LUCRĂRI",
+      "fr": "PROJETS"
+    },
+    "Product Films & Video Ads": {
+      "en": "Product Films & Video Ads",
+      "ro": "Filme de produs și reclame video",
+      "fr": "Films Produit & Publicités Vidéo"
+    },
+    "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery.": {
+      "en": "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery.",
+      "ro": "Explorează selecția noastră de filme de produs din frumusețe, modă, parfumerie și viață cotidiană. Filtrează colecția și urmărește orice film fără să părăsești galeria.",
+      "fr": "Découvrez notre sélection de films produit : beauté, mode, parfum et lifestyle. Filtrez la collection et regardez chaque film sans quitter la galerie."
+    },
+    "Product films": {
+      "en": "Product films",
+      "ro": "Filme de produs",
+      "fr": "Films produit"
+    },
+    "Products, brought to life. Beauty, fashion, fragrance and everyday objects. Explore our film selection, each with a world of its own.": {
+      "en": "Products, brought to life. Beauty, fashion, fragrance and everyday objects. Explore our film selection, each with a world of its own.",
+      "ro": "Produse care prind viață. Frumusețe, modă, parfumuri și obiecte cotidiene. Descoperă selecția noastră de filme, fiecare cu propriul univers.",
+      "fr": "Des produits qui prennent vie. Beauté, mode, parfum et objets du quotidien : explorez notre sélection de films. Chaque film, son univers."
+    }
+  },
+  "filters": [
+    {
+      "id": "all",
+      "ro": "Toate filmele",
+      "en": "All films",
+      "fr": "Tous les films"
+    },
+    {
+      "id": "beauty",
+      "ro": "Frumusețe",
+      "en": "Beauty",
+      "fr": "Beauté"
+    },
+    {
+      "id": "lifestyle",
+      "ro": "Viață cotidiană",
+      "en": "Lifestyle",
+      "fr": "Lifestyle"
+    },
+    {
+      "id": "fashion",
+      "ro": "Modă",
+      "en": "Fashion",
+      "fr": "Mode"
+    },
+    {
+      "id": "fragrance",
+      "ro": "Parfumuri",
+      "en": "Fragrance",
+      "fr": "Parfum"
+    },
+    {
+      "id": "motion",
+      "ro": "Animație",
+      "en": "Motion",
+      "fr": "Animation"
+    }
+  ]
+}

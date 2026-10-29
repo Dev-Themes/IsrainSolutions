@@ -1,3 +1,4 @@
+import { videoOffers } from "@/data/video-offers";
 import { ui } from "@/i18n/ui";
 import React from "react";
 import type { Metadata } from "next";
@@ -33,6 +34,6 @@ export default async function ContactPage({
   const validLocale: Locale = isValidLocale(locale) ? locale : defaultLocale;
 
   const query = await searchParams;
-  const offer = typeof query.offer === "string" && ["2", "3", "5"].includes(query.offer) ? Number(query.offer) : undefined;
+  const offer = typeof query.offer === "string" && videoOffers.some(item => String(item.count) === query.offer) ? Number(query.offer) : undefined;
   return <ContactSection locale={validLocale} as="h1" offer={offer} />;
 }

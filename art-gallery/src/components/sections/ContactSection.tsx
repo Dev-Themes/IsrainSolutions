@@ -21,11 +21,11 @@ export function ContactSection({ locale, as = "h2", offer }: { locale: Locale; a
   }, [copyState]);
   const offerLabel = offer ? `${offer} ${ui(locale, "vidéos produit", "product videos")}` : "";
   const emailHref = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`PopArt Agency — ${offerLabel ? `${offerLabel} / ` : ""}${copy.topics[topic]}`)}`;
-  const socials = [{ name: "Facebook", url: "https://facebook.com" }, ...siteConfig.socials];
+  const socials = siteConfig.socials;
 
   return <section className="popart-contact contact-experience dark-section section-space" aria-label={dict.contact.heroHeading}>
     <div className="container-popart">
-      <div className="contact-eyebrow"><span className="section-kicker">{copy.eyebrow}</span><span>{dict.contact.collaborations}</span></div>
+      <div className="contact-eyebrow"><span className="section-kicker">{copy.eyebrow}</span><span>{siteConfig.collaboration[locale]}</span></div>
       <div className="contact-main">
         <div className="contact-message">
           <GeometricHeading text="CONTACT" as={as} />
@@ -45,8 +45,8 @@ export function ContactSection({ locale, as = "h2", offer }: { locale: Locale; a
         </InteractiveSurface>
       </div>
       <div className="contact-bottom">
-        <div><h3>{copy.workWithUs}</h3><address><p>14 Rue de Charonne, {ui(locale, "Étage 4", "Floor 4")}</p><p>75011 Paris, {locale === "ro" ? "Franța" : "France"}</p></address></div>
-        <div className="contact-hours"><p>{dict.contact.hoursNote}</p><span>{dict.contact.location}</span></div>
+        <div><h3>{copy.workWithUs}</h3><address>{siteConfig.address[locale].map(line => <p key={line}>{line}</p>)}</address></div>
+        <div className="contact-hours"><p>{dict.contact.hoursNote}</p><span>{siteConfig.location}</span></div>
         <nav className="contact-socials" aria-label={copy.socialLabel}>{socials.map(social => <a href={social.url} key={social.name} target="_blank" rel="noopener noreferrer"><span>{social.name}</span><ArrowUpRight size={16} aria-hidden="true" /></a>)}</nav>
       </div>
     </div>

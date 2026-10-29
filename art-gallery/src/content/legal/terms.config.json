@@ -1,0 +1,108 @@
+{
+  "updated": "2026-10-29",
+  "editorialStatus": "Draft for business owner review. Confirm operator identity, real contact details, providers, retention and actual commercial arrangements before publication.",
+  "translations": {
+    "ro": {
+      "back": "Înapoi la început",
+      "label": "Informații legale",
+      "updatedLabel": "Ultima actualizare",
+      "contactLabel": "Pentru întrebări, contactează studioul.",
+      "title": "Termeni și condiții",
+      "intro": "Acești termeni descriu utilizarea site-ului și modul în care începem o colaborare creativă. Detaliile fiecărui proiect se stabilesc separat, în scris.",
+      "sections": [
+        {
+          "heading": "Utilizarea site-ului",
+          "paragraphs": [
+            "Site-ul prezintă serviciile, ofertele și selecția noastră de lucrări. Îl poți consulta pentru a evalua o colaborare. Nu utiliza site-ul pentru activități abuzive sau pentru a afecta funcționarea sa."
+          ]
+        },
+        {
+          "heading": "Oferte și colaborări",
+          "paragraphs": [
+            "Selectarea unui pachet deschide o solicitare prin e-mail; nu reprezintă o comandă plătită sau un contract confirmat. Domeniul proiectului, livrabilele, termenele, plata și eventualele revizii se confirmă printr-o ofertă sau un acord scris înainte de începerea lucrului."
+          ]
+        },
+        {
+          "heading": "Lucrări și drepturi de utilizare",
+          "paragraphs": [
+            "Imaginile, filmele, mărcile și celelalte materiale aparțin titularilor lor. Prezentarea în portofoliu nu acordă permisiunea de a copia, redistribui sau utiliza comercial materialele. Drepturile pentru livrabilele unui proiect se stabilesc în acordul aferent."
+          ]
+        },
+        {
+          "heading": "Informații și linkuri externe",
+          "paragraphs": [
+            "Conținutul și disponibilitatea ofertelor pot fi actualizate. Confirmă detaliile curente cu studioul înainte de a lua o decizie. Linkurile externe, inclusiv rețelele sociale, duc către servicii cu propriile condiții și politici."
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "back": "Retour à l’accueil",
+      "label": "Informations légales",
+      "updatedLabel": "Dernière mise à jour",
+      "contactLabel": "Pour toute question, contactez le studio.",
+      "title": "Conditions générales",
+      "intro": "Ces conditions décrivent l’utilisation du site et les premières étapes d’une collaboration créative. Les modalités de chaque projet sont convenues séparément par écrit.",
+      "sections": [
+        {
+          "heading": "Utilisation du site",
+          "paragraphs": [
+            "Le site présente nos services, offres et travaux sélectionnés pour vous aider à envisager une collaboration. Ne l’utilisez pas de manière abusive ou susceptible de perturber son fonctionnement."
+          ]
+        },
+        {
+          "heading": "Offres et collaborations",
+          "paragraphs": [
+            "Le choix d’une formule ouvre une demande par e-mail ; il ne constitue ni une commande payée ni un contrat confirmé. Le périmètre, les livrables, les délais, le paiement et les révisions éventuelles sont précisés dans un devis ou un accord écrit avant le début du travail."
+          ]
+        },
+        {
+          "heading": "Travaux et droits d’utilisation",
+          "paragraphs": [
+            "Les images, films, marques et autres éléments appartiennent à leurs titulaires respectifs. Leur présentation dans le portfolio n’autorise pas leur copie, redistribution ou exploitation commerciale. Les droits relatifs aux livrables sont définis dans l’accord du projet."
+          ]
+        },
+        {
+          "heading": "Informations et liens externes",
+          "paragraphs": [
+            "Le contenu et la disponibilité des offres peuvent évoluer. Confirmez les informations actuelles avec le studio avant de prendre une décision. Les liens externes, notamment les réseaux sociaux, renvoient à des services ayant leurs propres conditions et politiques."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "back": "Back to home",
+      "label": "Legal information",
+      "updatedLabel": "Last updated",
+      "contactLabel": "For questions, contact the studio.",
+      "title": "Terms & Conditions",
+      "intro": "These terms describe use of the website and how a creative collaboration begins. Each project’s specific arrangements are agreed separately in writing.",
+      "sections": [
+        {
+          "heading": "Using this website",
+          "paragraphs": [
+            "This website presents our services, offers and selected work to help you consider a collaboration. Do not use it abusively or in a way that interferes with its operation."
+          ]
+        },
+        {
+          "heading": "Offers and collaborations",
+          "paragraphs": [
+            "Selecting a package opens an email enquiry; it is not a paid order or a confirmed contract. Project scope, deliverables, deadlines, payment and any revisions are confirmed in a written quote or agreement before work begins."
+          ]
+        },
+        {
+          "heading": "Work and usage rights",
+          "paragraphs": [
+            "Images, films, trademarks and other materials belong to their respective owners. Display in the portfolio does not grant permission to copy, redistribute or commercially use them. Rights to project deliverables are defined in the relevant project agreement."
+          ]
+        },
+        {
+          "heading": "Information and external links",
+          "paragraphs": [
+            "Content and offer availability may change. Confirm current details with the studio before making a decision. External links, including social networks, lead to services with their own terms and policies."
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,4 +1,5 @@
 "use client";
+import workContent from "@/content/pages/work.config.json";
 import { ui } from "@/i18n/ui";
 
 import { useState, useRef, type RefObject } from "react";
@@ -7,14 +8,7 @@ import type { WorkSample, WorkGroup } from "@/types/work";
 import { PortfolioCard } from "./PortfolioCard";
 import { PortfolioLightbox } from "./PortfolioLightbox";
 
-const groups = [
-  { id: "all", ro: "Toate filmele", en: "All films", fr: "Tous les films" },
-  { id: "beauty", ro: "Frumusețe", en: "Beauty", fr: "Beauté" },
-  { id: "lifestyle", ro: "Viață cotidiană", en: "Lifestyle", fr: "Lifestyle" },
-  { id: "fashion", ro: "Modă", en: "Fashion", fr: "Mode" },
-  { id: "fragrance", ro: "Parfumuri", en: "Fragrance", fr: "Parfum" },
-  { id: "motion", ro: "Animație", en: "Motion", fr: "Animation" },
-] as const;
+const groups = workContent.filters as Array<{ id: WorkGroup | "all" } & Record<Locale, string>>;
 
 export function PortfolioGrid({ projects, locale, variant = "archive" }: { projects: WorkSample[]; locale: Locale; variant?: "archive" | "featured" }) {
   const [group, setGroup] = useState<WorkGroup | "all">("all");

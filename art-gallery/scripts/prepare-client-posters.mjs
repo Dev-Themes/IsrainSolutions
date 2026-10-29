@@ -5,7 +5,7 @@ import { chromium } from "playwright";
 import sharp from "sharp";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const manifest = JSON.parse(fs.readFileSync(path.join(root, "src/data/client-video-manifest.json"), "utf8"));
+const manifest = JSON.parse(fs.readFileSync(path.join(root, "src/content/media.config.json"), "utf8"));
 const output = path.join(root, "public/videos/posters");
 const base = process.env.REVIEW_BASE_URL || "http://localhost:3000";
 fs.mkdirSync(output, { recursive: true });

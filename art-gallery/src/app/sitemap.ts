@@ -1,11 +1,9 @@
 ﻿import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
-import { productProjects } from "@/data/product-projects";
 import { locales, defaultLocale } from "@/i18n/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = ["", "/work", "/products", "/about", "/contact", "/privacy", "/cookies", "/terms",
-    ...productProjects.map(product => `/products/${product.slug}`),
   ];
   return routes.flatMap(route => locales.map(locale => ({
     url: `${siteConfig.url}/${locale}${route}`,

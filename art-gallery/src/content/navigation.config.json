@@ -1,0 +1,136 @@
+{
+  "header": [
+    {
+      "key": "home",
+      "href": ""
+    },
+    {
+      "key": "work",
+      "href": "/work"
+    },
+    {
+      "key": "products",
+      "href": "/products"
+    },
+    {
+      "key": "about",
+      "href": "/about"
+    },
+    {
+      "key": "contact",
+      "href": "/contact"
+    }
+  ],
+  "footer": [
+    {
+      "key": "work",
+      "href": "/work"
+    },
+    {
+      "key": "products",
+      "href": "/products"
+    },
+    {
+      "key": "about",
+      "href": "/about"
+    },
+    {
+      "key": "contact",
+      "href": "/contact"
+    }
+  ],
+  "legal": [
+    {
+      "key": "terms",
+      "href": "/terms"
+    },
+    {
+      "key": "privacy",
+      "href": "/privacy"
+    },
+    {
+      "key": "cookies",
+      "href": "/cookies"
+    }
+  ],
+  "translations": {
+    "ro": {
+      "nav": {
+        "home": "ACASĂ",
+        "work": "LUCRĂRI",
+        "products": "PRODUSE",
+        "about": "STUDIO",
+        "contact": "CONTACT",
+        "lang": "RO",
+        "langSwitchAria": "Schimbă limba",
+        "menuAria": "Meniul principal de navigare",
+        "openMenu": "Deschide meniul",
+        "closeMenu": "Închide meniul"
+      },
+      "footer": {
+        "work": "Lucrări",
+        "products": "Produse",
+        "about": "Studio",
+        "contact": "Contact",
+        "privacy": "Politica de confidențialitate",
+        "cookies": "Cookie-uri",
+        "terms": "Termeni și condiții",
+        "copyright": "© 2026 PopArt Agency. Toate drepturile rezervate.",
+        "symbolAria": "Simbol interactiv PopArt Agency — apasă sau treci cursorul pentru a vedea sigla",
+        "byline": "Site creat de studioul PopArt Agency"
+      }
+    },
+    "fr": {
+      "nav": {
+        "home": "ACCUEIL",
+        "work": "TRAVAUX",
+        "products": "PRODUITS",
+        "about": "STUDIO",
+        "contact": "CONTACT",
+        "lang": "FR",
+        "langSwitchAria": "Changer la langue",
+        "menuAria": "Menu de navigation principal",
+        "openMenu": "Ouvrir le menu",
+        "closeMenu": "Fermer le menu"
+      },
+      "footer": {
+        "work": "Travaux",
+        "products": "Produits",
+        "about": "Studio",
+        "contact": "Contact",
+        "privacy": "Politique de confidentialité",
+        "cookies": "Cookies",
+        "terms": "Conditions générales",
+        "copyright": "© 2026 PopArt Agency Studio Créatif. Tous droits réservés.",
+        "symbolAria": "Symbole interactif PopArt Agency — Cliquez ou survolez pour révéler la signature de marque",
+        "byline": "Site conçu par PopArt Agency Studio"
+      }
+    },
+    "en": {
+      "nav": {
+        "home": "HOME",
+        "work": "WORK",
+        "products": "PRODUCTS",
+        "about": "STUDIO",
+        "contact": "CONTACT",
+        "lang": "EN",
+        "langSwitchAria": "Change language",
+        "menuAria": "Main navigation menu",
+        "openMenu": "Open navigation menu",
+        "closeMenu": "Close navigation menu"
+      },
+      "footer": {
+        "work": "Work",
+        "products": "Products",
+        "about": "Studio",
+        "contact": "Contact",
+        "privacy": "Privacy Policy",
+        "cookies": "Cookies",
+        "terms": "Terms & Conditions",
+        "copyright": "© 2026 PopArt Agency Studio Créatif. All rights reserved.",
+        "symbolAria": "PopArt Agency interactive symbol — Click or hover to reveal brand wordmark",
+        "byline": "Website by PopArt Agency Studio"
+      }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "ro": {
+    "contact": {
+      "interaction": {
+        "eyebrow": "TOTUL ÎNCEPE CU O CONVERSAȚIE",
+        "start": "ÎNCEPE UN PROIECT",
+        "topicLabel": "Ce proiect ai în minte?",
+        "topics": [
+          "Brand și identitate",
+          "Campanie și conținut",
+          "Experiență digitală",
+          "Alt proiect"
+        ],
+        "copyEmail": "COPIAZĂ ADRESA DE E-MAIL",
+        "copied": "ADRESĂ COPIATĂ",
+        "copyError": "Copierea nu este disponibilă. Folosește linkul de e-mail.",
+        "workWithUs": "Lucrează cu noi",
+        "emailHint": "Alege un domeniu și povestește-ne ideea ta.",
+        "directEmail": "SCRIE STUDIOULUI",
+        "socialLabel": "Ne găsești și aici"
+      },
+      "heroHeading": "CONTACT",
+      "openingStatement": "Fiecare proiect extraordinar începe cu o conversație. Colaborăm cu branduri vizionare, instituții culturale și creatori ambițioși din întreaga lume.",
+      "inquiriesTitle": "Solicitări și colaborări",
+      "location": "Paris, Franța",
+      "collaborations": "Colaborări internaționale",
+      "email": "hello@popart.example",
+      "emailAria": "Trimite un e-mail studioului PopArt Agency",
+      "socialsTitle": "Rețele și arhivă",
+      "hoursNote": "Răspundem solicitărilor pentru proiecte creative noi în termen de 48 de ore lucrătoare."
+    }
+  },
+  "fr": {
+    "contact": {
+      "interaction": {
+        "eyebrow": "TOUT COMMENCE PAR UN ÉCHANGE",
+        "start": "PARLONS DE VOTRE PROJET",
+        "topicLabel": "Quel est votre projet ?",
+        "topics": [
+          "Marque et identité",
+          "Campagne et contenu",
+          "Expérience digitale",
+          "Autre projet"
+        ],
+        "copyEmail": "COPIER L’E-MAIL",
+        "copied": "E-MAIL COPIÉ",
+        "copyError": "Copie indisponible. Utilisez le lien e-mail.",
+        "workWithUs": "Travailler avec nous",
+        "emailHint": "Choisissez un domaine. Parlez-nous de votre idée.",
+        "directEmail": "ÉCRIRE AU STUDIO",
+        "socialLabel": "Retrouvez-nous ailleurs"
+      },
+      "heroHeading": "CONTACT",
+      "openingStatement": "Chaque projet extraordinaire commence par une conversation. Nous collaborons avec des marques visionnaires, des institutions culturelles et des créateurs audacieux à travers le monde.",
+      "inquiriesTitle": "Projets & Collaborations",
+      "location": "Paris, France",
+      "collaborations": "Collaborations Internationales",
+      "email": "hello@popart.example",
+      "emailAria": "Envoyer un e-mail au Studio PopArt Agency",
+      "socialsTitle": "Réseaux & Archives",
+      "hoursNote": "Réponse sous 48 heures ouvrées pour toute nouvelle demande artistique."
+    }
+  },
+  "en": {
+    "contact": {
+      "interaction": {
+        "eyebrow": "A CONVERSATION STARTS HERE",
+        "start": "START A PROJECT",
+        "topicLabel": "What are you working on?",
+        "topics": [
+          "Brand & identity",
+          "Campaign & content",
+          "Digital experience",
+          "Something else"
+        ],
+        "copyEmail": "COPY EMAIL",
+        "copied": "EMAIL COPIED",
+        "copyError": "Copy unavailable. Use the email link instead.",
+        "workWithUs": "Work with us",
+        "emailHint": "Choose a focus. Tell us what you have in mind.",
+        "directEmail": "EMAIL THE STUDIO",
+        "socialLabel": "Find us elsewhere"
+      },
+      "heroHeading": "CONTACT",
+      "openingStatement": "Every extraordinary project starts with a conversation. We partner with visionary brands, cultural institutions, and ambitious creators worldwide.",
+      "inquiriesTitle": "Inquiries & Collaborations",
+      "location": "Paris, France",
+      "collaborations": "Worldwide Collaborations",
+      "email": "hello@popart.example",
+      "emailAria": "Send an email to Studio PopArt Agency",
+      "socialsTitle": "Networks & Archive",
+      "hoursNote": "Inquiries are answered within 48 business hours for all new creative commissions."
+    }
+  }
+}

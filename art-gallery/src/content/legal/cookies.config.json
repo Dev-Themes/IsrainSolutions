@@ -1,0 +1,90 @@
+{
+  "updated": "2026-10-29",
+  "editorialStatus": "Draft for business owner review. Confirm operator identity, real contact details, providers, retention and actual commercial arrangements before publication.",
+  "translations": {
+    "ro": {
+      "back": "Înapoi la început",
+      "label": "Informații legale",
+      "updatedLabel": "Ultima actualizare",
+      "contactLabel": "Pentru întrebări, contactează studioul.",
+      "title": "Politica privind cookie-urile",
+      "intro": "Site-ul folosește navigare obișnuită între pagini și fișiere media găzduite local. Această pagină descrie comportamentul implementat în versiunea curentă.",
+      "sections": [
+        {
+          "heading": "Cookie-uri și stocare locală",
+          "paragraphs": [
+            "Codul aplicației nu setează cookie-uri de analiză sau publicitate și nu stochează preferințe în localStorage. Limba este indicată în adresă, prin /ro, /fr sau /en, fără a necesita un cookie de preferință."
+          ]
+        },
+        {
+          "heading": "Videoclipuri și servicii externe",
+          "paragraphs": [
+            "Filmele din galerie sunt fișiere servite de site, nu playere încorporate de la o platformă video externă. Linkurile către rețele sociale deschid alte site-uri, care pot utiliza propriile cookie-uri."
+          ]
+        },
+        {
+          "heading": "Setări și modificări",
+          "paragraphs": [
+            "Poți controla cookie-urile din setările browserului. Operatorul trebuie să verifice comportamentul infrastructurii de găzduire și să actualizeze această pagină dacă adaugă instrumente de analiză, publicitate sau alte servicii care schimbă utilizarea cookie-urilor."
+          ]
+        }
+      ]
+    },
+    "fr": {
+      "back": "Retour à l’accueil",
+      "label": "Informations légales",
+      "updatedLabel": "Dernière mise à jour",
+      "contactLabel": "Pour toute question, contactez le studio.",
+      "title": "Politique relative aux cookies",
+      "intro": "Le site utilise une navigation classique et des médias hébergés localement. Cette page décrit le comportement de la version actuelle.",
+      "sections": [
+        {
+          "heading": "Cookies et stockage local",
+          "paragraphs": [
+            "Le code de l’application ne définit pas de cookies de mesure d’audience ou de publicité et ne conserve pas de préférences dans localStorage. La langue figure dans l’adresse, via /ro, /fr ou /en, sans cookie de préférence."
+          ]
+        },
+        {
+          "heading": "Vidéos et services externes",
+          "paragraphs": [
+            "Les films de la galerie sont des fichiers servis par le site, et non des lecteurs intégrés provenant d’une plateforme vidéo externe. Les liens vers les réseaux sociaux ouvrent d’autres sites, qui peuvent utiliser leurs propres cookies."
+          ]
+        },
+        {
+          "heading": "Réglages et évolutions",
+          "paragraphs": [
+            "Vous pouvez gérer les cookies dans les réglages du navigateur. L’exploitant doit vérifier le comportement de l’hébergement et mettre cette page à jour en cas d’ajout d’outils d’analyse, de publicité ou d’autres services modifiant l’utilisation des cookies."
+          ]
+        }
+      ]
+    },
+    "en": {
+      "back": "Back to home",
+      "label": "Legal information",
+      "updatedLabel": "Last updated",
+      "contactLabel": "For questions, contact the studio.",
+      "title": "Cookie Policy",
+      "intro": "The website uses ordinary page navigation and locally hosted media. This page describes the behavior implemented in the current version.",
+      "sections": [
+        {
+          "heading": "Cookies and local storage",
+          "paragraphs": [
+            "The application code does not set analytics or advertising cookies or save preferences in localStorage. Language is represented in the address through /ro, /fr or /en, without needing a preference cookie."
+          ]
+        },
+        {
+          "heading": "Videos and external services",
+          "paragraphs": [
+            "Gallery films are files served by this site rather than embedded players from an external video platform. Social links open other websites, which may use their own cookies."
+          ]
+        },
+        {
+          "heading": "Settings and changes",
+          "paragraphs": [
+            "You can control cookies in your browser settings. The operator should verify the hosting infrastructure’s behavior and update this page if analytics, advertising or other services are added that change cookie usage."
+          ]
+        }
+      ]
+    }
+  }
+}
