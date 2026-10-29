@@ -2,6 +2,7 @@
 import { ui } from "@/i18n/ui";
 
 import navigation from "@/content/navigation.config.json";
+import { legalPagesEnabled } from "@/lib/legal-pages";
 import { siteConfig } from "@/lib/site-config";
 import React from "react";
 import Link from "next/link";
@@ -24,9 +25,9 @@ export function Footer({ locale }: FooterProps) {
           <ul className="space-y-3">
             {navigation.footer.map(item => <li key={item.key}><Link href={`/${locale}${item.href}`} className="text-[var(--muted)] hover:text-[var(--accent)] transition-colors">{dict.footer[item.key as keyof typeof dict.footer]}</Link></li>)}
           </ul>
-          <ul className="space-y-3">
+          {legalPagesEnabled && <ul className="space-y-3">
             {navigation.legal.map(item => <li key={item.key}><Link href={`/${locale}${item.href}`} className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">{dict.footer[item.key as keyof typeof dict.footer]}</Link></li>)}
-          </ul>
+          </ul>}
           {/* Copyright Metadata */}
           <div className="col-span-2 md:col-span-1 text-left md:text-right text-[var(--muted)] tracking-widest">
             <p>{siteConfig.copyright}</p>

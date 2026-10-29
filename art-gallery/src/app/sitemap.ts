@@ -1,9 +1,11 @@
 ﻿import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site-config";
 import { locales, defaultLocale } from "@/i18n/config";
+import { legalPagesEnabled } from "@/lib/legal-pages";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/work", "/products", "/about", "/contact", "/privacy", "/cookies", "/terms",
+  const routes = ["", "/work", "/products", "/about", "/contact",
+    ...(legalPagesEnabled ? ["/privacy", "/cookies", "/terms"] : []),
   ];
   return routes.flatMap(route => locales.map(locale => ({
     url: `${siteConfig.url}/${locale}${route}`,
