@@ -1,0 +1,4280 @@
+{
+  "404.html": {
+    "twitter:card": [
+      "summary_large_image"
+    ]
+  },
+  "index.html": {
+    "title": "PopArt Agency"
+  },
+  "404/index.html": {
+    "twitter:card": [
+      "summary_large_image"
+    ]
+  },
+  "about/index.html": {
+    "title": "PopArt Agency"
+  },
+  "contact/index.html": {
+    "title": "PopArt Agency"
+  },
+  "en/index.html": {
+    "title": "Product Video Ads & Creative Studio — PopArt Agency",
+    "description": [
+      "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life."
+    ],
+    "og:title": [
+      "Product Video Ads & Creative Studio — PopArt Agency"
+    ],
+    "og:description": [
+      "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Product Video Ads & Creative Studio — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Explore our product films and packages of 2, 3 or 5 video ads. Distinct creative directions that bring your product to life."
+    ]
+  },
+  "fr/index.html": {
+    "title": "Publicités Vidéo Produit & Studio Créatif — PopArt Agency",
+    "description": [
+      "Découvrez nos films produit et nos offres de 2, 3 ou 5 vidéos publicitaires. Des directions créatives distinctes pour mettre votre produit en scène."
+    ],
+    "og:title": [
+      "Publicités Vidéo Produit & Studio Créatif — PopArt Agency"
+    ],
+    "og:description": [
+      "Découvrez nos films produit et nos offres de 2, 3 ou 5 vidéos publicitaires. Des directions créatives distinctes pour mettre votre produit en scène."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Publicités Vidéo Produit & Studio Créatif — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Découvrez nos films produit et nos offres de 2, 3 ou 5 vidéos publicitaires. Des directions créatives distinctes pour mettre votre produit en scène."
+    ]
+  },
+  "portfolio/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/index.html": {
+    "title": "PopArt Agency"
+  },
+  "ro/index.html": {
+    "title": "Reclame video de produs și studio de creație — PopArt Agency",
+    "description": [
+      "Descoperă filmele noastre de produs și pachetele de 2, 3 sau 5 reclame video. Direcții creative distincte care dau viață produsului tău."
+    ],
+    "og:title": [
+      "Reclame video de produs și studio de creație — PopArt Agency"
+    ],
+    "og:description": [
+      "Descoperă filmele noastre de produs și pachetele de 2, 3 sau 5 reclame video. Direcții creative distincte care dau viață produsului tău."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Reclame video de produs și studio de creație — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Descoperă filmele noastre de produs și pachetele de 2, 3 sau 5 reclame video. Direcții creative distincte care dau viață produsului tău."
+    ]
+  },
+  "work/index.html": {
+    "title": "PopArt Agency"
+  },
+  "_not-found/index.html": {
+    "twitter:card": [
+      "summary_large_image"
+    ]
+  },
+  "work/acoustic-horizons/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/beyond-the-frame/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/color-studies/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/dark-matter/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/form-follows-feeling/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/invisible-architecture/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/kinetic-resonance/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/material-and-void/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/monochrome-pavilion/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/monolith-echoes/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/motion-without-borders/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/new-dimensions/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/nocturne-architecture/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/noise-visual-system/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/silent-geometry/index.html": {
+    "title": "PopArt Agency"
+  },
+  "work/the-art-of-presence/index.html": {
+    "title": "PopArt Agency"
+  },
+  "ro/about/index.html": {
+    "title": "Studio — Filozofie și competențe — PopArt Agency",
+    "description": [
+      "Mai mult decât o agenție. Un spațiu în care ideile prind formă. Descoperă viziunea, domeniile și direcția creativă a studioului PopArt Agency."
+    ],
+    "og:title": [
+      "Studio — Filozofie și competențe — PopArt Agency"
+    ],
+    "og:description": [
+      "Mai mult decât o agenție. Un spațiu în care ideile prind formă. Descoperă viziunea, domeniile și direcția creativă a studioului PopArt Agency."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Studio — Filozofie și competențe — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Mai mult decât o agenție. Un spațiu în care ideile prind formă. Descoperă viziunea, domeniile și direcția creativă a studioului PopArt Agency."
+    ]
+  },
+  "ro/contact/index.html": {
+    "title": "Contact și colaborări — Paris — PopArt Agency",
+    "description": [
+      "Începe o colaborare artistică cu studioul PopArt Agency din Paris. Direcție artistică, identitate vizuală și proiecte culturale."
+    ],
+    "og:title": [
+      "Contact și colaborări — Paris — PopArt Agency"
+    ],
+    "og:description": [
+      "Începe o colaborare artistică cu studioul PopArt Agency din Paris. Direcție artistică, identitate vizuală și proiecte culturale."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Contact și colaborări — Paris — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Începe o colaborare artistică cu studioul PopArt Agency din Paris. Direcție artistică, identitate vizuală și proiecte culturale."
+    ]
+  },
+  "ro/portfolio/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/products/index.html": {
+    "title": "PRODUSE — PopArt Agency",
+    "description": [
+      "O selecție de imagini din filmele noastre de produs. Frumusețe, modă, parfumuri și obiecte cotidiene, surprinse într-un singur cadru."
+    ],
+    "og:title": [
+      "PRODUSE — PopArt Agency"
+    ],
+    "og:description": [
+      "O selecție de imagini din filmele noastre de produs. Frumusețe, modă, parfumuri și obiecte cotidiene, surprinse într-un singur cadru."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PRODUSE — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O selecție de imagini din filmele noastre de produs. Frumusețe, modă, parfumuri și obiecte cotidiene, surprinse într-un singur cadru."
+    ]
+  },
+  "ro/work/index.html": {
+    "title": "Filme de produs și reclame video — PopArt Agency",
+    "description": [
+      "Explorează selecția noastră de filme de produs din frumusețe, modă, parfumerie și viață cotidiană. Filtrează colecția și urmărește orice film fără să părăsești galeria."
+    ],
+    "og:title": [
+      "Filme de produs și reclame video — PopArt Agency"
+    ],
+    "og:description": [
+      "Explorează selecția noastră de filme de produs din frumusețe, modă, parfumerie și viață cotidiană. Filtrează colecția și urmărește orice film fără să părăsești galeria."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Filme de produs și reclame video — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Explorează selecția noastră de filme de produs din frumusețe, modă, parfumerie și viață cotidiană. Filtrează colecția și urmărește orice film fără să părăsești galeria."
+    ]
+  },
+  "ro/work/acoustic-horizons/index.html": {
+    "title": "Acoustic Horizons — PopArt Agency",
+    "description": [
+      "Product design and mechanical interface for a reference-grade analog audio console."
+    ],
+    "og:title": [
+      "Acoustic Horizons — PopArt Agency"
+    ],
+    "og:description": [
+      "Product design and mechanical interface for a reference-grade analog audio console."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Acoustic Horizons — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Product design and mechanical interface for a reference-grade analog audio console."
+    ]
+  },
+  "ro/work/beyond-the-frame/index.html": {
+    "title": "Beyond the Frame — PopArt Agency",
+    "description": [
+      "Scenographic design and curatorial identity for a retrospective challenging the boundaries of the canvas."
+    ],
+    "og:title": [
+      "Beyond the Frame — PopArt Agency"
+    ],
+    "og:description": [
+      "Scenographic design and curatorial identity for a retrospective challenging the boundaries of the canvas."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Beyond the Frame — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Scenographic design and curatorial identity for a retrospective challenging the boundaries of the canvas."
+    ]
+  },
+  "ro/work/color-studies/index.html": {
+    "title": "Color Studies — PopArt Agency",
+    "description": [
+      "An exploration of spectral resonance and monolithic contrasts within raw architectural volumes."
+    ],
+    "og:title": [
+      "Color Studies — PopArt Agency"
+    ],
+    "og:description": [
+      "An exploration of spectral resonance and monolithic contrasts within raw architectural volumes."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Color Studies — PopArt Agency"
+    ],
+    "twitter:description": [
+      "An exploration of spectral resonance and monolithic contrasts within raw architectural volumes."
+    ]
+  },
+  "ro/work/dark-matter/index.html": {
+    "title": "Dark Matter — PopArt Agency",
+    "description": [
+      "Monumental installation visualizing invisible gravitational forces through ferrofluids and lasers."
+    ],
+    "og:title": [
+      "Dark Matter — PopArt Agency"
+    ],
+    "og:description": [
+      "Monumental installation visualizing invisible gravitational forces through ferrofluids and lasers."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Dark Matter — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Monumental installation visualizing invisible gravitational forces through ferrofluids and lasers."
+    ]
+  },
+  "ro/work/form-follows-feeling/index.html": {
+    "title": "Form Follows Feeling — PopArt Agency",
+    "description": [
+      "Material research into emotional translations of metal type into polished stone monoliths."
+    ],
+    "og:title": [
+      "Form Follows Feeling — PopArt Agency"
+    ],
+    "og:description": [
+      "Material research into emotional translations of metal type into polished stone monoliths."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Form Follows Feeling — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Material research into emotional translations of metal type into polished stone monoliths."
+    ]
+  },
+  "ro/work/invisible-architecture/index.html": {
+    "title": "Invisible Architecture — PopArt Agency",
+    "description": [
+      "A photographic investigation into negative space and chiseled voids across Europe's major architectural landmarks."
+    ],
+    "og:title": [
+      "Invisible Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "A photographic investigation into negative space and chiseled voids across Europe's major architectural landmarks."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Invisible Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A photographic investigation into negative space and chiseled voids across Europe's major architectural landmarks."
+    ]
+  },
+  "ro/work/kinetic-resonance/index.html": {
+    "title": "Kinetic Resonance — PopArt Agency",
+    "description": [
+      "Kinetic campaign celebrating photonic energy flux across custom prismatic refraction devices."
+    ],
+    "og:title": [
+      "Kinetic Resonance — PopArt Agency"
+    ],
+    "og:description": [
+      "Kinetic campaign celebrating photonic energy flux across custom prismatic refraction devices."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Kinetic Resonance — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Kinetic campaign celebrating photonic energy flux across custom prismatic refraction devices."
+    ]
+  },
+  "ro/work/material-and-void/index.html": {
+    "title": "Material & Void — PopArt Agency",
+    "description": [
+      "400-page bilingual art book juxtaposing earth's geological structures with modernist raw concrete forms."
+    ],
+    "og:title": [
+      "Material & Void — PopArt Agency"
+    ],
+    "og:description": [
+      "400-page bilingual art book juxtaposing earth's geological structures with modernist raw concrete forms."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Material & Void — PopArt Agency"
+    ],
+    "twitter:description": [
+      "400-page bilingual art book juxtaposing earth's geological structures with modernist raw concrete forms."
+    ]
+  },
+  "ro/work/monochrome-pavilion/index.html": {
+    "title": "Monochrome Pavilion — PopArt Agency",
+    "description": [
+      "Architectural design and spatial identity for a temporary pavilion in mass-tinted concrete and acoustic glass."
+    ],
+    "og:title": [
+      "Monochrome Pavilion — PopArt Agency"
+    ],
+    "og:description": [
+      "Architectural design and spatial identity for a temporary pavilion in mass-tinted concrete and acoustic glass."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monochrome Pavilion — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Architectural design and spatial identity for a temporary pavilion in mass-tinted concrete and acoustic glass."
+    ]
+  },
+  "ro/work/monolith-echoes/index.html": {
+    "title": "Monolith Echoes — PopArt Agency",
+    "description": [
+      "Large-format photographic series capturing sedimentary stone meeting rigorous geometric carving."
+    ],
+    "og:title": [
+      "Monolith Echoes — PopArt Agency"
+    ],
+    "og:description": [
+      "Large-format photographic series capturing sedimentary stone meeting rigorous geometric carving."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monolith Echoes — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Large-format photographic series capturing sedimentary stone meeting rigorous geometric carving."
+    ]
+  },
+  "ro/work/motion-without-borders/index.html": {
+    "title": "Motion Without Borders — PopArt Agency",
+    "description": [
+      "Kinetic visual direction and title sequence for an independent documentary exploring the dissolution of borders."
+    ],
+    "og:title": [
+      "Motion Without Borders — PopArt Agency"
+    ],
+    "og:description": [
+      "Kinetic visual direction and title sequence for an independent documentary exploring the dissolution of borders."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Motion Without Borders — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Kinetic visual direction and title sequence for an independent documentary exploring the dissolution of borders."
+    ]
+  },
+  "ro/work/new-dimensions/index.html": {
+    "title": "New Dimensions — PopArt Agency",
+    "description": [
+      "Creation of a plastic visual universe where object design converses with curvilinear suspended architecture."
+    ],
+    "og:title": [
+      "New Dimensions — PopArt Agency"
+    ],
+    "og:description": [
+      "Creation of a plastic visual universe where object design converses with curvilinear suspended architecture."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "New Dimensions — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Creation of a plastic visual universe where object design converses with curvilinear suspended architecture."
+    ]
+  },
+  "ro/work/nocturne-architecture/index.html": {
+    "title": "Nocturne Architecture — PopArt Agency",
+    "description": [
+      "A visual journey exploring silent geometries of modernist structures past midnight."
+    ],
+    "og:title": [
+      "Nocturne Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "A visual journey exploring silent geometries of modernist structures past midnight."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Nocturne Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A visual journey exploring silent geometries of modernist structures past midnight."
+    ]
+  },
+  "ro/work/noise-visual-system/index.html": {
+    "title": "Noise — PopArt Agency",
+    "description": [
+      "Modular graphic identity and generative typography for an avant-garde acoustic laboratory."
+    ],
+    "og:title": [
+      "Noise — PopArt Agency"
+    ],
+    "og:description": [
+      "Modular graphic identity and generative typography for an avant-garde acoustic laboratory."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Noise — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Modular graphic identity and generative typography for an avant-garde acoustic laboratory."
+    ]
+  },
+  "ro/work/silent-geometry/index.html": {
+    "title": "Silent Geometry — PopArt Agency",
+    "description": [
+      "Collection of geometric sculptures investigating light refractions across brushed brass and volcanic basalt."
+    ],
+    "og:title": [
+      "Silent Geometry — PopArt Agency"
+    ],
+    "og:description": [
+      "Collection of geometric sculptures investigating light refractions across brushed brass and volcanic basalt."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Silent Geometry — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Collection of geometric sculptures investigating light refractions across brushed brass and volcanic basalt."
+    ]
+  },
+  "ro/work/the-art-of-presence/index.html": {
+    "title": "The Art of Presence — PopArt Agency",
+    "description": [
+      "Immersive installation composed of shadow columns and reactive light pulsing to spatial dynamics."
+    ],
+    "og:title": [
+      "The Art of Presence — PopArt Agency"
+    ],
+    "og:description": [
+      "Immersive installation composed of shadow columns and reactive light pulsing to spatial dynamics."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "The Art of Presence — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Immersive installation composed of shadow columns and reactive light pulsing to spatial dynamics."
+    ]
+  },
+  "ro/products/atelier-zero/index.html": {
+    "title": "Esențializare tactilă — PopArt Agency",
+    "description": [
+      "Un sistem de ambalaje sustenabile care arată că eliminarea cernelurilor toxice poate pune în valoare luxul tactil."
+    ],
+    "og:title": [
+      "Esențializare tactilă — PopArt Agency"
+    ],
+    "og:description": [
+      "Un sistem de ambalaje sustenabile care arată că eliminarea cernelurilor toxice poate pune în valoare luxul tactil."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Esențializare tactilă — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Un sistem de ambalaje sustenabile care arată că eliminarea cernelurilor toxice poate pune în valoare luxul tactil."
+    ]
+  },
+  "ro/products/aura-skin/index.html": {
+    "title": "Simplitate tactilă — PopArt Agency",
+    "description": [
+      "Un concept de îngrijire a pielii care îmbină ceramica brută, sticla satinată și tipografia farmaceutică elvețiană."
+    ],
+    "og:title": [
+      "Simplitate tactilă — PopArt Agency"
+    ],
+    "og:description": [
+      "Un concept de îngrijire a pielii care îmbină ceramica brută, sticla satinată și tipografia farmaceutică elvețiană."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Simplitate tactilă — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Un concept de îngrijire a pielii care îmbină ceramica brută, sticla satinată și tipografia farmaceutică elvețiană."
+    ]
+  },
+  "ro/products/casa-noma/index.html": {
+    "title": "Pământ organic — PopArt Agency",
+    "description": [
+      "O serie de obiecte domestice din gresie ceramică brută, arsă cu lemne, care celebrează asimetria organică wabi-sabi."
+    ],
+    "og:title": [
+      "Pământ organic — PopArt Agency"
+    ],
+    "og:description": [
+      "O serie de obiecte domestice din gresie ceramică brută, arsă cu lemne, care celebrează asimetria organică wabi-sabi."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Pământ organic — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O serie de obiecte domestice din gresie ceramică brută, arsă cu lemne, care celebrează asimetria organică wabi-sabi."
+    ]
+  },
+  "ro/products/forma-objects/index.html": {
+    "title": "Locuire monolitică — PopArt Agency",
+    "description": [
+      "O colecție de obiecte pentru interior care explorează betonul turnat, stejarul ars și echilibrul gravitațional."
+    ],
+    "og:title": [
+      "Locuire monolitică — PopArt Agency"
+    ],
+    "og:description": [
+      "O colecție de obiecte pentru interior care explorează betonul turnat, stejarul ars și echilibrul gravitațional."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Locuire monolitică — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O colecție de obiecte pentru interior care explorează betonul turnat, stejarul ars și echilibrul gravitațional."
+    ]
+  },
+  "ro/products/kinetic-one/index.html": {
+    "title": "Viitor ergonomic — PopArt Agency",
+    "description": [
+      "Un dispozitiv purtabil speculativ care înlocuiește ecranele zgomotoase cu micropulsații haptice discrete."
+    ],
+    "og:title": [
+      "Viitor ergonomic — PopArt Agency"
+    ],
+    "og:description": [
+      "Un dispozitiv purtabil speculativ care înlocuiește ecranele zgomotoase cu micropulsații haptice discrete."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Viitor ergonomic — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Un dispozitiv purtabil speculativ care înlocuiește ecranele zgomotoase cu micropulsații haptice discrete."
+    ]
+  },
+  "ro/products/memoire/index.html": {
+    "title": "Arhivă tactilă — PopArt Agency",
+    "description": [
+      "O colecție de papetărie de lux care redă scrisului de mână greutatea fizică și permanența."
+    ],
+    "og:title": [
+      "Arhivă tactilă — PopArt Agency"
+    ],
+    "og:description": [
+      "O colecție de papetărie de lux care redă scrisului de mână greutatea fizică și permanența."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Arhivă tactilă — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O colecție de papetărie de lux care redă scrisului de mână greutatea fizică și permanența."
+    ]
+  },
+  "ro/products/mono-studio/index.html": {
+    "title": "Arhitectură din piele — PopArt Agency",
+    "description": [
+      "O explorare a marochinăriei structurate prin pliuri origami și piele tăbăcită vegetal."
+    ],
+    "og:title": [
+      "Arhitectură din piele — PopArt Agency"
+    ],
+    "og:description": [
+      "O explorare a marochinăriei structurate prin pliuri origami și piele tăbăcită vegetal."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Arhitectură din piele — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O explorare a marochinăriei structurate prin pliuri origami și piele tăbăcită vegetal."
+    ]
+  },
+  "ro/products/noir-edition/index.html": {
+    "title": "Forma parfumului — PopArt Agency",
+    "description": [
+      "O identitate de parfumerie de lux construită în jurul clarobscurului mineral și al geometriei pure."
+    ],
+    "og:title": [
+      "Forma parfumului — PopArt Agency"
+    ],
+    "og:description": [
+      "O identitate de parfumerie de lux construită în jurul clarobscurului mineral și al geometriei pure."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Forma parfumului — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O identitate de parfumerie de lux construită în jurul clarobscurului mineral și al geometriei pure."
+    ]
+  },
+  "ro/products/soniq-lab/index.html": {
+    "title": "Arhitectură acustică — PopArt Agency",
+    "description": [
+      "O viziune audiofilă futuristă care unește precizia mecanică CNC, știința acustică și albastrul electric."
+    ],
+    "og:title": [
+      "Arhitectură acustică — PopArt Agency"
+    ],
+    "og:description": [
+      "O viziune audiofilă futuristă care unește precizia mecanică CNC, știința acustică și albastrul electric."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Arhitectură acustică — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O viziune audiofilă futuristă care unește precizia mecanică CNC, știința acustică și albastrul electric."
+    ]
+  },
+  "ro/products/sora-optics/index.html": {
+    "title": "Perspectivă sculptată — PopArt Agency",
+    "description": [
+      "O colecție sculpturală de ochelari care explorează contururi neconvenționale și teșituri precise."
+    ],
+    "og:title": [
+      "Perspectivă sculptată — PopArt Agency"
+    ],
+    "og:description": [
+      "O colecție sculpturală de ochelari care explorează contururi neconvenționale și teșituri precise."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Perspectivă sculptată — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O colecție sculpturală de ochelari care explorează contururi neconvenționale și teșituri precise."
+    ]
+  },
+  "ro/products/tempus-01/index.html": {
+    "title": "Liniște cronometrică — PopArt Agency",
+    "description": [
+      "O creație orologeră contemplativă care răspunde ostentației luxului prin liniște matematică."
+    ],
+    "og:title": [
+      "Liniște cronometrică — PopArt Agency"
+    ],
+    "og:description": [
+      "O creație orologeră contemplativă care răspunde ostentației luxului prin liniște matematică."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Liniște cronometrică — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O creație orologeră contemplativă care răspunde ostentației luxului prin liniște matematică."
+    ]
+  },
+  "ro/products/vela-light/index.html": {
+    "title": "Strălucire atmosferică — PopArt Agency",
+    "description": [
+      "O serie de corpuri de iluminat sculpturale care explorează difuzia opalescentă și temperaturile de culoare ale amurgului."
+    ],
+    "og:title": [
+      "Strălucire atmosferică — PopArt Agency"
+    ],
+    "og:description": [
+      "O serie de corpuri de iluminat sculpturale care explorează difuzia opalescentă și temperaturile de culoare ale amurgului."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Strălucire atmosferică — PopArt Agency"
+    ],
+    "twitter:description": [
+      "O serie de corpuri de iluminat sculpturale care explorează difuzia opalescentă și temperaturile de culoare ale amurgului."
+    ]
+  },
+  "ro/portfolio/atelier-zero/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/aura-skin/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/casa-noma/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/forma-objects/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/kinetic-one/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/memoire/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/mono-studio/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/noir-edition/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/soniq-lab/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/sora-optics/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/tempus-01/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/portfolio/vela-light/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/packages/essential/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/packages/full-creative/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "ro/packages/studio/index.html": {
+    "title": "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală",
+    "description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "og:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ],
+    "og:locale": [
+      "ro_RO"
+    ],
+    "og:locale:alternate": [
+      "fr_FR",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio de creație | Direcție artistică și identitate vizuală"
+    ],
+    "twitter:description": [
+      "PopArt Agency este un studio de creație independent, dedicat direcției artistice, identității vizuale, fotografiei și poveștilor vizuale contemporane fără granițe."
+    ]
+  },
+  "products/atelier-zero/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/aura-skin/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/casa-noma/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/forma-objects/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/kinetic-one/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/memoire/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/mono-studio/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/noir-edition/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/soniq-lab/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/sora-optics/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/tempus-01/index.html": {
+    "title": "PopArt Agency"
+  },
+  "products/vela-light/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/atelier-zero/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/aura-skin/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/casa-noma/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/forma-objects/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/kinetic-one/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/memoire/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/mono-studio/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/noir-edition/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/soniq-lab/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/sora-optics/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/tempus-01/index.html": {
+    "title": "PopArt Agency"
+  },
+  "portfolio/vela-light/index.html": {
+    "title": "PopArt Agency"
+  },
+  "packages/essential/index.html": {
+    "title": "PopArt Agency"
+  },
+  "packages/full-creative/index.html": {
+    "title": "PopArt Agency"
+  },
+  "packages/studio/index.html": {
+    "title": "PopArt Agency"
+  },
+  "fr/about/index.html": {
+    "title": "Studio — Philosophie & Savoir-faire — PopArt Agency",
+    "description": [
+      "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio PopArt Agency."
+    ],
+    "og:title": [
+      "Studio — Philosophie & Savoir-faire — PopArt Agency"
+    ],
+    "og:description": [
+      "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio PopArt Agency."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Studio — Philosophie & Savoir-faire — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Plus qu'une agence. Un espace où les idées prennent forme. Découvrez le manifeste, les disciplines et l'équipe du Studio PopArt Agency."
+    ]
+  },
+  "fr/contact/index.html": {
+    "title": "Contact & Collaborations — Paris — PopArt Agency",
+    "description": [
+      "Initiez une collaboration artistique avec le Studio PopArt Agency à Paris. Direction artistique, identité visuelle et projets culturels."
+    ],
+    "og:title": [
+      "Contact & Collaborations — Paris — PopArt Agency"
+    ],
+    "og:description": [
+      "Initiez une collaboration artistique avec le Studio PopArt Agency à Paris. Direction artistique, identité visuelle et projets culturels."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Contact & Collaborations — Paris — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Initiez une collaboration artistique avec le Studio PopArt Agency à Paris. Direction artistique, identité visuelle et projets culturels."
+    ]
+  },
+  "fr/portfolio/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/products/index.html": {
+    "title": "PRODUITS — PopArt Agency",
+    "description": [
+      "Une sélection d’images issues de nos films produit. Beauté, mode, parfums et objets du quotidien, saisis en une image."
+    ],
+    "og:title": [
+      "PRODUITS — PopArt Agency"
+    ],
+    "og:description": [
+      "Une sélection d’images issues de nos films produit. Beauté, mode, parfums et objets du quotidien, saisis en une image."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PRODUITS — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une sélection d’images issues de nos films produit. Beauté, mode, parfums et objets du quotidien, saisis en une image."
+    ]
+  },
+  "fr/work/index.html": {
+    "title": "Films Produit & Publicités Vidéo — PopArt Agency",
+    "description": [
+      "Découvrez notre sélection de films produit : beauté, mode, parfum et lifestyle. Filtrez la collection et regardez chaque film sans quitter la galerie."
+    ],
+    "og:title": [
+      "Films Produit & Publicités Vidéo — PopArt Agency"
+    ],
+    "og:description": [
+      "Découvrez notre sélection de films produit : beauté, mode, parfum et lifestyle. Filtrez la collection et regardez chaque film sans quitter la galerie."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Films Produit & Publicités Vidéo — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Découvrez notre sélection de films produit : beauté, mode, parfum et lifestyle. Filtrez la collection et regardez chaque film sans quitter la galerie."
+    ]
+  },
+  "fr/work/acoustic-horizons/index.html": {
+    "title": "Acoustic Horizons — PopArt Agency",
+    "description": [
+      "Design produit et interface mécanique d'une console audio de référence pour ingénieurs du son d'élite."
+    ],
+    "og:title": [
+      "Acoustic Horizons — PopArt Agency"
+    ],
+    "og:description": [
+      "Design produit et interface mécanique d'une console audio de référence pour ingénieurs du son d'élite."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Acoustic Horizons — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Design produit et interface mécanique d'une console audio de référence pour ingénieurs du son d'élite."
+    ]
+  },
+  "fr/work/beyond-the-frame/index.html": {
+    "title": "Beyond the Frame — PopArt Agency",
+    "description": [
+      "Conception scénographique et identité curatoriale pour une rétrospective questionnant les limites du tableau."
+    ],
+    "og:title": [
+      "Beyond the Frame — PopArt Agency"
+    ],
+    "og:description": [
+      "Conception scénographique et identité curatoriale pour une rétrospective questionnant les limites du tableau."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Beyond the Frame — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Conception scénographique et identité curatoriale pour une rétrospective questionnant les limites du tableau."
+    ]
+  },
+  "fr/work/color-studies/index.html": {
+    "title": "Color Studies — PopArt Agency",
+    "description": [
+      "Une exploration de la résonance spectrale et des contrastes monolithiques au sein d'espaces architecturaux bruts."
+    ],
+    "og:title": [
+      "Color Studies — PopArt Agency"
+    ],
+    "og:description": [
+      "Une exploration de la résonance spectrale et des contrastes monolithiques au sein d'espaces architecturaux bruts."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Color Studies — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une exploration de la résonance spectrale et des contrastes monolithiques au sein d'espaces architecturaux bruts."
+    ]
+  },
+  "fr/work/dark-matter/index.html": {
+    "title": "Dark Matter — PopArt Agency",
+    "description": [
+      "Installation monumentale explorant la visualisation des forces gravitationnelles invisibles par ferrofluides et lasers."
+    ],
+    "og:title": [
+      "Dark Matter — PopArt Agency"
+    ],
+    "og:description": [
+      "Installation monumentale explorant la visualisation des forces gravitationnelles invisibles par ferrofluides et lasers."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Dark Matter — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Installation monumentale explorant la visualisation des forces gravitationnelles invisibles par ferrofluides et lasers."
+    ]
+  },
+  "fr/work/form-follows-feeling/index.html": {
+    "title": "Form Follows Feeling — PopArt Agency",
+    "description": [
+      "Une recherche matérielle sur la traduction émotionnelle des caractères de plomb en monolithes de pierre polie."
+    ],
+    "og:title": [
+      "Form Follows Feeling — PopArt Agency"
+    ],
+    "og:description": [
+      "Une recherche matérielle sur la traduction émotionnelle des caractères de plomb en monolithes de pierre polie."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Form Follows Feeling — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une recherche matérielle sur la traduction émotionnelle des caractères de plomb en monolithes de pierre polie."
+    ]
+  },
+  "fr/work/invisible-architecture/index.html": {
+    "title": "Invisible Architecture — PopArt Agency",
+    "description": [
+      "Une recherche d'angles impossibles et de vides sculptés à travers les ensembles architecturaux majeurs du continent."
+    ],
+    "og:title": [
+      "Invisible Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "Une recherche d'angles impossibles et de vides sculptés à travers les ensembles architecturaux majeurs du continent."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Invisible Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une recherche d'angles impossibles et de vides sculptés à travers les ensembles architecturaux majeurs du continent."
+    ]
+  },
+  "fr/work/kinetic-resonance/index.html": {
+    "title": "Kinetic Resonance — PopArt Agency",
+    "description": [
+      "Campagne cinétique célébrant l'énergie des flux photoniques à travers des dispositifs de réfraction prismatique."
+    ],
+    "og:title": [
+      "Kinetic Resonance — PopArt Agency"
+    ],
+    "og:description": [
+      "Campagne cinétique célébrant l'énergie des flux photoniques à travers des dispositifs de réfraction prismatique."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Kinetic Resonance — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Campagne cinétique célébrant l'énergie des flux photoniques à travers des dispositifs de réfraction prismatique."
+    ]
+  },
+  "fr/work/material-and-void/index.html": {
+    "title": "Material & Void — PopArt Agency",
+    "description": [
+      "Ouvrage d'art bilingue de 400 pages mettant en miroir les structures géologiques de la terre et le béton moderniste."
+    ],
+    "og:title": [
+      "Material & Void — PopArt Agency"
+    ],
+    "og:description": [
+      "Ouvrage d'art bilingue de 400 pages mettant en miroir les structures géologiques de la terre et le béton moderniste."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Material & Void — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Ouvrage d'art bilingue de 400 pages mettant en miroir les structures géologiques de la terre et le béton moderniste."
+    ]
+  },
+  "fr/work/monochrome-pavilion/index.html": {
+    "title": "Monochrome Pavilion — PopArt Agency",
+    "description": [
+      "Conception architecturale et identité spatiale d'un pavillon temporaire en béton teinté dans la masse et verre acoustique."
+    ],
+    "og:title": [
+      "Monochrome Pavilion — PopArt Agency"
+    ],
+    "og:description": [
+      "Conception architecturale et identité spatiale d'un pavillon temporaire en béton teinté dans la masse et verre acoustique."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monochrome Pavilion — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Conception architecturale et identité spatiale d'un pavillon temporaire en béton teinté dans la masse et verre acoustique."
+    ]
+  },
+  "fr/work/monolith-echoes/index.html": {
+    "title": "Monolith Echoes — PopArt Agency",
+    "description": [
+      "Série photographique grand format immortalisant la rencontre entre la roche sédimentaire et la découpe géométrique."
+    ],
+    "og:title": [
+      "Monolith Echoes — PopArt Agency"
+    ],
+    "og:description": [
+      "Série photographique grand format immortalisant la rencontre entre la roche sédimentaire et la découpe géométrique."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monolith Echoes — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Série photographique grand format immortalisant la rencontre entre la roche sédimentaire et la découpe géométrique."
+    ]
+  },
+  "fr/work/motion-without-borders/index.html": {
+    "title": "Motion Without Borders — PopArt Agency",
+    "description": [
+      "Direction visuelle cinétique et séquence de titres pour un documentaire d'art explorant l'effacement des frontières géographiques."
+    ],
+    "og:title": [
+      "Motion Without Borders — PopArt Agency"
+    ],
+    "og:description": [
+      "Direction visuelle cinétique et séquence de titres pour un documentaire d'art explorant l'effacement des frontières géographiques."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Motion Without Borders — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Direction visuelle cinétique et séquence de titres pour un documentaire d'art explorant l'effacement des frontières géographiques."
+    ]
+  },
+  "fr/work/new-dimensions/index.html": {
+    "title": "New Dimensions — PopArt Agency",
+    "description": [
+      "Création d'un univers plastique où l'art de l'objet dialogue avec des architectures curvilignes en suspension."
+    ],
+    "og:title": [
+      "New Dimensions — PopArt Agency"
+    ],
+    "og:description": [
+      "Création d'un univers plastique où l'art de l'objet dialogue avec des architectures curvilignes en suspension."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "New Dimensions — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Création d'un univers plastique où l'art de l'objet dialogue avec des architectures curvilignes en suspension."
+    ]
+  },
+  "fr/work/nocturne-architecture/index.html": {
+    "title": "Nocturne Architecture — PopArt Agency",
+    "description": [
+      "Une odyssée visuelle explorant les géométries silencieuses des grandes structures modernistes après minuit."
+    ],
+    "og:title": [
+      "Nocturne Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "Une odyssée visuelle explorant les géométries silencieuses des grandes structures modernistes après minuit."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Nocturne Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une odyssée visuelle explorant les géométries silencieuses des grandes structures modernistes après minuit."
+    ]
+  },
+  "fr/work/noise-visual-system/index.html": {
+    "title": "Noise — PopArt Agency",
+    "description": [
+      "Identité graphique modulaire et typographie générative pour un laboratoire acoustique d'avant-garde."
+    ],
+    "og:title": [
+      "Noise — PopArt Agency"
+    ],
+    "og:description": [
+      "Identité graphique modulaire et typographie générative pour un laboratoire acoustique d'avant-garde."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Noise — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Identité graphique modulaire et typographie générative pour un laboratoire acoustique d'avant-garde."
+    ]
+  },
+  "fr/work/silent-geometry/index.html": {
+    "title": "Silent Geometry — PopArt Agency",
+    "description": [
+      "Ensemble de sculptures géométriques explorant les réfractions de la lumière sur des surfaces en laiton brossé et pierre de lave."
+    ],
+    "og:title": [
+      "Silent Geometry — PopArt Agency"
+    ],
+    "og:description": [
+      "Ensemble de sculptures géométriques explorant les réfractions de la lumière sur des surfaces en laiton brossé et pierre de lave."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Silent Geometry — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Ensemble de sculptures géométriques explorant les réfractions de la lumière sur des surfaces en laiton brossé et pierre de lave."
+    ]
+  },
+  "fr/work/the-art-of-presence/index.html": {
+    "title": "The Art of Presence — PopArt Agency",
+    "description": [
+      "Dispositif immersif composé de piliers d'ombre et de lumière réagissant aux mouvements imperceptibles des visiteurs."
+    ],
+    "og:title": [
+      "The Art of Presence — PopArt Agency"
+    ],
+    "og:description": [
+      "Dispositif immersif composé de piliers d'ombre et de lumière réagissant aux mouvements imperceptibles des visiteurs."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "The Art of Presence — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Dispositif immersif composé de piliers d'ombre et de lumière réagissant aux mouvements imperceptibles des visiteurs."
+    ]
+  },
+  "fr/products/atelier-zero/index.html": {
+    "title": "Tactile Subtraction — PopArt Agency",
+    "description": [
+      "Une identité de packaging éco-responsable prouvant que l'élimination des encres polluantes élève le prestige de l'objet."
+    ],
+    "og:title": [
+      "Tactile Subtraction — PopArt Agency"
+    ],
+    "og:description": [
+      "Une identité de packaging éco-responsable prouvant que l'élimination des encres polluantes élève le prestige de l'objet."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Tactile Subtraction — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une identité de packaging éco-responsable prouvant que l'élimination des encres polluantes élève le prestige de l'objet."
+    ]
+  },
+  "fr/products/aura-skin/index.html": {
+    "title": "Tactile Simplicity — PopArt Agency",
+    "description": [
+      "Une gamme de soins spéculative alliant céramique brute, verre satiné et typographie médicale suisse."
+    ],
+    "og:title": [
+      "Tactile Simplicity — PopArt Agency"
+    ],
+    "og:description": [
+      "Une gamme de soins spéculative alliant céramique brute, verre satiné et typographie médicale suisse."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Tactile Simplicity — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une gamme de soins spéculative alliant céramique brute, verre satiné et typographie médicale suisse."
+    ]
+  },
+  "fr/products/casa-noma/index.html": {
+    "title": "Organic Earth — PopArt Agency",
+    "description": [
+      "Une collection d'objets domestiques en grès brut cuit au feu de bois, explorant les imperfections wabi-sabi."
+    ],
+    "og:title": [
+      "Organic Earth — PopArt Agency"
+    ],
+    "og:description": [
+      "Une collection d'objets domestiques en grès brut cuit au feu de bois, explorant les imperfections wabi-sabi."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Organic Earth — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une collection d'objets domestiques en grès brut cuit au feu de bois, explorant les imperfections wabi-sabi."
+    ]
+  },
+  "fr/products/forma-objects/index.html": {
+    "title": "Monolithic Living — PopArt Agency",
+    "description": [
+      "Une collection d'objets d'intérieur explorant le béton coulé, le bois brûlé et l'équilibre gravitaire."
+    ],
+    "og:title": [
+      "Monolithic Living — PopArt Agency"
+    ],
+    "og:description": [
+      "Une collection d'objets d'intérieur explorant le béton coulé, le bois brûlé et l'équilibre gravitaire."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monolithic Living — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une collection d'objets d'intérieur explorant le béton coulé, le bois brûlé et l'équilibre gravitaire."
+    ]
+  },
+  "fr/products/kinetic-one/index.html": {
+    "title": "Ergonomic Future — PopArt Agency",
+    "description": [
+      "Un dispositif portable spéculatif qui supprime l'encombrement des écrans classiques au profit de micro-pulsations haptiques."
+    ],
+    "og:title": [
+      "Ergonomic Future — PopArt Agency"
+    ],
+    "og:description": [
+      "Un dispositif portable spéculatif qui supprime l'encombrement des écrans classiques au profit de micro-pulsations haptiques."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Ergonomic Future — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Un dispositif portable spéculatif qui supprime l'encombrement des écrans classiques au profit de micro-pulsations haptiques."
+    ]
+  },
+  "fr/products/memoire/index.html": {
+    "title": "Tactile Archival — PopArt Agency",
+    "description": [
+      "Une collection d'objets d'écriture haut de gamme redonnant à l'acte manuscrit sa solennité et sa beauté matérielle."
+    ],
+    "og:title": [
+      "Tactile Archival — PopArt Agency"
+    ],
+    "og:description": [
+      "Une collection d'objets d'écriture haut de gamme redonnant à l'acte manuscrit sa solennité et sa beauté matérielle."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Tactile Archival — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une collection d'objets d'écriture haut de gamme redonnant à l'acte manuscrit sa solennité et sa beauté matérielle."
+    ]
+  },
+  "fr/products/mono-studio/index.html": {
+    "title": "Architectural Leather — PopArt Agency",
+    "description": [
+      "Une exploration de la maroquinerie structurée conçue selon des patrons de pliage origami et un cuir tanné végétal."
+    ],
+    "og:title": [
+      "Architectural Leather — PopArt Agency"
+    ],
+    "og:description": [
+      "Une exploration de la maroquinerie structurée conçue selon des patrons de pliage origami et un cuir tanné végétal."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Architectural Leather — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une exploration de la maroquinerie structurée conçue selon des patrons de pliage origami et un cuir tanné végétal."
+    ]
+  },
+  "fr/products/noir-edition/index.html": {
+    "title": "The Shape of Scent — PopArt Agency",
+    "description": [
+      "Une identité de haute parfumerie bâtie autour du clair-obscur minéral et de la géométrie pure."
+    ],
+    "og:title": [
+      "The Shape of Scent — PopArt Agency"
+    ],
+    "og:description": [
+      "Une identité de haute parfumerie bâtie autour du clair-obscur minéral et de la géométrie pure."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "The Shape of Scent — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une identité de haute parfumerie bâtie autour du clair-obscur minéral et de la géométrie pure."
+    ]
+  },
+  "fr/products/soniq-lab/index.html": {
+    "title": "Acoustic Architecture — PopArt Agency",
+    "description": [
+      "Une vision futuriste de l'écoute audiophile conciliant pureté mécanique, usinage CNC et bleu électrique."
+    ],
+    "og:title": [
+      "Acoustic Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "Une vision futuriste de l'écoute audiophile conciliant pureté mécanique, usinage CNC et bleu électrique."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Acoustic Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une vision futuriste de l'écoute audiophile conciliant pureté mécanique, usinage CNC et bleu électrique."
+    ]
+  },
+  "fr/products/sora-optics/index.html": {
+    "title": "Sculpted Perspective — PopArt Agency",
+    "description": [
+      "Une collection de lunettes de soleil et de vue sculpturales défiant les silhouettes conventionnelles par des biseaux acérés."
+    ],
+    "og:title": [
+      "Sculpted Perspective — PopArt Agency"
+    ],
+    "og:description": [
+      "Une collection de lunettes de soleil et de vue sculpturales défiant les silhouettes conventionnelles par des biseaux acérés."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Sculpted Perspective — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une collection de lunettes de soleil et de vue sculpturales défiant les silhouettes conventionnelles par des biseaux acérés."
+    ]
+  },
+  "fr/products/tempus-01/index.html": {
+    "title": "Chronometric Silence — PopArt Agency",
+    "description": [
+      "Une pièce d'horlogerie contemplative défiant l'ostentation par la rigueur mathématique du temps."
+    ],
+    "og:title": [
+      "Chronometric Silence — PopArt Agency"
+    ],
+    "og:description": [
+      "Une pièce d'horlogerie contemplative défiant l'ostentation par la rigueur mathématique du temps."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Chronometric Silence — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une pièce d'horlogerie contemplative défiant l'ostentation par la rigueur mathématique du temps."
+    ]
+  },
+  "fr/products/vela-light/index.html": {
+    "title": "Atmospheric Radiance — PopArt Agency",
+    "description": [
+      "Une collection d'éclairage d'ambiance sculptural explorant la diffusion opalescente et la température de couleur crépusculaire."
+    ],
+    "og:title": [
+      "Atmospheric Radiance — PopArt Agency"
+    ],
+    "og:description": [
+      "Une collection d'éclairage d'ambiance sculptural explorant la diffusion opalescente et la température de couleur crépusculaire."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Atmospheric Radiance — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Une collection d'éclairage d'ambiance sculptural explorant la diffusion opalescente et la température de couleur crépusculaire."
+    ]
+  },
+  "fr/portfolio/atelier-zero/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/aura-skin/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/casa-noma/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/forma-objects/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/kinetic-one/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/memoire/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/mono-studio/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/noir-edition/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/soniq-lab/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/sora-optics/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/tempus-01/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/portfolio/vela-light/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/packages/essential/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/packages/full-creative/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "fr/packages/studio/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ],
+    "og:locale": [
+      "fr_FR"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "en_US"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency est un studio créatif indépendant explorant la direction artistique, l'identité visuelle, la photographie et les récits contemporains sans frontières."
+    ]
+  },
+  "en/about/index.html": {
+    "title": "Studio — Philosophy & Capabilities — PopArt Agency",
+    "description": [
+      "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership."
+    ],
+    "og:title": [
+      "Studio — Philosophy & Capabilities — PopArt Agency"
+    ],
+    "og:description": [
+      "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Studio — Philosophy & Capabilities — PopArt Agency"
+    ],
+    "twitter:description": [
+      "More than an agency. A space where ideas take shape. Explore PopArt Agency Studio's manifesto, disciplines and creative leadership."
+    ]
+  },
+  "en/contact/index.html": {
+    "title": "Contact & Collaborations — Paris — PopArt Agency",
+    "description": [
+      "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions."
+    ],
+    "og:title": [
+      "Contact & Collaborations — Paris — PopArt Agency"
+    ],
+    "og:description": [
+      "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Contact & Collaborations — Paris — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Initiate an artistic collaboration with PopArt Agency Studio in Paris. Art direction, visual identity and cultural commissions."
+    ]
+  },
+  "en/portfolio/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/products/index.html": {
+    "title": "PRODUCTS — PopArt Agency",
+    "description": [
+      "A selection of stills from our product films. Beauty, fashion, fragrance and everyday objects, captured in a single frame."
+    ],
+    "og:title": [
+      "PRODUCTS — PopArt Agency"
+    ],
+    "og:description": [
+      "A selection of stills from our product films. Beauty, fashion, fragrance and everyday objects, captured in a single frame."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PRODUCTS — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A selection of stills from our product films. Beauty, fashion, fragrance and everyday objects, captured in a single frame."
+    ]
+  },
+  "en/work/index.html": {
+    "title": "Product Films & Video Ads — PopArt Agency",
+    "description": [
+      "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery."
+    ],
+    "og:title": [
+      "Product Films & Video Ads — PopArt Agency"
+    ],
+    "og:description": [
+      "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Product Films & Video Ads — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Explore our selected product films across beauty, fashion, fragrance and lifestyle. Filter the collection and watch any film without leaving the gallery."
+    ]
+  },
+  "en/work/acoustic-horizons/index.html": {
+    "title": "Acoustic Horizons — PopArt Agency",
+    "description": [
+      "Product design and mechanical interface for a reference-grade analog audio console."
+    ],
+    "og:title": [
+      "Acoustic Horizons — PopArt Agency"
+    ],
+    "og:description": [
+      "Product design and mechanical interface for a reference-grade analog audio console."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Acoustic Horizons — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Product design and mechanical interface for a reference-grade analog audio console."
+    ]
+  },
+  "en/work/beyond-the-frame/index.html": {
+    "title": "Beyond the Frame — PopArt Agency",
+    "description": [
+      "Scenographic design and curatorial identity for a retrospective challenging the boundaries of the canvas."
+    ],
+    "og:title": [
+      "Beyond the Frame — PopArt Agency"
+    ],
+    "og:description": [
+      "Scenographic design and curatorial identity for a retrospective challenging the boundaries of the canvas."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Beyond the Frame — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Scenographic design and curatorial identity for a retrospective challenging the boundaries of the canvas."
+    ]
+  },
+  "en/work/color-studies/index.html": {
+    "title": "Color Studies — PopArt Agency",
+    "description": [
+      "An exploration of spectral resonance and monolithic contrasts within raw architectural volumes."
+    ],
+    "og:title": [
+      "Color Studies — PopArt Agency"
+    ],
+    "og:description": [
+      "An exploration of spectral resonance and monolithic contrasts within raw architectural volumes."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Color Studies — PopArt Agency"
+    ],
+    "twitter:description": [
+      "An exploration of spectral resonance and monolithic contrasts within raw architectural volumes."
+    ]
+  },
+  "en/work/dark-matter/index.html": {
+    "title": "Dark Matter — PopArt Agency",
+    "description": [
+      "Monumental installation visualizing invisible gravitational forces through ferrofluids and lasers."
+    ],
+    "og:title": [
+      "Dark Matter — PopArt Agency"
+    ],
+    "og:description": [
+      "Monumental installation visualizing invisible gravitational forces through ferrofluids and lasers."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Dark Matter — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Monumental installation visualizing invisible gravitational forces through ferrofluids and lasers."
+    ]
+  },
+  "en/work/form-follows-feeling/index.html": {
+    "title": "Form Follows Feeling — PopArt Agency",
+    "description": [
+      "Material research into emotional translations of metal type into polished stone monoliths."
+    ],
+    "og:title": [
+      "Form Follows Feeling — PopArt Agency"
+    ],
+    "og:description": [
+      "Material research into emotional translations of metal type into polished stone monoliths."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Form Follows Feeling — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Material research into emotional translations of metal type into polished stone monoliths."
+    ]
+  },
+  "en/work/invisible-architecture/index.html": {
+    "title": "Invisible Architecture — PopArt Agency",
+    "description": [
+      "A photographic investigation into negative space and chiseled voids across Europe's major architectural landmarks."
+    ],
+    "og:title": [
+      "Invisible Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "A photographic investigation into negative space and chiseled voids across Europe's major architectural landmarks."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Invisible Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A photographic investigation into negative space and chiseled voids across Europe's major architectural landmarks."
+    ]
+  },
+  "en/work/kinetic-resonance/index.html": {
+    "title": "Kinetic Resonance — PopArt Agency",
+    "description": [
+      "Kinetic campaign celebrating photonic energy flux across custom prismatic refraction devices."
+    ],
+    "og:title": [
+      "Kinetic Resonance — PopArt Agency"
+    ],
+    "og:description": [
+      "Kinetic campaign celebrating photonic energy flux across custom prismatic refraction devices."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Kinetic Resonance — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Kinetic campaign celebrating photonic energy flux across custom prismatic refraction devices."
+    ]
+  },
+  "en/work/material-and-void/index.html": {
+    "title": "Material & Void — PopArt Agency",
+    "description": [
+      "400-page bilingual art book juxtaposing earth's geological structures with modernist raw concrete forms."
+    ],
+    "og:title": [
+      "Material & Void — PopArt Agency"
+    ],
+    "og:description": [
+      "400-page bilingual art book juxtaposing earth's geological structures with modernist raw concrete forms."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Material & Void — PopArt Agency"
+    ],
+    "twitter:description": [
+      "400-page bilingual art book juxtaposing earth's geological structures with modernist raw concrete forms."
+    ]
+  },
+  "en/work/monochrome-pavilion/index.html": {
+    "title": "Monochrome Pavilion — PopArt Agency",
+    "description": [
+      "Architectural design and spatial identity for a temporary pavilion in mass-tinted concrete and acoustic glass."
+    ],
+    "og:title": [
+      "Monochrome Pavilion — PopArt Agency"
+    ],
+    "og:description": [
+      "Architectural design and spatial identity for a temporary pavilion in mass-tinted concrete and acoustic glass."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monochrome Pavilion — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Architectural design and spatial identity for a temporary pavilion in mass-tinted concrete and acoustic glass."
+    ]
+  },
+  "en/work/monolith-echoes/index.html": {
+    "title": "Monolith Echoes — PopArt Agency",
+    "description": [
+      "Large-format photographic series capturing sedimentary stone meeting rigorous geometric carving."
+    ],
+    "og:title": [
+      "Monolith Echoes — PopArt Agency"
+    ],
+    "og:description": [
+      "Large-format photographic series capturing sedimentary stone meeting rigorous geometric carving."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monolith Echoes — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Large-format photographic series capturing sedimentary stone meeting rigorous geometric carving."
+    ]
+  },
+  "en/work/motion-without-borders/index.html": {
+    "title": "Motion Without Borders — PopArt Agency",
+    "description": [
+      "Kinetic visual direction and title sequence for an independent documentary exploring the dissolution of borders."
+    ],
+    "og:title": [
+      "Motion Without Borders — PopArt Agency"
+    ],
+    "og:description": [
+      "Kinetic visual direction and title sequence for an independent documentary exploring the dissolution of borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Motion Without Borders — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Kinetic visual direction and title sequence for an independent documentary exploring the dissolution of borders."
+    ]
+  },
+  "en/work/new-dimensions/index.html": {
+    "title": "New Dimensions — PopArt Agency",
+    "description": [
+      "Creation of a plastic visual universe where object design converses with curvilinear suspended architecture."
+    ],
+    "og:title": [
+      "New Dimensions — PopArt Agency"
+    ],
+    "og:description": [
+      "Creation of a plastic visual universe where object design converses with curvilinear suspended architecture."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "New Dimensions — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Creation of a plastic visual universe where object design converses with curvilinear suspended architecture."
+    ]
+  },
+  "en/work/nocturne-architecture/index.html": {
+    "title": "Nocturne Architecture — PopArt Agency",
+    "description": [
+      "A visual journey exploring silent geometries of modernist structures past midnight."
+    ],
+    "og:title": [
+      "Nocturne Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "A visual journey exploring silent geometries of modernist structures past midnight."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Nocturne Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A visual journey exploring silent geometries of modernist structures past midnight."
+    ]
+  },
+  "en/work/noise-visual-system/index.html": {
+    "title": "Noise — PopArt Agency",
+    "description": [
+      "Modular graphic identity and generative typography for an avant-garde acoustic laboratory."
+    ],
+    "og:title": [
+      "Noise — PopArt Agency"
+    ],
+    "og:description": [
+      "Modular graphic identity and generative typography for an avant-garde acoustic laboratory."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Noise — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Modular graphic identity and generative typography for an avant-garde acoustic laboratory."
+    ]
+  },
+  "en/work/silent-geometry/index.html": {
+    "title": "Silent Geometry — PopArt Agency",
+    "description": [
+      "Collection of geometric sculptures investigating light refractions across brushed brass and volcanic basalt."
+    ],
+    "og:title": [
+      "Silent Geometry — PopArt Agency"
+    ],
+    "og:description": [
+      "Collection of geometric sculptures investigating light refractions across brushed brass and volcanic basalt."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Silent Geometry — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Collection of geometric sculptures investigating light refractions across brushed brass and volcanic basalt."
+    ]
+  },
+  "en/work/the-art-of-presence/index.html": {
+    "title": "The Art of Presence — PopArt Agency",
+    "description": [
+      "Immersive installation composed of shadow columns and reactive light pulsing to spatial dynamics."
+    ],
+    "og:title": [
+      "The Art of Presence — PopArt Agency"
+    ],
+    "og:description": [
+      "Immersive installation composed of shadow columns and reactive light pulsing to spatial dynamics."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "The Art of Presence — PopArt Agency"
+    ],
+    "twitter:description": [
+      "Immersive installation composed of shadow columns and reactive light pulsing to spatial dynamics."
+    ]
+  },
+  "en/products/atelier-zero/index.html": {
+    "title": "Tactile Subtraction — PopArt Agency",
+    "description": [
+      "A sustainable packaging system demonstrating that stripping toxic inks elevates tactile luxury."
+    ],
+    "og:title": [
+      "Tactile Subtraction — PopArt Agency"
+    ],
+    "og:description": [
+      "A sustainable packaging system demonstrating that stripping toxic inks elevates tactile luxury."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Tactile Subtraction — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A sustainable packaging system demonstrating that stripping toxic inks elevates tactile luxury."
+    ]
+  },
+  "en/products/aura-skin/index.html": {
+    "title": "Tactile Simplicity — PopArt Agency",
+    "description": [
+      "A speculative skincare ritual pairing raw ceramics, satin glass, and Swiss pharmaceutical typography."
+    ],
+    "og:title": [
+      "Tactile Simplicity — PopArt Agency"
+    ],
+    "og:description": [
+      "A speculative skincare ritual pairing raw ceramics, satin glass, and Swiss pharmaceutical typography."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Tactile Simplicity — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A speculative skincare ritual pairing raw ceramics, satin glass, and Swiss pharmaceutical typography."
+    ]
+  },
+  "en/products/casa-noma/index.html": {
+    "title": "Organic Earth — PopArt Agency",
+    "description": [
+      "A domestic object series in wood-fired raw stoneware celebrating wabi-sabi organic asymmetry."
+    ],
+    "og:title": [
+      "Organic Earth — PopArt Agency"
+    ],
+    "og:description": [
+      "A domestic object series in wood-fired raw stoneware celebrating wabi-sabi organic asymmetry."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Organic Earth — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A domestic object series in wood-fired raw stoneware celebrating wabi-sabi organic asymmetry."
+    ]
+  },
+  "en/products/forma-objects/index.html": {
+    "title": "Monolithic Living — PopArt Agency",
+    "description": [
+      "An interior object collection exploring cast concrete, scorched oak, and gravitational balance."
+    ],
+    "og:title": [
+      "Monolithic Living — PopArt Agency"
+    ],
+    "og:description": [
+      "An interior object collection exploring cast concrete, scorched oak, and gravitational balance."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Monolithic Living — PopArt Agency"
+    ],
+    "twitter:description": [
+      "An interior object collection exploring cast concrete, scorched oak, and gravitational balance."
+    ]
+  },
+  "en/products/kinetic-one/index.html": {
+    "title": "Ergonomic Future — PopArt Agency",
+    "description": [
+      "A speculative wearable device replacing noisy displays with subtle haptic micro-pulsations."
+    ],
+    "og:title": [
+      "Ergonomic Future — PopArt Agency"
+    ],
+    "og:description": [
+      "A speculative wearable device replacing noisy displays with subtle haptic micro-pulsations."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Ergonomic Future — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A speculative wearable device replacing noisy displays with subtle haptic micro-pulsations."
+    ]
+  },
+  "en/products/memoire/index.html": {
+    "title": "Tactile Archival — PopArt Agency",
+    "description": [
+      "A luxury writing stationery collection restoring physical gravity and permanence to handwriting."
+    ],
+    "og:title": [
+      "Tactile Archival — PopArt Agency"
+    ],
+    "og:description": [
+      "A luxury writing stationery collection restoring physical gravity and permanence to handwriting."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Tactile Archival — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A luxury writing stationery collection restoring physical gravity and permanence to handwriting."
+    ]
+  },
+  "en/products/mono-studio/index.html": {
+    "title": "Architectural Leather — PopArt Agency",
+    "description": [
+      "An exploration of structured leather goods drafted via origami folding and vegetable-tanned hides."
+    ],
+    "og:title": [
+      "Architectural Leather — PopArt Agency"
+    ],
+    "og:description": [
+      "An exploration of structured leather goods drafted via origami folding and vegetable-tanned hides."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Architectural Leather — PopArt Agency"
+    ],
+    "twitter:description": [
+      "An exploration of structured leather goods drafted via origami folding and vegetable-tanned hides."
+    ]
+  },
+  "en/products/noir-edition/index.html": {
+    "title": "The Shape of Scent — PopArt Agency",
+    "description": [
+      "A luxury fragrance identity built around mineral chiaroscuro and pure geometry."
+    ],
+    "og:title": [
+      "The Shape of Scent — PopArt Agency"
+    ],
+    "og:description": [
+      "A luxury fragrance identity built around mineral chiaroscuro and pure geometry."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "The Shape of Scent — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A luxury fragrance identity built around mineral chiaroscuro and pure geometry."
+    ]
+  },
+  "en/products/soniq-lab/index.html": {
+    "title": "Acoustic Architecture — PopArt Agency",
+    "description": [
+      "A futuristic audiophile vision uniting CNC mechanical purity, acoustic science, and electric blue."
+    ],
+    "og:title": [
+      "Acoustic Architecture — PopArt Agency"
+    ],
+    "og:description": [
+      "A futuristic audiophile vision uniting CNC mechanical purity, acoustic science, and electric blue."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Acoustic Architecture — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A futuristic audiophile vision uniting CNC mechanical purity, acoustic science, and electric blue."
+    ]
+  },
+  "en/products/sora-optics/index.html": {
+    "title": "Sculpted Perspective — PopArt Agency",
+    "description": [
+      "A sculptural eyewear collection challenging conventional contours with knife-edge bevels."
+    ],
+    "og:title": [
+      "Sculpted Perspective — PopArt Agency"
+    ],
+    "og:description": [
+      "A sculptural eyewear collection challenging conventional contours with knife-edge bevels."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Sculpted Perspective — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A sculptural eyewear collection challenging conventional contours with knife-edge bevels."
+    ]
+  },
+  "en/products/tempus-01/index.html": {
+    "title": "Chronometric Silence — PopArt Agency",
+    "description": [
+      "A contemplative horological work defying luxury ostentation with mathematical silence."
+    ],
+    "og:title": [
+      "Chronometric Silence — PopArt Agency"
+    ],
+    "og:description": [
+      "A contemplative horological work defying luxury ostentation with mathematical silence."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Chronometric Silence — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A contemplative horological work defying luxury ostentation with mathematical silence."
+    ]
+  },
+  "en/products/vela-light/index.html": {
+    "title": "Atmospheric Radiance — PopArt Agency",
+    "description": [
+      "A sculptural atmospheric lighting series exploring opalescent diffusion and twilight color temperatures."
+    ],
+    "og:title": [
+      "Atmospheric Radiance — PopArt Agency"
+    ],
+    "og:description": [
+      "A sculptural atmospheric lighting series exploring opalescent diffusion and twilight color temperatures."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "Atmospheric Radiance — PopArt Agency"
+    ],
+    "twitter:description": [
+      "A sculptural atmospheric lighting series exploring opalescent diffusion and twilight color temperatures."
+    ]
+  },
+  "en/portfolio/atelier-zero/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/aura-skin/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/casa-noma/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/forma-objects/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/kinetic-one/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/memoire/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/mono-studio/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/noir-edition/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/soniq-lab/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/sora-optics/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/tempus-01/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/portfolio/vela-light/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/packages/essential/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/packages/full-creative/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  },
+  "en/packages/studio/index.html": {
+    "title": "PopArt Agency — Studio Créatif | Art Direction & Visual Identity",
+    "description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "og:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ],
+    "og:locale": [
+      "en_US"
+    ],
+    "og:locale:alternate": [
+      "ro_RO",
+      "fr_FR"
+    ],
+    "twitter:card": [
+      "summary_large_image"
+    ],
+    "twitter:title": [
+      "PopArt Agency — Studio Créatif | Art Direction & Visual Identity"
+    ],
+    "twitter:description": [
+      "PopArt Agency is an independent creative studio exploring art direction, visual identity, photography and contemporary visual stories without borders."
+    ]
+  }
+}

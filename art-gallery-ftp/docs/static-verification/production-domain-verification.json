@@ -1,0 +1,40 @@
+{
+  "productionOrigin": "https://popart.agency",
+  "htmlFilesChecked": 199,
+  "activeLocalizedPages": 99,
+  "productionMetadataUrlsChecked": 1315,
+  "preservedSeoTextAndLocales": true,
+  "recoveredImagesExportedAndByteIdentical": 36,
+  "legalFiles": [],
+  "legalSitemapEntries": 0,
+  "localhostMetadataUrls": 0,
+  "oldDomainMetadataUrls": 0,
+  "buildWarnings": [
+    "node.exe : \u26a0 metadataBase property in metadata export is not set for resolving social open graph or twitter images,",
+    "\u26a0 metadataBase property in metadata export is not set for resolving social open graph or twitter images, using",
+    "\u26a0 metadataBase property in metadata export is not set for resolving social open graph or twitter images, using",
+    "\u26a0 metadataBase property in metadata export is not set for resolving social open graph or twitter images, using",
+    "\u26a0 metadataBase property in metadata export is not set for resolving social open graph or twitter images, using",
+    "\u26a0 metadataBase property in metadata export is not set for resolving social open graph or twitter images, using",
+    "\u26a0 metadataBase property in metadata export is not set for resolving social open graph or twitter images, using"
+  ],
+  "buildWarningCount": 7,
+  "buildWarningExplanation": "Next.js 16.4.2 automatically processes the root opengraph-image before the localized layout supplies metadataBase. Root 404 metadataBase is now explicit. Final HTML and page data contain no localhost or old-domain URLs. Existing layout and routing structure was preserved.",
+  "checkedAt": "2026-10-29T10:49:38.806862+00:00",
+  "buildPassed": true,
+  "typecheckPassed": true,
+  "lintPassed": true,
+  "browserChecksPassed": 528,
+  "browserRuntimeErrors": [],
+  "failedLocalRequests": [],
+  "failedRemoteRequests": [],
+  "staticRouteAudit": {
+    "checkedAt": "2026-10-29T10:45:52.889Z",
+    "pages": 147,
+    "internalLinks": 145,
+    "assets": 119,
+    "failures": 0,
+    "remoteImagesNotVerified": []
+  },
+  "exportDirectory": "D:\\Muhammad Shariq\\Internship\\Israin Solutions - Ongoing\\art-gallery-ftp\\out"
+}

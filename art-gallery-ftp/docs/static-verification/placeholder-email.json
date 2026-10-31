@@ -1,0 +1,358 @@
+{
+  "checkedAt": "2026-10-29T10:25:40.701368+00:00",
+  "email": "hello@popart.example",
+  "changed": false,
+  "sourceAndDocumentation": [
+    {
+      "file": "src/content/site.config.json",
+      "occurrences": 1,
+      "lines": [
+        10
+      ]
+    },
+    {
+      "file": "src/content/pages/contact.config.json",
+      "occurrences": 3,
+      "lines": [
+        27,
+        58,
+        89
+      ]
+    },
+    {
+      "file": "src/content/pages/interface.config.json",
+      "occurrences": 4,
+      "lines": [
+        62,
+        63,
+        64,
+        65
+      ]
+    },
+    {
+      "file": "scripts/verify-service-contact.mjs",
+      "occurrences": 2,
+      "lines": [
+        48,
+        53
+      ]
+    },
+    {
+      "file": "docs/FTP-DEPLOYMENT.md",
+      "occurrences": 1,
+      "lines": [
+        46
+      ]
+    }
+  ],
+  "generatedFiles": [
+    {
+      "file": "out/en/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/fr/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/ro/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/_next/static/chunks/028c5s-um7c3c.js",
+      "occurrences": 5,
+      "lines": [
+        3
+      ]
+    },
+    {
+      "file": "out/_next/static/chunks/0l_wwnl3be2iy.js",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/ro/contact/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/ro/products/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/ro/work/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/fr/contact/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/fr/products/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/fr/work/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/en/contact/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/en/products/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": "out/en/work/index.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/static/chunks/028c5s-um7c3c.js",
+      "occurrences": 5,
+      "lines": [
+        3
+      ]
+    },
+    {
+      "file": ".next/static/chunks/0l_wwnl3be2iy.js",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/en.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/fr.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/ro.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/_0fpikdc_mx2wd._.js",
+      "occurrences": 1,
+      "lines": [
+        17
+      ]
+    },
+    {
+      "file": ".next/server/chunks/_0fpikdc_mx2wd._.js.map",
+      "occurrences": 1,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/src_1avfwyefeqrd4._.js",
+      "occurrences": 1,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/src_1avfwyefeqrd4._.js.map",
+      "occurrences": 1,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/src_1t_n4yv4tun1x._.js",
+      "occurrences": 4,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/src_1t_n4yv4tun1x._.js.map",
+      "occurrences": 4,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/src_20ggh68q_a3m5._.js",
+      "occurrences": 4,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/src_20ggh68q_a3m5._.js.map",
+      "occurrences": 4,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_0402t_i3ey3ak._.js",
+      "occurrences": 1,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_0402t_i3ey3ak._.js.map",
+      "occurrences": 1,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_0doc-pp_txlpn._.js",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_0doc-pp_txlpn._.js.map",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_0h6xhi_g1xuj_._.js",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_0h6xhi_g1xuj_._.js.map",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_1zf99sb0vlpdi._.js",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/chunks/ssr/_1zf99sb0vlpdi._.js.map",
+      "occurrences": 3,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/en/contact.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/en/products.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/en/work.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/fr/contact.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/fr/products.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/fr/work.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/ro/contact.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/ro/products.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    },
+    {
+      "file": ".next/server/app/ro/work.html",
+      "occurrences": 2,
+      "lines": [
+        1
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1059 @@
+{
+  "checkedAt": "2026-10-29T10:22:36.774Z",
+  "scope": "D:\\Muhammad Shariq\\Internship\\Israin Solutions - Ongoing\\art-gallery-ftp",
+  "total": 36,
+  "restored": 0,
+  "unresolved": 36,
+  "availableImageFilesInspected": 187,
+  "cachedFilenameMatches": [],
+  "originalProjectAccessed": false,
+  "affectedPages": [
+    "/en/work/acoustic-horizons/",
+    "/en/work/beyond-the-frame/",
+    "/en/work/color-studies/",
+    "/en/work/dark-matter/",
+    "/en/work/form-follows-feeling/",
+    "/en/work/invisible-architecture/",
+    "/en/work/kinetic-resonance/",
+    "/en/work/material-and-void/",
+    "/en/work/monochrome-pavilion/",
+    "/en/work/monolith-echoes/",
+    "/en/work/motion-without-borders/",
+    "/en/work/new-dimensions/",
+    "/en/work/nocturne-architecture/",
+    "/en/work/noise-visual-system/",
+    "/en/work/silent-geometry/",
+    "/en/work/the-art-of-presence/",
+    "/fr/work/acoustic-horizons/",
+    "/fr/work/beyond-the-frame/",
+    "/fr/work/color-studies/",
+    "/fr/work/dark-matter/",
+    "/fr/work/form-follows-feeling/",
+    "/fr/work/invisible-architecture/",
+    "/fr/work/kinetic-resonance/",
+    "/fr/work/material-and-void/",
+    "/fr/work/monochrome-pavilion/",
+    "/fr/work/monolith-echoes/",
+    "/fr/work/motion-without-borders/",
+    "/fr/work/new-dimensions/",
+    "/fr/work/nocturne-architecture/",
+    "/fr/work/noise-visual-system/",
+    "/fr/work/silent-geometry/",
+    "/fr/work/the-art-of-presence/",
+    "/ro/work/acoustic-horizons/",
+    "/ro/work/beyond-the-frame/",
+    "/ro/work/color-studies/",
+    "/ro/work/dark-matter/",
+    "/ro/work/form-follows-feeling/",
+    "/ro/work/invisible-architecture/",
+    "/ro/work/kinetic-resonance/",
+    "/ro/work/material-and-void/",
+    "/ro/work/monochrome-pavilion/",
+    "/ro/work/monolith-echoes/",
+    "/ro/work/motion-without-borders/",
+    "/ro/work/new-dimensions/",
+    "/ro/work/nocturne-architecture/",
+    "/ro/work/noise-visual-system/",
+    "/ro/work/silent-geometry/",
+    "/ro/work/the-art-of-presence/"
+  ],
+  "entries": [
+    {
+      "url": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/e84c1058a2b9d56c.webp",
+      "exportAsset": "out/images/work/e84c1058a2b9d56c.webp",
+      "localMatches": [],
+      "directProjects": [
+        "color-studies",
+        "kinetic-resonance"
+      ],
+      "affectedPages": [
+        "/en/work/color-studies/",
+        "/en/work/kinetic-resonance/",
+        "/fr/work/color-studies/",
+        "/fr/work/kinetic-resonance/",
+        "/ro/work/color-studies/",
+        "/ro/work/kinetic-resonance/"
+      ],
+      "sourceLines": [
+        44,
+        540
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/3aa5fd23cfe46895.webp",
+      "exportAsset": "out/images/work/3aa5fd23cfe46895.webp",
+      "localMatches": [],
+      "directProjects": [
+        "color-studies"
+      ],
+      "affectedPages": [
+        "/en/work/acoustic-horizons/",
+        "/en/work/beyond-the-frame/",
+        "/en/work/color-studies/",
+        "/en/work/dark-matter/",
+        "/en/work/form-follows-feeling/",
+        "/en/work/invisible-architecture/",
+        "/en/work/kinetic-resonance/",
+        "/en/work/material-and-void/",
+        "/en/work/monochrome-pavilion/",
+        "/en/work/monolith-echoes/",
+        "/en/work/motion-without-borders/",
+        "/en/work/new-dimensions/",
+        "/en/work/nocturne-architecture/",
+        "/en/work/noise-visual-system/",
+        "/en/work/silent-geometry/",
+        "/en/work/the-art-of-presence/",
+        "/fr/work/acoustic-horizons/",
+        "/fr/work/beyond-the-frame/",
+        "/fr/work/color-studies/",
+        "/fr/work/dark-matter/",
+        "/fr/work/form-follows-feeling/",
+        "/fr/work/invisible-architecture/",
+        "/fr/work/kinetic-resonance/",
+        "/fr/work/material-and-void/",
+        "/fr/work/monochrome-pavilion/",
+        "/fr/work/monolith-echoes/",
+        "/fr/work/motion-without-borders/",
+        "/fr/work/new-dimensions/",
+        "/fr/work/nocturne-architecture/",
+        "/fr/work/noise-visual-system/",
+        "/fr/work/silent-geometry/",
+        "/fr/work/the-art-of-presence/",
+        "/ro/work/acoustic-horizons/",
+        "/ro/work/beyond-the-frame/",
+        "/ro/work/color-studies/",
+        "/ro/work/dark-matter/",
+        "/ro/work/form-follows-feeling/",
+        "/ro/work/invisible-architecture/",
+        "/ro/work/kinetic-resonance/",
+        "/ro/work/material-and-void/",
+        "/ro/work/monochrome-pavilion/",
+        "/ro/work/monolith-echoes/",
+        "/ro/work/motion-without-borders/",
+        "/ro/work/new-dimensions/",
+        "/ro/work/nocturne-architecture/",
+        "/ro/work/noise-visual-system/",
+        "/ro/work/silent-geometry/",
+        "/ro/work/the-art-of-presence/"
+      ],
+      "sourceLines": [
+        40,
+        43
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/0261d9a27fa7ab24.webp",
+      "exportAsset": "out/images/work/0261d9a27fa7ab24.webp",
+      "localMatches": [],
+      "directProjects": [
+        "noise-visual-system",
+        "monochrome-pavilion"
+      ],
+      "affectedPages": [
+        "/en/work/monochrome-pavilion/",
+        "/en/work/noise-visual-system/",
+        "/fr/work/monochrome-pavilion/",
+        "/fr/work/noise-visual-system/",
+        "/ro/work/monochrome-pavilion/",
+        "/ro/work/noise-visual-system/"
+      ],
+      "sourceLines": [
+        89,
+        580,
+        583
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/bfbd0a34382f84aa.webp",
+      "exportAsset": "out/images/work/bfbd0a34382f84aa.webp",
+      "localMatches": [],
+      "directProjects": [
+        "noise-visual-system",
+        "monochrome-pavilion"
+      ],
+      "affectedPages": [
+        "/en/work/acoustic-horizons/",
+        "/en/work/beyond-the-frame/",
+        "/en/work/color-studies/",
+        "/en/work/dark-matter/",
+        "/en/work/form-follows-feeling/",
+        "/en/work/invisible-architecture/",
+        "/en/work/kinetic-resonance/",
+        "/en/work/material-and-void/",
+        "/en/work/monochrome-pavilion/",
+        "/en/work/monolith-echoes/",
+        "/en/work/motion-without-borders/",
+        "/en/work/new-dimensions/",
+        "/en/work/nocturne-architecture/",
+        "/en/work/noise-visual-system/",
+        "/en/work/silent-geometry/",
+        "/en/work/the-art-of-presence/",
+        "/fr/work/acoustic-horizons/",
+        "/fr/work/beyond-the-frame/",
+        "/fr/work/color-studies/",
+        "/fr/work/dark-matter/",
+        "/fr/work/form-follows-feeling/",
+        "/fr/work/invisible-architecture/",
+        "/fr/work/kinetic-resonance/",
+        "/fr/work/material-and-void/",
+        "/fr/work/monochrome-pavilion/",
+        "/fr/work/monolith-echoes/",
+        "/fr/work/motion-without-borders/",
+        "/fr/work/new-dimensions/",
+        "/fr/work/nocturne-architecture/",
+        "/fr/work/noise-visual-system/",
+        "/fr/work/silent-geometry/",
+        "/fr/work/the-art-of-presence/",
+        "/ro/work/acoustic-horizons/",
+        "/ro/work/beyond-the-frame/",
+        "/ro/work/color-studies/",
+        "/ro/work/dark-matter/",
+        "/ro/work/form-follows-feeling/",
+        "/ro/work/invisible-architecture/",
+        "/ro/work/kinetic-resonance/",
+        "/ro/work/material-and-void/",
+        "/ro/work/monochrome-pavilion/",
+        "/ro/work/monolith-echoes/",
+        "/ro/work/motion-without-borders/",
+        "/ro/work/new-dimensions/",
+        "/ro/work/nocturne-architecture/",
+        "/ro/work/noise-visual-system/",
+        "/ro/work/silent-geometry/",
+        "/ro/work/the-art-of-presence/"
+      ],
+      "sourceLines": [
+        85,
+        88,
+        584
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/a9215ff4f94c7ba0.webp",
+      "exportAsset": "out/images/work/a9215ff4f94c7ba0.webp",
+      "localMatches": [],
+      "directProjects": [
+        "color-studies",
+        "beyond-the-frame"
+      ],
+      "affectedPages": [
+        "/en/work/beyond-the-frame/",
+        "/en/work/color-studies/",
+        "/fr/work/beyond-the-frame/",
+        "/fr/work/color-studies/",
+        "/ro/work/beyond-the-frame/",
+        "/ro/work/color-studies/"
+      ],
+      "sourceLines": [
+        45,
+        134
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/4cba56edb643941a.webp",
+      "exportAsset": "out/images/work/4cba56edb643941a.webp",
+      "localMatches": [],
+      "directProjects": [
+        "beyond-the-frame"
+      ],
+      "affectedPages": [
+        "/en/work/beyond-the-frame/",
+        "/en/work/color-studies/",
+        "/en/work/noise-visual-system/",
+        "/fr/work/beyond-the-frame/",
+        "/fr/work/color-studies/",
+        "/fr/work/noise-visual-system/",
+        "/ro/work/beyond-the-frame/",
+        "/ro/work/color-studies/",
+        "/ro/work/noise-visual-system/"
+      ],
+      "sourceLines": [
+        130,
+        133
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/96b9dbe448295a00.webp",
+      "exportAsset": "out/images/work/96b9dbe448295a00.webp",
+      "localMatches": [],
+      "directProjects": [
+        "nocturne-architecture"
+      ],
+      "affectedPages": [
+        "/en/work/nocturne-architecture/",
+        "/fr/work/nocturne-architecture/",
+        "/ro/work/nocturne-architecture/"
+      ],
+      "sourceLines": [
+        175,
+        178
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/0bf969c2e7ceb34a.webp",
+      "exportAsset": "out/images/work/0bf969c2e7ceb34a.webp",
+      "localMatches": [],
+      "directProjects": [
+        "beyond-the-frame"
+      ],
+      "affectedPages": [
+        "/en/work/beyond-the-frame/",
+        "/fr/work/beyond-the-frame/",
+        "/ro/work/beyond-the-frame/"
+      ],
+      "sourceLines": [
+        135
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/0213352056cefe1f.webp",
+      "exportAsset": "out/images/work/0213352056cefe1f.webp",
+      "localMatches": [],
+      "directProjects": [
+        "noise-visual-system"
+      ],
+      "affectedPages": [
+        "/en/work/noise-visual-system/",
+        "/fr/work/noise-visual-system/",
+        "/ro/work/noise-visual-system/"
+      ],
+      "sourceLines": [
+        90
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/ef65282c90185793.webp",
+      "exportAsset": "out/images/work/ef65282c90185793.webp",
+      "localMatches": [],
+      "directProjects": [
+        "nocturne-architecture"
+      ],
+      "affectedPages": [
+        "/en/work/nocturne-architecture/",
+        "/fr/work/nocturne-architecture/",
+        "/ro/work/nocturne-architecture/"
+      ],
+      "sourceLines": [
+        179
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1518895949257-7621c3c786d7?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/0fdda581ee06ad4f.webp",
+      "exportAsset": "out/images/work/0fdda581ee06ad4f.webp",
+      "localMatches": [],
+      "directProjects": [
+        "monolith-echoes"
+      ],
+      "affectedPages": [
+        "/en/work/monolith-echoes/",
+        "/fr/work/monolith-echoes/",
+        "/ro/work/monolith-echoes/"
+      ],
+      "sourceLines": [
+        224
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/a81c388d9faa490b.webp",
+      "exportAsset": "out/images/work/a81c388d9faa490b.webp",
+      "localMatches": [],
+      "directProjects": [
+        "nocturne-architecture"
+      ],
+      "affectedPages": [
+        "/en/work/nocturne-architecture/",
+        "/fr/work/nocturne-architecture/",
+        "/ro/work/nocturne-architecture/"
+      ],
+      "sourceLines": [
+        180
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/c49d5a73615ff024.webp",
+      "exportAsset": "out/images/work/c49d5a73615ff024.webp",
+      "localMatches": [],
+      "directProjects": [
+        "monolith-echoes"
+      ],
+      "affectedPages": [
+        "/en/work/monolith-echoes/",
+        "/fr/work/monolith-echoes/",
+        "/ro/work/monolith-echoes/"
+      ],
+      "sourceLines": [
+        220,
+        223
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/d3d415a96df79efc.webp",
+      "exportAsset": "out/images/work/d3d415a96df79efc.webp",
+      "localMatches": [],
+      "directProjects": [
+        "new-dimensions",
+        "silent-geometry"
+      ],
+      "affectedPages": [
+        "/en/work/new-dimensions/",
+        "/en/work/silent-geometry/",
+        "/fr/work/new-dimensions/",
+        "/fr/work/silent-geometry/",
+        "/ro/work/new-dimensions/",
+        "/ro/work/silent-geometry/"
+      ],
+      "sourceLines": [
+        265,
+        268,
+        625,
+        628
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/abacde9cefdb61d4.webp",
+      "exportAsset": "out/images/work/abacde9cefdb61d4.webp",
+      "localMatches": [],
+      "directProjects": [
+        "monolith-echoes"
+      ],
+      "affectedPages": [
+        "/en/work/monolith-echoes/",
+        "/fr/work/monolith-echoes/",
+        "/ro/work/monolith-echoes/"
+      ],
+      "sourceLines": [
+        225
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/4e430ccbee8d8484.webp",
+      "exportAsset": "out/images/work/4e430ccbee8d8484.webp",
+      "localMatches": [],
+      "directProjects": [
+        "new-dimensions"
+      ],
+      "affectedPages": [
+        "/en/work/new-dimensions/",
+        "/fr/work/new-dimensions/",
+        "/ro/work/new-dimensions/"
+      ],
+      "sourceLines": [
+        270
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/bde5437e297ae17c.webp",
+      "exportAsset": "out/images/work/bde5437e297ae17c.webp",
+      "localMatches": [],
+      "directProjects": [
+        "new-dimensions"
+      ],
+      "affectedPages": [
+        "/en/work/new-dimensions/",
+        "/fr/work/new-dimensions/",
+        "/ro/work/new-dimensions/"
+      ],
+      "sourceLines": [
+        269
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/67b07ec2eb3a5308.webp",
+      "exportAsset": "out/images/work/67b07ec2eb3a5308.webp",
+      "localMatches": [],
+      "directProjects": [
+        "form-follows-feeling",
+        "silent-geometry"
+      ],
+      "affectedPages": [
+        "/en/work/form-follows-feeling/",
+        "/en/work/silent-geometry/",
+        "/fr/work/form-follows-feeling/",
+        "/fr/work/silent-geometry/",
+        "/ro/work/form-follows-feeling/",
+        "/ro/work/silent-geometry/"
+      ],
+      "sourceLines": [
+        310,
+        313,
+        629
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/dacfc7da3d58c2c5.webp",
+      "exportAsset": "out/images/work/dacfc7da3d58c2c5.webp",
+      "localMatches": [],
+      "directProjects": [
+        "the-art-of-presence",
+        "dark-matter"
+      ],
+      "affectedPages": [
+        "/en/work/dark-matter/",
+        "/en/work/the-art-of-presence/",
+        "/fr/work/dark-matter/",
+        "/fr/work/the-art-of-presence/",
+        "/ro/work/dark-matter/",
+        "/ro/work/the-art-of-presence/"
+      ],
+      "sourceLines": [
+        355,
+        358,
+        719
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/7aefc79a8df379d2.webp",
+      "exportAsset": "out/images/work/7aefc79a8df379d2.webp",
+      "localMatches": [],
+      "directProjects": [
+        "form-follows-feeling"
+      ],
+      "affectedPages": [
+        "/en/work/form-follows-feeling/",
+        "/fr/work/form-follows-feeling/",
+        "/ro/work/form-follows-feeling/"
+      ],
+      "sourceLines": [
+        315
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/3e16da1aa6b03fcd.webp",
+      "exportAsset": "out/images/work/3e16da1aa6b03fcd.webp",
+      "localMatches": [],
+      "directProjects": [
+        "the-art-of-presence"
+      ],
+      "affectedPages": [
+        "/en/work/the-art-of-presence/",
+        "/fr/work/the-art-of-presence/",
+        "/ro/work/the-art-of-presence/"
+      ],
+      "sourceLines": [
+        359
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/10413ce191e87ce0.webp",
+      "exportAsset": "out/images/work/10413ce191e87ce0.webp",
+      "localMatches": [],
+      "directProjects": [
+        "form-follows-feeling",
+        "silent-geometry"
+      ],
+      "affectedPages": [
+        "/en/work/form-follows-feeling/",
+        "/en/work/silent-geometry/",
+        "/fr/work/form-follows-feeling/",
+        "/fr/work/silent-geometry/",
+        "/ro/work/form-follows-feeling/",
+        "/ro/work/silent-geometry/"
+      ],
+      "sourceLines": [
+        314,
+        630
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/ee85a02f1fc58dc7.webp",
+      "exportAsset": "out/images/work/ee85a02f1fc58dc7.webp",
+      "localMatches": [],
+      "directProjects": [
+        "the-art-of-presence"
+      ],
+      "affectedPages": [
+        "/en/work/the-art-of-presence/",
+        "/fr/work/the-art-of-presence/",
+        "/ro/work/the-art-of-presence/"
+      ],
+      "sourceLines": [
+        360
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/f7fcdb3fbe32a270.webp",
+      "exportAsset": "out/images/work/f7fcdb3fbe32a270.webp",
+      "localMatches": [],
+      "directProjects": [
+        "material-and-void"
+      ],
+      "affectedPages": [
+        "/en/work/material-and-void/",
+        "/fr/work/material-and-void/",
+        "/ro/work/material-and-void/"
+      ],
+      "sourceLines": [
+        404
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/dfcc4790a91976c1.webp",
+      "exportAsset": "out/images/work/dfcc4790a91976c1.webp",
+      "localMatches": [],
+      "directProjects": [
+        "material-and-void",
+        "invisible-architecture",
+        "monochrome-pavilion"
+      ],
+      "affectedPages": [
+        "/en/work/invisible-architecture/",
+        "/en/work/material-and-void/",
+        "/en/work/monochrome-pavilion/",
+        "/fr/work/invisible-architecture/",
+        "/fr/work/material-and-void/",
+        "/fr/work/monochrome-pavilion/",
+        "/ro/work/invisible-architecture/",
+        "/ro/work/material-and-void/",
+        "/ro/work/monochrome-pavilion/"
+      ],
+      "sourceLines": [
+        400,
+        403,
+        495,
+        585
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/2af4506e0c01e52c.webp",
+      "exportAsset": "out/images/work/2af4506e0c01e52c.webp",
+      "localMatches": [],
+      "directProjects": [
+        "material-and-void"
+      ],
+      "affectedPages": [
+        "/en/work/material-and-void/",
+        "/fr/work/material-and-void/",
+        "/ro/work/material-and-void/"
+      ],
+      "sourceLines": [
+        405
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/bd1f85eb13ed0d30.webp",
+      "exportAsset": "out/images/work/bd1f85eb13ed0d30.webp",
+      "localMatches": [],
+      "directProjects": [
+        "motion-without-borders"
+      ],
+      "affectedPages": [
+        "/en/work/motion-without-borders/",
+        "/fr/work/motion-without-borders/",
+        "/ro/work/motion-without-borders/"
+      ],
+      "sourceLines": [
+        449
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/816fbbdcf779d454.webp",
+      "exportAsset": "out/images/work/816fbbdcf779d454.webp",
+      "localMatches": [],
+      "directProjects": [
+        "motion-without-borders",
+        "dark-matter"
+      ],
+      "affectedPages": [
+        "/en/work/dark-matter/",
+        "/en/work/motion-without-borders/",
+        "/fr/work/dark-matter/",
+        "/fr/work/motion-without-borders/",
+        "/ro/work/dark-matter/",
+        "/ro/work/motion-without-borders/"
+      ],
+      "sourceLines": [
+        445,
+        448,
+        720
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/d902486ecf316b6d.webp",
+      "exportAsset": "out/images/work/d902486ecf316b6d.webp",
+      "localMatches": [],
+      "directProjects": [
+        "motion-without-borders"
+      ],
+      "affectedPages": [
+        "/en/work/motion-without-borders/",
+        "/fr/work/motion-without-borders/",
+        "/ro/work/motion-without-borders/"
+      ],
+      "sourceLines": [
+        450
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/637da334649a8029.webp",
+      "exportAsset": "out/images/work/637da334649a8029.webp",
+      "localMatches": [],
+      "directProjects": [
+        "invisible-architecture"
+      ],
+      "affectedPages": [
+        "/en/work/invisible-architecture/",
+        "/fr/work/invisible-architecture/",
+        "/ro/work/invisible-architecture/"
+      ],
+      "sourceLines": [
+        490,
+        493
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1496868834840-5f4c98840aaa?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/a65564b92f696776.webp",
+      "exportAsset": "out/images/work/a65564b92f696776.webp",
+      "localMatches": [],
+      "directProjects": [
+        "invisible-architecture"
+      ],
+      "affectedPages": [
+        "/en/work/invisible-architecture/",
+        "/fr/work/invisible-architecture/",
+        "/ro/work/invisible-architecture/"
+      ],
+      "sourceLines": [
+        494
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1507499739999-097706ad8914?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/30e15190bd0158ee.webp",
+      "exportAsset": "out/images/work/30e15190bd0158ee.webp",
+      "localMatches": [],
+      "directProjects": [
+        "kinetic-resonance"
+      ],
+      "affectedPages": [
+        "/en/work/kinetic-resonance/",
+        "/fr/work/kinetic-resonance/",
+        "/ro/work/kinetic-resonance/"
+      ],
+      "sourceLines": [
+        535,
+        538
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/60373ae231f8dbd7.webp",
+      "exportAsset": "out/images/work/60373ae231f8dbd7.webp",
+      "localMatches": [],
+      "directProjects": [
+        "acoustic-horizons"
+      ],
+      "affectedPages": [
+        "/en/work/acoustic-horizons/",
+        "/fr/work/acoustic-horizons/",
+        "/ro/work/acoustic-horizons/"
+      ],
+      "sourceLines": [
+        670,
+        673
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1461360370896-922624d12aa1?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/3286309640941043.webp",
+      "exportAsset": "out/images/work/3286309640941043.webp",
+      "localMatches": [],
+      "directProjects": [
+        "acoustic-horizons"
+      ],
+      "affectedPages": [
+        "/en/work/acoustic-horizons/",
+        "/fr/work/acoustic-horizons/",
+        "/ro/work/acoustic-horizons/"
+      ],
+      "sourceLines": [
+        674
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/85fbcdc08529e54b.webp",
+      "exportAsset": "out/images/work/85fbcdc08529e54b.webp",
+      "localMatches": [],
+      "directProjects": [
+        "kinetic-resonance",
+        "dark-matter"
+      ],
+      "affectedPages": [
+        "/en/work/dark-matter/",
+        "/en/work/kinetic-resonance/",
+        "/fr/work/dark-matter/",
+        "/fr/work/kinetic-resonance/",
+        "/ro/work/dark-matter/",
+        "/ro/work/kinetic-resonance/"
+      ],
+      "sourceLines": [
+        539,
+        715,
+        718
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    },
+    {
+      "url": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=1600&q=80",
+      "expectedLocalAsset": "public/images/work/09a4ebb555c2c852.webp",
+      "exportAsset": "out/images/work/09a4ebb555c2c852.webp",
+      "localMatches": [],
+      "directProjects": [
+        "acoustic-horizons"
+      ],
+      "affectedPages": [
+        "/en/work/acoustic-horizons/",
+        "/fr/work/acoustic-horizons/",
+        "/ro/work/acoustic-horizons/"
+      ],
+      "sourceLines": [
+        675
+      ],
+      "status": "unresolved",
+      "failure": {
+        "message": "fetch failed",
+        "causeCode": "EACCES",
+        "causeMessage": null
+      }
+    }
+  ]
+}

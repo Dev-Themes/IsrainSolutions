@@ -1,0 +1,35 @@
+[
+  {
+    "id": "sans",
+    "fonts": [
+      {
+        "familyName": "PopArtGeist",
+        "postScriptName": "PopArtGeist",
+        "isCustomFont": true,
+        "glyphCount": 14
+      }
+    ]
+  },
+  {
+    "id": "bold",
+    "fonts": [
+      {
+        "familyName": "PopArtGeist",
+        "postScriptName": "PopArtGeist-Bold",
+        "isCustomFont": true,
+        "glyphCount": 14
+      }
+    ]
+  },
+  {
+    "id": "mono",
+    "fonts": [
+      {
+        "familyName": "PopArtGeist Mono",
+        "postScriptName": "PopArtGeist-Mono-Medium",
+        "isCustomFont": true,
+        "glyphCount": 14
+      }
+    ]
+  }
+]

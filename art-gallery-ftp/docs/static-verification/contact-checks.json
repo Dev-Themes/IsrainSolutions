@@ -1,0 +1,10 @@
+{
+  "checkedAt": "2026-10-29T10:27:04.872Z",
+  "passed": true,
+  "results": [
+    "en: preserved email display/mailto, four enquiry topics with offer=3, clipboard success and error feedback",
+    "fr: preserved email display/mailto, four enquiry topics with offer=3, clipboard success and error feedback",
+    "ro: preserved email display/mailto, four enquiry topics with offer=3, clipboard success and error feedback"
+  ],
+  "deliveryTested": false
+}

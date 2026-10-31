@@ -1,0 +1,650 @@
+[
+  {
+    "name": "aesop-daily-ritual-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 25932
+  },
+  {
+    "name": "aesop-daily-ritual.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 25932
+  },
+  {
+    "name": "balenciaga-black-bag-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 59214
+  },
+  {
+    "name": "balenciaga-black-bag.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 85734
+  },
+  {
+    "name": "balenciaga-objects-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 36650
+  },
+  {
+    "name": "balenciaga-objects.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 53122
+  },
+  {
+    "name": "beauty-gloss-closeup-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 81194
+  },
+  {
+    "name": "beauty-gloss-closeup.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 116082
+  },
+  {
+    "name": "bogdao-mineral-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 24438
+  },
+  {
+    "name": "bogdao-mineral.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 30858
+  },
+  {
+    "name": "burberry-table-play-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 32858
+  },
+  {
+    "name": "burberry-table-play.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 42876
+  },
+  {
+    "name": "burberry-trench-details-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 105304
+  },
+  {
+    "name": "burberry-trench-details.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 184114
+  },
+  {
+    "name": "fashion-floral-story-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 57818
+  },
+  {
+    "name": "fashion-floral-story.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 81694
+  },
+  {
+    "name": "foldeat-fresh-perspective-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      1080,
+      1350
+    ],
+    "bytes": 131738
+  },
+  {
+    "name": "foldeat-fresh-perspective.webp",
+    "before": [
+      1280,
+      725
+    ],
+    "after": [
+      1920,
+      1087
+    ],
+    "bytes": 128922
+  },
+  {
+    "name": "footwear-new-perspective-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 52192
+  },
+  {
+    "name": "footwear-new-perspective.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 52192
+  },
+  {
+    "name": "gentle-monster-bloom-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 63638
+  },
+  {
+    "name": "gentle-monster-bloom.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 86810
+  },
+  {
+    "name": "glossier-pocket-ritual-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 18096
+  },
+  {
+    "name": "glossier-pocket-ritual.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 22922
+  },
+  {
+    "name": "hermes-watercolour-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 94592
+  },
+  {
+    "name": "hermes-watercolour.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 149870
+  },
+  {
+    "name": "hm-beauty-colour-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 64476
+  },
+  {
+    "name": "hm-beauty-colour.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 64476
+  },
+  {
+    "name": "loewe-apple-transformation-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 20404
+  },
+  {
+    "name": "loewe-apple-transformation.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 30346
+  },
+  {
+    "name": "loewe-pistachio-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 30054
+  },
+  {
+    "name": "loewe-pistachio.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 41092
+  },
+  {
+    "name": "miu-miu-pages-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      608,
+      760
+    ],
+    "bytes": 56722
+  },
+  {
+    "name": "miu-miu-pages.webp",
+    "before": [
+      608,
+      1080
+    ],
+    "after": [
+      608,
+      1080
+    ],
+    "bytes": 83716
+  },
+  {
+    "name": "mos-soft-focus-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 64168
+  },
+  {
+    "name": "mos-soft-focus.webp",
+    "before": [
+      720,
+      1272
+    ],
+    "after": [
+      720,
+      1272
+    ],
+    "bytes": 97268
+  },
+  {
+    "name": "motion-unexpected-evening-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 22798
+  },
+  {
+    "name": "motion-unexpected-evening.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 29742
+  },
+  {
+    "name": "pero-pattern-play-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 67842
+  },
+  {
+    "name": "pero-pattern-play.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 67842
+  },
+  {
+    "name": "petit-violet-puzzle-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 152810
+  },
+  {
+    "name": "petit-violet-puzzle.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 301638
+  },
+  {
+    "name": "ricinus-hair-ritual-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 43066
+  },
+  {
+    "name": "ricinus-hair-ritual.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 65084
+  },
+  {
+    "name": "rollie-set-your-alarms-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 45228
+  },
+  {
+    "name": "rollie-set-your-alarms.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 62800
+  },
+  {
+    "name": "stop-motion-soft-world-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 120710
+  },
+  {
+    "name": "stop-motion-soft-world.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 202802
+  },
+  {
+    "name": "summer-in-motion-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 105596
+  },
+  {
+    "name": "summer-in-motion.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 166266
+  },
+  {
+    "name": "tmb-everyday-bottle-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 49058
+  },
+  {
+    "name": "tmb-everyday-bottle.webp",
+    "before": [
+      720,
+      1272
+    ],
+    "after": [
+      720,
+      1272
+    ],
+    "bytes": 68120
+  },
+  {
+    "name": "typology-roseglow-tile.webp",
+    "before": [
+      720,
+      900
+    ],
+    "after": [
+      720,
+      900
+    ],
+    "bytes": 41222
+  },
+  {
+    "name": "typology-roseglow.webp",
+    "before": [
+      720,
+      1280
+    ],
+    "after": [
+      720,
+      1280
+    ],
+    "bytes": 56908
+  }
+]

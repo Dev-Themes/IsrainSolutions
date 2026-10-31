@@ -1,0 +1,117 @@
+{
+  "ro": {
+    "eyebrow": "Produse · Reclame video pentru magazine online",
+    "title": "Din poza produsului, într-o reclamă",
+    "titleEm": "care oprește scroll-ul.",
+    "intro": "Ne trimiți pozele, noi facem conceptul, storyboard-ul și videoclipul. Gata de pus pe Meta, TikTok și pe site, în 5 zile lucrătoare.",
+    "packages": "Vezi pachetele", "enquire": "Cere o ofertă", "heroLabel": "Ricinus · reclamă reală", "play": "Redă reclama Ricinus",
+    "facts": ["1080p", "9:16 · 1:1 · 16:9", "15–20 secunde", "muzică + efecte sonore"],
+    "processLabel": "De la produs la reclamă", "processTitle": "O poză de catalog.", "processEm": "Zece cadre. O reclamă.",
+    "processIntro": "Produsul tău, într-o poveste vizuală. Vezi cum construim direcția creativă, cadru cu cadru.",
+    "frames": ["1. Produsul tău", "2. Storyboard-ul", "3. Reclama finală"],
+    "frameNotes": ["Punctul de plecare: produsul în prim-plan.", "Îl aprobi înainte să producem ceva.", "În toate formatele."],
+    "includedLabel": "În fiecare pachet", "includedTitle": "Ce primești,", "includedEm": "fără costuri ascunse.",
+    "included": [
+      ["Concept și storyboard", "Gândim ideea și cadrele înainte de producție. Știi de la început cum va arăta reclama."],
+      ["3 formate", "Vertical pentru Reels și TikTok, pătrat pentru feed și orizontal pentru site."],
+      ["Muzică și efecte sonore", "Sunet ales pentru produs și montaj, pregătit pentru reclamă."],
+      ["Variante de început", "Primele 3 secunde în două variante, ca să testezi care oprește mai mulți oameni."],
+      ["O rundă de modificări", "Ajustăm textul, ritmul sau muzica după prima variantă."],
+      ["Drepturi de folosire", "Folosești videoclipurile în reclame, pe site și pe social media."]
+    ],
+    "stepsLabel": "Cum lucrăm", "stepsTitle": "Patru pași,", "stepsEm": "cinci zile.",
+    "steps": [
+      ["Ne trimiți produsul", "Poze de pe site, link-ul produsului și unde vrei să rulezi reclama.", "Ziua 1"],
+      ["Primești storyboard-ul", "Conceptul și cadrele, pe care le aprobi sau le schimbi.", "Ziua 2"],
+      ["Producem reclama", "Generăm cadrele, montăm, adăugăm muzica și efectele.", "Zilele 3–4"],
+      ["Livrare și modificări", "Primești toate formatele și o rundă de modificări.", "Ziua 5"]
+    ],
+    "workLabel": "Din portofoliu", "workTitle": "Reclame făcute", "workEm": "de noi.", "allWork": "Toate lucrările",
+    "faqLabel": "Întrebări frecvente", "faqTitle": "Înainte", "faqEm": "să comanzi.",
+    "faq": [
+      ["Am nevoie de poze profesionale?", "Nu. Pozele de pe site sunt suficiente, cât timp produsul se vede clar. Dacă ai mai multe unghiuri, cu atât mai bine."],
+      ["Ce diferență e între pachet și abonamentul lunar?", "Pachetul îl plătești o singură dată. Abonamentul îți aduce reclame noi în fiecare lună, la un preț mai mic pe videoclip. E util dacă rulezi reclame constant, pentru că aceeași reclamă începe să meargă mai slab după câteva săptămâni."],
+      ["Pot anula abonamentul?", "Da, după primele 3 luni, cu o lună înainte. Videoclipurile primite rămân ale tale."],
+      ["Ce se întâmplă dacă nu-mi place reclama?", "De aceea aprobi storyboard-ul înainte de producție. După livrare ai inclusă o rundă de modificări."],
+      ["Pot folosi videoclipurile în reclame plătite?", "Da, pe Meta, TikTok, Google și oriunde altundeva, după ce factura e plătită integral."]
+    ],
+    "orderLabel": "Comandă", "orderTitle": "Spune-ne ce produs vrei", "orderEm": "să vândă mai mult.",
+    "orderIntro": "Îți răspundem în 24 de ore cu o propunere și primul concept.", "orderCta": "Hai să vorbim despre produsul tău"
+  },
+  "en": {
+    "eyebrow": "Products · Video ads for online stores",
+    "title": "From a product photo to an ad", "titleEm": "that stops the scroll.",
+    "intro": "Send us your photos. We create the concept, storyboard and video. Ready for Meta, TikTok and your website in 5 working days.",
+    "packages": "Explore the packages", "enquire": "Request a proposal", "heroLabel": "Ricinus · a real product ad", "play": "Play the Ricinus ad",
+    "facts": ["1080p", "9:16 · 1:1 · 16:9", "15–20 seconds", "music + sound effects"],
+    "processLabel": "From product to ad", "processTitle": "One catalogue photo.", "processEm": "Ten frames. One ad.",
+    "processIntro": "Your product, in a visual story. See how we build the creative direction, frame by frame.",
+    "frames": ["1. Your product", "2. The storyboard", "3. The final ad"],
+    "frameNotes": ["The starting point: your product in focus.", "You approve it before production starts.", "In every format."],
+    "includedLabel": "In every package", "includedTitle": "What you get,", "includedEm": "without hidden costs.",
+    "included": [
+      ["Concept and storyboard", "We plan the idea and frames before production. You know what the ad will look like from the start."],
+      ["3 formats", "Vertical for Reels and TikTok, square for feeds and landscape for your website."],
+      ["Music and sound effects", "Sound selected for your product and edit, ready for your ad."],
+      ["Opening variations", "Two versions of the first 3 seconds, so you can test which catches more attention."],
+      ["One revision round", "We adjust the text, pace or music after the first version."],
+      ["Usage rights", "Use the videos in ads, on your website and on social media."]
+    ],
+    "stepsLabel": "How we work", "stepsTitle": "Four steps,", "stepsEm": "five days.",
+    "steps": [
+      ["Send us your product", "Website photos, the product link and where you want to run your ad.", "Day 1"],
+      ["Review the storyboard", "Approve or adjust the concept and frames.", "Day 2"],
+      ["We produce the ad", "We generate the frames, edit and add music and effects.", "Days 3–4"],
+      ["Delivery and revisions", "Receive every format and one revision round.", "Day 5"]
+    ],
+    "workLabel": "From our portfolio", "workTitle": "Ads made", "workEm": "by us.", "allWork": "All our work",
+    "faqLabel": "Frequently asked questions", "faqTitle": "Before", "faqEm": "you order.",
+    "faq": [
+      ["Do I need professional photos?", "No. Website photos are enough as long as the product is clear. More angles help."],
+      ["How does a package differ from a monthly subscription?", "A package is a one-off purchase. A subscription brings new ads each month at a lower price per video. It suits ongoing advertising, where the same ad can lose effectiveness after a few weeks."],
+      ["Can I cancel a subscription?", "Yes, after the first 3 months, with one month's notice. The videos you receive remain yours."],
+      ["What if I don't like the ad?", "You approve the storyboard before production. One revision round is included after delivery."],
+      ["Can I use the videos in paid ads?", "Yes, on Meta, TikTok, Google and elsewhere once the invoice is paid in full."]
+    ],
+    "orderLabel": "Get started", "orderTitle": "Tell us which product you want", "orderEm": "to sell more.",
+    "orderIntro": "We reply within 24 hours with a proposal and an initial concept.", "orderCta": "Let's talk about your product"
+  },
+  "fr": {
+    "eyebrow": "Produits · Publicités vidéo pour boutiques en ligne",
+    "title": "D'une photo produit à une publicité", "titleEm": "qui arrête le défilement.",
+    "intro": "Envoyez vos photos. Nous créons le concept, le storyboard et la vidéo. Prêts pour Meta, TikTok et votre site en 5 jours ouvrés.",
+    "packages": "Voir les formules", "enquire": "Demander une proposition", "heroLabel": "Ricinus · une vraie publicité", "play": "Lire la publicité Ricinus",
+    "facts": ["1080p", "9:16 · 1:1 · 16:9", "15–20 secondes", "musique + effets sonores"],
+    "processLabel": "Du produit à la publicité", "processTitle": "Une photo catalogue.", "processEm": "Dix plans. Une publicité.",
+    "processIntro": "Votre produit dans une histoire visuelle. Découvrez la construction de la direction créative, plan par plan.",
+    "frames": ["1. Votre produit", "2. Le storyboard", "3. La publicité finale"],
+    "frameNotes": ["Le point de départ : votre produit au premier plan.", "Vous le validez avant la production.", "Dans tous les formats."],
+    "includedLabel": "Dans chaque formule", "includedTitle": "Tout est inclus,", "includedEm": "sans frais cachés.",
+    "included": [
+      ["Concept et storyboard", "Nous préparons l'idée et les plans avant la production. Vous savez dès le départ à quoi ressemblera la publicité."],
+      ["3 formats", "Vertical pour Reels et TikTok, carré pour le fil et horizontal pour votre site."],
+      ["Musique et effets sonores", "Un son adapté au produit et au montage, prêt pour la publicité."],
+      ["Variantes d'ouverture", "Deux versions des 3 premières secondes pour tester celle qui attire le plus l'attention."],
+      ["Une série de retouches", "Nous ajustons le texte, le rythme ou la musique après la première version."],
+      ["Droits d'utilisation", "Utilisez les vidéos dans vos publicités, sur votre site et sur les réseaux sociaux."]
+    ],
+    "stepsLabel": "Notre méthode", "stepsTitle": "Quatre étapes,", "stepsEm": "cinq jours.",
+    "steps": [
+      ["Envoyez votre produit", "Photos du site, lien du produit et canaux de diffusion souhaités.", "Jour 1"],
+      ["Validez le storyboard", "Approuvez ou ajustez le concept et les plans.", "Jour 2"],
+      ["Nous créons la publicité", "Génération des plans, montage, musique et effets sonores.", "Jours 3–4"],
+      ["Livraison et retouches", "Tous les formats et une série de retouches.", "Jour 5"]
+    ],
+    "workLabel": "Notre portfolio", "workTitle": "Des publicités créées", "workEm": "par nous.", "allWork": "Tous les projets",
+    "faqLabel": "Questions fréquentes", "faqTitle": "Avant", "faqEm": "de commander.",
+    "faq": [
+      ["Faut-il des photos professionnelles ?", "Non. Les photos du site suffisent si le produit est bien visible. Plusieurs angles sont un plus."],
+      ["Quelle différence entre formule et abonnement mensuel ?", "Une formule s'achète une seule fois. Un abonnement apporte de nouvelles publicités chaque mois à un prix par vidéo inférieur. Il convient aux campagnes continues, car une même publicité peut perdre en efficacité après quelques semaines."],
+      ["Puis-je résilier l'abonnement ?", "Oui, après les 3 premiers mois, avec un préavis d'un mois. Les vidéos reçues restent à vous."],
+      ["Et si la publicité ne me plaît pas ?", "Vous validez le storyboard avant la production. Une série de retouches est incluse après livraison."],
+      ["Puis-je utiliser les vidéos en publicité payante ?", "Oui, sur Meta, TikTok, Google et ailleurs après paiement intégral de la facture."]
+    ],
+    "orderLabel": "Commander", "orderTitle": "Quel produit souhaitez-vous", "orderEm": "vendre davantage ?",
+    "orderIntro": "Nous répondons sous 24 heures avec une proposition et un premier concept.", "orderCta": "Parlons de votre produit"
+  }
+}
