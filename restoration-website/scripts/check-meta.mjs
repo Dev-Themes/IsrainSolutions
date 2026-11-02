@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+const html=await fetch('http://localhost:3000').then(r=>r.text());
+const title=html.match(/<title>(.*?)<\/title>/)?.[1] ?? '';
+assert(title.length>0&&title.length<=60,'Title length');
+const description=html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? '';
+assert(description.length>=140&&description.length<=160,`Description length: ${description.length}`);
+assert.equal((html.match(/<h1\b/g)||[]).length,1);
+assert(/rel="canonical"/.test(html));
+assert(/property="og:image"/.test(html));assert(/name="twitter:image"/.test(html));
+for(const image of html.matchAll(/<img\b[^>]*>/g))assert(/\balt="/.test(image[0]));
+console.log('Metadata checks passed');

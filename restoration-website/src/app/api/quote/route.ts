@@ -1,0 +1,4 @@
+import {z} from 'zod';
+const schema=z.object({name:z.string().min(2).max(100),phone:z.string().regex(/^[+0-9 ()-]{8,20}$/),suburb:z.string().min(1).max(100),damage:z.string().min(1).max(100),message:z.string().max(2000),consent:z.literal('on'),website:z.string().max(0)});
+export async function POST(request:Request){if(Number(request.headers.get('content-length'))>10000)return Response.json({message:'Enquiry too large.'},{status:413});try{const result=schema.safeParse(await request.json());if(!result.success)return Response.json({message:'Please check all required fields and your phone number.'},{status:400}); // TODO: distributed rate limiting and email provider using QUOTE_TO_EMAIL. Never claim delivery before provider confirmation.
+return Response.json({message:'Online delivery is not configured yet. Please call our team to arrange your assessment.'},{status:503});}catch{return Response.json({message:'Invalid request. Please try again.'},{status:400})}}
