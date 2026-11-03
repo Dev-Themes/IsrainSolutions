@@ -1,1 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#0b1f3a" d="M3 27 32 4l29 23h-9L32 12 12 27z"/><path fill="#1e88e5" d="M32 17C26 27 18 35 18 43a14 14 0 0 0 28 0c0-8-8-16-14-26Z"/><path fill="#fff" d="m24 43 5 5 11-12 3 3-14 15-8-8z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" role="img" aria-labelledby="logo-title">
+  <title id="logo-title">Brisbane Restoration Co. mark</title>
+  <rect width="80" height="80" rx="18" fill="#0b2433"/>
+  <path d="M18 43.5 40 19l22 24.5" fill="none" stroke="#f8f7f4" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M27 43.5v17h26v-17" fill="none" stroke="#f8f7f4" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M40 30c-6.5 8.2-10.5 13.1-10.5 18.2a10.5 10.5 0 0 0 21 0C50.5 43.1 46.5 38.2 40 30Z" fill="#c66a3d"/>
+  <path d="m35.2 48.5 3.4 3.4 7-7" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
