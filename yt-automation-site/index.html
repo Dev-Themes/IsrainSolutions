@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><title>yt-automation</title></head>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>yt-automation: a personal video publishing tool</title>
+<style>
+ body{font-family:system-ui,Arial,sans-serif;max-width:760px;margin:40px auto;padding:0 16px;line-height:1.6;color:#222}
+ table{border-collapse:collapse;width:100%} td,th{border:1px solid #ccc;padding:8px;text-align:left;vertical-align:top}
+</style>
+</head>
 <body>
 <h1>yt-automation</h1>
-<p>yt-automation is a personal, internal-use tool that creates original educational
-software-tip videos and uploads them to the developer's own YouTube channel.
-It is not offered to the public and has no other users.</p>
+<p>yt-automation is a personal, single-user tool that prepares short videos and
+publishes them to the developer's own YouTube channel, then reads that channel's
+performance numbers to plan future videos. It has one user (its developer), it is
+not offered to the public, and it does not access anyone else's YouTube account.</p>
+
+<h2>Developer and channel</h2>
+<p>Developer: Muhammad Shariq (individual developer)<br>
+Channel: <a href="https://youtube.com/@ember-0-edge?si=MPq29OYBKzlFQgPT">Ember & Edge</a><br>
+Contact: devthemes4@gmail.com</p>
+
+<h2>What the tool does</h2>
+<ol>
+ <li>Plans a video topic and assembles an edited short video from licensed
+     stock footage and sound, with AI assistance for planning and writing titles
+     and descriptions.</li>
+ <li>Uploads the finished video to the developer's own channel with a title,
+     description, tags and a privacy setting chosen by the developer in the
+     tool's configuration.</li>
+ <li>Reads the developer's own video statistics to see which topics perform
+     well.</li>
+</ol>
+
+<h2>YouTube API access and why each permission is needed</h2>
+<table>
+<tr><th>Permission (scope)</th><th>Used for</th></tr>
+<tr><td>youtube.upload</td><td>Uploading the developer's videos to the developer's own channel</td></tr>
+<tr><td>youtube.readonly</td><td>Reading the developer's own channel and video information, including the privacy and processing status of an uploaded video</td></tr>
+<tr><td>yt-analytics.readonly</td><td>Reading the developer's own video analytics (views, watch time, retention, likes)</td></tr>
+</table>
+
+<p>This tool uses YouTube API Services. By using it, the developer is bound by the
+<a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a>.
+See the <a href="privacy.html">Privacy Policy</a> and the
+<a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</p>
+
 <p><a href="privacy.html">Privacy Policy</a></p>
-<p>Contact: YOUR_EMAIL@gmail.com</p>
-</body></html>
+</body>
+</html>
