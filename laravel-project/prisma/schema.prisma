@@ -1,0 +1,139 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  PRO
+  ADMIN
+}
+
+enum LeadStatus {
+  PENDING
+  MATCHED
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+enum Urgency {
+  EMERGENCY
+  SAME_DAY
+  WITHIN_48_HOURS
+  FLEXIBLE
+}
+
+model User {
+  id            String       @id @default(cuid())
+  name          String
+  email         String       @unique
+  passwordHash  String
+  phone         String?
+  role          Role         @default(CUSTOMER)
+  avatarUrl     String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  proProfile    ProProfile?
+  leads         Lead[]       @relation("CustomerLeads")
+  proLeads      Lead[]       @relation("AssignedProLeads")
+  reviews       Review[]     @relation("AuthorReviews")
+}
+
+model ProProfile {
+  id               String       @id @default(cuid())
+  userId           String       @unique
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyName      String
+  slug             String       @unique
+  bio              String
+  phone            String
+  website          String?
+  hourlyRate       Int?         // In GBP for UK / USD for US
+  calloutFee       Int?         // Emergency callout base fee
+  isVerified       Boolean      @default(true)
+  isInsuranceValid Boolean      @default(true)
+  insuranceAmount  String?      // e.g. "£2,000,000 Public Liability"
+  licenseNumber    String?      // e.g. "Gas Safe #592104" or "NICEIC #D60312"
+  yearsInBusiness  Int          @default(8)
+  rating           Float        @default(4.9)
+  reviewCount      Int          @default(32)
+  country          String       // "UK" or "US"
+  city             String
+  postcodeOrZip    String
+  address          String?
+  categories       Category[]   @relation("ProCategories")
+  reviews          Review[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model Category {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  name        String
+  icon        String       // Lucide icon identifier
+  description String
+  avgPriceUK  String       // e.g. "£65 - £120/hr"
+  avgPriceUS  String       // e.g. "$75 - $150/hr"
+  emergencyAvailable Boolean @default(true)
+  pros        ProProfile[] @relation("ProCategories")
+  leads       Lead[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Location {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  name         String
+  country      String   // "UK" or "US"
+  stateCounty  String   // e.g. "Greater London", "Greater Manchester", "Texas"
+  isPopular    Boolean  @default(false)
+  postalPrefix String?  // e.g. "SW", "M", "787"
+  createdAt    DateTime @default(now())
+}
+
+model Lead {
+  id            String      @id @default(cuid())
+  referenceCode String      @unique
+  customerId    String?
+  customer      User?       @relation("CustomerLeads", fields: [customerId], references: [id], onDelete: SetNull)
+  categoryId    String
+  category      Category    @relation(fields: [categoryId], references: [id])
+  customerName  String
+  customerEmail String
+  customerPhone String
+  country       String      // "UK" or "US"
+  city          String
+  postcodeOrZip String
+  urgency       Urgency     @default(WITHIN_48_HOURS)
+  title         String
+  description   String
+  status        LeadStatus  @default(PENDING)
+  assignedProId String?
+  assignedPro   User?       @relation("AssignedProLeads", fields: [assignedProId], references: [id], onDelete: SetNull)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Review {
+  id           String      @id @default(cuid())
+  proProfileId String
+  proProfile   ProProfile  @relation(fields: [proProfileId], references: [id], onDelete: Cascade)
+  authorId     String?
+  author       User?       @relation("AuthorReviews", fields: [authorId], references: [id], onDelete: SetNull)
+  authorName   String
+  rating       Int         // 1 to 5
+  title        String
+  comment      String
+  verifiedJob  Boolean     @default(true)
+  city         String
+  createdAt    DateTime    @default(now())
+}
