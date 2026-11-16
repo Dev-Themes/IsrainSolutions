@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { AuthProvider } from "@/lib/auth-context";
+import { getSiteUrl, siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -32,40 +33,40 @@ export const viewport: Viewport = {
   ],
 };
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "TradeConnect | Verified Local Trade Services (UK & USA)",
     template: "%s | TradeConnect",
   },
-  description:
-    "Find trusted, vetted local tradespeople across the UK and USA. Compare free quotes with verified public liability insurance for plumbing, electrical, roofing, and HVAC.",
-  keywords: [
-    "home services marketplace",
-    "hire tradesmen UK",
-    "local contractors USA",
-    "emergency plumbers",
-    "certified electricians",
-    "roofing contractors",
-    "heating engineers",
-  ],
+  description: siteConfig.description,
   authors: [{ name: "TradeConnect Global" }],
   creator: "TradeConnect",
   publisher: "TradeConnect",
-  metadataBase: new URL("https://tradeconnect-marketplace.vercel.app"),
   icons: {
     icon: "/images/brand/logo.jpg",
     shortcut: "/images/brand/logo.jpg",
     apple: "/images/brand/logo.jpg",
   },
+  alternates: {
+    canonical: siteUrl,
+    languages: {
+      "en-GB": `${siteUrl}/uk`,
+      "en-US": `${siteUrl}/us`,
+      "x-default": siteUrl,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
     alternateLocale: "en_US",
-    url: "https://tradeconnect-marketplace.vercel.app",
+    url: siteUrl,
     siteName: "TradeConnect",
     title: "TradeConnect | Verified Local Trade Services",
     description:
-      "Connect with over 8,780+ vetted trade professionals. Fast quote matching, zero obligation, and verified customer reviews.",
+      "Connect with over 8,784+ vetted trade professionals. Fast quote matching, zero obligation, and verified customer reviews.",
     images: [
       {
         url: "/images/brand/og-preview.jpg",

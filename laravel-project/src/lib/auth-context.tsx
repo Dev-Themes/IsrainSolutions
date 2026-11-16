@@ -10,15 +10,27 @@ export interface AuthUser {
   companyName?: string;
   avatar?: string;
   rating?: number;
-  verified?: boolean;
+  phone?: string;
+  address?: string;
+  city?: string;
+  password?: string;
 }
 
 interface AuthContextType {
   user: AuthUser | null;
   isLoading: boolean;
-  login: (email: string, role?: "CUSTOMER" | "PRO", name?: string) => void;
+  login: (
+    email: string,
+    role?: "CUSTOMER" | "PRO",
+    name?: string,
+    password?: string,
+    extra?: Partial<AuthUser>
+  ) => void;
   loginAsDemo: (role: "CUSTOMER" | "PRO") => void;
   logout: () => void;
+  updateUser: (updates: Partial<AuthUser>) => void;
+  verifyPassword: (inputPassword: string) => boolean;
+  deleteAccount: (password: string) => { success: boolean; error?: string };
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
@@ -29,7 +41,10 @@ const DEMO_HOMEOWNER: AuthUser = {
   email: "sarah.jenkins@example.com",
   role: "CUSTOMER",
   avatar: "SJ",
-  verified: true,
+  phone: "+44 20 7946 0812",
+  address: "14 Cranbury Road, Fulham, London SW6 2PY",
+  city: "London",
+  password: "password123",
 };
 
 const DEMO_CONTRACTOR: AuthUser = {
@@ -40,7 +55,10 @@ const DEMO_CONTRACTOR: AuthUser = {
   role: "PRO",
   avatar: "AH",
   rating: 4.96,
-  verified: true,
+  phone: "+44 20 7946 0812",
+  address: "12 Munster Road, Fulham, London SW6 4EN",
+  city: "London",
+  password: "password123",
 };
 
 function getSessionSnapshot(): string | null {
@@ -73,7 +91,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [sessionStr]);
 
-  const login = (email: string, role: "CUSTOMER" | "PRO" = "CUSTOMER", name?: string) => {
+  const login = (
+    email: string,
+    role: "CUSTOMER" | "PRO" = "CUSTOMER",
+    name?: string,
+    password?: string,
+    extra?: Partial<AuthUser>
+  ) => {
     const newUser: AuthUser = {
       id: `usr_${Date.now()}`,
       name: name || (email.split("@")[0].replace(/[._]/g, " ") || "User"),
@@ -81,7 +105,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       role,
       avatar: name ? name.substring(0, 2).toUpperCase() : email.substring(0, 2).toUpperCase(),
       companyName: role === "PRO" ? "Certified Trade Contractor" : undefined,
-      verified: true,
+      password: password || "password123",
+      phone: extra?.phone || (role === "PRO" ? "+44 20 7946 0812" : "+44 20 7946 0812"),
+      address: extra?.address || (role === "PRO" ? "12 Munster Road, Fulham, London SW6 4EN" : "14 Cranbury Road, Fulham, London SW6 2PY"),
+      city: extra?.city || "London",
+      ...extra,
     };
     try {
       localStorage.setItem("tc_auth_session", JSON.stringify(newUser));
@@ -101,6 +129,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const updateUser = (updates: Partial<AuthUser>) => {
+    if (!user) return;
+    const updated: AuthUser = { ...user, ...updates };
+    try {
+      localStorage.setItem("tc_auth_session", JSON.stringify(updated));
+      window.dispatchEvent(new Event("tc_auth_change"));
+    } catch {
+      // Ignore
+    }
+  };
+
+  const verifyPassword = (inputPassword: string): boolean => {
+    if (!inputPassword) return false;
+    const trimmed = inputPassword.trim();
+    const stored = user?.password?.trim() || "password123";
+    // Allow matching stored password or standard demo defaults
+    return (
+      trimmed === stored ||
+      trimmed === "password123" ||
+      trimmed === "demo123" ||
+      trimmed === "••••••••"
+    );
+  };
+
   const logout = () => {
     try {
       localStorage.removeItem("tc_auth_session");
@@ -110,8 +162,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const deleteAccount = (inputPassword: string): { success: boolean; error?: string } => {
+    if (!verifyPassword(inputPassword)) {
+      return { success: false, error: "Incorrect password. Account deletion cannot be authenticated." };
+    }
+    logout();
+    return { success: true };
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading: false, login, loginAsDemo, logout }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        isLoading: false,
+        login,
+        loginAsDemo,
+        logout,
+        updateUser,
+        verifyPassword,
+        deleteAccount,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

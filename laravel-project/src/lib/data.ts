@@ -401,7 +401,7 @@ export const VERIFIED_PROS: VerifiedPro[] = [
     hourlyRate: 85,
     calloutFee: 95,
     rating: 4.96,
-    reviewCount: 148,
+    reviewCount: 168,
     yearsInBusiness: 14,
     isVerified: true,
     isInsuranceValid: true,
@@ -594,10 +594,11 @@ export interface JobCostGuide {
   notes: string;
 }
 
+// TODO: Confirm final production price ranges with client/operations
 export const TYPICAL_JOB_PRICES: JobCostGuide[] = [
   {
     job: "Emergency burst pipe repair & isolation",
-    category: "Plumbing",
+    category: "plumbing",
     ukPriceRange: "£110 - £180",
     usPriceRange: "$140 - $240",
     duration: "1 - 2 hours",
@@ -605,8 +606,17 @@ export const TYPICAL_JOB_PRICES: JobCostGuide[] = [
     notes: "Includes isolation valve replacement and up to 1m of copper/poly pipe.",
   },
   {
+    job: "Drain & toilet unblocking (mechanical/jetting)",
+    category: "plumbing",
+    ukPriceRange: "£95 - £220",
+    usPriceRange: "$130 - $290",
+    duration: "1 - 3 hours",
+    materialsIncluded: true,
+    notes: "High pressure jetting and rod clearance up to 15m inspection chamber.",
+  },
+  {
     job: "Combi boiler service & CP12 inspection",
-    category: "Boilers & Gas",
+    category: "gas-boiler",
     ukPriceRange: "£85 - £130",
     usPriceRange: "$110 - $170",
     duration: "1 hour",
@@ -615,7 +625,7 @@ export const TYPICAL_JOB_PRICES: JobCostGuide[] = [
   },
   {
     job: "10-Way dual RCD metal consumer unit upgrade",
-    category: "Electrical",
+    category: "electrical",
     ukPriceRange: "£420 - £650",
     usPriceRange: "$550 - $850",
     duration: "Half day (4 - 5 hrs)",
@@ -624,7 +634,7 @@ export const TYPICAL_JOB_PRICES: JobCostGuide[] = [
   },
   {
     job: "Pitched roof slipped slate & tile repair (up to 15 tiles)",
-    category: "Roofing",
+    category: "roofing",
     ukPriceRange: "£160 - £290",
     usPriceRange: "$210 - $380",
     duration: "2 - 3 hours",
@@ -632,8 +642,17 @@ export const TYPICAL_JOB_PRICES: JobCostGuide[] = [
     notes: "Includes ladder access, replacement slates, and ridge mortar check.",
   },
   {
+    job: "Central AC / heat pump complete system installation",
+    category: "hvac",
+    ukPriceRange: "£2,400 - £5,200",
+    usPriceRange: "$2,800 - $6,500",
+    duration: "1 - 2 days",
+    materialsIncluded: true,
+    notes: "Full equipment replacement, condenser pad, line set flush, and warranty signoff.",
+  },
+  {
     job: "Heat pump / AC annual diagnostic & refrigerant check",
-    category: "HVAC",
+    category: "hvac",
     ukPriceRange: "£95 - £160",
     usPriceRange: "$120 - $210",
     duration: "1 - 2 hours",
@@ -642,7 +661,7 @@ export const TYPICAL_JOB_PRICES: JobCostGuide[] = [
   },
   {
     job: "Ultion 3-star anti-snap lock replacement",
-    category: "Locksmith",
+    category: "locksmith",
     ukPriceRange: "£115 - £175",
     usPriceRange: "$150 - $220",
     duration: "45 minutes",
@@ -761,35 +780,7 @@ export const HOME_REVIEWS = [
   },
 ];
 
-export const BLOG_ARTICLES = [
-  {
-    slug: "winter-boiler-pressure-guide",
-    title: "How to check and top up your combi boiler water pressure",
-    excerpt: "If your central heating stops firing or radiators stay cold at the bottom, your system pressure may have dropped below 1 bar. Here is how to refill the loop safely.",
-    readTime: "4 min read",
-    category: "Heating & Boilers",
-    date: "10 November 2026",
-    author: "David Thornton, Gas Safe Engineer",
-  },
-  {
-    slug: "eicr-landlord-regulations-checklist",
-    title: "Electrical safety certificates (EICR): What inspectors check",
-    excerpt: "A plain explanation of C1, C2 and FI codes on an electrical report, why surge protection is now required, and how often tests must happen.",
-    readTime: "6 min read",
-    category: "Electrical",
-    date: "28 October 2026",
-    author: "Liam O'Connor, NICEIC Contractor",
-  },
-  {
-    slug: "storm-roof-damage-first-steps",
-    title: "What to do immediately after high winds damage your roof",
-    excerpt: "Steps to stop water reaching your ceilings, safe isolation of electrics, and how to photograph damage for your home insurance claim before repairs start.",
-    readTime: "5 min read",
-    category: "Roofing",
-    date: "14 October 2026",
-    author: "Simon Fletcher, Roofing Specialist",
-  },
-];
+export { BLOG_ARTICLES, type BlogArticle, type BlogArticleSection } from "./blog-data";
 
 export const FAQS = [
   {

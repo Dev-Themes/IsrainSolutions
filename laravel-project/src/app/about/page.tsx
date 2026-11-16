@@ -11,15 +11,46 @@ import {
   MapPin,
   Building2,
 } from "lucide-react";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { getSiteUrl } from "@/lib/site-config";
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
-  title: "Our Story & Standards | TradeConnect",
-  description: "Learn how TradeConnect was founded by tradespeople to eliminate rogue operators and connect homeowners with vetted, insured local contractors.",
+  title: "Our Story & Standards | Verified Trade Network",
+  description:
+    "Learn how TradeConnect was founded by tradespeople to eliminate rogue operators and connect homeowners with vetted, insured local contractors across the UK and US.",
+  alternates: {
+    canonical: `${siteUrl}/about`,
+    languages: {
+      "en-GB": `${siteUrl}/about`,
+      "en-US": `${siteUrl}/about`,
+      "x-default": `${siteUrl}/about`,
+    },
+  },
+  openGraph: {
+    title: "Our Story & Standards | TradeConnect",
+    description:
+      "TradeConnect connects homeowners with certified, insured local contractors. Zero sponsored rank manipulation.",
+    url: `${siteUrl}/about`,
+    siteName: "TradeConnect",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Story & Standards | TradeConnect",
+    description:
+      "TradeConnect connects homeowners with certified, insured local contractors.",
+  },
 };
 
 export default function AboutPage() {
   return (
     <div className="flex flex-col">
+      <div className="container-custom pt-4">
+        <Breadcrumbs items={[{ label: "About Us" }]} />
+      </div>
+
       {/* SECTION 1: TWO-LAYERED HERO */}
       <section className="section-light section-spacing border-b border-[var(--line)] relative overflow-hidden">
         <div className="container-custom">
@@ -276,7 +307,7 @@ export default function AboutPage() {
               href="/quote"
               className="inline-flex items-center px-6 py-3.5 rounded-[var(--radius)] bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold text-xs shadow-xs transition-colors"
             >
-              <span>Post Your Job Free</span>
+              <span>Post a Job</span>
               <ArrowRight className="w-4 h-4 ml-1.5" />
             </Link>
           </div>

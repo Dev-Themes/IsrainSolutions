@@ -22,6 +22,7 @@ import {
   KeyRound,
   Check,
   ChevronDown,
+  Globe,
 } from "lucide-react";
 import {
   CATEGORIES,
@@ -36,6 +37,7 @@ import { ReviewsCarousel } from "@/components/ui/reviews-carousel";
 import { WorkGallery } from "@/components/ui/work-gallery";
 import { AreaChips } from "@/components/ui/area-chips";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import { getSiteUrl } from "@/lib/site-config";
 
 const iconMap: Record<string, React.ReactNode> = {
   Wrench: <Wrench className="w-5 h-5 text-[var(--accent)]" />,
@@ -89,6 +91,8 @@ export default function HomePage() {
   const [postcodeOrCity, setPostcodeOrCity] = React.useState("");
   const [activeHeroShowcase, setActiveHeroShowcase] = React.useState(0);
   const [searchMode, setSearchMode] = React.useState<"QUOTE" | "EMERGENCY" | "DIRECTORY">("QUOTE");
+  const [pricingCurrency, setPricingCurrency] = React.useState<"GBP" | "USD">("GBP");
+  const [marketTab, setMarketTab] = React.useState<"UK" | "US">("UK");
 
   const handleHeroSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,28 +101,30 @@ export default function HomePage() {
     const matchedCity = CITIES.find(
       (c) => c.slug === query || c.name.toLowerCase() === query
     );
+    const countrySlug = matchedCity ? matchedCity.country.toLowerCase() : "uk";
     const citySlug = matchedCity ? matchedCity.slug : "london";
-    router.push(`/uk/${selectedCategory}/${citySlug}`);
+    router.push(`/${countrySlug}/${selectedCategory}/${citySlug}`);
   };
 
   // Structured Data (JSON-LD) for Organization, WebSite & FAQPage
+  const siteUrl = getSiteUrl();
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "WebSite",
         name: "TradeConnect",
-        url: "https://tradeconnect-marketplace.vercel.app",
+        url: siteUrl,
         potentialAction: {
           "@type": "SearchAction",
-          target: "https://tradeconnect-marketplace.vercel.app/uk/plumbing/{search_term_string}",
+          target: `${siteUrl}/uk/plumbing/{search_term_string}`,
           "query-input": "required name=search_term_string",
         },
       },
       {
         "@type": "Organization",
         name: "TradeConnect",
-        url: "https://tradeconnect-marketplace.vercel.app",
+        url: siteUrl,
         description:
           "Independent verified marketplace connecting homeowners with certified local trade professionals in the UK and USA.",
         contactPoint: {
@@ -427,11 +433,245 @@ export default function HomePage() {
         </section>
 
         {/* ======================================================== */}
+        {/* SECTION 3B: MARKETPLACE FOOTPRINT (UK 45% + US EXPANSION) */}
+        {/* ======================================================== */}
+        <section className="section-light section-spacing border-b border-[var(--line)] bg-[var(--surface)]">
+          <div className="container-custom">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 pb-6 border-b border-[var(--line)]">
+              <div className="max-w-2xl">
+                <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[var(--brand-light)] border border-[var(--line-subtle)] text-xs font-bold text-[var(--pine-accent)] mb-3">
+                  <Globe className="w-3.5 h-3.5 text-[var(--accent)] shrink-0" />
+                  <span>Established UK Presence &amp; Active US Expansion</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-[var(--text)] tracking-tight">
+                  Regional Market Coverage &amp; Contractor Network
+                </h2>
+                <p className="mt-2 text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed">
+                  Approximately 45% established coverage across UK metropolitan regions with strong growth momentum, alongside our newly launched US market expansion across 6 primary growth hubs.
+                </p>
+              </div>
+
+              {/* Dual Market Tab Buttons */}
+              <div className="mt-4 lg:mt-0 flex items-center bg-[var(--bg-alt)] p-1 rounded-[var(--radius)] border border-[var(--line)] shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setMarketTab("UK")}
+                  className={`px-4 py-2 rounded-[var(--radius-sm)] text-xs font-bold transition-all cursor-pointer flex items-center space-x-2 ${
+                    marketTab === "UK"
+                      ? "bg-[var(--brand)] text-white shadow-xs"
+                      : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                  }`}
+                >
+                  <span>🇬🇧 UK Market (45% Active)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMarketTab("US")}
+                  className={`px-4 py-2 rounded-[var(--radius-sm)] text-xs font-bold transition-all cursor-pointer flex items-center space-x-2 ${
+                    marketTab === "US"
+                      ? "bg-[var(--accent)] text-white shadow-xs"
+                      : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                  }`}
+                >
+                  <span>🇺🇸 USA Expansion (Live)</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Tab 1: UK Established Network */}
+            {marketTab === "UK" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-in fade-in duration-200">
+                <div className="lg:col-span-8 space-y-6">
+                  <div className="p-6 rounded-[var(--radius)] bg-[var(--bg-alt)] border border-[var(--line)]">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[var(--line-subtle)] gap-2">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
+                          National Footprint &middot; UK
+                        </span>
+                        <h3 className="text-lg font-bold text-[var(--text)]">
+                          Established UK Operations — 45% Planned Coverage Active
+                        </h3>
+                      </div>
+                      <span className="text-xs font-bold text-[var(--pine-accent)] bg-[var(--brand-light)] px-3 py-1 rounded-full border border-[var(--line-subtle)] w-fit">
+                        5,280+ UK Tradesmen
+                      </span>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-4">
+                      Our UK infrastructure is established across England, Scotland, and Wales. We have achieved over 45% of our targeted national postal coverage, leaving substantial runway for regional acquisition expansion.
+                    </p>
+
+                    <div className="mt-5">
+                      <span className="text-[10.5px] font-bold uppercase tracking-wider text-[var(--text)] block mb-2.5">
+                        Primary UK Active City Hubs:
+                      </span>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        {CITIES.filter((c) => c.country === "UK").map((city) => (
+                          <Link
+                            key={city.slug}
+                            href={`/uk/plumbing/${city.slug}`}
+                            className="p-2.5 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--line-subtle)] hover:border-[var(--brand)] hover:text-[var(--accent)] transition-colors flex items-center justify-between group"
+                          >
+                            <div>
+                              <div className="font-bold text-[var(--text)] group-hover:text-[var(--accent)]">
+                                {city.name}
+                              </div>
+                              <div className="text-[10px] text-[var(--text-light)]">
+                                {city.populationText.split("·")[1]?.trim() || city.stateCounty}
+                              </div>
+                            </div>
+                            <ArrowRight className="w-3 h-3 text-[var(--text-light)] group-hover:text-[var(--accent)]" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* UK Network Credibility Metrics */}
+                <div className="lg:col-span-4 space-y-4">
+                  <div className="p-6 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-soft space-y-4">
+                    <h4 className="font-bold text-sm text-[var(--text)]">
+                      UK Compliance &amp; Vetting Standards
+                    </h4>
+                    <div className="space-y-3 text-xs">
+                      <div className="flex items-start space-x-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[var(--pine-accent)] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[var(--text)] block font-bold">Gas Safe Register Mandate</strong>
+                          <span className="text-[var(--text-muted)]">100% of boiler engineers checked against the official register.</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[var(--pine-accent)] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[var(--text)] block font-bold">NICEIC &amp; Part P Approved</strong>
+                          <span className="text-[var(--text-muted)]">Electrical safety certification (EICR) compliant contractors.</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[var(--pine-accent)] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[var(--text)] block font-bold">£2M+ Public Liability Cover</strong>
+                          <span className="text-[var(--text-muted)]">Verified policy documents stored and monitored annually.</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <Link
+                        href="/uk"
+                        className="w-full py-2.5 rounded-[var(--radius-sm)] bg-[var(--brand)] hover:bg-[var(--brand-hover)] text-white text-center font-bold text-xs transition-colors shadow-xs block"
+                      >
+                        Browse Full UK Directory &rarr;
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Tab 2: US Expansion Hub */}
+            {marketTab === "US" && (
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start animate-in fade-in duration-200">
+                <div className="lg:col-span-8 space-y-6">
+                  <div className="p-6 rounded-[var(--radius)] bg-[var(--bg-alt)] border border-[var(--line)]">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[var(--line-subtle)] gap-2">
+                      <div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--accent)]">
+                          Market Expansion &middot; USA
+                        </span>
+                        <h3 className="text-lg font-bold text-[var(--text)]">
+                          USA Expansion — Active Across 6 High-Growth Hubs
+                        </h3>
+                      </div>
+                      <span className="text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40 px-3 py-1 rounded-full border border-amber-300 dark:border-amber-800 w-fit">
+                        3,500+ US Contractors
+                      </span>
+                    </div>
+
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed mt-4">
+                      Launched this week to capture high-demand residential services in Sun Belt and metropolitan growth corridors. We have onboarded licensed electricians, HVAC technicians, and plumbers across Texas, California, Illinois, Florida, and Arizona.
+                    </p>
+
+                    <div className="mt-5">
+                      <span className="text-[10.5px] font-bold uppercase tracking-wider text-[var(--text)] block mb-2.5">
+                        Active US Launch Metro Territories:
+                      </span>
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        {CITIES.filter((c) => c.country === "US").map((city) => (
+                          <Link
+                            key={city.slug}
+                            href={`/us/hvac/${city.slug}`}
+                            className="p-2.5 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--line-subtle)] hover:border-[var(--brand)] hover:text-[var(--accent)] transition-colors flex items-center justify-between group"
+                          >
+                            <div>
+                              <div className="font-bold text-[var(--text)] group-hover:text-[var(--accent)]">
+                                {city.name}, {city.stateCounty}
+                              </div>
+                              <div className="text-[10px] text-[var(--text-light)]">
+                                {city.populationText.split("·")[1]?.trim() || city.postalPrefix}
+                              </div>
+                            </div>
+                            <ArrowRight className="w-3 h-3 text-[var(--text-light)] group-hover:text-[var(--accent)]" />
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* US Expansion Network Credibility Metrics */}
+                <div className="lg:col-span-4 space-y-4">
+                  <div className="p-6 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-soft space-y-4">
+                    <h4 className="font-bold text-sm text-[var(--text)]">
+                      US Licensing &amp; Compliance Standards
+                    </h4>
+                    <div className="space-y-3 text-xs">
+                      <div className="flex items-start space-x-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[var(--pine-accent)] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[var(--text)] block font-bold">EPA Universal &amp; HVAC Regs</strong>
+                          <span className="text-[var(--text-muted)]">Refrigerant handling and heat pump pressure certified pros.</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[var(--pine-accent)] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[var(--text)] block font-bold">OSHA Safety &amp; State Boards</strong>
+                          <span className="text-[var(--text-muted)]">Verified state contractor board license numbers.</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start space-x-2.5">
+                        <CheckCircle2 className="w-4 h-4 text-[var(--pine-accent)] shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-[var(--text)] block font-bold">$1M+ Commercial General Liability</strong>
+                          <span className="text-[var(--text-muted)]">Active certificate of insurance verification on file.</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pt-2">
+                      <Link
+                        href="/us"
+                        className="w-full py-2.5 rounded-[var(--radius-sm)] bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white text-center font-bold text-xs transition-colors shadow-xs block"
+                      >
+                        Browse USA Expansion Directory &rarr;
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* ======================================================== */}
         {/* SECTION 4: SERVICES (8 Rich Cards with Checklist & Links) */}
         {/* ======================================================== */}
         <section id="categories-section" className="section-light section-spacing border-b border-[var(--line)]">
           <div className="container-custom">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
+            <div className="flex flex-col md:flex-row md:items-end justify-between mb-8">
               <div>
                 <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--accent)] block mb-1">
                   Core Trade Capabilities
@@ -440,13 +680,42 @@ export default function HomePage() {
                   Services Provided by Verified Contractors
                 </h2>
               </div>
-              <Link
-                href="/uk"
-                className="mt-3 md:mt-0 text-xs font-bold text-[var(--accent)] hover:underline inline-flex items-center"
-              >
-                <span>View all trade categories</span>
-                <ArrowRight className="w-3.5 h-3.5 ml-1" />
-              </Link>
+              <div className="mt-3 md:mt-0 flex items-center space-x-3">
+                {/* Currency & Market Rate Toggle */}
+                <div className="flex items-center bg-[var(--surface)] p-1 rounded-[var(--radius-sm)] border border-[var(--line)] text-xs font-bold">
+                  <span className="text-[10px] text-[var(--text-muted)] mr-2 uppercase tracking-wider pl-1">Currency:</span>
+                  <button
+                    type="button"
+                    onClick={() => setPricingCurrency("GBP")}
+                    className={`px-2.5 py-1 rounded-[var(--radius-sm)] transition-all cursor-pointer ${
+                      pricingCurrency === "GBP"
+                        ? "bg-[var(--brand)] text-white shadow-xs"
+                        : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                    }`}
+                  >
+                    £ GBP (UK)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPricingCurrency("USD")}
+                    className={`px-2.5 py-1 rounded-[var(--radius-sm)] transition-all cursor-pointer ${
+                      pricingCurrency === "USD"
+                        ? "bg-[var(--accent)] text-white shadow-xs"
+                        : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                    }`}
+                  >
+                    $ USD (US)
+                  </button>
+                </div>
+
+                <Link
+                  href={`/${pricingCurrency === "GBP" ? "uk" : "us"}`}
+                  className="text-xs font-bold text-[var(--accent)] hover:underline inline-flex items-center shrink-0"
+                >
+                  <span>Full directory</span>
+                  <ArrowRight className="w-3.5 h-3.5 ml-1" />
+                </Link>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -510,7 +779,7 @@ export default function HomePage() {
                       <div className="flex items-center justify-between text-xs mb-3">
                         <span className="text-[11px] text-[var(--text-muted)]">Typical rate:</span>
                         <span className="font-extrabold text-xs text-[var(--text)] font-mono">
-                          {cat.avgPriceUK.split("/")[0]}
+                          {pricingCurrency === "GBP" ? cat.avgPriceUK.split("/")[0] : cat.avgPriceUS.split("/")[0]}
                         </span>
                       </div>
 
@@ -522,7 +791,7 @@ export default function HomePage() {
                           Post Job
                         </Link>
                         <Link
-                          href={`/uk/${cat.slug}`}
+                          href={`/${pricingCurrency === "GBP" ? "uk" : "us"}/${cat.slug}`}
                           className="py-2 px-2.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-center text-xs font-bold text-[var(--text)] transition-colors flex items-center justify-center space-x-1"
                         >
                           <span>Pricing</span>

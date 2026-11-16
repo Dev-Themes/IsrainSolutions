@@ -1,9 +1,10 @@
 import { MetadataRoute } from "next";
-import { CATEGORIES, CITIES, BLOG_ARTICLES } from "@/lib/data";
+import { CATEGORIES, CITIES, BLOG_ARTICLES, VERIFIED_PROS } from "@/lib/data";
+import { getSiteUrl } from "@/lib/site-config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://tradeconnect-marketplace.vercel.app";
-  const lastModified = new Date("2026-01-01T00:00:00.000Z");
+  const baseUrl = getSiteUrl();
+  const lastModified = new Date();
 
   // Core Static Pages
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -30,7 +31,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // Category Hubs
+  // Verified Pro Profiles
+  const proRoutes: MetadataRoute.Sitemap = VERIFIED_PROS.map((pro) => ({
+    url: `${baseUrl}/pros/${pro.slug}`,
+    lastModified,
+    changeFrequency: "weekly",
+    priority: 0.75,
+  }));
+
+  // Category Hubs (UK & US)
   const categoryRoutes: MetadataRoute.Sitemap = [];
   for (const country of ["uk", "us"]) {
     for (const cat of CATEGORIES) {
@@ -60,6 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes,
     ...blogRoutes,
+    ...proRoutes,
     ...categoryRoutes,
     ...programmaticCityRoutes,
   ];

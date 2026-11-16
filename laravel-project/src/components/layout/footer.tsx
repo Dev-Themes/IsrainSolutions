@@ -139,6 +139,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/uk/painting" className="footer-link-hover">
+                  Painting & Decorating
+                </Link>
+              </li>
+              <li>
                 <Link href="/uk/locksmith" className="footer-link-hover">
                   Emergency Locksmiths
                 </Link>

@@ -19,7 +19,7 @@ export default async function Image({
 
   const categoryName = currentCategory ? currentCategory.name : "Trade Services";
   const cityName = currentCity ? currentCity.name : "Local Area";
-  const countryBadge = country.toUpperCase() === "UK" ? "🇬🇧 UK Vetted Network" : "🇺🇸 USA Verified Hub";
+  const countryBadge = country.toUpperCase() === "UK" ? "UK Vetted Network" : "USA Verified Hub";
 
   return new ImageResponse(
     (
@@ -34,7 +34,6 @@ export default async function Image({
           color: "#ffffff",
           padding: "60px 80px",
           fontFamily: "sans-serif",
-          position: "relative",
         }}
       >
         {/* Top Branding */}
@@ -56,13 +55,15 @@ export default async function Image({
             >
               TC
             </div>
-            <div style={{ fontSize: "32px", fontWeight: "800", letterSpacing: "-1px" }}>
-              Trade<span style={{ color: "#f59e0b" }}>Connect</span>
+            <div style={{ display: "flex", fontSize: "32px", fontWeight: "800", letterSpacing: "-1px" }}>
+              <span>Trade</span>
+              <span style={{ color: "#f59e0b" }}>Connect</span>
             </div>
           </div>
 
           <div
             style={{
+              display: "flex",
               padding: "10px 20px",
               borderRadius: "999px",
               backgroundColor: "rgba(245, 158, 11, 0.15)",
@@ -78,11 +79,12 @@ export default async function Image({
 
         {/* Center Headline */}
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-          <div style={{ fontSize: "20px", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "2px", fontWeight: "700" }}>
-            Verified & Insured Contractors
+          <div style={{ display: "flex", fontSize: "20px", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "2px", fontWeight: "700" }}>
+            Verified &amp; Insured Contractors
           </div>
           <div
             style={{
+              display: "flex",
               fontSize: "56px",
               fontWeight: "900",
               lineHeight: 1.15,
@@ -92,7 +94,7 @@ export default async function Image({
           >
             {categoryName} in {cityName}
           </div>
-          <div style={{ fontSize: "24px", color: "#cbd5e1" }}>
+          <div style={{ display: "flex", fontSize: "24px", color: "#cbd5e1" }}>
             Compare quotes from local professionals with verified public liability insurance.
           </div>
         </div>
@@ -109,21 +111,22 @@ export default async function Image({
         >
           <div style={{ display: "flex", gap: "40px" }}>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "28px", fontWeight: "800", color: "#f59e0b" }}>4.92 ★</span>
-              <span style={{ fontSize: "14px", color: "#94a3b8" }}>Average Customer Rating</span>
+              <div style={{ display: "flex", fontSize: "28px", fontWeight: "800", color: "#f59e0b" }}>4.92 / 5.0</div>
+              <div style={{ display: "flex", fontSize: "14px", color: "#94a3b8" }}>Average Customer Rating</div>
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "28px", fontWeight: "800" }}>8,780+</span>
-              <span style={{ fontSize: "14px", color: "#94a3b8" }}>Registered Vetted Pros</span>
+              <div style={{ display: "flex", fontSize: "28px", fontWeight: "800" }}>8,780+</div>
+              <div style={{ display: "flex", fontSize: "14px", color: "#94a3b8" }}>Registered Vetted Pros</div>
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontSize: "28px", fontWeight: "800" }}>&lt; 2 Hours</span>
-              <span style={{ fontSize: "14px", color: "#94a3b8" }}>Fast Quote Response</span>
+              <div style={{ display: "flex", fontSize: "28px", fontWeight: "800" }}>Under 2 Hours</div>
+              <div style={{ display: "flex", fontSize: "14px", color: "#94a3b8" }}>Fast Quote Response</div>
             </div>
           </div>
 
           <div
             style={{
+              display: "flex",
               padding: "12px 28px",
               backgroundColor: "#f59e0b",
               color: "#0b0f19",

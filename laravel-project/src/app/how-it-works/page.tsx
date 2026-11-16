@@ -7,15 +7,46 @@ import {
   CheckCircle2,
   ChevronDown,
 } from "lucide-react";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { getSiteUrl } from "@/lib/site-config";
+
+const siteUrl = getSiteUrl();
 
 export const metadata: Metadata = {
-  title: "How It Works | TradeConnect Marketplace",
-  description: "Learn how TradeConnect matches homeowners with vetted local trade professionals in 3 transparent, risk-free steps.",
+  title: "How It Works | Verified Quotes in 3 Steps",
+  description:
+    "Learn how TradeConnect matches homeowners with vetted, insured local trade professionals in 3 transparent, risk-free steps. Zero spam and guaranteed credentials.",
+  alternates: {
+    canonical: `${siteUrl}/how-it-works`,
+    languages: {
+      "en-GB": `${siteUrl}/how-it-works`,
+      "en-US": `${siteUrl}/how-it-works`,
+      "x-default": `${siteUrl}/how-it-works`,
+    },
+  },
+  openGraph: {
+    title: "How It Works | TradeConnect",
+    description:
+      "TradeConnect matches homeowners with vetted local trade professionals in 3 transparent, risk-free steps.",
+    url: `${siteUrl}/how-it-works`,
+    siteName: "TradeConnect",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "How It Works | TradeConnect",
+    description:
+      "TradeConnect matches homeowners with vetted local trade professionals in 3 transparent, risk-free steps.",
+  },
 };
 
 export default function HowItWorksPage() {
   return (
     <div className="flex flex-col">
+      <div className="container-custom pt-4">
+        <Breadcrumbs items={[{ label: "How It Works" }]} />
+      </div>
+
       {/* SECTION 1: INTERACTIVE TWO-LAYERED HERO */}
       <section className="section-light section-spacing border-b border-[var(--line)] relative overflow-hidden">
         <div className="container-custom">
@@ -60,7 +91,7 @@ export default function HowItWorksPage() {
                   href="/quote"
                   className="btn-primary px-6 py-3.5 rounded-[var(--radius)] font-bold text-xs inline-flex items-center space-x-2 shadow-xs"
                 >
-                  <span>Post a Free Job Request</span>
+                  <span>Post a Job</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
@@ -311,7 +342,7 @@ export default function HowItWorksPage() {
               href="/quote"
               className="inline-flex items-center px-6 py-3.5 rounded-[var(--radius)] bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white font-bold text-xs shadow-xs transition-colors"
             >
-              <span>Post Your Job Free</span>
+              <span>Post a Job</span>
               <ArrowRight className="w-4 h-4 ml-1.5" />
             </Link>
           </div>

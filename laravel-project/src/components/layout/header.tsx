@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   Menu,
   X,
@@ -19,15 +19,38 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CATEGORIES } from "@/lib/data";
 import { useAuth } from "@/lib/auth-context";
+import { UkFlagIcon, UsFlagIcon } from "@/components/ui/flag-icon";
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter();
   const { user, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = React.useState(false);
   const [desktopServicesOpen, setDesktopServicesOpen] = React.useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = React.useState(false);
-  const [country, setCountry] = React.useState<"UK" | "US">("UK");
+  const [userCountry, setUserCountry] = React.useState<"UK" | "US">("UK");
+
+  // Derive active country from route first, falling back to selected preference
+  const country: "UK" | "US" = pathname.startsWith("/us")
+    ? "US"
+    : pathname.startsWith("/uk")
+    ? "UK"
+    : userCountry;
+
+  const handleCountrySwitch = (target: "UK" | "US") => {
+    setUserCountry(target);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("tradeconnect_preferred_country", target);
+    }
+    if (pathname.startsWith("/uk") && target === "US") {
+      router.push(pathname.replace(/^\/uk/, "/us"));
+    } else if (pathname.startsWith("/us") && target === "UK") {
+      router.push(pathname.replace(/^\/us/, "/uk"));
+    } else if (pathname === "/") {
+      router.push(`/${target.toLowerCase()}`);
+    }
+  };
 
   const hamburgerButtonRef = React.useRef<HTMLButtonElement>(null);
   const mobileDrawerRef = React.useRef<HTMLDivElement>(null);
@@ -149,7 +172,7 @@ export function Header() {
                       {CATEGORIES.map((cat) => (
                         <Link
                           key={cat.slug}
-                          href={`/uk/${cat.slug}`}
+                          href={`/${country.toLowerCase()}/${cat.slug}`}
                           role="menuitem"
                           onClick={() => setDesktopServicesOpen(false)}
                           className="flex items-center justify-between px-3 py-2 rounded-[var(--radius-sm)] text-xs font-medium text-[var(--text)] hover:bg-[var(--bg-alt)] hover:text-[var(--accent)] transition-colors"
@@ -188,25 +211,29 @@ export function Header() {
               <div className="flex items-center bg-[var(--bg-alt)] p-0.5 rounded-[var(--radius-sm)] border border-[var(--line)] text-[11px]">
                 <button
                   type="button"
-                  onClick={() => setCountry("UK")}
-                  className={`px-2 py-0.5 rounded-[4px] font-semibold transition-colors cursor-pointer ${
+                  onClick={() => handleCountrySwitch("UK")}
+                  className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] font-semibold transition-colors cursor-pointer ${
                     country === "UK"
                       ? "bg-[var(--surface)] text-[var(--text)] shadow-xs"
                       : "text-[var(--text-muted)] hover:text-[var(--text)]"
                   }`}
+                  title="Switch to UK Market Directory (45% established coverage)"
                 >
-                  🇬🇧 UK
+                  <UkFlagIcon className="w-3.5 h-2.5 rounded-[1px]" />
+                  <span>UK</span>
                 </button>
                 <button
                   type="button"
-                  onClick={() => setCountry("US")}
-                  className={`px-2 py-0.5 rounded-[4px] font-semibold transition-colors cursor-pointer ${
+                  onClick={() => handleCountrySwitch("US")}
+                  className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-[4px] font-semibold transition-colors cursor-pointer ${
                     country === "US"
                       ? "bg-[var(--surface)] text-[var(--text)] shadow-xs"
                       : "text-[var(--text-muted)] hover:text-[var(--text)]"
                   }`}
+                  title="Switch to US Expansion Market Hub"
                 >
-                  🇺🇸 US
+                  <UsFlagIcon className="w-3.5 h-2.5 rounded-[1px]" />
+                  <span>US</span>
                 </button>
               </div>
 
@@ -292,8 +319,8 @@ export function Header() {
               {/* ROLE-AWARE ACTION BUTTONS:
                   - If Contractor (PRO): Show ONLY "Find Jobs", HIDE "Post a Job"
                   - If Homeowner (CUSTOMER): Show ONLY "Post a Job", HIDE "Find Jobs"
-                  - If Visitor (!user): Show BOTH */}
-              {(!user || user.role === "PRO") && (
+                  - If Visitor (!user): Show "Post a Job" & "Join as Pro" */}
+              {user?.role === "PRO" && (
                 <Link
                   href="/dashboard/pro"
                   className="whitespace-nowrap btn-secondary px-3.5 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1.5"
@@ -304,7 +331,7 @@ export function Header() {
                 </Link>
               )}
 
-              {(!user || user.role === "CUSTOMER") && (
+              {user?.role === "CUSTOMER" && (
                 <Link
                   href="/quote"
                   className="whitespace-nowrap btn-primary px-4 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1.5 shadow-xs"
@@ -313,6 +340,26 @@ export function Header() {
                   <span>Post a Job</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
+              )}
+
+              {!user && (
+                <div className="flex items-center space-x-2">
+                  <Link
+                    href="/for-pros"
+                    className="whitespace-nowrap px-3 py-1.5 text-xs font-semibold text-[var(--text-muted)] hover:text-[var(--text)] transition-colors"
+                    title="Information and registration for trade professionals"
+                  >
+                    <span>For Trades</span>
+                  </Link>
+                  <Link
+                    href="/quote"
+                    className="whitespace-nowrap btn-primary px-4 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1.5 shadow-xs"
+                    title="Post a job and receive competitive quotes"
+                  >
+                    <span>Post a Job</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
               )}
             </div>
 
@@ -373,7 +420,7 @@ export function Header() {
                 <div className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
                   Quick Access
                 </div>
-                {(!user || user.role === "CUSTOMER") && (
+                {user?.role === "CUSTOMER" && (
                   <Link
                     href="/quote"
                     onClick={closeMobileMenu}
@@ -382,15 +429,33 @@ export function Header() {
                     Post a Job (Homeowners)
                   </Link>
                 )}
-                {(!user || user.role === "PRO") && (
+                {user?.role === "PRO" && (
                   <Link
                     href="/dashboard/pro"
                     onClick={closeMobileMenu}
                     className="w-full py-2.5 rounded-[var(--radius-sm)] text-center font-bold text-xs border border-[var(--line)] text-[var(--text)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] transition-colors flex items-center justify-center space-x-1.5"
                   >
                     <Briefcase className="w-3.5 h-3.5 text-[var(--brand)]" />
-                    <span>Find Jobs (Service Providers)</span>
+                    <span>Find Jobs (Trades Dashboard)</span>
                   </Link>
+                )}
+                {!user && (
+                  <div className="space-y-2">
+                    <Link
+                      href="/quote"
+                      onClick={closeMobileMenu}
+                      className="w-full py-2.5 rounded-[var(--radius-sm)] text-center font-bold text-xs text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-colors shadow-xs block"
+                    >
+                      Post a Job (Free Quotes)
+                    </Link>
+                    <Link
+                      href="/for-pros"
+                      onClick={closeMobileMenu}
+                      className="w-full py-2.5 rounded-[var(--radius-sm)] text-center font-bold text-xs border border-[var(--line)] text-[var(--text)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] transition-colors block"
+                    >
+                      Join as a Trade Pro
+                    </Link>
+                  </div>
                 )}
               </div>
 
@@ -404,6 +469,45 @@ export function Header() {
                   Home
                 </Link>
 
+                {/* Mobile Country Switcher */}
+                <div className="pt-2 pb-1">
+                  <div className="flex items-center justify-between p-2 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] border border-[var(--line)]">
+                    <span className="text-[11px] font-bold text-[var(--text-muted)]">Active Market:</span>
+                    <div className="flex items-center space-x-1">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleCountrySwitch("UK");
+                          closeMobileMenu();
+                        }}
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-xs font-bold transition-all cursor-pointer ${
+                          country === "UK"
+                            ? "bg-[var(--brand)] text-white shadow-xs"
+                            : "bg-[var(--surface)] text-[var(--text)] border border-[var(--line)]"
+                        }`}
+                      >
+                        <UkFlagIcon className="w-3.5 h-2.5 rounded-[1px]" />
+                        <span>UK (45%)</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleCountrySwitch("US");
+                          closeMobileMenu();
+                        }}
+                        className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] text-xs font-bold transition-all cursor-pointer ${
+                          country === "US"
+                            ? "bg-[var(--accent)] text-white shadow-xs"
+                            : "bg-[var(--surface)] text-[var(--text)] border border-[var(--line)]"
+                        }`}
+                      >
+                        <UsFlagIcon className="w-3.5 h-2.5 rounded-[1px]" />
+                        <span>USA</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Expandable Services */}
                 <div>
                   <button
@@ -412,7 +516,7 @@ export function Header() {
                     className="w-full flex items-center justify-between px-3 py-2 rounded-[var(--radius-sm)] text-xs font-semibold text-[var(--text)] hover:bg-[var(--bg-alt)] transition-colors cursor-pointer"
                     aria-expanded={mobileServicesOpen}
                   >
-                    <span>Trade Categories</span>
+                    <span>Trade Categories ({country})</span>
                     <ChevronDown
                       className={`w-4 h-4 text-[var(--text-muted)] transition-transform duration-200 ${
                         mobileServicesOpen ? "rotate-180" : ""
@@ -424,7 +528,7 @@ export function Header() {
                       {CATEGORIES.map((cat) => (
                         <Link
                           key={cat.slug}
-                          href={`/uk/${cat.slug}`}
+                          href={`/${country.toLowerCase()}/${cat.slug}`}
                           onClick={closeMobileMenu}
                           className="block px-2.5 py-1.5 rounded-[4px] text-xs font-medium text-[var(--text)] hover:text-[var(--accent)]"
                         >

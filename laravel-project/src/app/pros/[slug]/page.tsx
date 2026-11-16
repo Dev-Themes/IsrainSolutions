@@ -6,13 +6,20 @@ import {
   Star,
   MapPin,
   CheckCircle2,
-  ChevronRight,
 } from "lucide-react";
 import { VERIFIED_PROS } from "@/lib/data";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { getSiteUrl } from "@/lib/site-config";
+import { UkFlagIcon, UsFlagIcon } from "@/components/ui/flag-icon";
+import { ProReviewsList } from "@/components/pros/pro-reviews-list";
+
+const siteUrl = getSiteUrl();
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+export const instant = false;
 
 export function generateStaticParams() {
   return VERIFIED_PROS.map((p) => ({ slug: p.slug }));
@@ -29,6 +36,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${pro.companyName} | Verified Reviews & Credentials`,
     description: `Read customer feedback for ${pro.companyName} in ${pro.city}. Licensed (${pro.licenseNumber}), insured, and rated ${pro.rating}★ on TradeConnect.`,
+    alternates: {
+      canonical: `${siteUrl}/pros/${pro.slug}`,
+      languages: {
+        "en-GB": `${siteUrl}/pros/${pro.slug}`,
+        "en-US": `${siteUrl}/pros/${pro.slug}`,
+        "x-default": `${siteUrl}/pros/${pro.slug}`,
+      },
+    },
+    openGraph: {
+      title: `${pro.companyName} | TradeConnect`,
+      description: `Verified ${pro.country === "UK" ? "UK" : "US"} trade professional: ${pro.companyName} in ${pro.city}. Rating: ${pro.rating} (${pro.reviewCount} reviews).`,
+      url: `${siteUrl}/pros/${pro.slug}`,
+      siteName: "TradeConnect",
+      type: "profile",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${pro.companyName} | TradeConnect`,
+      description: `Verified ${pro.country === "UK" ? "UK" : "US"} trade pro in ${pro.city}. Rating: ${pro.rating} (${pro.reviewCount} reviews).`,
+    },
   };
 }
 
@@ -40,17 +67,42 @@ export default async function ProProfilePage({ params }: PageProps) {
     notFound();
   }
 
+  const proJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    name: pro.companyName,
+    url: `${siteUrl}/pros/${pro.slug}`,
+    telephone: pro.phone,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: pro.city,
+      postalCode: pro.postcodeOrZip,
+      addressCountry: pro.country === "UK" ? "GB" : "US",
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: pro.rating.toString(),
+      reviewCount: pro.reviewCount.toString(),
+      bestRating: "5",
+      worstRating: "1",
+    },
+    priceRange: pro.country === "UK" ? `£${pro.hourlyRate}/hr` : `$${pro.hourlyRate}/hr`,
+  };
+
   return (
     <div className="flex flex-col">
-      {/* Breadcrumb */}
-      <div className="bg-[var(--bg-alt)] border-b border-[var(--line)] text-xs py-3 px-4">
-        <div className="container-custom flex items-center space-x-2 text-[var(--text-muted)]">
-          <Link href="/" className="hover:text-[var(--text)]">Home</Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <Link href="/pros" className="hover:text-[var(--text)]">Trade Directory</Link>
-          <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-[var(--text)] font-semibold truncate">{pro.companyName}</span>
-        </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(proJsonLd) }}
+      />
+
+      <div className="container-custom pt-4">
+        <Breadcrumbs
+          items={[
+            { label: "Trade Directory", href: "/pros" },
+            { label: pro.companyName },
+          ]}
+        />
       </div>
 
       {/* Header */}
@@ -58,10 +110,23 @@ export default async function ProProfilePage({ params }: PageProps) {
         <div className="container-custom">
           <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-8">
             <div className="max-w-3xl space-y-3">
-              <div className="flex items-center space-x-2">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--brand-light)] text-[var(--pine-accent)] flex items-center border border-[var(--line)]">
                   <ShieldCheck className="w-3 h-3 mr-1" />
                   Verified Contractor #{pro.id.toUpperCase()}
+                </span>
+                <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--bg-alt)] text-[var(--text-muted)] border border-[var(--line-subtle)]">
+                  {pro.country === "UK" ? (
+                    <>
+                      <UkFlagIcon className="w-3 h-2" />
+                      <span>UK Vetted</span>
+                    </>
+                  ) : (
+                    <>
+                      <UsFlagIcon className="w-3 h-2" />
+                      <span>USA Verified</span>
+                    </>
+                  )}
                 </span>
                 <span className="text-xs text-[var(--text-muted)]">
                   {pro.yearsInBusiness} Years in Business
@@ -135,39 +200,7 @@ export default async function ProProfilePage({ params }: PageProps) {
                 Verified Customer Feedback
               </h2>
 
-              <div className="space-y-4">
-                {pro.reviews.map((rev, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-[var(--surface)] rounded-[var(--radius)] p-5 border border-[var(--line)] shadow-soft"
-                  >
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center space-x-2">
-                        <span className="font-bold text-xs sm:text-sm text-[var(--text)]">
-                          {rev.author}
-                        </span>
-                        <span className="text-[10px] bg-[var(--brand-light)] text-[var(--pine-accent)] px-2 py-0.5 rounded font-bold">
-                          Verified Homeowner
-                        </span>
-                      </div>
-                      <span className="text-[11px] text-[var(--text-light)]">{rev.date}</span>
-                    </div>
-
-                    <div className="flex items-center text-[var(--accent)] mb-2">
-                      {[...Array(rev.rating)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-[var(--accent)]" />
-                      ))}
-                    </div>
-
-                    <h3 className="font-bold text-xs sm:text-sm text-[var(--text)] mb-1">
-                      {rev.title}
-                    </h3>
-                    <p className="text-xs text-[var(--text-muted)] leading-relaxed">
-                      &ldquo;{rev.comment}&rdquo;
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <ProReviewsList slug={pro.slug} initialReviews={pro.reviews} />
             </div>
 
             <div>

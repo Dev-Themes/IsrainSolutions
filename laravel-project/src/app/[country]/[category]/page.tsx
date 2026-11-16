@@ -3,10 +3,13 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { CATEGORIES, CITIES } from "@/lib/data";
+import { getSiteUrl } from "@/lib/site-config";
 
 interface PageProps {
   params: Promise<{ country: string; category: string }>;
 }
+
+export const instant = false;
 
 export function generateStaticParams() {
   const params: { country: string; category: string }[] = [];
@@ -21,15 +24,41 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { country, category } = await params;
   const currentCategory = CATEGORIES.find((c) => c.slug === category);
-  const countryName = country.toUpperCase() === "UK" ? "United Kingdom" : "United States";
+  const upper = country.toUpperCase() as "UK" | "US";
+  const countryName = upper === "UK" ? "United Kingdom" : "United States";
+  const siteUrl = getSiteUrl();
+  const pageUrl = `${siteUrl}/${country}/${category}`;
 
   if (!currentCategory) {
-    return { title: "Trade Category | TradeConnect" };
+    return { title: "Trade Category" };
   }
 
+  const title = `${currentCategory.name} across ${countryName} | Verified Specialists`;
+  const description = `Find certified ${currentCategory.name.toLowerCase()} experts across ${countryName}. Compare free quotes from vetted local pros with verified insurance coverage.`;
+
   return {
-    title: `${currentCategory.name} across ${countryName} | Verified Specialists`,
-    description: `Find certified ${currentCategory.name.toLowerCase()} experts in the ${countryName}. Get free quotes with verified liability coverage.`,
+    title,
+    description,
+    alternates: {
+      canonical: pageUrl,
+      languages: {
+        "en-GB": `${siteUrl}/uk/${category}`,
+        "en-US": `${siteUrl}/us/${category}`,
+        "x-default": `${siteUrl}/uk/${category}`,
+      },
+    },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: upper === "UK" ? "en_GB" : "en_US",
+      url: pageUrl,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+    },
   };
 }
 
@@ -42,10 +71,57 @@ export default async function CategoryHubPage({ params }: PageProps) {
     notFound();
   }
 
+  const siteUrl = getSiteUrl();
   const countryCities = CITIES.filter((c) => c.country === upper);
 
+  // JSON-LD Breadcrumbs & Service
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: siteUrl,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: `${upper} Hub`,
+            item: `${siteUrl}/${country}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: currentCategory.name,
+            item: `${siteUrl}/${country}/${category}`,
+          },
+        ],
+      },
+      {
+        "@type": "Service",
+        name: `${currentCategory.name} in ${upper === "UK" ? "the United Kingdom" : "the United States"}`,
+        serviceType: currentCategory.name,
+        provider: {
+          "@type": "Organization",
+          name: "TradeConnect Verified Network",
+          url: siteUrl,
+        },
+      },
+    ],
+  };
+
   return (
-    <div className="flex flex-col">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <div className="flex flex-col">
       {/* Breadcrumb */}
       <div className="bg-[var(--bg-alt)] border-b border-[var(--line)] text-xs py-3 px-4">
         <div className="container-custom flex items-center space-x-2 text-[var(--text-muted)]">
@@ -106,5 +182,6 @@ export default async function CategoryHubPage({ params }: PageProps) {
         </div>
       </section>
     </div>
+    </>
   );
 }

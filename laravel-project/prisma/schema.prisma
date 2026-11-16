@@ -137,3 +137,112 @@ model Review {
   city         String
   createdAt    DateTime    @default(now())
 }
+
+enum ContractStatus {
+  DRAFT
+  PENDING_APPROVAL
+  ACTIVE
+  INVOICED
+  PAID
+  COMPLETED
+}
+
+model Contract {
+  id                    String         @id @default(cuid())
+  referenceCode         String         @unique
+  service               String
+  title                 String
+  location              String
+  city                  String
+  country               String         @default("UK")
+  urgency               String         @default("Standard")
+  datePosted            String
+
+  // Homeowner info
+  homeownerId           String?
+  homeownerName         String
+  homeownerPhone        String
+  homeownerEmail        String?
+  homeownerAddress      String
+
+  // Pro info
+  proId                 String?
+  proSlug               String?
+  proName               String
+  proPhone              String
+  proEmail              String?
+  proLicense            String
+  proInsurance          String
+  proCity               String
+
+  status                ContractStatus @default(DRAFT)
+
+  // Pricing & Terms
+  agreedPrice           String         // e.g. "£145.00"
+  currency              String         @default("£")
+  priceNumeric          Float          @default(145.0)
+  providedServices      String[]
+  providedEquipments    String[]
+  serviceDate           String
+  serviceTime           String
+  warrantyPeriod        String
+  notes                 String?
+
+  // Approval & Digital Signature
+  approvedByHomeownerAt String?
+  homeownerSignature    String?
+
+  // Invoice Details
+  invoiceNumber         String?
+  invoiceIssuedAt       String?
+  invoicePaidAt         String?
+  labourAmount          Float?
+  materialsAmount       Float?
+  totalAmount           Float?
+  paymentMethod         String?
+
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+}
+
+model MarketplaceJob {
+  id            String      @id @default(cuid())
+  referenceCode String      @unique
+  service       String
+  title         String
+  description   String?
+  location      String
+  city          String
+  country       String      @default("UK")
+  urgency       String      @default("Standard")
+  datePosted    String
+  status        String      @default("QUOTING") // "QUOTING" | "IN_PROGRESS" | "COMPLETED"
+
+  homeownerId   String?
+  homeownerName String
+  homeownerPhone String
+  homeownerEmail String?
+
+  proposals     Json        @default("[]")
+  finalCost     String?
+  completedDate String?
+  reviewLeft    Json?
+
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model JobChatMessage {
+  id             String    @id @default(cuid())
+  referenceCode  String
+  senderRole     String    // "CUSTOMER" | "PRO"
+  senderName     String
+  text           String
+  timestamp      String
+  isCounterOffer Boolean   @default(false)
+  proposedPrice  String?
+  status         String?   // "PROPOSED" | "ACCEPTED" | "DECLINED"
+  createdAt      DateTime  @default(now())
+
+  @@index([referenceCode, createdAt])
+}

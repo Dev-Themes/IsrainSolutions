@@ -1,14 +1,21 @@
 import { MetadataRoute } from "next";
+import { getSiteUrl } from "@/lib/site-config";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://tradeconnect-marketplace.vercel.app";
+  const baseUrl = getSiteUrl();
 
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/dashboard/", "/auth/"],
+        disallow: [
+          "/api/",
+          "/dashboard/",
+          "/dashboard/*",
+          "/auth/",
+          "/auth/*",
+        ],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

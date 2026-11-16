@@ -11,7 +11,7 @@ import {
 import { jsPDF } from "jspdf";
 
 export interface InvoiceContractData {
-  documentType: "INVOICE" | "CONTRACT";
+  documentType: "INVOICE" | "CONTRACT" | "DRAFT_CONTRACT";
   documentNumber: string;
   issueDate: string;
   completionDate?: string;
@@ -20,8 +20,30 @@ export interface InvoiceContractData {
   serviceCategory: string;
   location: string;
   agreedPrice: string;
-  paymentStatus: "PAID IN FULL" | "ESCROW HELD" | "CONTRACT ACTIVE";
+  labourAmount?: number;
+  materialsAmount?: number;
+  subtotalAmount?: number;
+  vatRate?: number;
+  vatAmount?: number;
+  vatNumber?: string;
+  totalAmount?: number;
+  paymentStatus: "PAID IN FULL" | "ESCROW HELD" | "CONTRACT ACTIVE" | "DRAFT PENDING APPROVAL" | "PENDING APPROVAL" | "PENDING PAYMENT";
   paymentMethod?: string;
+  bankDetails?: {
+    bankName: string;
+    accountName: string;
+    sortCode: string;
+    accountNumber: string;
+    paymentReference?: string;
+  };
+  invoiceIssuedAt?: string;
+  invoicePaidAt?: string;
+  providedServices?: string[];
+  providedEquipments?: string[];
+  serviceDateTime?: string;
+  warrantyPeriod?: string;
+  homeownerSignature?: string;
+  notes?: string;
   homeowner: {
     name: string;
     phone: string;
@@ -58,6 +80,28 @@ export function InvoiceContractModal({
   if (!isOpen) return null;
 
   const isInvoice = data.documentType === "INVOICE";
+  const isDraft = data.documentType === "DRAFT_CONTRACT";
+  const docTitle = isInvoice ? "VAT INVOICE" : isDraft ? "DRAFT SERVICE CONTRACT" : "WORK CONTRACT";
+  const docSub = isInvoice ? "Official VAT Invoice & Receipt" : isDraft ? "Draft Contract (Pending Approval)" : "Digital Service Agreement";
+
+  const currencySymbol = data.agreedPrice.startsWith("$") ? "$" : "£";
+  const numPrice = parseFloat(data.agreedPrice.replace(/[^0-9.]/g, "")) || 0;
+  const labourVal = data.labourAmount !== undefined
+    ? data.labourAmount
+    : Math.round(numPrice * 0.7);
+  const materialsVal = data.materialsAmount !== undefined
+    ? data.materialsAmount
+    : Math.max(0, Math.round((numPrice - labourVal) * 100) / 100);
+  const subtotalVal = data.subtotalAmount !== undefined
+    ? data.subtotalAmount
+    : (labourVal + materialsVal);
+  const vatRate = data.vatRate ?? 20;
+  const vatVal = data.vatAmount !== undefined
+    ? data.vatAmount
+    : (isInvoice ? Math.round(subtotalVal * (vatRate / 100) * 100) / 100 : 0);
+  const grossVal = isInvoice
+    ? (subtotalVal + vatVal)
+    : numPrice;
 
   const handlePrint = () => {
     window.print();
@@ -73,151 +117,223 @@ export function InvoiceContractModal({
 
       // Header Band
       doc.setFillColor(31, 58, 52); // brand dark pine #1f3a34
-      doc.rect(15, 15, 180, 22, "F");
+      doc.rect(15, 12, 180, 22, "F");
 
       doc.setTextColor(255, 255, 255);
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
-      doc.text("TradeConnect Network", 22, 25);
+      doc.text("TradeConnect Network", 22, 22);
 
       doc.setFontSize(9);
       doc.setFont("helvetica", "normal");
-      doc.text("Verified Trade Services Marketplace (UK & US)", 22, 31);
+      doc.text("Verified Trade Services Marketplace (UK & US)", 22, 28);
 
       // Doc Type Badge
-      doc.setFillColor(180, 72, 31); // accent terracotta #b4481f
-      doc.roundedRect(140, 19, 48, 14, 2, 2, "F");
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(10);
-      doc.setFont("helvetica", "bold");
-      doc.text(isInvoice ? "VAT INVOICE" : "WORK CONTRACT", 145, 28);
+      if (isDraft) {
+        doc.setFillColor(217, 119, 6); // amber-600
+        doc.roundedRect(125, 16, 65, 14, 2, 2, "F");
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(8.5);
+        doc.setFont("helvetica", "bold");
+        doc.text("DRAFT CONTRACT", 132, 23);
+        doc.setFontSize(7);
+        doc.setFont("helvetica", "normal");
+        doc.text("PENDING SIGNATURE", 132, 27);
+      } else {
+        doc.setFillColor(180, 72, 31); // accent terracotta #b4481f
+        doc.roundedRect(138, 16, 52, 14, 2, 2, "F");
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(10);
+        doc.setFont("helvetica", "bold");
+        doc.text(isInvoice ? "VAT INVOICE" : "WORK CONTRACT", 143, 25);
+      }
 
       // Meta Details
       doc.setTextColor(50, 50, 50);
       doc.setFontSize(9);
       doc.setFont("helvetica", "normal");
-      doc.text(`Document Ref: ${data.documentNumber}`, 15, 46);
-      doc.text(`Job Reference: ${data.referenceCode}`, 15, 52);
-      doc.text(`Issue Date: ${data.issueDate}`, 15, 58);
-      doc.text(`Payment Status: ${data.paymentStatus}`, 115, 46);
-      doc.text(`Trade Category: ${data.serviceCategory}`, 115, 52);
-      doc.text(`Payment Method: ${data.paymentMethod || "Milestone Escrow"}`, 115, 58);
+      doc.text(`Document Ref: ${data.documentNumber}`, 15, 41);
+      doc.text(`Job Reference: ${data.referenceCode}`, 15, 47);
+      doc.text(`Issue Date: ${data.issueDate}`, 15, 53);
+      if (data.serviceDateTime) {
+        doc.text(`Service Schedule: ${data.serviceDateTime}`, 15, 59);
+      }
+      doc.text(`Status: ${data.paymentStatus}`, 115, 41);
+      doc.text(`Trade Category: ${data.serviceCategory}`, 115, 47);
+      doc.text(`Payment Method: ${data.paymentMethod || "TradeConnect Escrow"}`, 115, 53);
+      if (data.warrantyPeriod) {
+        doc.text(`Warranty: ${data.warrantyPeriod}`, 115, 59);
+      }
 
       // Horizontal Divider
       doc.setDrawColor(200, 200, 200);
-      doc.line(15, 64, 195, 64);
+      doc.line(15, 63, 195, 63);
 
       // Parties Box
       doc.setFillColor(248, 248, 248);
-      doc.rect(15, 68, 88, 38, "F");
-      doc.rect(107, 68, 88, 38, "F");
+      doc.rect(15, 66, 88, 36, "F");
+      doc.rect(107, 66, 88, 36, "F");
 
       // Client
       doc.setTextColor(100, 100, 100);
       doc.setFontSize(8);
       doc.setFont("helvetica", "bold");
-      doc.text("CLIENT / HOMEOWNER", 19, 74);
+      doc.text("CLIENT / HOMEOWNER", 19, 72);
       doc.setTextColor(20, 20, 20);
       doc.setFontSize(9.5);
-      doc.text(data.homeowner.name, 19, 81);
+      doc.text(data.homeowner.name, 19, 78);
       doc.setFontSize(8);
       doc.setFont("helvetica", "normal");
-      doc.text(data.homeowner.address, 19, 87);
-      doc.text(`Phone: ${data.homeowner.phone}`, 19, 93);
-      if (data.homeowner.email) doc.text(`Email: ${data.homeowner.email}`, 19, 99);
+      doc.text(data.homeowner.address, 19, 84);
+      doc.text(`Phone: ${data.homeowner.phone}`, 19, 90);
+      if (data.homeowner.email) doc.text(`Email: ${data.homeowner.email}`, 19, 96);
 
       // Contractor
       doc.setTextColor(100, 100, 100);
       doc.setFontSize(8);
       doc.setFont("helvetica", "bold");
-      doc.text("CERTIFIED CONTRACTOR", 111, 74);
+      doc.text("CERTIFIED CONTRACTOR", 111, 72);
       doc.setTextColor(20, 20, 20);
       doc.setFontSize(9.5);
-      doc.text(data.contractor.companyName, 111, 81);
+      doc.text(data.contractor.companyName, 111, 78);
       doc.setFontSize(8);
       doc.setFont("helvetica", "normal");
-      doc.text(`License / Gas Safe: ${data.contractor.licenseNumber}`, 111, 87);
-      doc.text(`Insurance: ${data.contractor.insuranceAmount} Verified`, 111, 93);
-      doc.text(`Registered Base: ${data.contractor.baseCity} | Phone: ${data.contractor.phone}`, 111, 99);
+      doc.text(`License / Gas Safe: ${data.contractor.licenseNumber}`, 111, 84);
+      doc.text(`Insurance: ${data.contractor.insuranceAmount} Verified`, 111, 90);
+      doc.text(`Base: ${data.contractor.baseCity} | ${data.contractor.phone}`, 111, 96);
 
       // Job Description & Scope
+      let curY = 108;
       doc.setFontSize(9);
       doc.setFont("helvetica", "bold");
       doc.setTextColor(40, 40, 40);
-      doc.text("CONTRACTED WORK SCOPE", 15, 115);
+      doc.text("CONTRACTED WORK SCOPE & SERVICES", 15, curY);
 
+      curY += 3;
       doc.setFillColor(255, 255, 255);
       doc.setDrawColor(210, 210, 210);
-      doc.rect(15, 118, 180, 18);
+      doc.rect(15, curY, 180, 16);
       doc.setFontSize(9);
       doc.setFont("helvetica", "bold");
-      doc.text(data.jobTitle, 19, 125);
+      doc.text(data.jobTitle, 19, curY + 6);
       doc.setFont("helvetica", "normal");
       doc.setFontSize(8);
-      doc.text(`Site Location: ${data.location} | Trade Standard Compliance verified.`, 19, 131);
+      doc.text(`Location: ${data.location} | All work executed to trade standard.`, 19, curY + 12);
+      curY += 21;
+
+      // Provided Services and Equipment if available
+      if (data.providedServices && data.providedServices.length > 0) {
+        doc.setFontSize(8.5);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(31, 58, 52);
+        doc.text("Agreed Services & Labor Scope:", 15, curY);
+        curY += 4;
+        doc.setFontSize(8);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(50, 50, 50);
+        data.providedServices.forEach((s) => {
+          doc.text(`• ${s}`, 19, curY);
+          curY += 4.5;
+        });
+        curY += 2;
+      }
+
+      if (data.providedEquipments && data.providedEquipments.length > 0) {
+        doc.setFontSize(8.5);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(31, 58, 52);
+        doc.text("Materials & Equipment Included:", 15, curY);
+        curY += 4;
+        doc.setFontSize(8);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(50, 50, 50);
+        data.providedEquipments.forEach((e) => {
+          doc.text(`• ${e}`, 19, curY);
+          curY += 4.5;
+        });
+        curY += 2;
+      }
 
       // Financial Table Header
       doc.setFillColor(235, 235, 235);
-      doc.rect(15, 143, 180, 8, "F");
+      doc.rect(15, curY, 180, 7, "F");
       doc.setFontSize(8);
       doc.setFont("helvetica", "bold");
-      doc.text("Item / Milestone Description", 19, 148);
-      doc.text("Audit Status", 130, 148);
-      doc.text("Total", 175, 148);
+      doc.text("Item / Description", 19, curY + 5);
+      doc.text("Audit Status", 130, curY + 5);
+      doc.text("Total", 175, curY + 5);
+      curY += 10;
 
-      // Table Content
-      let y = 158;
-      if (data.milestones && data.milestones.length > 0) {
-        data.milestones.forEach((m, idx) => {
-          doc.setFont("helvetica", "normal");
-          doc.text(`Milestone #${idx + 1}: ${m.title}`, 19, y);
-          doc.text("Verified Pass", 130, y);
-          doc.setFont("helvetica", "bold");
-          doc.text(m.amount, 175, y);
-          y += 8;
-        });
-      } else {
-        doc.setFont("helvetica", "normal");
-        doc.text("Certified Trade Labor & Approved Diagnostics", 19, y);
-        doc.text("Accredited", 130, y);
-        doc.setFont("helvetica", "bold");
-        doc.text(data.agreedPrice, 175, y);
-        y += 8;
+      // Financial Items - Dynamically derived from authoritative agreedPrice and breakdown
+      doc.setFont("helvetica", "normal");
+      doc.text("Professional Certified Trade Labor & Diagnostics", 19, curY);
+      doc.text("Accredited", 130, curY);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${currencySymbol}${labourVal.toFixed(2)}`, 175, curY);
+      curY += 6;
 
-        doc.setFont("helvetica", "normal");
-        doc.text("TradeConnect Escrow Protection & Dispute Guarantee", 19, y);
-        doc.text("Included (0%)", 130, y);
-        doc.setFont("helvetica", "bold");
-        doc.text("£0.00", 175, y);
-        y += 8;
-      }
+      doc.setFont("helvetica", "normal");
+      doc.text("Trade Replacement Materials, Equipment & Parts", 19, curY);
+      doc.text("Verified OEM", 130, curY);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${currencySymbol}${materialsVal.toFixed(2)}`, 175, curY);
+      curY += 6;
+
+      doc.setFont("helvetica", "normal");
+      doc.text("TradeConnect Escrow Protection & Dispute Guarantee", 19, curY);
+      doc.text("Included (0%)", 130, curY);
+      doc.setFont("helvetica", "bold");
+      doc.text(`${currencySymbol}0.00`, 175, curY);
+      curY += 6;
 
       // Total Box
       doc.setDrawColor(31, 58, 52);
       doc.setLineWidth(0.5);
-      doc.line(15, y + 2, 195, y + 2);
-      y += 10;
+      doc.line(15, curY + 1, 195, curY + 1);
+      curY += 7;
 
-      doc.setFontSize(10);
+      doc.setFontSize(9.5);
       doc.setFont("helvetica", "bold");
-      doc.text(isInvoice ? "TOTAL SETTLED (INC. VAT):" : "TOTAL CONTRACT AMOUNT:", 110, y);
-      doc.setFontSize(12);
+      doc.text(isInvoice ? "TOTAL SETTLED (INC. VAT):" : isDraft ? "PROPOSED CONTRACT TOTAL:" : "TOTAL CONTRACT AMOUNT:", 95, curY);
+      doc.setFontSize(11);
       doc.setTextColor(180, 72, 31);
-      doc.text(data.agreedPrice, 175, y);
+      doc.text(data.agreedPrice, 175, curY);
+      curY += 10;
+
+      // Signatures Box
+      doc.setFillColor(250, 250, 250);
+      doc.rect(15, curY, 88, 18, "F");
+      doc.rect(107, curY, 88, 18, "F");
+
+      doc.setFontSize(7.5);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(80, 80, 80);
+      doc.text("CONTRACTOR SIGNATURE", 19, curY + 5);
+      doc.text("HOMEOWNER SIGNATURE", 111, curY + 5);
+
+      doc.setFont("helvetica", "normal");
+      doc.text(`Signed: ${data.contractor.contactName} (${data.contractor.companyName})`, 19, curY + 11);
+      if (data.homeownerSignature) {
+        doc.setTextColor(16, 120, 60);
+        doc.text(`Approved & Signed: ${data.homeownerSignature}`, 111, curY + 11);
+      } else {
+        doc.setTextColor(180, 100, 20);
+        doc.text("Pending Homeowner Digital Approval", 111, curY + 11);
+      }
+      curY += 22;
 
       // Cryptographic Sign-off Audit
-      y += 18;
       doc.setDrawColor(220, 220, 220);
-      doc.line(15, y, 195, y);
-      y += 8;
+      doc.line(15, curY, 195, curY);
+      curY += 5;
 
       doc.setTextColor(120, 120, 120);
-      doc.setFontSize(7.5);
+      doc.setFontSize(7);
       doc.setFont("helvetica", "normal");
-      doc.text(`Digital Sign-off Timestamp: ${data.completionDate || data.issueDate} 14:22:09 UTC`, 15, y);
-      doc.text(`Cryptographic Audit Seal: SHA256:8f9c4b${data.documentNumber.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()}a94f8e`, 15, y + 4);
-      doc.text("TradeConnect Network Ltd | Registered in England & Wales #09482014 | VAT Reg GB 948 2014 92", 15, y + 8);
-      doc.text("Headquarters: 180 Strand, London WC2R 1EA | 24/7 Support: 0800 123 4567 | support@tradeconnect.com", 15, y + 12);
+      doc.text(`Digital Sign-off Timestamp: ${data.completionDate || data.issueDate} UTC`, 15, curY);
+      doc.text(`Cryptographic Audit Seal: SHA256:8f9c4b${data.documentNumber.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()}a94f8e`, 15, curY + 3.5);
+      doc.text("TradeConnect Network Ltd | Registered in England & Wales #09482014 | VAT Reg GB 948 2014 92", 15, curY + 7);
+      doc.text("Headquarters: 180 Strand, London WC2R 1EA | 24/7 Support: 0800 123 4567 | support@tradeconnect.com", 15, curY + 10.5);
 
       // Trigger local file download
       doc.save(`${data.documentNumber}.pdf`);
@@ -244,8 +360,8 @@ export function InvoiceContractModal({
         {/* Top Action Toolbar (Hidden in Print) */}
         <div className="shrink-0 no-print bg-zinc-900 text-white px-5 sm:px-6 py-3.5 flex items-center justify-between border-b border-zinc-800">
           <div className="flex items-center space-x-2 text-xs truncate">
-            <span className="font-bold uppercase tracking-wider text-[var(--accent)]">
-              {isInvoice ? "Official VAT Invoice & Receipt" : "Digital Service Agreement"}
+            <span className={`font-bold uppercase tracking-wider ${isDraft ? "text-amber-400" : "text-[var(--accent)]"}`}>
+              {docSub}
             </span>
             <span className="text-zinc-400">&bull;</span>
             <span className="font-mono text-zinc-300 font-semibold">{data.documentNumber}</span>
@@ -314,8 +430,8 @@ export function InvoiceContractModal({
               </div>
 
               <div className="text-left sm:text-right space-y-1">
-                <span className="inline-block px-3 py-1 rounded text-xs font-extrabold tracking-wider uppercase bg-zinc-900 text-white">
-                  {isInvoice ? "VAT INVOICE" : "WORK CONTRACT"}
+                <span className={`inline-block px-3 py-1 rounded text-xs font-extrabold tracking-wider uppercase ${isDraft ? "bg-amber-600 text-white" : "bg-zinc-900 text-white"}`}>
+                  {docTitle}
                 </span>
                 <div className="text-xs font-mono font-bold text-zinc-900 mt-1">
                   Ref: {data.documentNumber}
@@ -326,7 +442,12 @@ export function InvoiceContractModal({
                 <div className="text-[11px] text-zinc-600">
                   Date: {data.issueDate}
                 </div>
-                <div className="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                {data.serviceDateTime && (
+                  <div className="text-[11px] text-zinc-700 font-medium">
+                    Schedule: <strong>{data.serviceDateTime}</strong>
+                  </div>
+                )}
+                <div className={`mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold ${isDraft ? "bg-amber-100 text-amber-800 border border-amber-300" : "bg-emerald-100 text-emerald-800 border border-emerald-300"}`}>
                   <CheckCircle2 className="w-3 h-3 mr-1" />
                   {data.paymentStatus}
                 </div>
@@ -365,11 +486,11 @@ export function InvoiceContractModal({
             </div>
 
             {/* Job Scope & Specifications */}
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700">
                 Contracted Service Scope
               </h4>
-              <div className="p-4 rounded-lg border border-zinc-200 bg-white space-y-1.5">
+              <div className="p-4 rounded-lg border border-zinc-200 bg-white space-y-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="font-bold text-zinc-900 text-sm">{data.jobTitle}</span>
                   <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-zinc-100 text-zinc-700 border border-zinc-200">
@@ -377,9 +498,42 @@ export function InvoiceContractModal({
                   </span>
                 </div>
                 <p className="text-zinc-600 text-[11px] leading-relaxed">
-                  Location of works: {data.location}. All works executed in compliance with BS 7671 (Electrical) / Gas Safety Regulations 1998 / Building Regulations.
+                  Location of works: {data.location}. All works executed in compliance with trade safety and building regulations.
                 </p>
+                {data.warrantyPeriod && (
+                  <p className="text-[11px] text-emerald-800 font-semibold bg-emerald-50 px-2 py-1 rounded inline-block">
+                    Guarantee: {data.warrantyPeriod}
+                  </p>
+                )}
               </div>
+
+              {/* Provided Services List */}
+              {data.providedServices && data.providedServices.length > 0 && (
+                <div className="p-3.5 rounded-lg border border-zinc-200 bg-zinc-50/60 space-y-1.5">
+                  <span className="text-[11px] font-bold text-zinc-800 uppercase tracking-wider block">
+                    Agreed Services &amp; Labor Tasks:
+                  </span>
+                  <ul className="list-disc pl-5 space-y-1 text-zinc-700 text-xs">
+                    {data.providedServices.map((service, sIdx) => (
+                      <li key={sIdx}>{service}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Provided Equipments / Materials */}
+              {data.providedEquipments && data.providedEquipments.length > 0 && (
+                <div className="p-3.5 rounded-lg border border-zinc-200 bg-zinc-50/60 space-y-1.5">
+                  <span className="text-[11px] font-bold text-zinc-800 uppercase tracking-wider block">
+                    Included Equipment &amp; Materials:
+                  </span>
+                  <ul className="list-disc pl-5 space-y-1 text-zinc-700 text-xs">
+                    {data.providedEquipments.map((eq, eIdx) => (
+                      <li key={eIdx}>{eq}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             {/* Itemized Financial Breakdown Table */}
@@ -397,60 +551,156 @@ export function InvoiceContractModal({
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-zinc-200">
-                    {data.milestones && data.milestones.length > 0 ? (
-                      data.milestones.map((m, idx) => (
-                        <tr key={idx}>
-                          <td className="p-3">
-                            <span className="font-semibold text-zinc-900 block">{m.title}</span>
-                            <span className="text-[10px] text-zinc-500">Milestone #{idx + 1} &bull; Verified inspection</span>
-                          </td>
-                          <td className="p-3 text-[11px] text-zinc-600">Passed standard</td>
-                          <td className="p-3 text-right font-mono font-bold text-zinc-900">{m.amount}</td>
-                        </tr>
-                      ))
-                    ) : (
-                      <>
-                        <tr>
-                          <td className="p-3">
-                            <span className="font-semibold text-zinc-900 block">Professional Trade Labor &amp; Diagnostic</span>
-                            <span className="text-[10px] text-zinc-500">Qualified technician rate &bull; Completed to trade standard</span>
-                          </td>
-                          <td className="p-3 text-[11px] text-zinc-600">License validated</td>
-                          <td className="p-3 text-right font-mono font-bold text-zinc-900">
-                            {data.agreedPrice}
-                          </td>
-                        </tr>
-                        <tr>
-                          <td className="p-3">
-                            <span className="font-semibold text-zinc-900 block">TradeConnect Escrow Fee &amp; Guarantee</span>
-                            <span className="text-[10px] text-zinc-500">Milestone dispute protection &amp; insurance backing</span>
-                          </td>
-                          <td className="p-3 text-[11px] text-emerald-700 font-semibold">Included (0% fee)</td>
-                          <td className="p-3 text-right font-mono font-bold text-zinc-900">&pound;0.00</td>
-                        </tr>
-                      </>
-                    )}
-                  </tbody>
-                  <tfoot>
-                    <tr className="bg-zinc-50 border-t-2 border-zinc-800">
-                      <td colSpan={2} className="p-3 text-right font-bold text-zinc-800 uppercase text-[11px]">
-                        {isInvoice ? "Total Paid (Inc. VAT / Taxes):" : "Total Contract Value:"}
+                    <tr>
+                      <td className="p-3">
+                        <span className="font-semibold text-zinc-900 block">Professional Certified Trade Labor &amp; Diagnostics</span>
+                        <span className="text-[10px] text-zinc-500">Qualified technician rate &bull; Completed to trade standard</span>
                       </td>
-                      <td className="p-3 text-right font-mono font-extrabold text-base text-zinc-900">
-                        {data.agreedPrice}
+                      <td className="p-3 text-[11px] text-zinc-600">Accredited</td>
+                      <td className="p-3 text-right font-mono font-bold text-zinc-900">
+                        {currencySymbol}{labourVal.toFixed(2)}
                       </td>
                     </tr>
+                    <tr>
+                      <td className="p-3">
+                        <span className="font-semibold text-zinc-900 block">Trade Replacement Materials, Equipment &amp; Parts</span>
+                        <span className="text-[10px] text-zinc-500">Manufacturer standard replacement fittings &bull; Tested</span>
+                      </td>
+                      <td className="p-3 text-[11px] text-zinc-600">Verified OEM</td>
+                      <td className="p-3 text-right font-mono font-bold text-zinc-900">
+                        {currencySymbol}{materialsVal.toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="p-3">
+                        <span className="font-semibold text-zinc-900 block">TradeConnect Escrow Fee &amp; Guarantee</span>
+                        <span className="text-[10px] text-zinc-500">Milestone dispute protection &amp; insurance backing</span>
+                      </td>
+                      <td className="p-3 text-[11px] text-emerald-700 font-semibold">Included (0% fee)</td>
+                      <td className="p-3 text-right font-mono font-bold text-zinc-900">
+                        {currencySymbol}0.00
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    {isInvoice ? (
+                      <>
+                        <tr className="bg-zinc-50 border-t border-zinc-200 text-zinc-700">
+                          <td colSpan={2} className="p-2.5 text-right font-semibold text-[11px]">
+                            Subtotal (Net of VAT):
+                          </td>
+                          <td className="p-2.5 text-right font-mono font-bold text-zinc-900">
+                            {currencySymbol}{subtotalVal.toFixed(2)}
+                          </td>
+                        </tr>
+                        <tr className="bg-zinc-50 text-zinc-700">
+                          <td colSpan={2} className="p-2.5 text-right font-semibold text-[11px]">
+                            VAT ({vatRate}% &bull; Reg: {data.vatNumber || "GB 948 2014 92"}):
+                          </td>
+                          <td className="p-2.5 text-right font-mono font-bold text-zinc-900">
+                            {currencySymbol}{vatVal.toFixed(2)}
+                          </td>
+                        </tr>
+                        <tr className="bg-zinc-100 border-t-2 border-zinc-800">
+                          <td colSpan={2} className="p-3 text-right font-bold text-zinc-900 uppercase text-xs">
+                            {data.paymentStatus === "PAID IN FULL" ? "Total Paid (Gross Inc. VAT):" : "Total Due (Gross Inc. VAT):"}
+                          </td>
+                          <td className="p-3 text-right font-mono font-extrabold text-base text-zinc-900">
+                            {currencySymbol}{grossVal.toFixed(2)}
+                          </td>
+                        </tr>
+                      </>
+                    ) : (
+                      <tr className="bg-zinc-50 border-t-2 border-zinc-800">
+                        <td colSpan={2} className="p-3 text-right font-bold text-zinc-800 uppercase text-[11px]">
+                          {isDraft ? "Proposed Total:" : "Total Contract Value:"}
+                        </td>
+                        <td className="p-3 text-right font-mono font-extrabold text-base text-zinc-900">
+                          {data.agreedPrice}
+                        </td>
+                      </tr>
+                    )}
                   </tfoot>
                 </table>
               </div>
             </div>
 
+            {/* Banking & Settlement Card for Invoices */}
+            {isInvoice && (
+              <div className="p-4 rounded-lg bg-zinc-50 border border-zinc-200 space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-600 block">
+                    {data.paymentStatus === "PAID IN FULL"
+                      ? "Settled Bank Transfer Receipt (Protected)"
+                      : "Beneficiary Banking Details for Payment"}
+                  </span>
+                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-zinc-200 text-zinc-800">
+                    Ref: {data.referenceCode}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                  <div>
+                    <span className="text-[10px] text-zinc-500 uppercase block">Account Holder:</span>
+                    <strong className="text-zinc-900 font-semibold">
+                      {data.bankDetails?.accountName || data.contractor.companyName}
+                    </strong>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-zinc-500 uppercase block">Bank Name:</span>
+                    <strong className="text-zinc-900 font-semibold">
+                      {data.bankDetails?.bankName || "Barclays Business UK"}
+                    </strong>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-zinc-500 uppercase block">Sort Code:</span>
+                    <strong className="text-zinc-900 font-mono">
+                      {data.paymentStatus === "PAID IN FULL"
+                        ? `••-••-${(data.bankDetails?.sortCode || "20-04-15").replace(/[^0-9]/g, "").slice(-2)}`
+                        : data.bankDetails?.sortCode || "20-04-15"}
+                    </strong>
+                  </div>
+                  <div>
+                    <span className="text-[10px] text-zinc-500 uppercase block">Account Number:</span>
+                    <strong className="text-zinc-900 font-mono">
+                      {data.paymentStatus === "PAID IN FULL"
+                        ? `•••••${(data.bankDetails?.accountNumber || "83921049").slice(-4)}`
+                        : data.bankDetails?.accountNumber || "83921049"}
+                    </strong>
+                  </div>
+                </div>
+
+                {/* Issuing and Paid Timestamps */}
+                <div className="pt-2 border-t border-zinc-200 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] text-zinc-600">
+                  <div>
+                    <span>Invoice Issued: </span>
+                    <strong className="text-zinc-800">{data.invoiceIssuedAt || data.issueDate}</strong>
+                  </div>
+                  <div>
+                    <span>Payment Settled: </span>
+                    <strong className="text-emerald-700">
+                      {data.paymentStatus === "PAID IN FULL"
+                        ? (data.invoicePaidAt || data.completionDate || "Confirmed Settled")
+                        : "Awaiting Settlement"}
+                    </strong>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Digital Sign-off & Audit Trail Hash */}
             <div className="pt-4 border-t border-zinc-200 grid grid-cols-1 sm:grid-cols-2 gap-4 text-[10px] text-zinc-500">
               <div>
-                <span className="font-bold text-zinc-800 uppercase block mb-0.5">Digital Sign-Off Audit:</span>
-                <p>Sign-off timestamp: {data.completionDate || data.issueDate} 14:22:09 UTC</p>
-                <p className="font-mono text-[9px] mt-0.5 truncate text-zinc-400">
+                <span className="font-bold text-zinc-800 uppercase block mb-0.5">Digital Signatures:</span>
+                <p>Contractor: {data.contractor.contactName} ({data.contractor.companyName})</p>
+                <p className="mt-0.5">
+                  Homeowner: {data.homeownerSignature ? (
+                    <span className="text-emerald-700 font-semibold">Signed by {data.homeownerSignature}</span>
+                  ) : (
+                    <span className="text-amber-700 font-semibold">Pending Digital Signature</span>
+                  )}
+                </p>
+                <p className="font-mono text-[9px] mt-1 truncate text-zinc-400">
                   Cryptographic Seal: SHA256:8f9c4b{data.documentNumber.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()}a94f8e...{data.referenceCode}
                 </p>
               </div>

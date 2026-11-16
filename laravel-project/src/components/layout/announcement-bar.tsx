@@ -13,7 +13,7 @@ export function AnnouncementBar() {
           </span>
           <span className="hidden md:inline text-[var(--line-subtle)]">&middot;</span>
           <span className="hidden md:inline text-[var(--line-subtle)]">
-            Over 8,780+ vetted contractors across the UK and USA
+            8,784+ verified contractors &middot; 45% established UK coverage &amp; USA expansion
           </span>
         </div>
 

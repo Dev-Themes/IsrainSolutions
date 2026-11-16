@@ -10,6 +10,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { CATEGORIES, CITIES, VERIFIED_PROS } from "@/lib/data";
+import { getSiteUrl } from "@/lib/site-config";
 
 interface PageProps {
   params: Promise<{
@@ -18,6 +19,8 @@ interface PageProps {
     city: string;
   }>;
 }
+
+export const instant = false;
 
 export function generateStaticParams() {
   const params: { country: string; category: string; city: string }[] = [];
@@ -46,27 +49,33 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const siteUrl = getSiteUrl();
+  const pageUrl = `${siteUrl}/${country}/${category}/${city}`;
   const title = `Top Rated ${currentCategory.name} in ${currentCity.name} | Verified & Insured`;
-  const description = `Find trusted local ${currentCategory.name.toLowerCase()} experts in ${currentCity.name}, ${currentCity.stateCounty}. Compare up to 3 free quotes from vetted trades with verified public liability insurance.`;
+  const description = `Find trusted local ${currentCategory.name.toLowerCase()} experts in ${currentCity.name}, ${currentCity.stateCounty}. Compare up to 3 free quotes from vetted trades with verified ${currentCountry === "US" ? "general liability" : "public liability"} insurance.`;
 
   return {
     title,
     description,
-    keywords: [
-      `${currentCategory.name} in ${currentCity.name}`,
-      `emergency ${category} ${currentCity.name}`,
-      `local ${category} tradesmen ${currentCity.name}`,
-      `${currentCity.name} verified contractors`,
-    ],
     openGraph: {
       title,
       description,
       type: "website",
       locale: currentCountry === "UK" ? "en_GB" : "en_US",
-      url: `https://tradeconnect-marketplace.vercel.app/${country}/${category}/${city}`,
+      url: pageUrl,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
     },
     alternates: {
-      canonical: `https://tradeconnect-marketplace.vercel.app/${country}/${category}/${city}`,
+      canonical: pageUrl,
+      languages: {
+        "en-GB": `${siteUrl}/uk/${category}/${city}`,
+        "en-US": `${siteUrl}/us/${category}/${city}`,
+        "x-default": `${siteUrl}/uk/${category}/${city}`,
+      },
     },
   };
 }
@@ -89,6 +98,8 @@ export default async function ProgrammaticCityPage({ params }: PageProps) {
 
   const displayPros = localPros.length > 0 ? localPros : VERIFIED_PROS.slice(0, 2);
 
+  const siteUrl = getSiteUrl();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -99,25 +110,25 @@ export default async function ProgrammaticCityPage({ params }: PageProps) {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://tradeconnect-marketplace.vercel.app",
+            item: siteUrl,
           },
           {
             "@type": "ListItem",
             position: 2,
             name: `${currentCountry} Services`,
-            item: `https://tradeconnect-marketplace.vercel.app/${country}`,
+            item: `${siteUrl}/${country}`,
           },
           {
             "@type": "ListItem",
             position: 3,
             name: currentCategory.name,
-            item: `https://tradeconnect-marketplace.vercel.app/${country}/${category}`,
+            item: `${siteUrl}/${country}/${category}`,
           },
           {
             "@type": "ListItem",
             position: 4,
             name: `${currentCategory.name} in ${currentCity.name}`,
-            item: `https://tradeconnect-marketplace.vercel.app/${country}/${category}/${city}`,
+            item: `${siteUrl}/${country}/${category}/${city}`,
           },
         ],
       },
@@ -136,7 +147,7 @@ export default async function ProgrammaticCityPage({ params }: PageProps) {
         provider: {
           "@type": "Organization",
           name: "TradeConnect Verified Network",
-          url: "https://tradeconnect-marketplace.vercel.app",
+          url: siteUrl,
         },
         aggregateRating: {
           "@type": "AggregateRating",

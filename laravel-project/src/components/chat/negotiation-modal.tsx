@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   Sparkles,
   DollarSign,
+  MessageSquare,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 
@@ -64,19 +65,7 @@ export function NegotiationModal({
         // ignore
       }
     }
-
-    if (initialMessages && initialMessages.length > 0) return initialMessages;
-
-    // Genuine default history between verified homeowner and licensed contractor
-    return [
-      {
-        id: "msg_init_1",
-        senderRole: "PRO",
-        senderName: counterpartRole === "CONTRACTOR" ? counterpartName : "Apex Heating & Plumbing Ltd",
-        text: `Hello! I have reviewed your job specification for "${jobTitle}". My initial itemized quote is ${currentPrice}. Please message me directly here to confirm access, part numbers, or discuss milestone terms.`,
-        timestamp: "14 Nov, 10:30 AM",
-      },
-    ];
+    return initialMessages || [];
   });
 
   const [inputMessage, setInputMessage] = React.useState("");
@@ -87,7 +76,102 @@ export function NegotiationModal({
 
   const messagesEndRef = React.useRef<HTMLDivElement>(null);
 
-  // Sync to localStorage
+  // 1. Fetch messages from Neon DB
+  const fetchMessagesFromNeon = React.useCallback(async () => {
+    if (!referenceCode) return;
+    try {
+      const res = await fetch(`/api/messages?referenceCode=${encodeURIComponent(referenceCode)}`);
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data && Array.isArray(data.messages)) {
+        const mapped: ChatMessage[] = data.messages.map((m: {
+          id: string;
+          senderRole: "CUSTOMER" | "PRO";
+          senderName: string;
+          text: string;
+          timestamp: string;
+          isCounterOffer?: boolean;
+          proposedPrice?: string | null;
+          status?: "PROPOSED" | "ACCEPTED" | "DECLINED" | null;
+        }) => ({
+          id: m.id,
+          senderRole: m.senderRole,
+          senderName: m.senderName,
+          text: m.text,
+          timestamp: m.timestamp,
+          isCounterOffer: Boolean(m.isCounterOffer),
+          proposedPrice: m.proposedPrice || undefined,
+          status: (m.status as ChatMessage["status"]) || undefined,
+        }));
+
+        setMessages(mapped);
+        if (typeof window !== "undefined") {
+          try {
+            localStorage.setItem(storageKey, JSON.stringify(mapped));
+          } catch {
+            // ignore
+          }
+        }
+      }
+    } catch (err) {
+      console.warn("Neon DB /api/messages fetch notice:", err);
+    }
+  }, [referenceCode, storageKey]);
+
+  // 2. Poll messages when modal is open so 2 browsers sync in real time
+  React.useEffect(() => {
+    if (!isOpen || !referenceCode) return;
+    let isMounted = true;
+
+    // Initial fetch via Promise .then chain to satisfy React effect rules
+    fetch(`/api/messages?referenceCode=${encodeURIComponent(referenceCode)}`)
+      .then((res) => {
+        if (!res.ok) return null;
+        return res.json();
+      })
+      .then((data: { messages?: Array<Record<string, unknown>> } | null) => {
+        if (!isMounted || !data || !Array.isArray(data.messages)) return;
+        const mapped: ChatMessage[] = data.messages.map((m) => ({
+          id: String(m.id || ""),
+          senderRole: (m.senderRole as ChatMessage["senderRole"]) || "CUSTOMER",
+          senderName: String(m.senderName || ""),
+          text: String(m.text || ""),
+          timestamp: String(m.timestamp || ""),
+          isCounterOffer: Boolean(m.isCounterOffer),
+          proposedPrice: m.proposedPrice ? String(m.proposedPrice) : undefined,
+          status: (m.status as ChatMessage["status"]) || undefined,
+        }));
+        setMessages(mapped);
+      })
+      .catch((err) => {
+        console.warn("Neon DB /api/messages initial fetch notice:", err);
+      });
+
+    const interval = setInterval(() => {
+      void fetchMessagesFromNeon();
+    }, 2000);
+
+    const handleStorageUpdate = (e: StorageEvent) => {
+      if (e.key === storageKey && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (Array.isArray(parsed)) setMessages(parsed);
+        } catch {
+          // ignore
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageUpdate);
+
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+      window.removeEventListener("storage", handleStorageUpdate);
+    };
+  }, [isOpen, referenceCode, fetchMessagesFromNeon, storageKey]);
+
+  // Sync to localStorage as local cache
   React.useEffect(() => {
     if (typeof window !== "undefined" && messages.length > 0) {
       try {
@@ -106,24 +190,48 @@ export function NegotiationModal({
 
   if (!isOpen) return null;
 
-  const handleSendMessage = (e: React.FormEvent) => {
+  const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputMessage.trim()) return;
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `msg_${referenceCode}_${prev.length + 1}`,
-        senderRole: currentRole,
-        senderName: myName,
-        text: inputMessage.trim(),
-        timestamp: "Today, Just now",
-      },
-    ]);
+    const text = inputMessage.trim();
     setInputMessage("");
+
+    const timeStr = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+    const timestamp = `Today, ${timeStr}`;
+
+    const tempMsg: ChatMessage = {
+      id: `temp_${Date.now()}`,
+      senderRole: currentRole,
+      senderName: myName,
+      text,
+      timestamp,
+    };
+
+    // Optimistic local update
+    setMessages((prev) => [...prev, tempMsg]);
+
+    try {
+      const res = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referenceCode,
+          senderRole: currentRole,
+          senderName: myName,
+          text,
+          timestamp,
+        }),
+      });
+      if (res.ok) {
+        void fetchMessagesFromNeon();
+      }
+    } catch (err) {
+      console.error("Failed to persist message to Neon DB:", err);
+    }
   };
 
-  const handleSendCounterOffer = (e: React.FormEvent) => {
+  const handleSendCounterOffer = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!counterPriceInput.trim()) return;
 
@@ -132,44 +240,98 @@ export function NegotiationModal({
         ? counterPriceInput
         : `£${counterPriceInput}`;
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: `msg_counter_${referenceCode}_${prev.length + 1}`,
-        senderRole: currentRole,
-        senderName: myName,
-        text: counterReasonInput.trim()
-          ? `Proposed Counter-Offer: ${formattedPrice}. Note: "${counterReasonInput.trim()}"`
-          : `Proposed Counter-Offer: ${formattedPrice}.`,
-        timestamp: "Today, Just now",
-        isCounterOffer: true,
-        proposedPrice: formattedPrice,
-        status: "PROPOSED",
-      },
-    ]);
+    const text = counterReasonInput.trim()
+      ? `Proposed Counter-Offer: ${formattedPrice}. Note: "${counterReasonInput.trim()}"`
+      : `Proposed Counter-Offer: ${formattedPrice}.`;
+
     setIsCounterOfferOpen(false);
     setCounterPriceInput("");
     setCounterReasonInput("");
+
+    const timeStr = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+    const timestamp = `Today, ${timeStr}`;
+
+    const tempCounter: ChatMessage = {
+      id: `temp_counter_${Date.now()}`,
+      senderRole: currentRole,
+      senderName: myName,
+      text,
+      timestamp,
+      isCounterOffer: true,
+      proposedPrice: formattedPrice,
+      status: "PROPOSED",
+    };
+
+    // Optimistic local update
+    setMessages((prev) => [...prev, tempCounter]);
+
+    try {
+      const res = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referenceCode,
+          senderRole: currentRole,
+          senderName: myName,
+          text,
+          timestamp,
+          isCounterOffer: true,
+          proposedPrice: formattedPrice,
+          status: "PROPOSED",
+        }),
+      });
+      if (res.ok) {
+        void fetchMessagesFromNeon();
+      }
+    } catch (err) {
+      console.error("Failed to persist counter offer to Neon DB:", err);
+    }
   };
 
-  const handleAcceptCounterOffer = (msgId: string, price: string) => {
+  const handleAcceptCounterOffer = async (msgId: string, price: string) => {
+    const timeStr = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+    const timestamp = `Today, ${timeStr}`;
+    const acceptText = `I accept the revised quote of ${price}. This negotiated rate is now agreed and updated in our digital contract.`;
+
+    setActiveAgreedPrice(price);
+    if (onPriceAgreed) {
+      onPriceAgreed(price);
+    }
+
+    // Optimistic local update
     setMessages((prev) => {
       const updated = prev.map((m) =>
         m.id === msgId ? { ...m, status: "ACCEPTED" as const } : m
       );
       const acceptNote: ChatMessage = {
-        id: `msg_accept_${referenceCode}_${prev.length + 1}`,
+        id: `temp_accept_${Date.now()}`,
         senderRole: currentRole,
         senderName: myName,
-        text: `I accept the revised quote of ${price}. This negotiated rate is now agreed and updated in our digital contract.`,
-        timestamp: "Today, Just now",
+        text: acceptText,
+        timestamp,
       };
       return [...updated, acceptNote];
     });
 
-    setActiveAgreedPrice(price);
-    if (onPriceAgreed) {
-      onPriceAgreed(price);
+    try {
+      const res = await fetch("/api/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          referenceCode,
+          senderRole: currentRole,
+          senderName: myName,
+          text: acceptText,
+          timestamp,
+          acceptedCounterMessageId: msgId.startsWith("temp_") ? undefined : msgId,
+          agreedPrice: price,
+        }),
+      });
+      if (res.ok) {
+        void fetchMessagesFromNeon();
+      }
+    } catch (err) {
+      console.error("Failed to persist accepted counter offer to Neon DB:", err);
     }
   };
 
@@ -229,63 +391,75 @@ export function NegotiationModal({
 
         {/* Scrollable Message Thread Area */}
         <div className="flex-1 overflow-y-auto min-h-0 p-4 space-y-3 bg-[var(--bg)]/40 text-xs">
-          {messages.map((msg) => {
-            const isMe = msg.senderRole === currentRole;
-            return (
-              <div
-                key={msg.id}
-                className={`flex flex-col ${isMe ? "items-end" : "items-start"}`}
-              >
-                <div className="flex items-center space-x-1.5 mb-1 text-[10px] text-[var(--text-light)]">
-                  <span className="font-bold text-[var(--text)]">{isMe ? `You (${myName})` : msg.senderName}</span>
-                  <span>&bull;</span>
-                  <span>{msg.timestamp}</span>
-                </div>
-
-                <div
-                  className={`p-3.5 rounded-[var(--radius)] max-w-[88%] sm:max-w-[75%] space-y-2 shadow-xs ${
-                    isMe
-                      ? "bg-[var(--brand)] text-white rounded-br-none"
-                      : "bg-[var(--surface)] border border-[var(--line)] text-[var(--text)] rounded-bl-none"
-                  }`}
-                >
-                  <p className="leading-relaxed whitespace-pre-wrap">{msg.text}</p>
-
-                  {/* Counter Offer Box */}
-                  {msg.isCounterOffer && (
-                    <div className="mt-2 p-2.5 rounded bg-black/15 dark:bg-black/40 border border-white/20 text-xs space-y-2">
-                      <div className="flex items-center justify-between">
-                        <span className="font-bold uppercase tracking-wider text-[10px] opacity-90">
-                          Proposed Contract Value:
-                        </span>
-                        <span className="font-mono font-extrabold text-sm">{msg.proposedPrice}</span>
-                      </div>
-
-                      {msg.status === "PROPOSED" && !isMe && (
-                        <button
-                          type="button"
-                          onClick={() =>
-                            handleAcceptCounterOffer(msg.id, msg.proposedPrice || activeAgreedPrice)
-                          }
-                          className="w-full py-1.5 px-3 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-1 cursor-pointer transition-colors shadow-xs"
-                        >
-                          <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
-                          <span>Accept &amp; Lock New Rate into Contract</span>
-                        </button>
-                      )}
-
-                      {msg.status === "ACCEPTED" && (
-                        <div className="text-[11px] font-bold text-emerald-400 dark:text-emerald-300 flex items-center">
-                          <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
-                          <span>Agreed &amp; Updated in Contract</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                </div>
+          {messages.length === 0 ? (
+            <div className="h-full min-h-[180px] flex flex-col items-center justify-center text-center p-6 text-[var(--text-muted)] space-y-2">
+              <div className="w-10 h-10 rounded-full bg-[var(--surface)] border border-[var(--line)] flex items-center justify-center text-[var(--accent)] mb-1 shadow-xs">
+                <MessageSquare className="w-5 h-5" />
               </div>
-            );
-          })}
+              <p className="font-bold text-xs text-[var(--text)]">Direct Conversation Thread</p>
+              <p className="text-[11px] max-w-sm text-[var(--text-muted)] leading-relaxed">
+                Connect directly with <strong className="text-[var(--text)]">{counterpartName}</strong> regarding job <span className="font-mono text-[var(--text)]">{referenceCode}</span>. Discuss access times, part specifications, or submit counter-offers below.
+              </p>
+            </div>
+          ) : (
+            messages.map((msg) => {
+              const isMe = msg.senderRole === currentRole;
+              return (
+                <div
+                  key={msg.id}
+                  className={`flex flex-col ${isMe ? "items-end" : "items-start"}`}
+                >
+                  <div className="flex items-center space-x-1.5 mb-1 text-[10px] text-[var(--text-light)]">
+                    <span className="font-bold text-[var(--text)]">{isMe ? `You (${myName})` : msg.senderName}</span>
+                    <span>&bull;</span>
+                    <span>{msg.timestamp}</span>
+                  </div>
+
+                  <div
+                    className={`p-3.5 rounded-[var(--radius)] max-w-[88%] sm:max-w-[75%] space-y-2 shadow-xs ${
+                      isMe
+                        ? "bg-[var(--brand)] text-white rounded-br-none"
+                        : "bg-[var(--surface)] border border-[var(--line)] text-[var(--text)] rounded-bl-none"
+                    }`}
+                  >
+                    <p className="leading-relaxed whitespace-pre-wrap">{msg.text}</p>
+
+                    {/* Counter Offer Box */}
+                    {msg.isCounterOffer && (
+                      <div className="mt-2 p-2.5 rounded bg-black/15 dark:bg-black/40 border border-white/20 text-xs space-y-2">
+                        <div className="flex items-center justify-between">
+                          <span className="font-bold uppercase tracking-wider text-[10px] opacity-90">
+                            Proposed Contract Value:
+                          </span>
+                          <span className="font-mono font-extrabold text-sm">{msg.proposedPrice}</span>
+                        </div>
+
+                        {msg.status === "PROPOSED" && !isMe && (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              handleAcceptCounterOffer(msg.id, msg.proposedPrice || activeAgreedPrice)
+                            }
+                            className="w-full py-1.5 px-3 rounded bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-1 cursor-pointer transition-colors shadow-xs"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
+                            <span>Accept &amp; Lock New Rate into Contract</span>
+                          </button>
+                        )}
+
+                        {msg.status === "ACCEPTED" && (
+                          <div className="text-[11px] font-bold text-emerald-400 dark:text-emerald-300 flex items-center">
+                            <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
+                            <span>Agreed &amp; Updated in Contract</span>
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })
+          )}
           <div ref={messagesEndRef} />
         </div>
 
