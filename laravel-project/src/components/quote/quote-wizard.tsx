@@ -69,6 +69,53 @@ export function QuoteWizard() {
     executeDispatch();
   };
 
+  if (!user) {
+    return (
+      <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-8 sm:p-12 border border-[var(--line)] shadow-soft text-center animate-in fade-in duration-200">
+        <div className="w-14 h-14 rounded-full bg-[var(--brand-light)] text-[var(--accent)] mx-auto flex items-center justify-center mb-5 border border-[var(--line)]">
+          <Lock className="w-7 h-7" />
+        </div>
+        <span className="text-[11px] font-bold uppercase tracking-wider text-[var(--accent)] block">
+          Client Authentication Required
+        </span>
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[var(--text)] mt-1 mb-2">
+          Please Sign In to Post Your Job
+        </h2>
+        <p className="text-xs sm:text-sm text-[var(--text-muted)] max-w-md mx-auto mb-6 leading-relaxed">
+          To maintain verified trust and protect contractor dispatch availability, all job submissions require an authenticated homeowner account.
+        </p>
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto mb-6">
+          <Link
+            href="/auth/login?redirect=/quote"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-[var(--radius-sm)] btn-primary text-xs font-bold flex items-center justify-center space-x-1.5 shadow-xs"
+          >
+            <User className="w-4 h-4" />
+            <span>Sign In to Your Account</span>
+          </Link>
+          <Link
+            href="/auth/register?redirect=/quote"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-[var(--text)] text-xs font-bold flex items-center justify-center space-x-1.5 transition-colors"
+          >
+            <span>Register Free Account</span>
+          </Link>
+        </div>
+
+        <div className="pt-4 border-t border-[var(--line-subtle)] max-w-md mx-auto text-xs text-[var(--text-muted)]">
+          <span className="block mb-2 font-medium">Or continue immediately with demo access:</span>
+          <button
+            type="button"
+            onClick={() => loginAsDemo("CUSTOMER")}
+            className="px-4 py-2 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] hover:bg-[var(--surface)] border border-[var(--line)] text-xs font-bold text-[var(--text)] transition-colors cursor-pointer inline-flex items-center space-x-1.5 shadow-2xs"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <span>Instant Homeowner Demo Sign-In</span>
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (submittedRef) {
     return (
       <div className="bg-[var(--surface)] rounded-[var(--radius-lg)] p-8 sm:p-12 border border-[var(--line)] shadow-soft text-center">

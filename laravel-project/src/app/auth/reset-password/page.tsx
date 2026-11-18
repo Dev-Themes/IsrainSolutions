@@ -3,11 +3,13 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Lock, CheckCircle2, ArrowRight } from "lucide-react";
+import { Lock, CheckCircle2, ArrowRight, AlertCircle } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export default function ResetPasswordPage() {
   return (
-    <React.Suspense fallback={<div className="p-12 text-center text-[var(--text-muted)]">Loading reset form...</div>}>
+    <React.Suspense fallback={<div className="p-12 text-center text-xs text-[var(--text-muted)]">Loading reset form...</div>}>
       <ResetPasswordContent />
     </React.Suspense>
   );
@@ -16,7 +18,8 @@ export default function ResetPasswordPage() {
 function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get("email") || "user@example.com";
+  const email = searchParams.get("email") || "sarah.jenkins@example.com";
+  const { resetUserPassword } = useAuth();
 
   const [newPassword, setNewPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
@@ -33,14 +36,20 @@ function ResetPasswordContent() {
     }
 
     if (newPassword !== confirmPassword) {
-      setError("Passwords do not match. Please verify.");
+      setError("Passwords do not match. Please verify and re-enter.");
+      return;
+    }
+
+    const resetOk = resetUserPassword(email, newPassword);
+    if (!resetOk) {
+      setError("Unable to update password. Please ensure this email is valid or try again.");
       return;
     }
 
     setSuccess(true);
     setTimeout(() => {
       router.push("/auth/login");
-    }, 2000);
+    }, 1800);
   };
 
   return (
@@ -54,24 +63,25 @@ function ResetPasswordContent() {
             Set New Password
           </h1>
           <p className="text-xs text-[var(--text-muted)] mt-1">
-            Updating password for <strong>{email}</strong>
+            Updating password for <strong className="text-[var(--text)]">{email}</strong>
           </p>
         </div>
 
         {error && (
-          <div className="mb-4 p-3 rounded-[var(--radius-sm)] bg-red-500/10 border border-red-500/20 text-xs text-red-600 dark:text-red-400 font-medium">
-            {error}
+          <div className="mb-4 p-3 rounded-[var(--radius-sm)] bg-red-500/10 border border-red-500/20 text-xs text-red-600 dark:text-red-400 font-medium flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <span>{error}</span>
           </div>
         )}
 
         {success ? (
-          <div className="p-4 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] border border-[var(--line)] text-xs text-center space-y-2">
-            <div className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-600 mx-auto flex items-center justify-center">
+          <div className="p-5 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] border border-[var(--line)] text-xs text-center space-y-2">
+            <div className="w-9 h-9 rounded-full bg-emerald-500/20 text-emerald-600 mx-auto flex items-center justify-center">
               <CheckCircle2 className="w-5 h-5" />
             </div>
-            <div className="font-bold text-[var(--text)]">Password Updated Successfully</div>
+            <div className="font-bold text-sm text-[var(--text)]">Password Updated Successfully</div>
             <p className="text-[var(--text-muted)]">
-              Your password has been changed. Redirecting you to the sign-in screen...
+              Your new password is now active. Redirecting you to the sign-in screen...
             </p>
           </div>
         ) : (
@@ -80,13 +90,14 @@ function ResetPasswordContent() {
               <label className="block text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1">
                 New Password
               </label>
-              <input
-                type="password"
+              <PasswordInput
                 required
                 value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
+                onChange={(e) => {
+                  setNewPassword(e.target.value);
+                  setError("");
+                }}
                 placeholder="At least 8 characters"
-                className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--bg-alt)] text-xs text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -94,13 +105,14 @@ function ResetPasswordContent() {
               <label className="block text-[11px] font-bold uppercase tracking-wider text-[var(--text-muted)] mb-1">
                 Confirm New Password
               </label>
-              <input
-                type="password"
+              <PasswordInput
                 required
                 value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={(e) => {
+                  setConfirmPassword(e.target.value);
+                  setError("");
+                }}
                 placeholder="Re-enter password"
-                className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--bg-alt)] text-xs text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
               />
             </div>
 
@@ -108,7 +120,7 @@ function ResetPasswordContent() {
               type="submit"
               className="w-full py-3 rounded-[var(--radius)] btn-primary font-bold text-xs text-white transition-colors shadow-xs mt-2 flex items-center justify-center space-x-1.5 cursor-pointer"
             >
-              <span>Save & Sign In</span>
+              <span>Save &amp; Sign In</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </form>

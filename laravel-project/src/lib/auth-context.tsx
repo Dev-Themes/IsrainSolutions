@@ -31,6 +31,8 @@ interface AuthContextType {
   updateUser: (updates: Partial<AuthUser>) => void;
   verifyPassword: (inputPassword: string) => boolean;
   deleteAccount: (password: string) => { success: boolean; error?: string };
+  findUserByEmail: (email: string) => AuthUser | null;
+  resetUserPassword: (email: string, newPassword: string) => boolean;
 }
 
 const AuthContext = React.createContext<AuthContextType | undefined>(undefined);
@@ -91,6 +93,68 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [sessionStr]);
 
+  const getRegisteredUsers = (): Record<string, AuthUser> => {
+    if (typeof window === "undefined") return {};
+    try {
+      const stored = localStorage.getItem("tc_registered_users");
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  };
+
+  const saveRegisteredUser = (u: AuthUser) => {
+    if (typeof window === "undefined") return;
+    try {
+      const users = getRegisteredUsers();
+      users[u.email.toLowerCase()] = u;
+      localStorage.setItem("tc_registered_users", JSON.stringify(users));
+    } catch {
+      // Ignore
+    }
+  };
+
+  const findUserByEmail = (searchEmail: string): AuthUser | null => {
+    if (!searchEmail) return null;
+    const normalized = searchEmail.trim().toLowerCase();
+    if (normalized === DEMO_HOMEOWNER.email.toLowerCase()) return DEMO_HOMEOWNER;
+    if (normalized === DEMO_CONTRACTOR.email.toLowerCase()) return DEMO_CONTRACTOR;
+    if (user && user.email.toLowerCase() === normalized) return user;
+    const users = getRegisteredUsers();
+    return users[normalized] || null;
+  };
+
+  const resetUserPassword = (targetEmail: string, newPassword: string): boolean => {
+    if (!targetEmail || !newPassword) return false;
+    const normalized = targetEmail.trim().toLowerCase();
+
+    // If it is the demo homeowner or contractor, persist customized demo credentials
+    let target = findUserByEmail(normalized);
+    if (!target) {
+      if (normalized === DEMO_HOMEOWNER.email.toLowerCase()) {
+        target = { ...DEMO_HOMEOWNER };
+      } else if (normalized === DEMO_CONTRACTOR.email.toLowerCase()) {
+        target = { ...DEMO_CONTRACTOR };
+      }
+    }
+
+    if (!target) return false;
+
+    const updatedUser: AuthUser = {
+      ...target,
+      password: newPassword,
+    };
+
+    saveRegisteredUser(updatedUser);
+
+    // If currently logged in as this user, update active session too
+    if (user && user.email.toLowerCase() === normalized) {
+      updateUser({ password: newPassword });
+    }
+
+    return true;
+  };
+
   const login = (
     email: string,
     role: "CUSTOMER" | "PRO" = "CUSTOMER",
@@ -98,21 +162,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     password?: string,
     extra?: Partial<AuthUser>
   ) => {
+    const existing = findUserByEmail(email);
     const newUser: AuthUser = {
-      id: `usr_${Date.now()}`,
-      name: name || (email.split("@")[0].replace(/[._]/g, " ") || "User"),
+      id: existing?.id || `usr_${Date.now()}`,
+      name: name || existing?.name || (email.split("@")[0].replace(/[._]/g, " ") || "User"),
       email,
-      role,
-      avatar: name ? name.substring(0, 2).toUpperCase() : email.substring(0, 2).toUpperCase(),
-      companyName: role === "PRO" ? "Certified Trade Contractor" : undefined,
-      password: password || "password123",
-      phone: extra?.phone || (role === "PRO" ? "+44 20 7946 0812" : "+44 20 7946 0812"),
-      address: extra?.address || (role === "PRO" ? "12 Munster Road, Fulham, London SW6 4EN" : "14 Cranbury Road, Fulham, London SW6 2PY"),
-      city: extra?.city || "London",
+      role: existing?.role || role,
+      avatar: name ? name.substring(0, 2).toUpperCase() : (existing?.avatar || email.substring(0, 2).toUpperCase()),
+      companyName: role === "PRO" ? (existing?.companyName || "Certified Trade Contractor") : undefined,
+      password: password || existing?.password || "password123",
+      phone: extra?.phone || existing?.phone || (role === "PRO" ? "+44 20 7946 0812" : "+44 20 7946 0812"),
+      address: extra?.address || existing?.address || (role === "PRO" ? "12 Munster Road, Fulham, London SW6 4EN" : "14 Cranbury Road, Fulham, London SW6 2PY"),
+      city: extra?.city || existing?.city || "London",
+      ...existing,
       ...extra,
     };
+    if (password) {
+      newUser.password = password;
+    }
+
     try {
       localStorage.setItem("tc_auth_session", JSON.stringify(newUser));
+      saveRegisteredUser(newUser);
       window.dispatchEvent(new Event("tc_auth_change"));
     } catch {
       // Ignore storage errors
@@ -181,6 +252,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         updateUser,
         verifyPassword,
         deleteAccount,
+        findUserByEmail,
+        resetUserPassword,
       }}
     >
       {children}

@@ -10,6 +10,7 @@ export interface QuoteProposal {
   price: string;
   notes: string;
   status: "PENDING" | "ACCEPTED" | "DECLINED";
+  proEmail?: string;
 }
 
 export interface MarketplaceJobItem {

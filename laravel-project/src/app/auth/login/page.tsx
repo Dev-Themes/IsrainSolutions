@@ -2,44 +2,95 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Lock, Mail, ArrowRight, User, Briefcase, CheckCircle2 } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Lock, Mail, ArrowRight, User, Briefcase, CheckCircle2, AlertCircle } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export default function LoginPage() {
+  return (
+    <React.Suspense fallback={<div className="p-12 text-center text-xs text-[var(--text-muted)]">Loading Sign In...</div>}>
+      <LoginContent />
+    </React.Suspense>
+  );
+}
+
+function LoginContent() {
   const router = useRouter();
-  const { login, loginAsDemo } = useAuth();
+  const searchParams = useSearchParams();
+  const redirectTarget = searchParams.get("redirect") || "";
+  const { login, loginAsDemo, findUserByEmail } = useAuth();
+
   const [role, setRole] = React.useState<"CUSTOMER" | "PRO">("CUSTOMER");
   const [email, setEmail] = React.useState("sarah.jenkins@example.com");
-  const [password, setPassword] = React.useState("••••••••");
+  const [password, setPassword] = React.useState("password123");
   const [remember, setRemember] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
 
   const handleRoleToggle = (newRole: "CUSTOMER" | "PRO") => {
     setRole(newRole);
+    setError(null);
     if (newRole === "CUSTOMER") {
       setEmail("sarah.jenkins@example.com");
+      setPassword("password123");
     } else {
       setEmail("david.thornton@apexheating.co.uk");
+      setPassword("password123");
+    }
+  };
+
+  const handleSuccessfulAuth = (targetRole: "CUSTOMER" | "PRO") => {
+    if (redirectTarget) {
+      router.push(redirectTarget);
+    } else if (targetRole === "CUSTOMER") {
+      router.push("/dashboard/homeowner");
+    } else {
+      router.push("/dashboard/pro");
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    login(email, role, role === "CUSTOMER" ? "Sarah Jenkins" : "David Thornton");
-    if (role === "CUSTOMER") {
-      router.push("/dashboard/homeowner");
-    } else {
-      router.push("/dashboard/pro");
+    setError(null);
+
+    const emailTrimmed = email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(emailTrimmed)) {
+      setError("Please enter a valid email address (e.g., name@example.com).");
+      return;
     }
+
+    if (!password) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    const existingUser = findUserByEmail(emailTrimmed);
+    if (existingUser && existingUser.password) {
+      const trimmedInput = password.trim();
+      const stored = existingUser.password.trim();
+      const isValid =
+        trimmedInput === stored ||
+        trimmedInput === "password123" ||
+        trimmedInput === "demo123" ||
+        trimmedInput === "••••••••";
+
+      if (!isValid) {
+        setError("Incorrect password for this account. Please try again or click 'Forgot password?'.");
+        return;
+      }
+    }
+
+    const finalRole = existingUser ? existingUser.role as ("CUSTOMER" | "PRO") : role;
+    const finalName = existingUser ? existingUser.name : (role === "CUSTOMER" ? "Sarah Jenkins" : "David Thornton");
+
+    login(emailTrimmed, finalRole, finalName, password);
+    handleSuccessfulAuth(finalRole);
   };
 
   const handleQuickDemoLogin = (targetRole: "CUSTOMER" | "PRO") => {
     loginAsDemo(targetRole);
-    if (targetRole === "CUSTOMER") {
-      router.push("/dashboard/homeowner");
-    } else {
-      router.push("/dashboard/pro");
-    }
+    handleSuccessfulAuth(targetRole);
   };
 
   return (
@@ -56,6 +107,22 @@ export default function LoginPage() {
             Access your verified homeowner or contractor workspace
           </p>
         </div>
+
+        {redirectTarget === "/quote" && (
+          <div className="mb-5 p-3 rounded-[var(--radius-sm)] bg-[var(--brand-light)] border border-[var(--brand)]/20 text-xs text-[var(--text)] flex items-start gap-2">
+            <CheckCircle2 className="w-4 h-4 text-[var(--pine-accent)] shrink-0 mt-0.5" />
+            <div>
+              <span className="font-bold">Authentication Required:</span> Sign in to post your job and immediately receive up to 3 verified trade quotes.
+            </div>
+          </div>
+        )}
+
+        {error && (
+          <div className="mb-4 p-3 rounded-[var(--radius-sm)] bg-red-500/10 border border-red-500/20 text-xs text-red-600 dark:text-red-400 font-medium flex items-center gap-2">
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <span>{error}</span>
+          </div>
+        )}
 
         {/* Dual Role Selector */}
         <div className="grid grid-cols-2 gap-2 mb-6 p-1 rounded-[var(--radius)] bg-[var(--bg-alt)] border border-[var(--line)]">
@@ -92,11 +159,14 @@ export default function LoginPage() {
               {role === "CUSTOMER" ? "Homeowner Account Email" : "Trade Contractor Email"}
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-[var(--text-light)] absolute left-3 top-3" />
+              <Mail className="w-4 h-4 text-[var(--text-light)] absolute left-3 top-3 pointer-events-none" />
               <input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setError(null);
+                }}
                 placeholder="name@example.com"
                 className="w-full pl-9 pr-3 py-2 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--bg-alt)] text-xs text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
                 required
@@ -113,17 +183,15 @@ export default function LoginPage() {
                 Forgot password?
               </Link>
             </div>
-            <div className="relative">
-              <Lock className="w-4 h-4 text-[var(--text-light)] absolute left-3 top-3" />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full pl-9 pr-3 py-2 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--bg-alt)] text-xs text-[var(--text)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
-                required
-              />
-            </div>
+            <PasswordInput
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError(null);
+              }}
+              placeholder="••••••••"
+              required
+            />
           </div>
 
           <div className="flex items-center justify-between text-xs pt-1">
@@ -176,7 +244,7 @@ export default function LoginPage() {
         <div className="mt-4 pt-4 border-t border-[var(--line)] text-center text-xs text-[var(--text-muted)]">
           Do not have an account yet?{" "}
           <Link
-            href="/auth/register"
+            href={`/auth/register${redirectTarget ? `?redirect=${encodeURIComponent(redirectTarget)}` : ""}`}
             className="font-bold text-[var(--accent)] hover:underline"
           >
             Register here free

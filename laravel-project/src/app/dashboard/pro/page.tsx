@@ -22,6 +22,7 @@ import {
   Globe,
   Car,
   Save,
+  Receipt,
 } from "lucide-react";
 import { CITIES, CATEGORIES } from "@/lib/data";
 import {
@@ -114,17 +115,30 @@ export default function ContractorDashboardPage() {
   const { contracts: storeContracts } = useContractStore();
   const { jobs: marketplaceJobs, updateJob } = useJobStore();
   const mounted = useIsClient();
-  const earningsData = React.useMemo(() => getContractorEarnings("pro_uk_1", storeContracts), [storeContracts]);
+
+  const isDemoPro =
+    user?.email?.toLowerCase() === "david.thornton@apexheating.co.uk" ||
+    user?.email?.toLowerCase() === "apex.heating@tradeconnect.co.uk" ||
+    user?.id === "user_pro_1" ||
+    user?.id === "pro_uk_1";
+
+  const currentProId = isDemoPro ? "pro_uk_1" : (user?.id || "pro_custom");
 
   const [activeTab, setActiveTab] = React.useState<"LEADS" | "ACTIVE" | "EARNED" | "HISTORY" | "PROFILE">("LEADS");
   const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] = React.useState(false);
   const [profileSavedMsg, setProfileSavedMsg] = React.useState(false);
 
   // Contractor Profile & Coverage Area State
-  const [companyName, setCompanyName] = React.useState(user?.name || "Apex Heating & Emergency Plumbing Ltd");
-  const [leadEngineer, setLeadEngineer] = React.useState("David Thornton (Lead Engineer)");
-  const [proPhone, setProPhone] = React.useState(user?.phone || "+44 20 7946 0912");
-  const proEmail = user?.email || "apex.heating@tradeconnect.co.uk";
+  const [companyName, setCompanyName] = React.useState(
+    user?.companyName || user?.name || (isDemoPro ? "Apex Heating & Emergency Plumbing Ltd" : "Verified Trade Specialist")
+  );
+  const [leadEngineer, setLeadEngineer] = React.useState(
+    user?.name || (isDemoPro ? "David Thornton (Lead Engineer)" : "Lead Technician")
+  );
+  const [proPhone, setProPhone] = React.useState(
+    user?.phone || (isDemoPro ? "+44 20 7946 0912" : "")
+  );
+  const proEmail = user?.email || (isDemoPro ? "apex.heating@tradeconnect.co.uk" : "");
   const [homeBaseCity, setHomeBaseCity] = React.useState<string>(user?.city || "London");
   const [additionalCoverageCities, setAdditionalCoverageCities] = React.useState<string[]>([
     "Manchester",
@@ -139,6 +153,36 @@ export default function ContractorDashboardPage() {
   const [coverageRadius, setCoverageRadius] = React.useState("London & Greater South East (Base: London)");
   const [hourlyRate, setHourlyRate] = React.useState("£75 / hr");
   const [calloutFee, setCalloutFee] = React.useState("£45");
+
+  React.useEffect(() => {
+    if (user) {
+      if (user.companyName) {
+        setCompanyName(user.companyName);
+      } else if (user.name && !isDemoPro) {
+        setCompanyName(user.name);
+      }
+      if (user.name && !isDemoPro) {
+        setLeadEngineer(user.name);
+      }
+      if (user.phone && !isDemoPro) {
+        setProPhone(user.phone);
+      }
+      if (user.city) {
+        setHomeBaseCity(user.city);
+      }
+    }
+  }, [user, isDemoPro]);
+
+  const earningsData = React.useMemo(() => {
+    return getContractorEarnings(
+      {
+        id: isDemoPro ? "pro_uk_1" : user?.id,
+        email: user?.email,
+        companyName: companyName,
+      },
+      storeContracts
+    );
+  }, [isDemoPro, user, companyName, storeContracts]);
 
   const handleSaveProProfile = (e: React.FormEvent) => {
     e.preventDefault();
@@ -167,9 +211,15 @@ export default function ContractorDashboardPage() {
         return true;
       })
       .map((j) => {
-        const myExistingProposal = j.proposals.find(
-          (p) => p.proId === "pro_uk_1" || p.proName === companyName
-        );
+        const myExistingProposal = j.proposals.find((p) => {
+          if (isDemoPro) {
+            return p.proId === "pro_uk_1" || p.proName.toLowerCase().includes("apex heating");
+          }
+          if (user?.id && p.proId === user.id) return true;
+          if (user?.email && p.proEmail && p.proEmail.toLowerCase() === user.email.toLowerCase()) return true;
+          if (companyName && p.proName.toLowerCase() === companyName.toLowerCase()) return true;
+          return false;
+        });
         const isUrgent = j.urgency === "Emergency" ? "Emergency" : j.urgency === "Within 48 hours" ? "Within 48 Hours" : "Flexible";
         return {
           id: j.id,
@@ -196,7 +246,7 @@ export default function ContractorDashboardPage() {
             : undefined,
         };
       });
-  }, [marketplaceJobs, storeContracts, companyName, homeBaseCity]);
+  }, [marketplaceJobs, storeContracts, isDemoPro, user, companyName, homeBaseCity]);
 
   // Dynamic on-site status toggle overrides
   const [onSiteOverrides, setOnSiteOverrides] = React.useState<Record<string, "SCHEDULED" | "ON_SITE">>({});
@@ -204,7 +254,21 @@ export default function ContractorDashboardPage() {
   // Derive active and completed contracts from real database store contracts
   const activeContracts: ActiveContract[] = React.useMemo(() => {
     return storeContracts
-      .filter((c) => c.status === "ACTIVE" || c.status === "INVOICED")
+      .filter((c) => {
+        if (c.status !== "ACTIVE" && c.status !== "INVOICED") return false;
+        if (isDemoPro) {
+          return (
+            c.proId === "pro_uk_1" ||
+            c.proSlug === "apex-plumbing-heating-london" ||
+            c.proEmail?.toLowerCase() === "david.thornton@apexheating.co.uk" ||
+            c.proName.toLowerCase().includes("apex")
+          );
+        }
+        if (user?.id && c.proId === user.id) return true;
+        if (user?.email && c.proEmail && c.proEmail.toLowerCase() === user.email.toLowerCase()) return true;
+        if (companyName && c.proName.toLowerCase() === companyName.toLowerCase()) return true;
+        return false;
+      })
       .map((c) => ({
         id: c.id,
         referenceCode: c.referenceCode,
@@ -219,11 +283,25 @@ export default function ContractorDashboardPage() {
         status: onSiteOverrides[c.id] || (c.status === "INVOICED" ? "ON_SITE" : "SCHEDULED"),
         notes: c.notes || "",
       }));
-  }, [storeContracts, onSiteOverrides]);
+  }, [storeContracts, onSiteOverrides, isDemoPro, user, companyName]);
 
   const completedContracts: CompletedContract[] = React.useMemo(() => {
     const fromContracts = storeContracts
-      .filter((c) => c.status === "PAID" || c.status === "COMPLETED")
+      .filter((c) => {
+        if (c.status !== "PAID" && c.status !== "COMPLETED") return false;
+        if (isDemoPro) {
+          return (
+            c.proId === "pro_uk_1" ||
+            c.proSlug === "apex-plumbing-heating-london" ||
+            c.proEmail?.toLowerCase() === "david.thornton@apexheating.co.uk" ||
+            c.proName.toLowerCase().includes("apex")
+          );
+        }
+        if (user?.id && c.proId === user.id) return true;
+        if (user?.email && c.proEmail && c.proEmail.toLowerCase() === user.email.toLowerCase()) return true;
+        if (companyName && c.proName.toLowerCase() === companyName.toLowerCase()) return true;
+        return false;
+      })
       .map((c) => {
         const jobMatch = marketplaceJobs.find((j) => j.referenceCode === c.referenceCode);
         const resolvedReview = c.review || (jobMatch?.reviewLeft ? {
@@ -247,28 +325,30 @@ export default function ContractorDashboardPage() {
         };
       });
 
-    const fromJobs = marketplaceJobs
-      .filter((j) => j.status === "COMPLETED" && !fromContracts.some((c) => c.referenceCode === j.referenceCode))
-      .map((j) => ({
-        id: j.id,
-        referenceCode: j.referenceCode,
-        service: j.service,
-        title: j.title,
-        homeownerName: j.homeownerName,
-        completedDate: j.completedDate || "Recently Completed",
-        settledAmount: j.finalCost || "£145.00",
-        paymentStatus: "PAID" as const,
-        invoiceNumber: `INV-${j.referenceCode}`,
-        homeownerReview: j.reviewLeft ? {
-          author: j.homeownerName || "Homeowner",
-          rating: j.reviewLeft.rating,
-          date: j.completedDate || "Recently",
-          comment: j.reviewLeft.comment,
-        } : undefined,
-      }));
+    const fromJobs = isDemoPro
+      ? marketplaceJobs
+          .filter((j) => j.status === "COMPLETED" && !fromContracts.some((c) => c.referenceCode === j.referenceCode))
+          .map((j) => ({
+            id: j.id,
+            referenceCode: j.referenceCode,
+            service: j.service,
+            title: j.title,
+            homeownerName: j.homeownerName,
+            completedDate: j.completedDate || "Recently Completed",
+            settledAmount: j.finalCost || "£145.00",
+            paymentStatus: "PAID" as const,
+            invoiceNumber: `INV-${j.referenceCode}`,
+            homeownerReview: j.reviewLeft ? {
+              author: j.homeownerName || "Homeowner",
+              rating: j.reviewLeft.rating,
+              date: j.completedDate || "Recently",
+              comment: j.reviewLeft.comment,
+            } : undefined,
+          }))
+      : [];
 
     return [...fromContracts, ...fromJobs];
-  }, [storeContracts, marketplaceJobs]);
+  }, [storeContracts, marketplaceJobs, isDemoPro, user, companyName]);
 
   // Pro Verification Requirement: Must complete at least 10 contracts successfully AND have rating > 4.0
   const proCompletedCount = completedContracts.length;
@@ -423,7 +503,8 @@ export default function ContractorDashboardPage() {
     if (!targetJob) return;
 
     const updatedProposals = targetJob.proposals.map((p) => {
-      if (p.proId === "pro_uk_1" || p.proName === companyName) {
+      const isMyProp = (isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName;
+      if (isMyProp) {
         return {
           ...p,
           price: newPrice,
@@ -447,7 +528,7 @@ export default function ContractorDashboardPage() {
     } else {
       setQuotePrice("");
       setQuoteTimeline("Can attend within 1 hour");
-      setQuoteNotes("Fully equipped van with parts in stock. Certified Gas Safe & insured.");
+      setQuoteNotes("Fully equipped van with parts in stock. Certified trade specialist & insured.");
     }
   };
 
@@ -455,7 +536,10 @@ export default function ContractorDashboardPage() {
     if (confirm(`Withdraw your submitted quote for job ${referenceCode}?`)) {
       const targetJob = marketplaceJobs.find((j) => j.id === leadId || j.referenceCode === referenceCode);
       if (targetJob) {
-        const updatedProposals = targetJob.proposals.filter((p) => p.proId !== "pro_uk_1" && p.proName !== companyName);
+        const updatedProposals = targetJob.proposals.filter((p) => {
+          const isMyProp = (isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName;
+          return !isMyProp;
+        });
         await updateJob(targetJob.referenceCode, {
           proposals: updatedProposals,
         });
@@ -472,17 +556,21 @@ export default function ContractorDashboardPage() {
     if (targetJob) {
       const formattedPrice = quotePrice.startsWith("£") || quotePrice.startsWith("$") ? quotePrice : `£${quotePrice}`;
       const newProposal: QuoteProposal = {
-        proId: "pro_uk_1",
+        proId: currentProId,
         proName: companyName,
-        rating: 4.96,
-        phone: "+44 20 7946 0812",
+        rating: isDemoPro ? 4.96 : 5.0,
+        phone: proPhone || "+44 20 7946 0812",
         price: formattedPrice,
         notes: quoteNotes,
         status: "PENDING",
+        proEmail: proEmail || user?.email,
       };
 
       const updatedProposals = [
-        ...targetJob.proposals.filter((p) => p.proId !== "pro_uk_1" && p.proName !== companyName),
+        ...targetJob.proposals.filter((p) => {
+          const isMyProp = (isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName;
+          return !isMyProp;
+        }),
         newProposal,
       ];
 
@@ -519,13 +607,13 @@ export default function ContractorDashboardPage() {
       homeownerPhone: "+44 20 7946 0812",
       homeownerEmail: "sarah.jenkins@example.co.uk",
       homeownerAddress: lead.location,
-      proId: "pro_uk_1",
-      proSlug: "apex-plumbing-heating-london",
+      proId: currentProId,
+      proSlug: isDemoPro ? "apex-plumbing-heating-london" : companyName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       proName: companyName,
-      proPhone: "+44 20 7946 0812",
-      proEmail: "david@apexplumbing.co.uk",
-      proLicense: "Gas Safe Register #592104",
-      proInsurance: "£5,000,000 Direct Line Public Liability",
+      proPhone: proPhone || "+44 20 7946 0812",
+      proEmail: proEmail || "contractor@tradeconnect.co.uk",
+      proLicense: isDemoPro ? "Gas Safe Register #592104" : "Verified Trade Certification",
+      proInsurance: isDemoPro ? "£5,000,000 Direct Line Public Liability" : "£2,000,000 Trade Liability",
       proCity: homeBaseCity,
       status: "DRAFT",
       agreedPrice: lead.myQuote?.price || "£145.00",
@@ -647,13 +735,13 @@ export default function ContractorDashboardPage() {
       homeownerPhone: contract.homeownerPhone,
       homeownerEmail: "sarah.jenkins@example.co.uk",
       homeownerAddress: contract.address,
-      proId: "pro_uk_1",
-      proSlug: "apex-plumbing-heating-london",
+      proId: currentProId,
+      proSlug: isDemoPro ? "apex-plumbing-heating-london" : companyName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       proName: companyName,
-      proPhone: "+44 20 7946 0812",
-      proEmail: "david@apexplumbing.co.uk",
-      proLicense: "Gas Safe #592104",
-      proInsurance: "£5,000,000 Direct Line Public Liability",
+      proPhone: proPhone || "+44 20 7946 0812",
+      proEmail: proEmail || "contractor@tradeconnect.co.uk",
+      proLicense: isDemoPro ? "Gas Safe #592104" : "Verified Trade Certification",
+      proInsurance: isDemoPro ? "£5,000,000 Direct Line Public Liability" : "£2,000,000 Trade Liability",
       proCity: homeBaseCity,
       status: "ACTIVE",
       agreedPrice: resolvedPrice,
@@ -1269,101 +1357,113 @@ export default function ContractorDashboardPage() {
                 </span>
               </div>
 
-              {earningsData.monthlyBreakdown.map((mGroup) => (
-                <div
-                  key={mGroup.monthLabel}
-                  className="rounded-[var(--radius-lg)] bg-[var(--surface)] border border-[var(--line)] shadow-soft overflow-hidden"
-                >
-                  {/* Month Header Banner */}
-                  <div className="px-5 py-4 bg-[var(--bg-alt)] border-b border-[var(--line)] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-9 h-9 rounded-lg bg-[var(--brand-light)] text-[var(--brand)] flex items-center justify-center font-bold text-sm border border-[var(--line)]">
-                        {mGroup.monthLabel.slice(0, 3)}
+              {earningsData.monthlyBreakdown.length === 0 ? (
+                <div className="p-12 text-center rounded-[var(--radius-lg)] bg-[var(--surface)] border border-[var(--line)] space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-[var(--bg-alt)] border border-[var(--line)] flex items-center justify-center mx-auto text-[var(--brand)]">
+                    <Receipt className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-base font-bold text-[var(--text)]">No Settled Payouts Yet</h3>
+                  <p className="text-xs text-[var(--text-muted)] max-w-md mx-auto">
+                    When you complete contracts and clients release escrow funds, your monthly revenue breakdown and payment statements will appear here.
+                  </p>
+                </div>
+              ) : (
+                earningsData.monthlyBreakdown.map((mGroup) => (
+                  <div
+                    key={mGroup.monthLabel}
+                    className="rounded-[var(--radius-lg)] bg-[var(--surface)] border border-[var(--line)] shadow-soft overflow-hidden"
+                  >
+                    {/* Month Header Banner */}
+                    <div className="px-5 py-4 bg-[var(--bg-alt)] border-b border-[var(--line)] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-9 h-9 rounded-lg bg-[var(--brand-light)] text-[var(--brand)] flex items-center justify-center font-bold text-sm border border-[var(--line)]">
+                          {mGroup.monthLabel.slice(0, 3)}
+                        </div>
+                        <div>
+                          <h4 className="font-extrabold text-sm text-[var(--text)]">
+                            {mGroup.monthLabel}
+                          </h4>
+                          <span className="text-[11px] text-[var(--text-muted)]">
+                            {mGroup.jobsCount} completed and paid {mGroup.jobsCount === 1 ? "contract" : "contracts"}
+                          </span>
+                        </div>
                       </div>
-                      <div>
-                        <h4 className="font-extrabold text-sm text-[var(--text)]">
-                          {mGroup.monthLabel}
-                        </h4>
-                        <span className="text-[11px] text-[var(--text-muted)]">
-                          {mGroup.jobsCount} completed and paid {mGroup.jobsCount === 1 ? "contract" : "contracts"}
+
+                      <div className="sm:text-right">
+                        <span className="text-[10px] uppercase font-bold text-[var(--text-muted)] block">
+                          Monthly Settled Total
+                        </span>
+                        <span className="text-lg font-black font-mono text-[var(--accent)]">
+                          {earningsData.currency}{mGroup.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </span>
                       </div>
                     </div>
 
-                    <div className="sm:text-right">
-                      <span className="text-[10px] uppercase font-bold text-[var(--text-muted)] block">
-                        Monthly Settled Total
-                      </span>
-                      <span className="text-lg font-black font-mono text-[var(--accent)]">
-                        {earningsData.currency}{mGroup.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                      </span>
+                    {/* Contracts Table for this Month */}
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs border-collapse">
+                        <thead>
+                          <tr className="border-b border-[var(--line)] bg-[var(--surface)] text-[var(--text-muted)] font-bold uppercase text-[10px] tracking-wider">
+                            <th className="py-3 px-4">Ref &amp; Service</th>
+                            <th className="py-3 px-4">Job Scope</th>
+                            <th className="py-3 px-4">Client</th>
+                            <th className="py-3 px-4">Settled Date</th>
+                            <th className="py-3 px-4 text-right">Earned Amount</th>
+                            <th className="py-3 px-4 text-right">Invoice Document</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-[var(--line)]">
+                          {mGroup.contracts.map((cnt) => (
+                            <tr key={cnt.id} className="hover:bg-[var(--bg-alt)]/50 transition-colors">
+                              <td className="py-3.5 px-4 whitespace-nowrap">
+                                <span className="font-mono font-bold text-[var(--text)] block">
+                                  {cnt.referenceCode}
+                                </span>
+                                <span className="text-[10px] text-[var(--pine-accent)] font-semibold">
+                                  {cnt.service}
+                                </span>
+                              </td>
+                              <td className="py-3.5 px-4 max-w-xs">
+                                <span className="font-semibold text-[var(--text)] line-clamp-1 block">
+                                  {cnt.title}
+                                </span>
+                                <span className="text-[10px] text-[var(--text-muted)]">
+                                  {cnt.warrantyPeriod}
+                                </span>
+                              </td>
+                              <td className="py-3.5 px-4 whitespace-nowrap">
+                                <span className="font-medium text-[var(--text)] block">
+                                  {cnt.homeownerName}
+                                </span>
+                                <span className="text-[10px] text-[var(--text-muted)]">
+                                  {cnt.city}
+                                </span>
+                              </td>
+                              <td className="py-3.5 px-4 whitespace-nowrap text-[var(--text-muted)] text-[11px]">
+                                {cnt.invoicePaidAt?.split(",")[0] || cnt.serviceDate}
+                              </td>
+                              <td className="py-3.5 px-4 text-right whitespace-nowrap font-mono font-extrabold text-sm text-[var(--text)]">
+                                {cnt.currency}{(cnt.totalAmount || cnt.priceNumeric).toFixed(2)}
+                              </td>
+                              <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                                <button
+                                  type="button"
+                                  onClick={() => handleOpenStoreContractDoc(cnt)}
+                                  className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-[var(--accent)] font-bold text-xs cursor-pointer shadow-2xs"
+                                  title="Download VAT Invoice as PDF"
+                                >
+                                  <Printer className="w-3.5 h-3.5" />
+                                  <span>Download PDF</span>
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-
-                  {/* Contracts Table for this Month */}
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left text-xs border-collapse">
-                      <thead>
-                        <tr className="border-b border-[var(--line)] bg-[var(--surface)] text-[var(--text-muted)] font-bold uppercase text-[10px] tracking-wider">
-                          <th className="py-3 px-4">Ref &amp; Service</th>
-                          <th className="py-3 px-4">Job Scope</th>
-                          <th className="py-3 px-4">Client</th>
-                          <th className="py-3 px-4">Settled Date</th>
-                          <th className="py-3 px-4 text-right">Earned Amount</th>
-                          <th className="py-3 px-4 text-right">Invoice Document</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-[var(--line)]">
-                        {mGroup.contracts.map((cnt) => (
-                          <tr key={cnt.id} className="hover:bg-[var(--bg-alt)]/50 transition-colors">
-                            <td className="py-3.5 px-4 whitespace-nowrap">
-                              <span className="font-mono font-bold text-[var(--text)] block">
-                                {cnt.referenceCode}
-                              </span>
-                              <span className="text-[10px] text-[var(--pine-accent)] font-semibold">
-                                {cnt.service}
-                              </span>
-                            </td>
-                            <td className="py-3.5 px-4 max-w-xs">
-                              <span className="font-semibold text-[var(--text)] line-clamp-1 block">
-                                {cnt.title}
-                              </span>
-                              <span className="text-[10px] text-[var(--text-muted)]">
-                                {cnt.warrantyPeriod}
-                              </span>
-                            </td>
-                            <td className="py-3.5 px-4 whitespace-nowrap">
-                              <span className="font-medium text-[var(--text)] block">
-                                {cnt.homeownerName}
-                              </span>
-                              <span className="text-[10px] text-[var(--text-muted)]">
-                                {cnt.city}
-                              </span>
-                            </td>
-                            <td className="py-3.5 px-4 whitespace-nowrap text-[var(--text-muted)] text-[11px]">
-                              {cnt.invoicePaidAt?.split(",")[0] || cnt.serviceDate}
-                            </td>
-                            <td className="py-3.5 px-4 text-right whitespace-nowrap font-mono font-extrabold text-sm text-[var(--text)]">
-                              {cnt.currency}{(cnt.totalAmount || cnt.priceNumeric).toFixed(2)}
-                            </td>
-                            <td className="py-3.5 px-4 text-right whitespace-nowrap">
-                              <button
-                                type="button"
-                                onClick={() => handleOpenStoreContractDoc(cnt)}
-                                className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-[var(--accent)] font-bold text-xs cursor-pointer shadow-2xs"
-                                title="Download VAT Invoice as PDF"
-                              >
-                                <Printer className="w-3.5 h-3.5" />
-                                <span>Download PDF</span>
-                              </button>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         )}
@@ -1387,77 +1487,89 @@ export default function ContractorDashboardPage() {
               </button>
             </div>
 
-            {completedContracts.map((job) => (
-              <div
-                key={job.id}
-                className="p-6 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-soft space-y-4"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-                  <div>
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--bg-alt)] text-[var(--text-muted)] font-mono">
-                        {job.referenceCode}
-                      </span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--pine-accent)]/15 text-[var(--pine-accent)] font-bold">
-                        Completed &amp; Settled
-                      </span>
-                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--bg-alt)] text-[var(--text-muted)]">
-                        {job.service}
-                      </span>
-                    </div>
-                    <h3 className="text-base font-bold text-[var(--text)]">
-                      {job.title}
-                    </h3>
-                  </div>
-
-                  <div className="sm:text-right shrink-0">
-                    <span className="text-xs text-[var(--text-muted)] block">
-                      Settled Amount
-                    </span>
-                    <span className="text-base font-bold text-[var(--text)] font-serif">
-                      {job.settledAmount}
-                    </span>
-                  </div>
+            {completedContracts.length === 0 ? (
+              <div className="p-12 text-center rounded-[var(--radius-lg)] bg-[var(--surface)] border border-[var(--line)] space-y-3">
+                <div className="w-12 h-12 rounded-full bg-[var(--bg-alt)] border border-[var(--line)] flex items-center justify-center mx-auto text-[var(--brand)]">
+                  <Receipt className="w-6 h-6" />
                 </div>
-
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[var(--text-muted)] pt-2 border-t border-[var(--line)]">
-                  <span>Homeowner: <strong>{job.homeownerName}</strong> &middot; Completed: {job.completedDate}</span>
-                  <div className="flex items-center space-x-3">
-                    <span className="font-mono text-[11px] bg-[var(--bg-alt)] px-2 py-0.5 rounded border border-[var(--line)]">
-                      {job.invoiceNumber}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => handleOpenCompletedInvoiceDoc(job)}
-                      className="text-[var(--accent)] font-semibold hover:underline inline-flex items-center space-x-1 cursor-pointer"
-                      title="Print Official VAT Invoice as PDF"
-                    >
-                      <Printer className="w-3.5 h-3.5" />
-                      <span>Print VAT Invoice PDF</span>
-                    </button>
-                  </div>
-                </div>
-
-                {job.homeownerReview && (
-                  <div className="p-3.5 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] border border-[var(--line)]">
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="flex items-center space-x-1 text-xs font-bold text-[var(--accent)]">
-                        {Array.from({ length: job.homeownerReview.rating }).map((_, i) => (
-                          <Star key={i} className="w-3.5 h-3.5 fill-[var(--accent)]" />
-                        ))}
-                        <span className="ml-1 text-[var(--text)]">{job.homeownerReview.rating}.0 / 5.0</span>
-                      </div>
-                      <span className="text-[10px] text-[var(--text-muted)]">
-                        Verified review by {job.homeownerReview.author} &middot; {job.homeownerReview.date}
-                      </span>
-                    </div>
-                    <p className="text-xs text-[var(--text-muted)] italic">
-                      &ldquo;{job.homeownerReview.comment}&rdquo;
-                    </p>
-                  </div>
-                )}
+                <h3 className="text-base font-bold text-[var(--text)]">No Contract History Yet</h3>
+                <p className="text-xs text-[var(--text-muted)] max-w-md mx-auto">
+                  Completed contracts, official VAT invoice receipts, and verified homeowner reviews will be archived here once you finish and settle jobs.
+                </p>
               </div>
-            ))}
+            ) : (
+              completedContracts.map((job) => (
+                <div
+                  key={job.id}
+                  className="p-6 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-soft space-y-4"
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <div>
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--bg-alt)] text-[var(--text-muted)] font-mono">
+                          {job.referenceCode}
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--pine-accent)]/15 text-[var(--pine-accent)] font-bold">
+                          Completed &amp; Settled
+                        </span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--bg-alt)] text-[var(--text-muted)]">
+                          {job.service}
+                        </span>
+                      </div>
+                      <h3 className="text-base font-bold text-[var(--text)]">
+                        {job.title}
+                      </h3>
+                    </div>
+
+                    <div className="sm:text-right shrink-0">
+                      <span className="text-xs text-[var(--text-muted)] block">
+                        Settled Amount
+                      </span>
+                      <span className="text-base font-bold text-[var(--text)] font-serif">
+                        {job.settledAmount}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-[var(--text-muted)] pt-2 border-t border-[var(--line)]">
+                    <span>Homeowner: <strong>{job.homeownerName}</strong> &middot; Completed: {job.completedDate}</span>
+                    <div className="flex items-center space-x-3">
+                      <span className="font-mono text-[11px] bg-[var(--bg-alt)] px-2 py-0.5 rounded border border-[var(--line)]">
+                        {job.invoiceNumber}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => handleOpenCompletedInvoiceDoc(job)}
+                        className="text-[var(--accent)] font-semibold hover:underline inline-flex items-center space-x-1 cursor-pointer"
+                        title="Print Official VAT Invoice as PDF"
+                      >
+                        <Printer className="w-3.5 h-3.5" />
+                        <span>Print VAT Invoice PDF</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {job.homeownerReview && (
+                    <div className="p-3.5 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] border border-[var(--line)]">
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center space-x-1 text-xs font-bold text-[var(--accent)]">
+                          {Array.from({ length: job.homeownerReview.rating }).map((_, i) => (
+                            <Star key={i} className="w-3.5 h-3.5 fill-[var(--accent)]" />
+                          ))}
+                          <span className="ml-1 text-[var(--text)]">{job.homeownerReview.rating}.0 / 5.0</span>
+                        </div>
+                        <span className="text-[10px] text-[var(--text-muted)]">
+                          Verified review by {job.homeownerReview.author} &middot; {job.homeownerReview.date}
+                        </span>
+                      </div>
+                      <p className="text-xs text-[var(--text-muted)] italic">
+                        &ldquo;{job.homeownerReview.comment}&rdquo;
+                      </p>
+                    </div>
+                  )}
+                </div>
+              ))
+            )}
           </div>
         )}
 
@@ -2029,7 +2141,7 @@ export default function ContractorDashboardPage() {
               const target = marketplaceJobs.find((j) => j.referenceCode === updated.referenceCode);
               if (target) {
                 const updatedProposals = target.proposals.map((p) =>
-                  p.proId === "pro_uk_1" || p.proName === companyName
+                  ((isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName)
                     ? { ...p, price: updated.agreedPrice, notes: updated.notes }
                     : p
                 );

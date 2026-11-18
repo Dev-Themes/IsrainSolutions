@@ -352,9 +352,9 @@ export function Header() {
                     <span>For Trades</span>
                   </Link>
                   <Link
-                    href="/quote"
+                    href="/auth/login?redirect=/quote"
                     className="whitespace-nowrap btn-primary px-4 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1.5 shadow-xs"
-                    title="Post a job and receive competitive quotes"
+                    title="Sign in to post a job and receive competitive quotes"
                   >
                     <span>Post a Job</span>
                     <ArrowRight className="w-3.5 h-3.5" />
@@ -442,11 +442,11 @@ export function Header() {
                 {!user && (
                   <div className="space-y-2">
                     <Link
-                      href="/quote"
+                      href="/auth/login?redirect=/quote"
                       onClick={closeMobileMenu}
                       className="w-full py-2.5 rounded-[var(--radius-sm)] text-center font-bold text-xs text-white bg-[var(--accent)] hover:bg-[var(--accent-hover)] transition-colors shadow-xs block"
                     >
-                      Post a Job (Free Quotes)
+                      Post a Job (Sign In to Post)
                     </Link>
                     <Link
                       href="/for-pros"

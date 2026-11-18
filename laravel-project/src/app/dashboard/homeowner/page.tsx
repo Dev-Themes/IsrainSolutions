@@ -59,7 +59,49 @@ export default function HomeownerDashboardPage() {
   const { contracts: storeContracts, submitReview } = useContractStore();
   const { jobs, createJob, updateJob, removeJob } = useJobStore();
   const mounted = useIsClient();
-  const homeownerStats = React.useMemo(() => getHomeownerStats("usr_homeowner_1", storeContracts), [storeContracts]);
+
+  const isDemo =
+    user?.email?.toLowerCase() === "sarah.jenkins@example.com" ||
+    user?.id === "user_homeowner_1" ||
+    user?.id === "usr_homeowner_1";
+
+  // Filter jobs belonging strictly to this homeowner
+  const myJobs = React.useMemo(() => {
+    return jobs.filter((j) => {
+      if (isDemo) {
+        return (
+          j.homeownerId === "usr_homeowner_1" ||
+          j.homeownerId === "user_homeowner_1" ||
+          j.homeownerEmail?.toLowerCase() === "sarah.jenkins@example.com" ||
+          j.homeownerName.toLowerCase().includes("sarah")
+        );
+      }
+      if (user?.id && j.homeownerId === user.id) return true;
+      if (user?.email && j.homeownerEmail && j.homeownerEmail.toLowerCase() === user.email.toLowerCase()) return true;
+      return false;
+    });
+  }, [jobs, user, isDemo]);
+
+  // Filter contracts belonging strictly to this homeowner
+  const myContracts = React.useMemo(() => {
+    return storeContracts.filter((c) => {
+      if (isDemo) {
+        return (
+          c.homeownerId === "usr_homeowner_1" ||
+          c.homeownerId === "user_homeowner_1" ||
+          c.homeownerEmail?.toLowerCase() === "sarah.jenkins@example.com" ||
+          c.homeownerName.toLowerCase().includes("sarah")
+        );
+      }
+      if (user?.id && c.homeownerId === user.id) return true;
+      if (user?.email && c.homeownerEmail && c.homeownerEmail.toLowerCase() === user.email.toLowerCase()) return true;
+      return false;
+    });
+  }, [storeContracts, user, isDemo]);
+
+  const homeownerStats = React.useMemo(() => {
+    return getHomeownerStats({ id: user?.id, email: user?.email, name: user?.name }, myContracts);
+  }, [user, myContracts]);
 
   // Tab Navigation: Listings & Quotes, Ongoing Contracts, History & Receipts, Profile & Settings
   const [activeTab, setActiveTab] = React.useState<"LISTINGS" | "ONGOING" | "HISTORY" | "PROFILE">("LISTINGS");
@@ -105,11 +147,20 @@ export default function HomeownerDashboardPage() {
   const [reviewComment, setReviewComment] = React.useState("");
 
   // Profile Edit State
-  const [profileName, setProfileName] = React.useState(user?.name || "Sarah Jenkins");
-  const [profilePhone, setProfilePhone] = React.useState(user?.phone || "+44 20 7946 0812");
-  const [profileAddress, setProfileAddress] = React.useState(user?.address || "14 Cranbury Road, Fulham, London SW6 2PY");
-  const [profileCity, setProfileCity] = React.useState(user?.city || "London");
-  const profileEmail = user?.email || "sarah.jenkins@example.com";
+  const [profileName, setProfileName] = React.useState(user?.name || (isDemo ? "Sarah Jenkins" : "Homeowner"));
+  const [profilePhone, setProfilePhone] = React.useState(user?.phone || (isDemo ? "+44 20 7946 0812" : ""));
+  const [profileAddress, setProfileAddress] = React.useState(user?.address || (isDemo ? "14 Cranbury Road, Fulham, London SW6 2PY" : ""));
+  const [profileCity, setProfileCity] = React.useState(user?.city || (isDemo ? "London" : ""));
+  const profileEmail = user?.email || (isDemo ? "sarah.jenkins@example.com" : "");
+
+  React.useEffect(() => {
+    if (user) {
+      if (user.name && !isDemo) setProfileName(user.name);
+      if (user.phone && !isDemo) setProfilePhone(user.phone);
+      if (user.address && !isDemo) setProfileAddress(user.address);
+      if (user.city && !isDemo) setProfileCity(user.city);
+    }
+  }, [user, isDemo]);
 
   const handleSaveProfile = (e: React.FormEvent) => {
     e.preventDefault();
@@ -437,16 +488,16 @@ export default function HomeownerDashboardPage() {
     alert("Contract finalized and verified review published! Receipt available in Contract History.");
   };
 
-  // Dedicated data slicing
-  const quotingJobs = jobs.filter((j) => j.status === "QUOTING");
-  const ongoingContracts = storeContracts.filter(
+  // Dedicated data slicing strictly for the current homeowner
+  const quotingJobs = myJobs.filter((j) => j.status === "QUOTING");
+  const ongoingContracts = myContracts.filter(
     (c) => c.status === "PENDING_APPROVAL" || c.status === "ACTIVE" || c.status === "INVOICED"
   );
-  const inProgressJobs = jobs.filter(
-    (j) => j.status === "IN_PROGRESS" && !storeContracts.some((c) => c.referenceCode === j.referenceCode)
+  const inProgressJobs = myJobs.filter(
+    (j) => j.status === "IN_PROGRESS" && !myContracts.some((c) => c.referenceCode === j.referenceCode)
   );
-  const completedContracts = storeContracts.filter((c) => c.status === "PAID" || c.status === "COMPLETED");
-  const completedJobs = jobs.filter((j) => j.status === "COMPLETED");
+  const completedContracts = myContracts.filter((c) => c.status === "PAID" || c.status === "COMPLETED");
+  const completedJobs = myJobs.filter((j) => j.status === "COMPLETED");
 
   // Verified Badge Rule: Must complete at least 10 contracts successfully
   const completedContractsCount = completedContracts.length;
@@ -514,7 +565,7 @@ export default function HomeownerDashboardPage() {
               Total Settled (Escrow)
             </div>
             <div className="text-2xl font-bold text-[var(--text)] mt-1 font-serif" suppressHydrationWarning>
-              {homeownerStats.totalSpent}
+              £{homeownerStats.totalSpent.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
             <div className="text-[11px] text-[var(--pine-accent)] font-semibold mt-0.5">
               0% Dispute Ratio
@@ -771,7 +822,7 @@ export default function HomeownerDashboardPage() {
             ) : (
               <>
                 {/* 1. PENDING APPROVAL DRAFTS */}
-                {storeContracts.filter((c) => c.status === "PENDING_APPROVAL").map((draft) => (
+                {myContracts.filter((c) => c.status === "PENDING_APPROVAL").map((draft) => (
                   <div
                     key={draft.id}
                     className="p-5 sm:p-6 rounded-[var(--radius-lg)] bg-amber-500/10 border-2 border-amber-500/40 shadow-soft space-y-4 animate-in fade-in duration-200"
@@ -852,7 +903,7 @@ export default function HomeownerDashboardPage() {
                 ))}
 
                 {/* 2. INVOICED CONTRACTS */}
-                {storeContracts.filter((c) => c.status === "INVOICED").map((invoiced) => (
+                {myContracts.filter((c) => c.status === "INVOICED").map((invoiced) => (
                   <div
                     key={invoiced.id}
                     className="p-5 sm:p-6 rounded-[var(--radius-lg)] bg-emerald-500/10 border-2 border-emerald-500/40 shadow-soft space-y-4 animate-in fade-in duration-200"
@@ -926,7 +977,7 @@ export default function HomeownerDashboardPage() {
                 ))}
 
                 {/* 3. ACTIVE SIGNED ONGOING CONTRACTS */}
-                {storeContracts.filter((c) => c.status === "ACTIVE").map((contract) => (
+                {myContracts.filter((c) => c.status === "ACTIVE").map((contract) => (
                   <div
                     key={contract.id}
                     className="rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-soft p-6 space-y-4"
@@ -1138,8 +1189,8 @@ export default function HomeownerDashboardPage() {
                     {user?.avatar || (user?.name ? user.name.substring(0, 2).toUpperCase() : "HM")}
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-[var(--text)]">{user?.name || "Sarah Jenkins"}</h3>
-                    <p className="text-xs text-[var(--text-muted)]">{user?.email || "sarah.jenkins@example.com"}</p>
+                    <h3 className="font-bold text-sm text-[var(--text)]">{user?.name || (isDemo ? "Sarah Jenkins" : "Homeowner")}</h3>
+                    <p className="text-xs text-[var(--text-muted)]">{user?.email || (isDemo ? "sarah.jenkins@example.co.uk" : "")}</p>
                   </div>
                 </div>
 

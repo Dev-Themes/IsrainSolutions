@@ -601,49 +601,52 @@ interface SeedLedgerEntry {
 }
 
 export function getContractorEarnings(
-  proIdOrSlug = "pro_uk_1",
+  proFilter: string | { id?: string; email?: string; companyName?: string } = "pro_uk_1",
   contractsList?: JobContract[]
 ): ContractorEarningsReport {
   const all = contractsList || getContracts();
+
+  const proId = typeof proFilter === "string" ? proFilter : proFilter.id;
+  const proEmail = typeof proFilter === "string" ? undefined : proFilter.email?.toLowerCase();
+  const proCompany = typeof proFilter === "string" ? undefined : proFilter.companyName?.toLowerCase();
+
+  const isDemoPro =
+    proId === "pro_uk_1" ||
+    proId === "user_pro_1" ||
+    proEmail === "david.thornton@apexheating.co.uk" ||
+    proEmail === "apex.heating@tradeconnect.co.uk";
+
   // Filter for contracts associated with this pro that are PAID or COMPLETED
-  const paidContracts = all.filter(
-    (c) =>
-      (c.proId === proIdOrSlug || c.proSlug === proIdOrSlug) &&
-      (c.status === "PAID" || c.status === "COMPLETED")
-  );
+  const paidContracts = all.filter((c) => {
+    if (isDemoPro) {
+      return (
+        c.proId === "pro_uk_1" ||
+        c.proSlug === "apex-plumbing-heating-london" ||
+        c.proEmail?.toLowerCase() === "david.thornton@apexheating.co.uk" ||
+        c.proEmail?.toLowerCase() === "david@apexplumbing.co.uk" ||
+        c.proName.toLowerCase().includes("apex")
+      );
+    }
+
+    // For real new contractors: strictly match their user ID or registered email
+    if (proId && c.proId === proId) return true;
+    if (proEmail && c.proEmail && c.proEmail.toLowerCase() === proEmail) return true;
+    if (proCompany && c.proName && c.proName.toLowerCase() === proCompany) return true;
+    return false;
+  }).filter((c) => c.status === "PAID" || c.status === "COMPLETED");
 
   let totalLifetimeEarned = 0;
   const monthMap: { [key: string]: MonthlyEarningEntry } = {};
 
-  // Empty ledger to start cleanly from 0 real paid contracts
-  const seedLedger: SeedLedgerEntry[] = [];
-
-  // Initialize month map with seed data
-  seedLedger.forEach((entry) => {
-    monthMap[entry.monthKey] = {
-      ...entry,
-      total: entry.totalEarned,
-      contracts: [],
-      invoices: [...entry.invoices],
-    };
-    totalLifetimeEarned += entry.totalEarned;
-  });
-
-  // Now dynamically add any real-time paid contracts
+  // Now dynamically calculate paid contracts for this contractor
   paidContracts.forEach((contract) => {
     const amount = contract.totalAmount || contract.priceNumeric || 0;
-    // Check if contract is already in seed invoices
-    const exists = Object.values(monthMap).some((m) =>
-      m.invoices.some((inv) => inv.id === contract.id || inv.referenceCode === contract.referenceCode)
-    );
-
-    if (!exists && amount > 0) {
-      // Determine month
-      const currentMonthKey = "2026-11";
-      if (!monthMap[currentMonthKey]) {
-        monthMap[currentMonthKey] = {
-          monthKey: currentMonthKey,
-          monthLabel: "November 2026",
+    if (amount > 0) {
+      const monthKey = contract.invoicePaidAt ? contract.invoicePaidAt.substring(0, 7) : "2026-11";
+      if (!monthMap[monthKey]) {
+        monthMap[monthKey] = {
+          monthKey,
+          monthLabel: "Current Period",
           totalEarned: 0,
           total: 0,
           jobsCount: 0,
@@ -651,12 +654,12 @@ export function getContractorEarnings(
           invoices: [],
         };
       }
-      monthMap[currentMonthKey].totalEarned += amount;
-      monthMap[currentMonthKey].total += amount;
-      monthMap[currentMonthKey].jobsCount += 1;
-      monthMap[currentMonthKey].invoices.unshift({
+      monthMap[monthKey].totalEarned += amount;
+      monthMap[monthKey].total += amount;
+      monthMap[monthKey].jobsCount += 1;
+      monthMap[monthKey].invoices.unshift({
         id: contract.id,
-        invoiceNumber: contract.invoiceNumber || `INV-2026-${contract.referenceCode.replace("TC-", "")}`,
+        invoiceNumber: contract.invoiceNumber || `INV-${contract.referenceCode}`,
         referenceCode: contract.referenceCode,
         title: contract.title,
         homeownerName: contract.homeownerName,
@@ -667,61 +670,14 @@ export function getContractorEarnings(
     }
   });
 
-  // Populate total and contracts array for each month
-  Object.values(monthMap).forEach((m) => {
-    m.total = m.totalEarned;
-    m.contracts = m.invoices.map((inv) => {
-      const match = all.find((c) => c.id === inv.id || c.referenceCode === inv.referenceCode);
-      if (match) return match;
-      return {
-        id: inv.id,
-        referenceCode: inv.referenceCode,
-        service: "Plumbing & Heating Services",
-        title: inv.title,
-        location: "London, UK",
-        city: "London",
-        country: "UK",
-        urgency: "Standard",
-        datePosted: inv.paidDate,
-        homeownerId: "usr_homeowner_1",
-        homeownerName: inv.homeownerName,
-        homeownerPhone: "+44 20 7946 0812",
-        homeownerEmail: "client@example.com",
-        homeownerAddress: "Fulham, London",
-        proId: "pro_uk_1",
-        proSlug: "apex-plumbing-heating-london",
-        proName: "Apex Heating & Emergency Plumbing Ltd",
-        proPhone: "+44 20 7946 0812",
-        proEmail: "david@apexplumbing.co.uk",
-        proLicense: "Gas Safe Register #592104",
-        proInsurance: "£5,000,000 Direct Line Public Liability",
-        proCity: "London (SW6)",
-        status: "COMPLETED",
-        agreedPrice: `£${inv.amount.toFixed(2)}`,
-        currency: "£",
-        priceNumeric: inv.amount,
-        totalAmount: inv.amount,
-        invoiceNumber: inv.invoiceNumber,
-        invoicePaidAt: inv.paidDate,
-        providedServices: ["Certified trade labor & installation", "Standard building compliance inspection"],
-        providedEquipments: ["Approved trade replacement fittings & hardware"],
-        serviceDate: inv.paidDate,
-        serviceTime: "10:00 AM",
-        warrantyPeriod: "12 Months Workmanship Guarantee",
-        notes: "Settled via TradeConnect Escrow.",
-      };
-    });
-  });
-
   const breakdown = Object.values(monthMap).sort((a, b) => b.monthKey.localeCompare(a.monthKey));
-  const thisMonthEarned = monthMap["2026-11"]?.totalEarned || 0;
-  const completedContractsCount = breakdown.reduce((acc, m) => acc + m.jobsCount, 0);
+  const thisMonthEarned = breakdown[0]?.totalEarned || 0;
 
   return {
     totalLifetimeEarned,
     lifetimeTotal: totalLifetimeEarned,
     thisMonthEarned,
-    completedContractsCount,
+    completedContractsCount: paidContracts.length,
     currency: "£",
     monthlyBreakdown: breakdown,
     allPaidContracts: paidContracts,
@@ -743,15 +699,34 @@ export interface HomeownerStats {
 }
 
 export function getHomeownerStats(
-  homeownerName = "Sarah Jenkins",
+  userFilter: string | { id?: string; email?: string; name?: string } = "usr_homeowner_1",
   contractsList?: JobContract[]
 ): HomeownerStats {
   const all = contractsList || getContracts();
-  const mine = all.filter(
-    (c) =>
-      c.homeownerName.toLowerCase().includes(homeownerName.toLowerCase()) ||
-      homeownerName.toLowerCase().includes(c.homeownerName.toLowerCase())
-  );
+  const id = typeof userFilter === "string" ? userFilter : userFilter.id;
+  const email = typeof userFilter === "string" ? undefined : userFilter.email?.toLowerCase();
+  const name = typeof userFilter === "string" ? userFilter : userFilter.name;
+
+  const isDemo =
+    id === "usr_homeowner_1" ||
+    id === "user_homeowner_1" ||
+    email === "sarah.jenkins@example.com" ||
+    (typeof userFilter === "string" && userFilter.toLowerCase().includes("sarah"));
+
+  const mine = all.filter((c) => {
+    if (isDemo) {
+      return (
+        c.homeownerId === "usr_homeowner_1" ||
+        c.homeownerId === "user_homeowner_1" ||
+        c.homeownerEmail?.toLowerCase() === "sarah.jenkins@example.com" ||
+        c.homeownerName.toLowerCase().includes("sarah")
+      );
+    }
+    // For non-demo real registered users: strictly match by user ID or user email
+    if (id && c.homeownerId === id) return true;
+    if (email && c.homeownerEmail && c.homeownerEmail.toLowerCase() === email) return true;
+    return false;
+  });
 
   const completed = mine.filter((c) => c.status === "COMPLETED" || c.status === "PAID");
   const active = mine.filter((c) => c.status === "ACTIVE" || c.status === "INVOICED");
@@ -761,14 +736,14 @@ export function getHomeownerStats(
   const signedCount = completed.length + active.length;
 
   return {
-    homeownerName,
+    homeownerName: name || "Homeowner",
     signedContractsCount: signedCount,
     completedContractsCount: completed.length,
     activeContractsCount: active.length,
     pendingDraftsCount: pendingDrafts.length,
     totalSpent,
-    isVerifiedJobProvider: signedCount >= 1,
-    memberSince: "October 2026",
+    isVerifiedJobProvider: signedCount >= 10,
+    memberSince: isDemo ? "October 2026" : "Recently Joined",
   };
 }
 
