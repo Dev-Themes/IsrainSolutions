@@ -14,8 +14,6 @@ import {
   Zap,
   Flame,
   Hammer,
-  Sparkles,
-  Award,
   Users,
 } from "lucide-react";
 import { CATEGORIES, CITIES, VERIFIED_PROS } from "@/lib/data";

@@ -23,6 +23,8 @@ export interface InvoiceContractData {
   labourAmount?: number;
   materialsAmount?: number;
   subtotalAmount?: number;
+  platformFeeRate?: number;
+  platformFeeAmount?: number;
   vatRate?: number;
   vatAmount?: number;
   vatNumber?: string;
@@ -81,27 +83,31 @@ export function InvoiceContractModal({
 
   const isInvoice = data.documentType === "INVOICE";
   const isDraft = data.documentType === "DRAFT_CONTRACT";
-  const docTitle = isInvoice ? "VAT INVOICE" : isDraft ? "DRAFT SERVICE CONTRACT" : "WORK CONTRACT";
-  const docSub = isInvoice ? "Official VAT Invoice & Receipt" : isDraft ? "Draft Contract (Pending Approval)" : "Digital Service Agreement";
+  const docTitle = isInvoice ? "OFFICIAL INVOICE & RECEIPT" : isDraft ? "DRAFT SERVICE CONTRACT" : "WORK CONTRACT";
+  const docSub = isInvoice ? "Official Service Invoice & Settlement" : isDraft ? "Draft Contract (Pending Approval)" : "Digital Service Agreement";
 
   const currencySymbol = data.agreedPrice.startsWith("$") ? "$" : "£";
   const numPrice = parseFloat(data.agreedPrice.replace(/[^0-9.]/g, "")) || 0;
+  let subtotalVal = data.subtotalAmount !== undefined
+    ? data.subtotalAmount
+    : numPrice;
+  if (data.totalAmount && Math.abs(subtotalVal - data.totalAmount) < 0.01 && data.totalAmount > 0) {
+    // subtotal was previously set to gross totalAmount (which includes the 5% platform fee)
+    subtotalVal = Math.round((data.totalAmount / 1.05) * 100) / 100;
+  }
   const labourVal = data.labourAmount !== undefined
     ? data.labourAmount
-    : Math.round(numPrice * 0.7);
+    : Math.round(subtotalVal * 0.7 * 100) / 100;
   const materialsVal = data.materialsAmount !== undefined
     ? data.materialsAmount
-    : Math.max(0, Math.round((numPrice - labourVal) * 100) / 100);
-  const subtotalVal = data.subtotalAmount !== undefined
-    ? data.subtotalAmount
-    : (labourVal + materialsVal);
-  const vatRate = data.vatRate ?? 20;
-  const vatVal = data.vatAmount !== undefined
-    ? data.vatAmount
-    : (isInvoice ? Math.round(subtotalVal * (vatRate / 100) * 100) / 100 : 0);
-  const grossVal = isInvoice
-    ? (subtotalVal + vatVal)
-    : numPrice;
+    : Math.max(0, Math.round((subtotalVal - labourVal) * 100) / 100);
+  const platformFeeRate = data.platformFeeRate ?? 5;
+  const platformFeeVal = data.platformFeeAmount !== undefined && Math.abs(data.platformFeeAmount - Math.round(subtotalVal * 0.05 * 100) / 100) < 0.05
+    ? data.platformFeeAmount
+    : Math.round(subtotalVal * (platformFeeRate / 100) * 100) / 100;
+  const grossVal = data.totalAmount && data.totalAmount > subtotalVal
+    ? data.totalAmount
+    : Math.round((subtotalVal + platformFeeVal) * 100) / 100;
 
   const handlePrint = () => {
     window.print();
@@ -145,7 +151,7 @@ export function InvoiceContractModal({
         doc.setTextColor(255, 255, 255);
         doc.setFontSize(10);
         doc.setFont("helvetica", "bold");
-        doc.text(isInvoice ? "VAT INVOICE" : "WORK CONTRACT", 143, 25);
+        doc.text(isInvoice ? "SERVICE INVOICE" : "WORK CONTRACT", 141, 25);
       }
 
       // Meta Details
@@ -280,10 +286,10 @@ export function InvoiceContractModal({
       curY += 6;
 
       doc.setFont("helvetica", "normal");
-      doc.text("TradeConnect Escrow Protection & Dispute Guarantee", 19, curY);
-      doc.text("Included (0%)", 130, curY);
+      doc.text("TradeConnect Platform Protection & Escrow Fee (5%)", 19, curY);
+      doc.text("Fixed 5.0%", 130, curY);
       doc.setFont("helvetica", "bold");
-      doc.text(`${currencySymbol}0.00`, 175, curY);
+      doc.text(`${currencySymbol}${platformFeeVal.toFixed(2)}`, 175, curY);
       curY += 6;
 
       // Total Box
@@ -292,12 +298,12 @@ export function InvoiceContractModal({
       doc.line(15, curY + 1, 195, curY + 1);
       curY += 7;
 
-      doc.setFontSize(9.5);
+      doc.setFontSize(9);
       doc.setFont("helvetica", "bold");
-      doc.text(isInvoice ? "TOTAL SETTLED (INC. VAT):" : isDraft ? "PROPOSED CONTRACT TOTAL:" : "TOTAL CONTRACT AMOUNT:", 95, curY);
+      doc.text(isInvoice ? "TOTAL SETTLED (INC. 5% FEE):" : isDraft ? "PROPOSED CONTRACT TOTAL:" : "TOTAL CONTRACT AMOUNT:", 88, curY);
       doc.setFontSize(11);
       doc.setTextColor(180, 72, 31);
-      doc.text(data.agreedPrice, 175, curY);
+      doc.text(`${currencySymbol}${grossVal.toFixed(2)}`, 175, curY);
       curY += 10;
 
       // Signatures Box
@@ -332,7 +338,7 @@ export function InvoiceContractModal({
       doc.setFont("helvetica", "normal");
       doc.text(`Digital Sign-off Timestamp: ${data.completionDate || data.issueDate} UTC`, 15, curY);
       doc.text(`Cryptographic Audit Seal: SHA256:8f9c4b${data.documentNumber.replace(/[^a-zA-Z0-9]/g, "").toLowerCase()}a94f8e`, 15, curY + 3.5);
-      doc.text("TradeConnect Network Ltd | Registered in England & Wales #09482014 | VAT Reg GB 948 2014 92", 15, curY + 7);
+      doc.text("TradeConnect Network Ltd | Registered in England & Wales #09482014 | Milestone Escrow Protected", 15, curY + 7);
       doc.text("Headquarters: 180 Strand, London WC2R 1EA | 24/7 Support: 0800 123 4567 | support@tradeconnect.com", 15, curY + 10.5);
 
       // Trigger local file download
@@ -423,7 +429,7 @@ export function InvoiceContractModal({
                   </div>
                 </div>
                 <p className="text-[10px] text-zinc-500 max-w-xs leading-relaxed">
-                  TradeConnect Network Ltd &middot; Registered Company #09482014 &middot; VAT Reg GB 948 2014 92
+                  TradeConnect Network Ltd &middot; Registered Company #09482014 &middot; Milestone Escrow Protected
                   <br />
                   Headquarters: 180 Strand, Temple, London WC2R 1EA
                 </p>
@@ -573,12 +579,12 @@ export function InvoiceContractModal({
                     </tr>
                     <tr>
                       <td className="p-3">
-                        <span className="font-semibold text-zinc-900 block">TradeConnect Escrow Fee &amp; Guarantee</span>
-                        <span className="text-[10px] text-zinc-500">Milestone dispute protection &amp; insurance backing</span>
+                        <span className="font-semibold text-zinc-900 block">TradeConnect Platform Fee &amp; Escrow Protection (5%)</span>
+                        <span className="text-[10px] text-zinc-500">Non-negotiable fixed platform fee &bull; Dispute mediation &amp; £2M insurance</span>
                       </td>
-                      <td className="p-3 text-[11px] text-emerald-700 font-semibold">Included (0% fee)</td>
+                      <td className="p-3 text-[11px] text-zinc-700 font-semibold">Fixed 5.0%</td>
                       <td className="p-3 text-right font-mono font-bold text-zinc-900">
-                        {currencySymbol}0.00
+                        {currencySymbol}{platformFeeVal.toFixed(2)}
                       </td>
                     </tr>
                   </tbody>
@@ -587,7 +593,7 @@ export function InvoiceContractModal({
                       <>
                         <tr className="bg-zinc-50 border-t border-zinc-200 text-zinc-700">
                           <td colSpan={2} className="p-2.5 text-right font-semibold text-[11px]">
-                            Subtotal (Net of VAT):
+                            Contractor Services Subtotal:
                           </td>
                           <td className="p-2.5 text-right font-mono font-bold text-zinc-900">
                             {currencySymbol}{subtotalVal.toFixed(2)}
@@ -595,15 +601,15 @@ export function InvoiceContractModal({
                         </tr>
                         <tr className="bg-zinc-50 text-zinc-700">
                           <td colSpan={2} className="p-2.5 text-right font-semibold text-[11px]">
-                            VAT ({vatRate}% &bull; Reg: {data.vatNumber || "GB 948 2014 92"}):
+                            TradeConnect Platform Protection Fee (5% Fixed):
                           </td>
                           <td className="p-2.5 text-right font-mono font-bold text-zinc-900">
-                            {currencySymbol}{vatVal.toFixed(2)}
+                            {currencySymbol}{platformFeeVal.toFixed(2)}
                           </td>
                         </tr>
                         <tr className="bg-zinc-100 border-t-2 border-zinc-800">
                           <td colSpan={2} className="p-3 text-right font-bold text-zinc-900 uppercase text-xs">
-                            {data.paymentStatus === "PAID IN FULL" ? "Total Paid (Gross Inc. VAT):" : "Total Due (Gross Inc. VAT):"}
+                            {data.paymentStatus === "PAID IN FULL" ? "Total Paid (Gross Inc. 5% Fee):" : "Total Due (Gross Inc. 5% Fee):"}
                           </td>
                           <td className="p-3 text-right font-mono font-extrabold text-base text-zinc-900">
                             {currencySymbol}{grossVal.toFixed(2)}

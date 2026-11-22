@@ -14,6 +14,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
+import { toast } from "@/components/ui/toast";
 
 interface DeleteAccountModalProps {
   isOpen: boolean;
@@ -65,7 +66,7 @@ export function DeleteAccountModal({
     }
 
     handleClose();
-    alert("Your TradeConnect profile, active listings, and account data have been permanently deleted.");
+    toast.success("Your TradeConnect profile, active listings, and account data have been permanently deleted.");
     router.push("/");
   };
 

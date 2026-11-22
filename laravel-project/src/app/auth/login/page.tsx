@@ -22,21 +22,14 @@ function LoginContent() {
   const { login, loginAsDemo, findUserByEmail } = useAuth();
 
   const [role, setRole] = React.useState<"CUSTOMER" | "PRO">("CUSTOMER");
-  const [email, setEmail] = React.useState("sarah.jenkins@example.com");
-  const [password, setPassword] = React.useState("password123");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const [remember, setRemember] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 
   const handleRoleToggle = (newRole: "CUSTOMER" | "PRO") => {
     setRole(newRole);
     setError(null);
-    if (newRole === "CUSTOMER") {
-      setEmail("sarah.jenkins@example.com");
-      setPassword("password123");
-    } else {
-      setEmail("david.thornton@apexheating.co.uk");
-      setPassword("password123");
-    }
   };
 
   const handleSuccessfulAuth = (targetRole: "CUSTOMER" | "PRO") => {

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import type { MarketplaceJobItem, QuoteProposal } from "./job-store";
 
 export type ContractStatus =
   | "DRAFT"             // Contractor is drafting (price, equipment, services, date/time)
@@ -63,6 +64,8 @@ export interface JobContract {
   labourAmount?: number;
   materialsAmount?: number;
   subtotalAmount?: number;
+  platformFeeRate?: number;
+  platformFeeAmount?: number;
   vatRate?: number;
   vatAmount?: number;
   vatNumber?: string;
@@ -271,6 +274,81 @@ function extractNumericPrice(priceStr: string | number | undefined, defaultVal =
 }
 
 /**
+ * Resolves accurate contract financials:
+ * - contractPrice: Agreed contractor fee for labor and materials (excludes platform fee)
+ * - platformFee: 5% platform fee
+ * - totalGross: Total gross amount paid by homeowner / held in escrow
+ */
+export type FinancialTarget = {
+  priceNumeric?: number;
+  agreedPrice?: string;
+  subtotalAmount?: number;
+  labourAmount?: number;
+  materialsAmount?: number;
+  platformFeeAmount?: number;
+  totalAmount?: number;
+  finalCost?: string;
+};
+
+export function getContractFinancials(c?: FinancialTarget | null): {
+  contractPrice: number;
+  platformFee: number;
+  totalGross: number;
+  labour: number;
+  materials: number;
+} {
+  if (!c) {
+    return {
+      contractPrice: 0,
+      platformFee: 0,
+      totalGross: 0,
+      labour: 0,
+      materials: 0,
+    };
+  }
+
+  const labourVal = c.labourAmount !== undefined && !isNaN(c.labourAmount) ? c.labourAmount : undefined;
+  const materialsVal = c.materialsAmount !== undefined && !isNaN(c.materialsAmount) ? c.materialsAmount : undefined;
+
+  let contractPrice = 0;
+  if (c.subtotalAmount !== undefined && !isNaN(c.subtotalAmount) && c.subtotalAmount > 0) {
+    contractPrice = c.subtotalAmount;
+  } else if (labourVal !== undefined && materialsVal !== undefined && (labourVal + materialsVal) > 0) {
+    contractPrice = Math.round((labourVal + materialsVal) * 100) / 100;
+  } else {
+    const rawNum =
+      c.priceNumeric ||
+      (c.agreedPrice ? parseFloat(c.agreedPrice.replace(/[^0-9.]/g, "")) : (c.finalCost ? parseFloat(c.finalCost.replace(/[^0-9.]/g, "")) : 0)) ||
+      0;
+    // Handle case where priceNumeric was mistakenly stored equal to totalAmount (which already had the 5% fee)
+    if (c.totalAmount && c.totalAmount > 0 && Math.abs(rawNum - c.totalAmount) < 0.01) {
+      contractPrice = Math.round((c.totalAmount / 1.05) * 100) / 100;
+    } else {
+      contractPrice = rawNum;
+    }
+  }
+
+  const platformFee = c.platformFeeAmount !== undefined && !isNaN(c.platformFeeAmount)
+    ? c.platformFeeAmount
+    : Math.round(contractPrice * 0.05 * 100) / 100;
+
+  const totalGross = c.totalAmount !== undefined && !isNaN(c.totalAmount) && c.totalAmount >= contractPrice
+    ? c.totalAmount
+    : Math.round((contractPrice + platformFee) * 100) / 100;
+
+  const resolvedLabour = labourVal !== undefined ? labourVal : Math.round(contractPrice * 0.7 * 100) / 100;
+  const resolvedMaterials = materialsVal !== undefined ? materialsVal : Math.round((contractPrice - resolvedLabour) * 100) / 100;
+
+  return {
+    contractPrice,
+    platformFee,
+    totalGross,
+    labour: resolvedLabour,
+    materials: resolvedMaterials,
+  };
+}
+
+/**
  * Update an existing contract or create a draft contract
  * Harmonizes agreedPrice, priceNumeric, totalAmount, labourAmount, materialsAmount
  * and syncs directly to Neon PostgreSQL.
@@ -321,6 +399,20 @@ export function updateContractDraft(
     ? updates.totalAmount
     : resolvedNumeric;
 
+  const resolvedEquipments =
+    updates.providedEquipments && updates.providedEquipments.length > 0
+      ? updates.providedEquipments
+      : idx !== -1 && all[idx].providedEquipments && all[idx].providedEquipments.length > 0
+      ? all[idx].providedEquipments
+      : ["Certified trade replacement parts and compression fittings", "Standard high-spec trade consumables"];
+
+  const resolvedServices =
+    updates.providedServices && updates.providedServices.length > 0
+      ? updates.providedServices
+      : idx !== -1 && all[idx].providedServices && all[idx].providedServices.length > 0
+      ? all[idx].providedServices
+      : ["Initial trade inspection & diagnosis", "Agreed repair labor and material fitting"];
+
   const harmonizedUpdates: Partial<JobContract> = {
     ...updates,
     agreedPrice: resolvedAgreedPrice,
@@ -329,6 +421,8 @@ export function updateContractDraft(
     labourAmount: resolvedLabour,
     materialsAmount: resolvedMaterials,
     totalAmount: resolvedTotal,
+    providedServices: resolvedServices,
+    providedEquipments: resolvedEquipments,
   };
 
   if (idx === -1) {
@@ -343,19 +437,19 @@ export function updateContractDraft(
       country: updates.country || "UK",
       urgency: updates.urgency || "Standard",
       datePosted: updates.datePosted || new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
-      homeownerId: updates.homeownerId || "usr_homeowner_1",
-      homeownerName: updates.homeownerName || "Sarah Jenkins",
+      homeownerId: updates.homeownerId || "",
+      homeownerName: updates.homeownerName || "Homeowner",
       homeownerPhone: updates.homeownerPhone || "+44 20 7946 0812",
-      homeownerEmail: updates.homeownerEmail || "sarah.jenkins@example.co.uk",
-      homeownerAddress: updates.homeownerAddress || "14 Cranbury Road, Fulham, London SW6 2PY",
-      proId: updates.proId || "pro_uk_1",
-      proSlug: updates.proSlug || "apex-plumbing-heating-london",
-      proName: updates.proName || "Apex Heating & Emergency Plumbing Ltd",
+      homeownerEmail: updates.homeownerEmail || "",
+      homeownerAddress: updates.homeownerAddress || updates.location || "London, UK",
+      proId: updates.proId || "",
+      proSlug: updates.proSlug || (updates.proName ? updates.proName.toLowerCase().replace(/[^a-z0-9]+/g, "-") : "trade-specialist"),
+      proName: updates.proName || "Trade Specialist",
       proPhone: updates.proPhone || "+44 20 7946 0812",
-      proEmail: updates.proEmail || "david@apexplumbing.co.uk",
-      proLicense: updates.proLicense || "Gas Safe Register #592104",
-      proInsurance: updates.proInsurance || "£5,000,000 Direct Line Public Liability",
-      proCity: updates.proCity || "London (SW6)",
+      proEmail: updates.proEmail || "",
+      proLicense: updates.proLicense || "Verified Trade Certification",
+      proInsurance: updates.proInsurance || "£2,000,000 Trade Liability",
+      proCity: updates.proCity || updates.city || "London",
       status: updates.status || "DRAFT",
       agreedPrice: resolvedAgreedPrice,
       currency: resolvedCurrency,
@@ -363,8 +457,8 @@ export function updateContractDraft(
       labourAmount: resolvedLabour,
       materialsAmount: resolvedMaterials,
       totalAmount: resolvedTotal,
-      providedServices: updates.providedServices || ["Initial trade inspection & diagnosis", "Agreed repair labor and material fitting"],
-      providedEquipments: updates.providedEquipments || ["Standard trade replacement fittings", "Approved diagnostic testing equipment"],
+      providedServices: resolvedServices,
+      providedEquipments: resolvedEquipments,
       serviceDate: updates.serviceDate || "Next Available Slot",
       serviceTime: updates.serviceTime || "09:00 AM",
       warrantyPeriod: updates.warrantyPeriod || "12 Months Workmanship Guarantee",
@@ -391,7 +485,11 @@ export function updateContractDraft(
  * Contractor finalizes draft and sends to homeowner for approval
  */
 export function submitDraftToHomeowner(contractId: string): JobContract | null {
+  const all = getContracts();
+  const existing = all.find((c) => c.id === contractId || c.referenceCode === contractId);
+
   return updateContractDraft(contractId, {
+    ...(existing || {}),
     status: "PENDING_APPROVAL",
   });
 }
@@ -411,7 +509,11 @@ export function approveAndSignContract(
     minute: "2-digit",
   });
 
+  const all = getContracts();
+  const existing = all.find((c) => c.id === contractId || c.referenceCode === contractId);
+
   return updateContractDraft(contractId, {
+    ...(existing || {}),
     status: "ACTIVE",
     approvedByHomeownerAt: timestamp,
     homeownerSignature: signatureName,
@@ -428,6 +530,8 @@ export function sendContractInvoice(
     labourAmount: number;
     materialsAmount: number;
     subtotalAmount?: number;
+    platformFeeRate?: number;
+    platformFeeAmount?: number;
     vatRate?: number;
     vatAmount?: number;
     vatNumber?: string;
@@ -440,7 +544,8 @@ export function sendContractInvoice(
       accountNumber: string;
       paymentReference?: string;
     };
-  }
+  },
+  baseContract?: Partial<JobContract>
 ): JobContract | null {
   const timestamp = new Date().toLocaleDateString("en-GB", {
     day: "numeric",
@@ -452,28 +557,38 @@ export function sendContractInvoice(
 
   const all = getContracts();
   const existing = all.find((c) => c.id === contractId || c.referenceCode === contractId);
-  const currency = existing?.currency || "£";
+  const currency = existing?.currency || baseContract?.currency || "£";
+
+  const subtotal = invoiceData.subtotalAmount ?? (invoiceData.labourAmount + invoiceData.materialsAmount);
+  const fee = invoiceData.platformFeeAmount ?? Math.round(subtotal * 0.05 * 100) / 100;
+  const gross = invoiceData.totalAmount || Math.round((subtotal + fee) * 100) / 100;
 
   return updateContractDraft(contractId, {
+    ...(baseContract || {}),
+    ...(existing || {}),
     status: "INVOICED",
     invoiceNumber: invoiceData.invoiceNumber,
     invoiceIssuedAt: timestamp,
     labourAmount: invoiceData.labourAmount,
     materialsAmount: invoiceData.materialsAmount,
-    subtotalAmount: invoiceData.subtotalAmount ?? (invoiceData.labourAmount + invoiceData.materialsAmount),
-    vatRate: invoiceData.vatRate ?? 20,
+    subtotalAmount: subtotal,
+    platformFeeRate: invoiceData.platformFeeRate ?? 5,
+    platformFeeAmount: fee,
+    vatRate: invoiceData.vatRate ?? 0,
     vatAmount: invoiceData.vatAmount ?? 0,
     vatNumber: invoiceData.vatNumber ?? "GB 948 2014 92",
-    totalAmount: invoiceData.totalAmount,
-    priceNumeric: invoiceData.totalAmount,
-    agreedPrice: `${currency}${invoiceData.totalAmount.toFixed(2)}`,
+    totalAmount: gross,
+    priceNumeric: subtotal,
+    agreedPrice: `${currency}${subtotal.toFixed(2)}`,
+    providedServices: existing?.providedServices || baseContract?.providedServices,
+    providedEquipments: existing?.providedEquipments || baseContract?.providedEquipments,
     paymentMethod: invoiceData.paymentMethod || "Bank Transfer (Direct)",
     bankDetails: invoiceData.bankDetails || {
       bankName: "Barclays Business UK",
-      accountName: existing?.proName || "Apex Heating & Emergency Plumbing Ltd",
+      accountName: existing?.proName || baseContract?.proName || "Trade Specialist",
       sortCode: "20-04-15",
       accountNumber: "83921049",
-      paymentReference: existing?.referenceCode || "TC-2026",
+      paymentReference: existing?.referenceCode || baseContract?.referenceCode || "TC-2026",
     },
   });
 }
@@ -493,7 +608,11 @@ export function markInvoicePaid(
     minute: "2-digit",
   });
 
+  const all = getContracts();
+  const existing = all.find((c) => c.id === contractId || c.referenceCode === contractId);
+
   return updateContractDraft(contractId, {
+    ...(existing || {}),
     status: "PAID",
     invoicePaidAt: timestamp,
     paymentMethod,
@@ -519,8 +638,13 @@ export function submitContractReview(
     year: "numeric",
   });
 
+  const all = getContracts();
+  const existing = all.find((c) => c.id === contractId || c.referenceCode === contractId);
+
   const updated = updateContractDraft(contractId, {
-    status: "COMPLETED",
+    ...(existing || {}),
+    status: "PAID",
+    invoicePaidAt: existing?.invoicePaidAt || dateStr,
     review: {
       rating: review.rating,
       comment: review.comment,
@@ -584,31 +708,87 @@ export interface ContractorEarningsReport {
   allPaidContracts: JobContract[];
 }
 
-interface SeedLedgerEntry {
-  monthKey: string;
-  monthLabel: string;
-  totalEarned: number;
-  jobsCount: number;
-  invoices: {
-    id: string;
-    invoiceNumber: string;
-    referenceCode: string;
-    title: string;
-    homeownerName: string;
-    amount: number;
-    paidDate: string;
-  }[];
+function parseMonthKeyAndLabel(dateStr?: string): { monthKey: string; monthLabel: string } {
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  const shortMonthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const now = new Date();
+  const fallbackYear = now.getFullYear();
+  const fallbackMonth = now.getMonth(); // 0-indexed
+  const fallbackKey = `${fallbackYear}-${String(fallbackMonth + 1).padStart(2, "0")}`;
+  const fallbackLabel = `${monthNames[fallbackMonth]} ${fallbackYear}`;
+
+  if (!dateStr || dateStr.toLowerCase().includes("recent") || dateStr.toLowerCase() === "today") {
+    return { monthKey: fallbackKey, monthLabel: fallbackLabel };
+  }
+
+  // 1. Check for month names like "21 Nov 2026" or "November 2026"
+  for (let i = 0; i < 12; i++) {
+    if (new RegExp(`\\b(${monthNames[i]}|${shortMonthNames[i]})\\b`, "i").test(dateStr)) {
+      const yearMatch = dateStr.match(/\b(20\d\d)\b/);
+      const y = yearMatch ? parseInt(yearMatch[1], 10) : fallbackYear;
+      const m = i + 1;
+      return {
+        monthKey: `${y}-${String(m).padStart(2, "0")}`,
+        monthLabel: `${monthNames[i]} ${y}`,
+      };
+    }
+  }
+
+  // 2. Check for DD/MM/YYYY format e.g. "21/11/2026"
+  const dmyMatch = dateStr.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
+  if (dmyMatch) {
+    const m = parseInt(dmyMatch[2], 10);
+    const y = parseInt(dmyMatch[3], 10);
+    if (!isNaN(y) && !isNaN(m) && m >= 1 && m <= 12) {
+      return {
+        monthKey: `${y}-${String(m).padStart(2, "0")}`,
+        monthLabel: `${monthNames[m - 1]} ${y}`,
+      };
+    }
+  }
+
+  // 3. Check for ISO format YYYY-MM-DD
+  const isoMatch = dateStr.match(/^(\d{4})-(\d{2})/);
+  if (isoMatch) {
+    const y = parseInt(isoMatch[1], 10);
+    const m = parseInt(isoMatch[2], 10);
+    if (!isNaN(y) && !isNaN(m) && m >= 1 && m <= 12) {
+      return {
+        monthKey: `${y}-${String(m).padStart(2, "0")}`,
+        monthLabel: `${monthNames[m - 1]} ${y}`,
+      };
+    }
+  }
+
+  // 4. Try standard Date.parse
+  const parsed = new Date(dateStr);
+  if (!isNaN(parsed.getTime())) {
+    const y = parsed.getFullYear();
+    const m = parsed.getMonth();
+    return {
+      monthKey: `${y}-${String(m + 1).padStart(2, "0")}`,
+      monthLabel: `${monthNames[m]} ${y}`,
+    };
+  }
+
+  return { monthKey: fallbackKey, monthLabel: fallbackLabel };
 }
 
 export function getContractorEarnings(
-  proFilter: string | { id?: string; email?: string; companyName?: string } = "pro_uk_1",
-  contractsList?: JobContract[]
+  proFilter: string | { id?: string; email?: string; companyName?: string; name?: string } = "pro_uk_1",
+  contractsList?: JobContract[],
+  jobsList?: MarketplaceJobItem[]
 ): ContractorEarningsReport {
   const all = contractsList || getContracts();
 
   const proId = typeof proFilter === "string" ? proFilter : proFilter.id;
   const proEmail = typeof proFilter === "string" ? undefined : proFilter.email?.toLowerCase();
   const proCompany = typeof proFilter === "string" ? undefined : proFilter.companyName?.toLowerCase();
+  const proName = typeof proFilter === "string" ? undefined : proFilter.name?.toLowerCase();
 
   const isDemoPro =
     proId === "pro_uk_1" ||
@@ -628,25 +808,90 @@ export function getContractorEarnings(
       );
     }
 
-    // For real new contractors: strictly match their user ID or registered email
+    // For real new contractors: strictly match their user ID, registered email or name
     if (proId && c.proId === proId) return true;
     if (proEmail && c.proEmail && c.proEmail.toLowerCase() === proEmail) return true;
     if (proCompany && c.proName && c.proName.toLowerCase() === proCompany) return true;
+    if (proName && c.proName && c.proName.toLowerCase() === proName) return true;
     return false;
   }).filter((c) => c.status === "PAID" || c.status === "COMPLETED");
+
+  // Also include any completed jobs from jobsList where this contractor's proposal was accepted
+  if (Array.isArray(jobsList)) {
+    jobsList.forEach((j: MarketplaceJobItem) => {
+      if (j.status !== "COMPLETED") return;
+      if (paidContracts.some((c) => c.referenceCode === j.referenceCode)) return;
+
+      const isMyJob = isDemoPro
+        ? true
+        : j.proposals?.some((p: QuoteProposal) =>
+            p.status === "ACCEPTED" &&
+            (p.proId === proId ||
+              (proEmail && p.proEmail?.toLowerCase() === proEmail) ||
+              (proCompany && p.proName?.toLowerCase() === proCompany) ||
+              (proName && p.proName?.toLowerCase() === proName))
+          );
+
+      if (isMyJob) {
+        const rawPrice = j.finalCost || "£145.00";
+        const numericPrice = parseFloat(rawPrice.replace(/[^0-9.]/g, "")) || 145;
+        const acceptedProp = j.proposals?.find((p: QuoteProposal) => p.status === "ACCEPTED");
+
+        paidContracts.push({
+          id: `cnt_${j.id}`,
+          referenceCode: j.referenceCode,
+          service: j.service,
+          title: j.title,
+          location: j.location,
+          city: j.city || "London",
+          country: j.country || "UK",
+          urgency: j.urgency || "Standard",
+          datePosted: j.datePosted,
+          homeownerId: j.homeownerId || "",
+          homeownerName: j.homeownerName,
+          homeownerPhone: j.homeownerPhone || "+44 20 7946 0812",
+          homeownerEmail: j.homeownerEmail || "",
+          homeownerAddress: j.location,
+          proId: acceptedProp?.proId || proId || "pro_custom",
+          proSlug: "contractor",
+          proName: acceptedProp?.proName || proCompany || proName || "Trade Specialist",
+          proPhone: acceptedProp?.phone || "+44 20 7946 0812",
+          proEmail: acceptedProp?.proEmail || proEmail || "",
+          proLicense: "Verified Trade Certification",
+          proInsurance: "£2,000,000 Trade Liability",
+          proCity: j.city || "London",
+          status: "PAID",
+          agreedPrice: rawPrice,
+          currency: "£",
+          priceNumeric: numericPrice,
+          totalAmount: numericPrice,
+          providedServices: ["Standard trade diagnostic & repair", "Certified part installation"],
+          providedEquipments: ["Certified replacement fittings", "Approved diagnostic testing equipment"],
+          serviceDate: j.completedDate || "Recently",
+          serviceTime: "09:00 AM",
+          warrantyPeriod: "12 Months Workmanship Guarantee",
+          invoiceNumber: `INV-${j.referenceCode}`,
+          invoicePaidAt: j.completedDate || new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
+          notes: "Job completed to homeowner satisfaction.",
+        });
+      }
+    });
+  }
 
   let totalLifetimeEarned = 0;
   const monthMap: { [key: string]: MonthlyEarningEntry } = {};
 
   // Now dynamically calculate paid contracts for this contractor
   paidContracts.forEach((contract) => {
-    const amount = contract.totalAmount || contract.priceNumeric || 0;
+    // Contractor earnings strictly exclude platform fee
+    const fin = getContractFinancials(contract);
+    const amount = fin.contractPrice;
     if (amount > 0) {
-      const monthKey = contract.invoicePaidAt ? contract.invoicePaidAt.substring(0, 7) : "2026-11";
+      const { monthKey, monthLabel } = parseMonthKeyAndLabel(contract.invoicePaidAt || contract.serviceDate);
       if (!monthMap[monthKey]) {
         monthMap[monthKey] = {
           monthKey,
-          monthLabel: "Current Period",
+          monthLabel,
           totalEarned: 0,
           total: 0,
           jobsCount: 0,
@@ -657,6 +902,7 @@ export function getContractorEarnings(
       monthMap[monthKey].totalEarned += amount;
       monthMap[monthKey].total += amount;
       monthMap[monthKey].jobsCount += 1;
+      monthMap[monthKey].contracts.unshift(contract);
       monthMap[monthKey].invoices.unshift({
         id: contract.id,
         invoiceNumber: contract.invoiceNumber || `INV-${contract.referenceCode}`,
@@ -732,7 +978,7 @@ export function getHomeownerStats(
   const active = mine.filter((c) => c.status === "ACTIVE" || c.status === "INVOICED");
   const pendingDrafts = mine.filter((c) => c.status === "PENDING_APPROVAL" || c.status === "DRAFT");
 
-  const totalSpent = completed.reduce((sum, c) => sum + (c.totalAmount || c.priceNumeric || 0), 0);
+  const totalSpent = completed.reduce((sum, c) => sum + getContractFinancials(c).contractPrice, 0);
   const signedCount = completed.length + active.length;
 
   return {
@@ -766,33 +1012,45 @@ export function useContractStore() {
 
   React.useEffect(() => {
     let isMounted = true;
+    let inFlight = false;
 
-    // 1. Hydrate from Neon PostgreSQL database in background
-    fetch("/api/contracts")
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch from Neon DB");
-        return res.json();
-      })
-      .then((data) => {
-        if (isMounted && data && Array.isArray(data.contracts) && data.contracts.length > 0) {
-          // Merge with local storage contracts
+    const pollContracts = async () => {
+      if (!isMounted || inFlight) return;
+      inFlight = true;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4500);
+
+      try {
+        const res = await fetch("/api/contracts", { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (!res.ok) return;
+        const data = await res.json();
+        if (isMounted && data && Array.isArray(data.contracts)) {
           const currentLocal = getContracts();
-          const merged = [...data.contracts];
-          // Preserve any newly added local contracts not yet on server
-          currentLocal.forEach((lc: JobContract) => {
-            if (!merged.some((mc: JobContract) => mc.referenceCode === lc.referenceCode || mc.id === lc.id)) {
-              merged.push(lc);
-            }
-          });
+          // Authoritative list from database: only preserve unsynced temporary local items
+          const pendingLocal = currentLocal.filter(
+            (lc: JobContract) => lc.id.startsWith("cnt_temp_") && !data.contracts.some((mc: JobContract) => mc.referenceCode === lc.referenceCode)
+          );
+          const merged = [...data.contracts, ...pendingLocal];
           saveContracts(merged);
         }
-      })
-      .catch((err) => {
-        console.warn("Neon DB fetch notice:", err);
-      });
+      } catch (err: unknown) {
+        if ((err as Error)?.name !== "AbortError") {
+          console.warn("Neon DB fetch notice:", err);
+        }
+      } finally {
+        clearTimeout(timeoutId);
+        inFlight = false;
+      }
+    };
+
+    pollContracts();
+    const timer = setInterval(pollContracts, 5000);
 
     return () => {
       isMounted = false;
+      clearInterval(timer);
     };
   }, []);
 

@@ -16,8 +16,6 @@ import {
   Sparkles,
   ArrowRight,
   FileCheck,
-  AlertTriangle,
-  HelpCircle,
 } from "lucide-react";
 
 const siteUrl = getSiteUrl();
@@ -66,7 +64,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-function getArticleImages(category: string, slug: string) {
+function getArticleImages(category: string) {
   const cat = category.toLowerCase();
   if (cat.includes("heat") || cat.includes("boiler")) {
     return {
@@ -115,7 +113,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound();
   }
 
-  const images = getArticleImages(article.category, article.slug);
+  const images = getArticleImages(article.category);
   const relatedArticles = BLOG_ARTICLES.filter((a) => a.slug !== article.slug).slice(0, 3);
 
   const jsonLd = {

@@ -9,8 +9,6 @@ import {
   ArrowRight,
   Sparkles,
   CheckCircle2,
-  AlertCircle,
-  HelpCircle,
 } from "lucide-react";
 
 interface CostCalculatorProps {

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BLOG_ARTICLES } from "@/lib/data";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getSiteUrl } from "@/lib/site-config";
-import { Clock, User, ArrowRight, ShieldCheck, Award } from "lucide-react";
+import { Clock, User, ArrowRight, Award } from "lucide-react";
 
 const siteUrl = getSiteUrl();
 

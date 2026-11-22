@@ -11,6 +11,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
+import { markThreadAsRead } from "@/lib/message-store";
 
 export interface ChatMessage {
   id: string;
@@ -83,7 +84,7 @@ export function NegotiationModal({
       const res = await fetch(`/api/messages?referenceCode=${encodeURIComponent(referenceCode)}`);
       if (!res.ok) return;
       const data = await res.json();
-      if (data && Array.isArray(data.messages)) {
+      if (data && Array.isArray(data.messages) && data.messages.length > 0) {
         const mapped: ChatMessage[] = data.messages.map((m: {
           id: string;
           senderRole: "CUSTOMER" | "PRO";
@@ -104,14 +105,23 @@ export function NegotiationModal({
           status: (m.status as ChatMessage["status"]) || undefined,
         }));
 
-        setMessages(mapped);
-        if (typeof window !== "undefined") {
-          try {
-            localStorage.setItem(storageKey, JSON.stringify(mapped));
-          } catch {
-            // ignore
+        setMessages((prev) => {
+          // Merge server messages with any pending local messages
+          const serverIds = new Set(mapped.map((m) => m.id));
+          const serverTexts = new Set(mapped.map((m) => `${m.senderRole}_${m.text}`));
+          const pendingLocal = prev.filter(
+            (p) => p.id.startsWith("temp_") && !serverIds.has(p.id) && !serverTexts.has(`${p.senderRole}_${p.text}`)
+          );
+          const merged = [...mapped, ...pendingLocal];
+          if (typeof window !== "undefined") {
+            try {
+              localStorage.setItem(storageKey, JSON.stringify(merged));
+            } catch {
+              // ignore
+            }
           }
-        }
+          return merged;
+        });
       }
     } catch (err) {
       console.warn("Neon DB /api/messages fetch notice:", err);
@@ -185,8 +195,11 @@ export function NegotiationModal({
   React.useEffect(() => {
     if (isOpen) {
       messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      if (referenceCode) {
+        markThreadAsRead(referenceCode, currentRole);
+      }
     }
-  }, [isOpen, messages]);
+  }, [isOpen, messages, referenceCode, currentRole]);
 
   if (!isOpen) return null;
 
@@ -208,8 +221,19 @@ export function NegotiationModal({
       timestamp,
     };
 
-    // Optimistic local update
-    setMessages((prev) => [...prev, tempMsg]);
+    // Immediate local persistence & event dispatch
+    setMessages((prev) => {
+      const updated = [...prev, tempMsg];
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(updated));
+          window.dispatchEvent(new CustomEvent("tc_new_message", { detail: { referenceCode } }));
+        } catch {
+          // ignore
+        }
+      }
+      return updated;
+    });
 
     try {
       const res = await fetch("/api/messages", {
@@ -236,7 +260,7 @@ export function NegotiationModal({
     if (!counterPriceInput.trim()) return;
 
     const formattedPrice =
-      counterPriceInput.startsWith("£") || counterPriceInput.startsWith("$")
+      counterPriceInput.startsWith("£") || counterPriceInput.startsWith("$") || counterPriceInput.startsWith("€")
         ? counterPriceInput
         : `£${counterPriceInput}`;
 
@@ -262,8 +286,19 @@ export function NegotiationModal({
       status: "PROPOSED",
     };
 
-    // Optimistic local update
-    setMessages((prev) => [...prev, tempCounter]);
+    // Immediate local persistence & event dispatch
+    setMessages((prev) => {
+      const updated = [...prev, tempCounter];
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify(updated));
+          window.dispatchEvent(new CustomEvent("tc_new_message", { detail: { referenceCode } }));
+        } catch {
+          // ignore
+        }
+      }
+      return updated;
+    });
 
     try {
       const res = await fetch("/api/messages", {
@@ -329,6 +364,9 @@ export function NegotiationModal({
       });
       if (res.ok) {
         void fetchMessagesFromNeon();
+        if (typeof window !== "undefined") {
+          window.dispatchEvent(new CustomEvent("tc_new_message", { detail: { referenceCode } }));
+        }
       }
     } catch (err) {
       console.error("Failed to persist accepted counter offer to Neon DB:", err);

@@ -32,10 +32,14 @@ import {
   useContractStore,
   JobContract,
   getHomeownerStats,
+  getContractFinancials,
 } from "@/lib/contract-store";
 import { ContractApprovalModal } from "@/components/contracts/contract-approval-modal";
 import { HomeownerReviewModal } from "@/components/contracts/homeowner-review-modal";
 import { DeleteAccountModal } from "@/components/auth/delete-account-modal";
+import { toast } from "@/components/ui/toast";
+import { useUnreadMessages } from "@/lib/message-store";
+import { useCurrency } from "@/lib/currency";
 
 import {
   useJobStore,
@@ -56,7 +60,7 @@ function useIsClient() {
 export default function HomeownerDashboardPage() {
   const router = useRouter();
   const { user, updateUser } = useAuth();
-  const { contracts: storeContracts, submitReview } = useContractStore();
+  const { contracts: storeContracts, submitReview, updateDraft } = useContractStore();
   const { jobs, createJob, updateJob, removeJob } = useJobStore();
   const mounted = useIsClient();
 
@@ -115,6 +119,8 @@ export default function HomeownerDashboardPage() {
   const [payReviewMode, setPayReviewMode] = React.useState<"PAY_AND_REVIEW" | "REVIEW_ONLY">("PAY_AND_REVIEW");
 
   // Document & Negotiation States
+  const { unreadMap } = useUnreadMessages("CUSTOMER");
+  const { currency, setCurrency, format } = useCurrency();
   const [selectedDocData, setSelectedDocData] = React.useState<InvoiceContractData | null>(null);
   const [isDocModalOpen, setIsDocModalOpen] = React.useState(false);
   const [activeNegotiation, setActiveNegotiation] = React.useState<{
@@ -153,14 +159,14 @@ export default function HomeownerDashboardPage() {
   const [profileCity, setProfileCity] = React.useState(user?.city || (isDemo ? "London" : ""));
   const profileEmail = user?.email || (isDemo ? "sarah.jenkins@example.com" : "");
 
-  React.useEffect(() => {
-    if (user) {
-      if (user.name && !isDemo) setProfileName(user.name);
-      if (user.phone && !isDemo) setProfilePhone(user.phone);
-      if (user.address && !isDemo) setProfileAddress(user.address);
-      if (user.city && !isDemo) setProfileCity(user.city);
-    }
-  }, [user, isDemo]);
+  const [syncedUserId, setSyncedUserId] = React.useState(user?.id);
+  if (user && user.id !== syncedUserId) {
+    setSyncedUserId(user.id);
+    if (user.name && !isDemo) setProfileName(user.name);
+    if (user.phone && !isDemo) setProfilePhone(user.phone);
+    if (user.address && !isDemo) setProfileAddress(user.address);
+    if (user.city && !isDemo) setProfileCity(user.city);
+  }
 
   const handleSaveProfile = (e: React.FormEvent) => {
     e.preventDefault();
@@ -170,7 +176,7 @@ export default function HomeownerDashboardPage() {
       address: profileAddress,
       city: profileCity,
     });
-    alert("Profile details saved successfully!");
+    toast.success("Profile details saved successfully!");
   };
 
   const handleOpenDraftDoc = (c: JobContract) => {
@@ -399,7 +405,7 @@ export default function HomeownerDashboardPage() {
 
     setIsCreateModalOpen(false);
     setNewTitle("");
-    alert(`Job request ${newRef} has been published to verified trade contractors in your area!`);
+    toast.success(`Job request ${newRef} has been published to verified trade contractors in your area!`);
   };
 
   const handleStartEdit = (job: HomeownerJob) => {
@@ -419,9 +425,14 @@ export default function HomeownerDashboardPage() {
   };
 
   const handleDeleteJob = async (jobId: string, referenceCode: string) => {
-    if (confirm(`Are you sure you want to delete job request ${referenceCode}? All open contractor proposals for this listing will be cancelled.`)) {
-      await removeJob(referenceCode);
+    await removeJob(referenceCode);
+    try {
+      await fetch(`/api/contracts?referenceCode=${encodeURIComponent(referenceCode)}`, { method: "DELETE" });
+      await fetch(`/api/messages?referenceCode=${encodeURIComponent(referenceCode)}`, { method: "DELETE" });
+    } catch {
+      // ignore cleanup fetch errors
     }
+    toast.info(`Job request ${referenceCode} was removed.`);
   };
 
   const handleAcceptProposal = async (jobId: string, proId: string) => {
@@ -439,15 +450,52 @@ export default function HomeownerDashboardPage() {
         : { ...p, status: "DECLINED" as const }
     );
     const acceptedProp = updatedProposals.find((p) => p.status === "ACCEPTED");
+    const resolvedPrice = acceptedProp?.price || target.finalCost || "£145.00";
+    const numericPrice = parseFloat(resolvedPrice.replace(/[^0-9.]/g, "")) || 145;
 
     await updateJob(target.referenceCode, {
       status: "IN_PROGRESS",
       proposals: updatedProposals,
-      finalCost: acceptedProp?.price,
+      finalCost: resolvedPrice,
+    });
+
+    // Create or activate formal legal contract in contract-store & Neon DB
+    const existingContract = storeContracts.find((c) => c.referenceCode === target.referenceCode || c.id === target.id);
+    const contractId = existingContract ? existingContract.id : `cnt_${target.id}`;
+
+    updateDraft(contractId, {
+      ...(existingContract || {}),
+      referenceCode: target.referenceCode,
+      service: target.service,
+      title: target.title,
+      location: target.location,
+      city: target.city || "London",
+      country: target.country || "UK",
+      urgency: target.urgency || "Standard",
+      homeownerId: user.id || target.homeownerId || "",
+      homeownerName: user.name || target.homeownerName,
+      homeownerPhone: user.phone || target.homeownerPhone || "+44 20 7946 0812",
+      homeownerEmail: user.email || target.homeownerEmail || "",
+      homeownerAddress: target.location,
+      proId: acceptedProp?.proId || existingContract?.proId || proId,
+      proName: acceptedProp?.proName || existingContract?.proName || "Trade Specialist",
+      proPhone: acceptedProp?.phone || existingContract?.proPhone || "+44 20 7946 0812",
+      proEmail: acceptedProp?.proEmail || existingContract?.proEmail || "",
+      status: "ACTIVE",
+      agreedPrice: resolvedPrice,
+      priceNumeric: numericPrice,
+      totalAmount: numericPrice,
+      serviceDate: existingContract?.serviceDate || new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
+      serviceTime: existingContract?.serviceTime || "09:00 AM",
+      warrantyPeriod: existingContract?.warrantyPeriod || "12 Months Workmanship Guarantee",
+      providedServices: existingContract?.providedServices || ["Standard trade inspection", "Agreed service & fitting"],
+      providedEquipments: existingContract?.providedEquipments || ["Certified trade materials", "Standard trade consumables"],
+      approvedByHomeownerAt: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }),
+      homeownerSignature: user.name || "Homeowner Signed",
     });
 
     setActiveTab("ONGOING");
-    alert("Contractor proposal accepted! This job has now moved to Ongoing Contracts.");
+    toast.success("Contractor proposal accepted! An active contract has been created and this job has moved to Ongoing Contracts.");
   };
 
   const handleCompleteAndReview = async (e: React.FormEvent) => {
@@ -456,36 +504,69 @@ export default function HomeownerDashboardPage() {
 
     const acceptedProp = reviewingJob.proposals.find((p) => p.status === "ACCEPTED");
     const dateStr = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
-    const authorName = user?.name || "Sarah Jenkins";
+    const authorName = user?.name || (isDemo ? "Sarah Jenkins" : "Homeowner");
     const commentText = reviewComment || "Job completed strictly to specification. Verified contractor.";
+    const resolvedPrice = acceptedProp ? acceptedProp.price : reviewingJob.finalCost || "£145.00";
+    const numericPrice = parseFloat(resolvedPrice.replace(/[^0-9.]/g, "")) || 145;
 
     await updateJob(reviewingJob.referenceCode, {
       status: "COMPLETED",
       completedDate: dateStr,
-      finalCost: acceptedProp ? acceptedProp.price : "£145.00",
+      finalCost: resolvedPrice,
       reviewLeft: {
         rating: reviewRating,
         comment: commentText,
       },
     });
 
-    // Also persist review directly to contract-store and Neon contracts
+    // Ensure contract is stored as PAID/COMPLETED in contract-store & Neon DB for contractor earnings
     const matchedContract = storeContracts.find(
       (c) => c.referenceCode === reviewingJob.referenceCode || c.id === reviewingJob.id
     );
-    if (matchedContract) {
-      submitReview(matchedContract.id, {
+    const contractId = matchedContract ? matchedContract.id : `cnt_${reviewingJob.id}`;
+
+    updateDraft(contractId, {
+      ...(matchedContract || {}),
+      referenceCode: reviewingJob.referenceCode,
+      service: reviewingJob.service,
+      title: reviewingJob.title,
+      location: reviewingJob.location,
+      city: reviewingJob.city || "London",
+      country: reviewingJob.country || "UK",
+      homeownerId: user?.id || reviewingJob.homeownerId || "",
+      homeownerName: user?.name || reviewingJob.homeownerName,
+      homeownerEmail: user?.email || reviewingJob.homeownerEmail || "",
+      homeownerPhone: user?.phone || reviewingJob.homeownerPhone,
+      homeownerAddress: reviewingJob.location,
+      proId: acceptedProp?.proId || matchedContract?.proId || "pro_custom",
+      proName: acceptedProp?.proName || matchedContract?.proName || "Trade Specialist",
+      proEmail: acceptedProp?.proEmail || matchedContract?.proEmail || "",
+      proPhone: acceptedProp?.phone || matchedContract?.proPhone || "",
+      status: "PAID",
+      agreedPrice: resolvedPrice,
+      priceNumeric: numericPrice,
+      totalAmount: numericPrice,
+      invoicePaidAt: dateStr,
+      paymentMethod: "TradeConnect Protected Escrow (Card)",
+      review: {
         rating: reviewRating,
-        title: `${reviewingJob.service} in ${matchedContract.city || "London"}`,
         comment: commentText,
         author: authorName,
-        city: matchedContract.city || "London",
-      });
-    }
+        date: dateStr,
+      },
+    });
+
+    submitReview(contractId, {
+      rating: reviewRating,
+      title: `${reviewingJob.service} in ${reviewingJob.city || "London"}`,
+      comment: commentText,
+      author: authorName,
+      city: reviewingJob.city || "London",
+    });
 
     setReviewingJob(null);
     setActiveTab("HISTORY");
-    alert("Contract finalized and verified review published! Receipt available in Contract History.");
+    toast.success("Contract finalized and verified review published! Payment released to contractor and receipt stored in Contract History.");
   };
 
   // Dedicated data slicing strictly for the current homeowner
@@ -499,9 +580,80 @@ export default function HomeownerDashboardPage() {
   const completedContracts = myContracts.filter((c) => c.status === "PAID" || c.status === "COMPLETED");
   const completedJobs = myJobs.filter((j) => j.status === "COMPLETED");
 
+  const allHistoryItems = React.useMemo(() => {
+    const list: {
+      id: string;
+      referenceCode: string;
+      title: string;
+      service: string;
+      proName: string;
+      displayCost: string;
+      completedDate: string;
+      review?: { rating: number; comment: string };
+      rawContract?: JobContract;
+      rawJob?: HomeownerJob;
+    }[] = [];
+
+    completedContracts.forEach((c) => {
+      list.push({
+        id: c.id,
+        referenceCode: c.referenceCode,
+        title: c.title,
+        service: c.service,
+        proName: c.proName,
+        displayCost: c.agreedPrice || `${c.currency}${(c.totalAmount || c.priceNumeric).toFixed(2)}`,
+        completedDate: c.invoicePaidAt?.split(",")[0] || c.serviceDate,
+        review: c.review ? { rating: c.review.rating, comment: c.review.comment } : undefined,
+        rawContract: c,
+      });
+    });
+
+    completedJobs.forEach((j) => {
+      if (!list.some((item) => item.referenceCode === j.referenceCode)) {
+        list.push({
+          id: j.id,
+          referenceCode: j.referenceCode,
+          title: j.title,
+          service: j.service,
+          proName: j.proposals.find((p) => p.status === "ACCEPTED")?.proName || "Trade Specialist",
+          displayCost: j.finalCost || "£145.00",
+          completedDate: j.completedDate || "Recently",
+          review: j.reviewLeft ? { rating: j.reviewLeft.rating, comment: j.reviewLeft.comment } : undefined,
+          rawJob: j,
+        });
+      }
+    });
+
+    return list;
+  }, [completedContracts, completedJobs]);
+
   // Verified Badge Rule: Must complete at least 10 contracts successfully
-  const completedContractsCount = completedContracts.length;
+  const completedContractsCount = allHistoryItems.length;
   const isHomeownerVerified = completedContractsCount >= 10;
+
+  // Airtight Auth & Role Guard
+  React.useEffect(() => {
+    if (mounted) {
+      if (!user) {
+        router.replace("/auth/login?redirect=/dashboard/homeowner");
+      } else if (user.role === "PRO") {
+        router.replace("/dashboard/pro");
+      }
+    }
+  }, [mounted, user, router]);
+
+  // Shield dashboard UI from unauthenticated users or wrong role
+  if (!mounted || !user || user.role === "PRO") {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-12 h-12 border-4 border-[var(--brand)] border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-sm font-bold text-[var(--text)]">Verifying Homeowner Authorization...</p>
+        <p className="text-xs text-[var(--text-muted)] mt-1">
+          {!user ? "Please sign in to access your dashboard. Redirecting to login..." : "Redirecting to your contractor portal..."}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="section-light section-spacing">
@@ -562,13 +714,13 @@ export default function HomeownerDashboardPage() {
 
           <div className="p-4 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-xs">
             <div className="text-xs text-[var(--text-muted)] uppercase tracking-wider font-bold">
-              Total Settled (Escrow)
+              Total Settled (Contract Work)
             </div>
-            <div className="text-2xl font-bold text-[var(--text)] mt-1 font-serif" suppressHydrationWarning>
-              £{homeownerStats.totalSpent.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            <div className="text-2xl font-bold text-[var(--text)] mt-1 font-mono" suppressHydrationWarning>
+              {format(homeownerStats.totalSpent)}
             </div>
             <div className="text-[11px] text-[var(--pine-accent)] font-semibold mt-0.5">
-              0% Dispute Ratio
+              Excl. 5% Escrow Fee &bull; 0% Dispute
             </div>
           </div>
 
@@ -585,57 +737,124 @@ export default function HomeownerDashboardPage() {
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex border-b border-[var(--line)] mb-6 overflow-x-auto">
-          <button
-            type="button"
-            onClick={() => setActiveTab("LISTINGS")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "LISTINGS"
-                ? "border-[var(--accent)] text-[var(--accent)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <span suppressHydrationWarning>My Job Listings &amp; Quotes ({quotingJobs.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("ONGOING")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "ONGOING"
-                ? "border-[var(--accent)] text-[var(--accent)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <span suppressHydrationWarning>Ongoing Contracts ({ongoingContracts.length + inProgressJobs.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("HISTORY")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "HISTORY"
-                ? "border-[var(--accent)] text-[var(--accent)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <span suppressHydrationWarning>Contract History &amp; Receipts ({completedContracts.length + completedJobs.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("PROFILE")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "PROFILE"
-                ? "border-[var(--accent)] text-[var(--accent)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            Profile &amp; Settings
-          </button>
+        {/* Tab Navigation & Currency Switcher */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-[var(--line)] mb-6 gap-3">
+          <div className="flex overflow-x-auto">
+            <button
+              type="button"
+              onClick={() => setActiveTab("LISTINGS")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "LISTINGS"
+                  ? "border-[var(--accent)] text-[var(--accent)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <span suppressHydrationWarning>My Job Listings &amp; Quotes ({quotingJobs.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("ONGOING")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "ONGOING"
+                  ? "border-[var(--accent)] text-[var(--accent)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <span suppressHydrationWarning>Ongoing Contracts ({ongoingContracts.length + inProgressJobs.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("HISTORY")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "HISTORY"
+                  ? "border-[var(--accent)] text-[var(--accent)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <span suppressHydrationWarning>Contract History &amp; Receipts ({allHistoryItems.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("PROFILE")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "PROFILE"
+                  ? "border-[var(--accent)] text-[var(--accent)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              Profile &amp; Settings
+            </button>
+          </div>
+
+          <div className="flex items-center space-x-1 p-1 rounded-lg bg-[var(--surface)] border border-[var(--line)] text-xs shrink-0 self-start sm:self-center mb-2 sm:mb-0 shadow-2xs">
+            <span className="text-[10px] text-[var(--text-muted)] font-bold px-1.5 uppercase">Currency:</span>
+            {(["GBP", "USD", "EUR"] as const).map((currCode) => (
+              <button
+                key={currCode}
+                type="button"
+                onClick={() => setCurrency(currCode)}
+                className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
+                  currency === currCode
+                    ? "bg-[var(--accent)] text-white shadow-xs"
+                    : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                }`}
+              >
+                {currCode === "GBP" ? "£ GBP" : currCode === "USD" ? "$ USD" : "€ EUR"}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* TAB 1: JOB LISTINGS & QUOTES */}
         {activeTab === "LISTINGS" && (
           <div className="space-y-6">
+            {/* Action Required Banners for Drafts & Invoices */}
+            {myContracts.some((c) => c.status === "PENDING_APPROVAL") && (
+              <div className="p-4 rounded-[var(--radius)] bg-amber-500/10 border-2 border-amber-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs animate-in fade-in duration-200">
+                <div className="flex items-center space-x-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse shrink-0" />
+                  <div>
+                    <span className="font-bold text-amber-900 dark:text-amber-200 block">
+                      Contractor submitted a formal contract draft for your review!
+                    </span>
+                    <span className="text-[11px] text-amber-700 dark:text-amber-300">
+                      Review proposed arrival date, warranty and services, then sign digitally.
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("ONGOING")}
+                  className="px-3.5 py-1.5 rounded-[var(--radius-sm)] bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shrink-0 inline-flex items-center space-x-1 cursor-pointer shadow-xs"
+                >
+                  <span>Review &amp; Approve Contract &rarr;</span>
+                </button>
+              </div>
+            )}
+
+            {myContracts.some((c) => c.status === "INVOICED") && (
+              <div className="p-4 rounded-[var(--radius)] bg-emerald-500/10 border-2 border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs animate-in fade-in duration-200">
+                <div className="flex items-center space-x-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <div>
+                    <span className="font-bold text-emerald-900 dark:text-emerald-200 block">
+                      Contractor has issued a final service invoice! Work completed.
+                    </span>
+                    <span className="text-[11px] text-emerald-700 dark:text-emerald-300">
+                      Settle payment via TradeConnect Escrow and leave your verified homeowner review.
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("ONGOING")}
+                  className="px-3.5 py-1.5 rounded-[var(--radius-sm)] bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shrink-0 inline-flex items-center space-x-1 cursor-pointer shadow-xs"
+                >
+                  <span>Pay Invoice &amp; Leave Review &rarr;</span>
+                </button>
+              </div>
+            )}
+
             {quotingJobs.length === 0 ? (
               <div className="p-12 text-center rounded-[var(--radius-lg)] bg-[var(--surface)] border border-[var(--line)] space-y-3">
                 <div className="w-12 h-12 rounded-full bg-[var(--bg-alt)] border border-[var(--line)] flex items-center justify-center mx-auto text-[var(--accent)]">
@@ -756,7 +975,7 @@ export default function HomeownerDashboardPage() {
                             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 shrink-0">
                               <div className="text-left sm:text-right pr-2">
                                 <span className="text-[10px] text-[var(--text-light)] block uppercase">Quote Price</span>
-                                <span className="font-extrabold text-sm text-[var(--text)] font-serif">{prop.price}</span>
+                                <span className="font-extrabold text-sm text-[var(--text)] font-mono">{format(prop.price)}</span>
                               </div>
 
                               <div className="flex items-center space-x-2">
@@ -777,6 +996,11 @@ export default function HomeownerDashboardPage() {
                                 >
                                   <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                                   <span>Negotiate / Message</span>
+                                  {unreadMap[job.referenceCode] > 0 && (
+                                    <span className="ml-1 px-1.5 py-0.2 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                                      {unreadMap[job.referenceCode]} new
+                                    </span>
+                                  )}
                                 </button>
 
                                 <button
@@ -836,6 +1060,11 @@ export default function HomeownerDashboardPage() {
                           <span className="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-amber-500 text-white">
                             Action Required: Review Draft Contract
                           </span>
+                          {unreadMap[draft.referenceCode] > 0 && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-red-600 text-white animate-pulse inline-flex items-center space-x-1 shadow-xs">
+                              <span>💬 {unreadMap[draft.referenceCode]} New Messages</span>
+                            </span>
+                          )}
                           <span className="text-xs text-[var(--text-muted)]">
                             Submitted by <strong>{draft.proName}</strong>
                           </span>
@@ -847,10 +1076,16 @@ export default function HomeownerDashboardPage() {
 
                       <div className="sm:text-right shrink-0">
                         <span className="text-[10px] uppercase font-bold text-[var(--text-muted)] block">
-                          Agreed Total Price
+                          Contract Work Price
                         </span>
                         <span className="text-xl font-black text-amber-700 dark:text-amber-400 font-mono">
-                          {draft.agreedPrice}
+                          {format(draft.subtotalAmount || draft.priceNumeric)}
+                        </span>
+                        <span className="text-[10px] text-[var(--text-muted)] block mt-0.5">
+                          +5% Platform Fee: {format(draft.platformFeeAmount ?? ((draft.subtotalAmount || draft.priceNumeric) * 0.05))}
+                        </span>
+                        <span className="text-[11px] font-bold text-[var(--text)] block font-mono">
+                          Total Payable: {format(draft.totalAmount || ((draft.subtotalAmount || draft.priceNumeric) * 1.05))}
                         </span>
                       </div>
                     </div>
@@ -878,14 +1113,38 @@ export default function HomeownerDashboardPage() {
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-                      <button
-                        type="button"
-                        onClick={() => handleOpenDraftDoc(draft)}
-                        className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-xs font-semibold text-[var(--text)] cursor-pointer"
-                      >
-                        <Download className="w-3.5 h-3.5 text-zinc-600" />
-                        <span>Download Draft PDF</span>
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          type="button"
+                          onClick={() => handleOpenDraftDoc(draft)}
+                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-xs font-semibold text-[var(--text)] cursor-pointer"
+                        >
+                          <Download className="w-3.5 h-3.5 text-zinc-600" />
+                          <span>Download Draft PDF</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setActiveNegotiation({
+                              jobId: draft.id,
+                              proId: draft.proId,
+                              proName: draft.proName,
+                              jobTitle: draft.title,
+                              referenceCode: draft.referenceCode,
+                              currentPrice: draft.agreedPrice,
+                            })
+                          }
+                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-xs font-semibold text-[var(--text)] cursor-pointer"
+                        >
+                          <Lock className="w-3 h-3 text-emerald-600" />
+                          <span>Message Contractor</span>
+                          {unreadMap[draft.referenceCode] > 0 && (
+                            <span className="ml-1 px-1.5 py-0.2 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                              {unreadMap[draft.referenceCode]} new
+                            </span>
+                          )}
+                        </button>
+                      </div>
 
                       <button
                         type="button"
@@ -917,6 +1176,11 @@ export default function HomeownerDashboardPage() {
                           <span className="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-700 text-white">
                             Work Completed &bull; Payment Due
                           </span>
+                          {unreadMap[invoiced.referenceCode] > 0 && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-red-600 text-white animate-pulse inline-flex items-center space-x-1 shadow-xs">
+                              <span>💬 {unreadMap[invoiced.referenceCode]} New Messages</span>
+                            </span>
+                          )}
                           <span className="text-xs text-[var(--text-muted)]">
                             From <strong>{invoiced.proName}</strong>
                           </span>
@@ -928,10 +1192,16 @@ export default function HomeownerDashboardPage() {
 
                       <div className="sm:text-right shrink-0">
                         <span className="text-[10px] uppercase font-bold text-[var(--text-muted)] block">
-                          Total Due (Inc. VAT)
+                          Contract Work Price
                         </span>
-                        <span className="text-2xl font-black text-emerald-700 dark:text-emerald-400 font-mono">
-                          {invoiced.currency}{(invoiced.totalAmount || invoiced.priceNumeric).toFixed(2)}
+                        <span className="text-xl font-black text-[var(--text)] font-mono">
+                          {format(invoiced.subtotalAmount || invoiced.priceNumeric)}
+                        </span>
+                        <span className="text-[10px] text-zinc-500 block mt-0.5">
+                          +5% Platform Fee: {format(invoiced.platformFeeAmount ?? ((invoiced.subtotalAmount || invoiced.priceNumeric) * 0.05))}
+                        </span>
+                        <span className="text-lg font-black text-emerald-700 dark:text-emerald-400 font-mono block">
+                          Total Due: {format(invoiced.totalAmount || ((invoiced.subtotalAmount || invoiced.priceNumeric) * 1.05))}
                         </span>
                       </div>
                     </div>
@@ -942,7 +1212,7 @@ export default function HomeownerDashboardPage() {
                           Itemized Breakdown
                         </span>
                         <span className="text-zinc-700 dark:text-zinc-300 text-[11px]">
-                          Labour: {invoiced.currency}{invoiced.labourAmount ?? Math.round(invoiced.priceNumeric * 0.7)} &bull; Materials: {invoiced.currency}{invoiced.materialsAmount ?? Math.round(invoiced.priceNumeric * 0.3)}
+                          Labour: {format(invoiced.labourAmount ?? Math.round(invoiced.priceNumeric * 0.7))} &bull; Materials: {format(invoiced.materialsAmount ?? Math.round(invoiced.priceNumeric * 0.3))}
                         </span>
                       </div>
                       <span className="text-[11px] text-emerald-700 font-semibold">
@@ -951,14 +1221,38 @@ export default function HomeownerDashboardPage() {
                     </div>
 
                     <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-                      <button
-                        type="button"
-                        onClick={() => handleOpenDraftDoc(invoiced)}
-                        className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-xs font-semibold text-[var(--text)] cursor-pointer"
-                      >
-                        <Download className="w-3.5 h-3.5 text-zinc-600" />
-                        <span>Download Invoice PDF</span>
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          type="button"
+                          onClick={() => handleOpenDraftDoc(invoiced)}
+                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-xs font-semibold text-[var(--text)] cursor-pointer"
+                        >
+                          <Download className="w-3.5 h-3.5 text-zinc-600" />
+                          <span>Download Invoice PDF</span>
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setActiveNegotiation({
+                              jobId: invoiced.id,
+                              proId: invoiced.proId,
+                              proName: invoiced.proName,
+                              jobTitle: invoiced.title,
+                              referenceCode: invoiced.referenceCode,
+                              currentPrice: invoiced.agreedPrice,
+                            })
+                          }
+                          className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] text-xs font-semibold text-[var(--text)] cursor-pointer"
+                        >
+                          <Lock className="w-3 h-3 text-emerald-600" />
+                          <span>Message Contractor</span>
+                          {unreadMap[invoiced.referenceCode] > 0 && (
+                            <span className="ml-1 px-1.5 py-0.2 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                              {unreadMap[invoiced.referenceCode]} new
+                            </span>
+                          )}
+                        </button>
+                      </div>
 
                       <button
                         type="button"
@@ -970,7 +1264,7 @@ export default function HomeownerDashboardPage() {
                         className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-[var(--radius-sm)] bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-colors cursor-pointer shadow-xs"
                       >
                         <Receipt className="w-4 h-4" />
-                        <span>Pay Invoice &amp; Leave Review ({invoiced.currency}{(invoiced.totalAmount || invoiced.priceNumeric).toFixed(2)})</span>
+                        <span>Pay Invoice &amp; Leave Review ({format(invoiced.totalAmount || ((invoiced.subtotalAmount || invoiced.priceNumeric) * 1.05))})</span>
                       </button>
                     </div>
                   </div>
@@ -992,6 +1286,11 @@ export default function HomeownerDashboardPage() {
                             <CheckCircle2 className="w-3 h-3 mr-1 text-emerald-600" />
                             Contract Active &bull; In Progress
                           </span>
+                          {unreadMap[contract.referenceCode] > 0 && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-red-600 text-white animate-pulse inline-flex items-center space-x-1 shadow-xs">
+                              <span>💬 {unreadMap[contract.referenceCode]} New Messages</span>
+                            </span>
+                          )}
                         </div>
                         <h3 className="text-base font-bold text-[var(--text)] mt-1.5">
                           {contract.title}
@@ -999,8 +1298,14 @@ export default function HomeownerDashboardPage() {
                       </div>
 
                       <div className="text-xs text-left sm:text-right">
-                        <span className="text-[10px] uppercase font-bold text-[var(--text-muted)] block">Agreed Rate</span>
-                        <span className="text-lg font-black text-[var(--text)] font-mono">{contract.agreedPrice}</span>
+                        <span className="text-[10px] uppercase font-bold text-[var(--text-muted)] block">Contract Work Price</span>
+                        <span className="text-lg font-black text-[var(--text)] font-mono">{format(contract.subtotalAmount || contract.priceNumeric)}</span>
+                        <span className="text-[10px] text-[var(--text-muted)] block mt-0.5">
+                          +5% Platform Fee: {format(contract.platformFeeAmount ?? ((contract.subtotalAmount || contract.priceNumeric) * 0.05))}
+                        </span>
+                        <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-mono block">
+                          Total Escrow: {format(contract.totalAmount || ((contract.subtotalAmount || contract.priceNumeric) * 1.05))}
+                        </span>
                       </div>
                     </div>
 
@@ -1025,7 +1330,7 @@ export default function HomeownerDashboardPage() {
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between pt-2">
+                    <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[var(--line-subtle)]">
                       <button
                         type="button"
                         onClick={() => handleOpenDraftDoc(contract)}
@@ -1035,13 +1340,51 @@ export default function HomeownerDashboardPage() {
                         <span>View Contract PDF &amp; Terms</span>
                       </button>
 
-                      <a
-                        href={`tel:${contract.proPhone}`}
-                        className="px-3 py-1.5 rounded-[var(--radius-sm)] bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs inline-flex items-center space-x-1"
-                      >
-                        <Phone className="w-3.5 h-3.5 mr-1" />
-                        <span>Call Contractor</span>
-                      </a>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setActiveNegotiation({
+                              jobId: contract.id,
+                              proId: contract.proId,
+                              proName: contract.proName,
+                              jobTitle: contract.title,
+                              referenceCode: contract.referenceCode,
+                              currentPrice: contract.agreedPrice,
+                            })
+                          }
+                          className="px-3 py-2 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] hover:bg-[var(--line-subtle)] border border-[var(--line)] text-[var(--text)] font-semibold text-xs inline-flex items-center space-x-1 cursor-pointer"
+                        >
+                          <Lock className="w-3.5 h-3.5 text-emerald-600 mr-1" />
+                          <span>Message</span>
+                          {unreadMap[contract.referenceCode] > 0 && (
+                            <span className="ml-1 px-1.5 py-0.2 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                              {unreadMap[contract.referenceCode]}
+                            </span>
+                          )}
+                        </button>
+
+                        <a
+                          href={`tel:${contract.proPhone}`}
+                          className="px-3 py-2 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] hover:bg-[var(--line-subtle)] border border-[var(--line)] text-[var(--text)] font-semibold text-xs inline-flex items-center space-x-1"
+                        >
+                          <Phone className="w-3.5 h-3.5 mr-1 text-[var(--accent)]" />
+                          <span>Call Contractor</span>
+                        </a>
+
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setPayingReviewContract(contract);
+                            setPayReviewMode("PAY_AND_REVIEW");
+                            setIsPayReviewModalOpen(true);
+                          }}
+                          className="btn-primary px-3.5 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1 shadow-xs cursor-pointer"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5" />
+                          <span>Complete &amp; Release Escrow Payment</span>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -1097,30 +1440,28 @@ export default function HomeownerDashboardPage() {
         {/* TAB 3: CONTRACT HISTORY & COMPLETED JOBS */}
         {activeTab === "HISTORY" && (
           <div className="space-y-4">
-            {completedJobs.length === 0 && completedContracts.length === 0 ? (
+            {allHistoryItems.length === 0 ? (
               <div className="p-12 text-center rounded-[var(--radius-lg)] bg-[var(--surface)] border border-[var(--line)] space-y-3">
                 <div className="w-12 h-12 rounded-full bg-[var(--bg-alt)] border border-[var(--line)] flex items-center justify-center mx-auto text-[var(--accent)]">
                   <Receipt className="w-6 h-6" />
                 </div>
                 <h3 className="text-base font-bold text-[var(--text)]">No Contract History Yet</h3>
                 <p className="text-xs text-[var(--text-muted)] max-w-md mx-auto">
-                  Completed contracts, official VAT invoice receipts, and contractor reviews will be archived here.
+                  Completed contracts, official service invoice receipts, and contractor reviews will be archived here.
                 </p>
               </div>
             ) : (
-              completedJobs.map((job) => {
-                const matched = storeContracts.find((c) => c.referenceCode === job.referenceCode);
-                const displayCost = matched?.agreedPrice || job.finalCost || "£145.00";
+              allHistoryItems.map((item) => {
                 return (
                   <div
-                    key={job.id}
+                    key={item.id}
                     className="rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-soft p-6"
                   >
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-[var(--line-subtle)] gap-2">
                       <div>
                         <div className="flex items-center space-x-2">
                           <span className="font-mono text-xs font-bold text-[var(--brand)]">
-                            {job.referenceCode}
+                            {item.referenceCode}
                           </span>
                           <span className="inline-flex items-center text-[10px] font-bold text-[var(--pine-accent)] bg-[var(--brand-light)] px-2 py-0.5 rounded">
                             <CheckCircle2 className="w-3 h-3 mr-1" />
@@ -1128,15 +1469,28 @@ export default function HomeownerDashboardPage() {
                           </span>
                         </div>
                         <h3 className="text-base font-bold text-[var(--text)] mt-1">
-                          {job.title}
+                          {item.title}
                         </h3>
                       </div>
 
                       <div className="text-xs text-[var(--text-muted)] text-left sm:text-right">
-                        <span>Completed on {job.completedDate || "16 Nov 2026"}</span>
-                        <span className="block font-bold text-sm text-[var(--text)] font-serif mt-0.5">
-                          Paid: {displayCost}
-                        </span>
+                        <span>Completed on {item.completedDate}</span>
+                        {(() => {
+                          const fin = getContractFinancials(item.rawContract || item.rawJob);
+                          return (
+                            <div className="mt-1">
+                              <span className="text-[10px] uppercase font-bold text-[var(--text-muted)] block">
+                                Contract Work Price
+                              </span>
+                              <span className="font-extrabold text-sm text-[var(--text)] font-mono">
+                                {format(fin.contractPrice)}
+                              </span>
+                              <span className="text-[10px] text-[var(--text-muted)] block">
+                                +5% Platform Fee: {format(fin.platformFee)} &bull; Total Settled: {format(fin.totalGross)}
+                              </span>
+                            </div>
+                          );
+                        })()}
                       </div>
                     </div>
 
@@ -1144,28 +1498,34 @@ export default function HomeownerDashboardPage() {
                       <div>
                         <span className="text-[11px] text-[var(--text-light)] block">Hired Contractor:</span>
                         <span className="font-bold text-[var(--text)]">
-                          {matched?.proName || (job.proposals[0]?.proName || "Apex Heating & Emergency Plumbing Ltd")}
+                          {item.proName}
                         </span>
-                        {job.reviewLeft && (
+                        {item.review && (
                           <div className="mt-2 p-3 rounded-[var(--radius-sm)] bg-[var(--bg-alt)]/50 border border-[var(--line-subtle)] text-xs text-[var(--text-muted)]">
                             <div className="flex items-center text-[var(--accent)] mb-1">
-                              {[...Array(job.reviewLeft.rating)].map((_, i) => (
+                              {[...Array(item.review.rating)].map((_, i) => (
                                 <Star key={i} className="w-3 h-3 fill-[var(--accent)]" />
                               ))}
                               <span className="text-[10px] font-semibold text-[var(--text-light)] ml-1.5">
                                 Verified Review Left
                               </span>
                             </div>
-                            &ldquo;{job.reviewLeft.comment}&rdquo;
+                            &ldquo;{item.review.comment}&rdquo;
                           </div>
                         )}
                       </div>
 
                       <button
                         type="button"
-                        onClick={() => handleOpenInvoice(job)}
+                        onClick={() => {
+                          if (item.rawContract) {
+                            handleOpenDraftDoc(item.rawContract);
+                          } else if (item.rawJob) {
+                            handleOpenInvoice(item.rawJob);
+                          }
+                        }}
                         className="btn-secondary px-3.5 py-2 rounded-[var(--radius-sm)] text-xs font-semibold inline-flex items-center space-x-1.5 self-start md:self-center cursor-pointer shadow-xs"
-                        title="View and print official VAT invoice as PDF"
+                        title="View and print official service invoice as PDF"
                       >
                         <Printer className="w-3.5 h-3.5 text-[var(--brand)]" />
                         <span>View &amp; Print Official PDF Invoice</span>
@@ -1628,6 +1988,7 @@ export default function HomeownerDashboardPage() {
         {/* MODAL 5: END-TO-END ENCRYPTED BARGAINING CHAT */}
         {activeNegotiation && (
           <NegotiationModal
+            key={activeNegotiation.referenceCode}
             isOpen={Boolean(activeNegotiation)}
             onClose={() => setActiveNegotiation(null)}
             jobTitle={activeNegotiation.jobTitle}

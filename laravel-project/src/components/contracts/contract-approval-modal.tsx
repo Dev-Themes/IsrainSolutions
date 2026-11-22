@@ -1,8 +1,10 @@
 "use client";
 
 import * as React from "react";
-import { X, CheckCircle2, ShieldCheck, Download, Calendar, Clock, Award } from "lucide-react";
+import Link from "next/link";
+import { X, CheckCircle2, ShieldCheck, Download, Calendar, Clock, Award, Info } from "lucide-react";
 import { JobContract, approveAndSignContract } from "@/lib/contract-store";
+import { toast } from "@/components/ui/toast";
 
 interface ContractApprovalModalProps {
   isOpen: boolean;
@@ -42,6 +44,7 @@ export function ContractApprovalModal({
     setIsSubmitting(false);
 
     if (approved) {
+      toast.success("Contract signed! Payment secured in TradeConnect Escrow.");
       if (onApproved) onApproved(approved);
       onClose();
     }
@@ -83,30 +86,67 @@ export function ContractApprovalModal({
         {/* Content Body */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5 text-xs text-zinc-800">
           {/* Key Contract Summary Bar */}
-          <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 block">
-                Agreed Contract Price
-              </span>
-              <div className="text-2xl font-black text-zinc-900 font-display">
-                {contract.agreedPrice}
-              </div>
-              <span className="text-[11px] text-zinc-600 block mt-0.5">
-                Held safely under TradeConnect Protected Escrow
-              </span>
-            </div>
+          {(() => {
+            const currencySymbol = contract.currency || (contract.agreedPrice.startsWith("$") ? "$" : "£");
+            const numPrice = contract.priceNumeric || parseFloat(contract.agreedPrice.replace(/[^0-9.]/g, "")) || 0;
+            const platformFee = Math.round(numPrice * 0.05 * 100) / 100;
+            const totalEscrowDeposit = Math.round((numPrice + platformFee) * 100) / 100;
 
-            <div className="space-y-1 text-right sm:text-right">
-              <div className="inline-flex items-center space-x-1.5 text-zinc-700 font-medium">
-                <Calendar className="w-3.5 h-3.5 text-zinc-500" />
-                <span>{contract.serviceDate}</span>
+            return (
+              <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 space-y-3">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-amber-800 block">
+                      Agreed Contractor Price
+                    </span>
+                    <div className="text-2xl font-black text-zinc-900 font-display">
+                      {contract.agreedPrice}
+                    </div>
+                    <span className="text-[11px] text-zinc-600 block mt-0.5">
+                      Direct payment to contractor upon satisfactory completion
+                    </span>
+                  </div>
+
+                  <div className="space-y-1 text-right sm:text-right">
+                    <div className="inline-flex items-center space-x-1.5 text-zinc-700 font-medium">
+                      <Calendar className="w-3.5 h-3.5 text-zinc-500" />
+                      <span>{contract.serviceDate}</span>
+                    </div>
+                    <div className="flex items-center space-x-1.5 text-zinc-700 font-medium justify-end">
+                      <Clock className="w-3.5 h-3.5 text-zinc-500" />
+                      <span>{contract.serviceTime}</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Platform Fee & Total Escrow Transparency Breakdown */}
+                <div className="pt-2 border-t border-amber-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                  <div className="bg-white/80 p-2.5 rounded-lg border border-amber-200/60">
+                    <span className="text-[10px] uppercase font-bold text-zinc-500 block">Contractor Services</span>
+                    <span className="font-mono font-bold text-zinc-900">{currencySymbol}{numPrice.toFixed(2)}</span>
+                  </div>
+                  <div className="bg-white/80 p-2.5 rounded-lg border border-amber-200/60">
+                    <span className="text-[10px] uppercase font-bold text-emerald-800 block">5% Platform Protection Fee</span>
+                    <span className="font-mono font-bold text-emerald-700">+{currencySymbol}{platformFee.toFixed(2)}</span>
+                  </div>
+                  <div className="bg-amber-100/90 p-2.5 rounded-lg border border-amber-300">
+                    <span className="text-[10px] uppercase font-bold text-amber-900 block">Total Escrow Deposit</span>
+                    <span className="font-mono font-extrabold text-amber-950 text-sm">{currencySymbol}{totalEscrowDeposit.toFixed(2)}</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center space-x-1.5 text-[11px] text-zinc-600 bg-amber-100/40 px-2.5 py-1.5 rounded-md">
+                  <Info className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                  <span>
+                    Non-negotiable 5% platform fee guarantees escrow protection &amp; £2M insurance.{" "}
+                    <Link href="/blog/platform-fees-escrow-protection-policy" target="_blank" className="text-amber-800 font-bold underline hover:text-amber-950">
+                      Learn about fees policy
+                    </Link>
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center space-x-1.5 text-zinc-700 font-medium justify-end">
-                <Clock className="w-3.5 h-3.5 text-zinc-500" />
-                <span>{contract.serviceTime}</span>
-              </div>
-            </div>
-          </div>
+            );
+          })()}
 
           {/* Contractor Credentials & Protection */}
           <div className="p-4 rounded-lg bg-zinc-50 border border-zinc-200 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">

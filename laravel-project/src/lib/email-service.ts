@@ -11,7 +11,6 @@ interface StoredOtp {
 
 // Global OTP store to survive hot-reloads in development
 declare global {
-  // eslint-disable-next-line no-var
   var __tc_otp_store__: Map<string, StoredOtp> | undefined;
 }
 

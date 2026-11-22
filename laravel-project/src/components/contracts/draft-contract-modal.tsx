@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { X, Plus, Trash2, FileText, CheckCircle2, AlertCircle } from "lucide-react";
-import { JobContract, updateContractDraft, submitDraftToHomeowner } from "@/lib/contract-store";
+import { JobContract, updateContractDraft } from "@/lib/contract-store";
+import { toast } from "@/components/ui/toast";
 
 interface DraftContractModalProps {
   isOpen: boolean;
@@ -19,9 +20,66 @@ export function DraftContractModal({
   onSaved,
   onPreviewPdf,
 }: DraftContractModalProps) {
+  const toIsoDate = (str?: string): string => {
+    if (!str) {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      return tomorrow.toISOString().split("T")[0];
+    }
+    const parsed = new Date(str);
+    if (!isNaN(parsed.getTime())) {
+      return parsed.toISOString().split("T")[0];
+    }
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split("T")[0];
+  };
+
+  const toTimeInput = (timeStr?: string): string => {
+    if (!timeStr) return "09:30";
+    const match = timeStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)?/i);
+    if (match) {
+      let hours = parseInt(match[1], 10);
+      const mins = match[2];
+      const ampm = match[3]?.toUpperCase();
+      if (ampm === "PM" && hours < 12) hours += 12;
+      if (ampm === "AM" && hours === 12) hours = 0;
+      return `${String(hours).padStart(2, "0")}:${mins}`;
+    }
+    return "09:30";
+  };
+
+  const formatTimeFromInput = (val: string): string => {
+    if (!val) return "09:30 AM";
+    const [hStr, mStr] = val.split(":");
+    let hours = parseInt(hStr, 10);
+    const minutes = mStr || "00";
+    const ampm = hours >= 12 ? "PM" : "AM";
+    if (hours > 12) hours -= 12;
+    if (hours === 0) hours = 12;
+    return `${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;
+  };
+
+  const formatFromIso = (isoStr: string): string => {
+    const parsed = new Date(isoStr);
+    if (!isNaN(parsed.getTime())) {
+      return parsed.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+    }
+    return isoStr;
+  };
+
   const [agreedPrice, setAgreedPrice] = React.useState(contract.agreedPrice || "£145.00");
-  const [serviceDate, setServiceDate] = React.useState(contract.serviceDate || "17 Nov 2026");
-  const [serviceTime, setServiceTime] = React.useState(contract.serviceTime || "09:30 AM");
+  const [rawServiceDate, setRawServiceDate] = React.useState<string>(() => toIsoDate(contract.serviceDate));
+  const [serviceDate, setServiceDate] = React.useState<string>(() => {
+    if (contract.serviceDate && contract.serviceDate !== "Next Available Slot") {
+      return contract.serviceDate;
+    }
+    return formatFromIso(toIsoDate());
+  });
+  const [rawServiceTime, setRawServiceTime] = React.useState<string>(() => toTimeInput(contract.serviceTime));
+  const [serviceTime, setServiceTime] = React.useState<string>(() => {
+    return contract.serviceTime || "09:30 AM";
+  });
   const [warrantyPeriod, setWarrantyPeriod] = React.useState(
     contract.warrantyPeriod || "12 Months Workmanship Guarantee"
   );
@@ -41,8 +99,31 @@ export function DraftContractModal({
   );
   const [newEquipment, setNewEquipment] = React.useState("");
 
+  const [syncedContractId, setSyncedContractId] = React.useState(contract.id);
+  if (contract.id !== syncedContractId) {
+    setSyncedContractId(contract.id);
+    setAgreedPrice(contract.agreedPrice || "£145.00");
+    setRawServiceDate(toIsoDate(contract.serviceDate));
+    setServiceDate(
+      contract.serviceDate && contract.serviceDate !== "Next Available Slot"
+        ? contract.serviceDate
+        : formatFromIso(toIsoDate())
+    );
+    setRawServiceTime(toTimeInput(contract.serviceTime));
+    setServiceTime(contract.serviceTime || "09:30 AM");
+    setWarrantyPeriod(contract.warrantyPeriod || "12 Months Workmanship Guarantee");
+    setNotes(contract.notes || "");
+    if (contract.providedServices && contract.providedServices.length > 0) {
+      setServices([...contract.providedServices]);
+    }
+    if (contract.providedEquipments && contract.providedEquipments.length > 0) {
+      setEquipments([...contract.providedEquipments]);
+    }
+  }
+
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [statusMessage, setStatusMessage] = React.useState<string | null>(null);
+  const currencySymbol = agreedPrice.startsWith("$") ? "$" : "£";
 
   if (!isOpen) return null;
 
@@ -76,9 +157,17 @@ export function DraftContractModal({
   const handleSaveDraft = (e?: React.MouseEvent) => {
     if (e) e.preventDefault();
     setIsSubmitting(true);
+    const numPrice = getCleanPriceNumeric(agreedPrice);
+    const platformFee = Math.round(numPrice * 0.05 * 100) / 100;
+    const totalDeposit = Math.round((numPrice + platformFee) * 100) / 100;
+
     const updated = updateContractDraft(contract.id, {
+      ...contract,
       agreedPrice,
-      priceNumeric: getCleanPriceNumeric(agreedPrice),
+      priceNumeric: numPrice,
+      platformFeeRate: 5,
+      platformFeeAmount: platformFee,
+      totalAmount: totalDeposit,
       serviceDate,
       serviceTime,
       warrantyPeriod,
@@ -89,36 +178,43 @@ export function DraftContractModal({
     });
     setIsSubmitting(false);
     if (updated) {
-      setStatusMessage("Draft contract saved successfully.");
+      toast.success("Draft Saved", "Contract draft updated successfully.");
       if (onSaved) onSaved(updated);
-      setTimeout(() => setStatusMessage(null), 2500);
     }
   };
 
   const handleSubmitToHomeowner = (e: React.MouseEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // First save updates
-    updateContractDraft(contract.id, {
+    const numPrice = getCleanPriceNumeric(agreedPrice);
+    const platformFee = Math.round(numPrice * 0.05 * 100) / 100;
+    const totalDeposit = Math.round((numPrice + platformFee) * 100) / 100;
+
+    // Save all contract metadata and promote status to PENDING_APPROVAL
+    const finalized = updateContractDraft(contract.id, {
+      ...contract,
       agreedPrice,
-      priceNumeric: getCleanPriceNumeric(agreedPrice),
+      priceNumeric: numPrice,
+      platformFeeRate: 5,
+      platformFeeAmount: platformFee,
+      totalAmount: totalDeposit,
       serviceDate,
       serviceTime,
       warrantyPeriod,
       notes,
       providedServices: services,
       providedEquipments: equipments,
+      status: "PENDING_APPROVAL",
     });
-    // Then promote status to PENDING_APPROVAL
-    const finalized = submitDraftToHomeowner(contract.id);
     setIsSubmitting(false);
     if (finalized) {
-      setStatusMessage("Final draft submitted to homeowner dashboard for review & approval!");
+      setStatusMessage("Proposal draft saved and submitted.");
+      toast.success(
+        "Proposal Submitted",
+        "Final draft submitted to homeowner dashboard for review and sign-off!"
+      );
       if (onSaved) onSaved(finalized);
-      setTimeout(() => {
-        setStatusMessage(null);
-        onClose();
-      }, 1500);
+      onClose();
     }
   };
 
@@ -182,11 +278,11 @@ export function DraftContractModal({
             </div>
           </div>
 
-          {/* Agreed Price & Currency */}
+          {/* Agreed Price, Service Date & Time */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1">
-                Final Agreed Price *
+                Contractor Quote ({currencySymbol}) *
               </label>
               <input
                 type="text"
@@ -195,9 +291,20 @@ export function DraftContractModal({
                 placeholder="e.g. £145.00"
                 className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-zinc-300 text-sm font-bold font-mono focus:outline-hidden focus:ring-2 focus:ring-[var(--accent)]"
               />
-              <span className="text-[10px] text-zinc-500 mt-1 block">
-                Agreed in negotiation or chat
-              </span>
+              <div className="mt-1.5 p-2 rounded bg-amber-50 border border-amber-200/80 text-[10px] space-y-0.5">
+                <div className="flex justify-between text-zinc-600">
+                  <span>Contractor Quote:</span>
+                  <span className="font-semibold text-zinc-800">{currencySymbol}{getCleanPriceNumeric(agreedPrice).toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-amber-800 font-medium">
+                  <span>Fixed 5% Platform Fee:</span>
+                  <span>+{currencySymbol}{(getCleanPriceNumeric(agreedPrice) * 0.05).toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-zinc-900 font-bold border-t border-amber-200 pt-0.5">
+                  <span>Homeowner Escrow Total:</span>
+                  <span>{currencySymbol}{(getCleanPriceNumeric(agreedPrice) * 1.05).toFixed(2)}</span>
+                </div>
+              </div>
             </div>
 
             <div>
@@ -205,12 +312,19 @@ export function DraftContractModal({
                 Service Date *
               </label>
               <input
-                type="text"
-                value={serviceDate}
-                onChange={(e) => setServiceDate(e.target.value)}
-                placeholder="e.g. 18 Nov 2026"
-                className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-zinc-300 text-xs focus:outline-hidden focus:ring-2 focus:ring-[var(--accent)]"
+                type="date"
+                value={rawServiceDate}
+                min={new Date().toISOString().split("T")[0]}
+                onChange={(e) => {
+                  setRawServiceDate(e.target.value);
+                  setServiceDate(formatFromIso(e.target.value));
+                }}
+                required
+                className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-zinc-300 text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[var(--accent)]"
               />
+              <span className="text-[10px] text-zinc-500 mt-1 block">
+                Scheduled: <strong className="text-zinc-900">{serviceDate}</strong>
+              </span>
             </div>
 
             <div>
@@ -218,12 +332,18 @@ export function DraftContractModal({
                 Arrival / Service Time *
               </label>
               <input
-                type="text"
-                value={serviceTime}
-                onChange={(e) => setServiceTime(e.target.value)}
-                placeholder="e.g. 09:30 AM"
-                className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-zinc-300 text-xs focus:outline-hidden focus:ring-2 focus:ring-[var(--accent)]"
+                type="time"
+                value={rawServiceTime}
+                onChange={(e) => {
+                  setRawServiceTime(e.target.value);
+                  setServiceTime(formatTimeFromInput(e.target.value));
+                }}
+                required
+                className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-zinc-300 text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[var(--accent)]"
               />
+              <span className="text-[10px] text-zinc-500 mt-1 block">
+                Time slot: <strong className="text-zinc-900">{serviceTime}</strong>
+              </span>
             </div>
           </div>
 

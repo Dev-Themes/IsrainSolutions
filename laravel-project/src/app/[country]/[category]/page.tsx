@@ -11,14 +11,6 @@ import {
   MapPin,
   ArrowRight,
   Sparkles,
-  Wrench,
-  Zap,
-  Flame,
-  Hammer,
-  HelpCircle,
-  PhoneCall,
-  Award,
-  FileText,
   BadgeCheck,
 } from "lucide-react";
 import { CATEGORIES, CITIES, VERIFIED_PROS } from "@/lib/data";

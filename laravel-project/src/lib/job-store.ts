@@ -267,14 +267,20 @@ export function useJobStore() {
 
   React.useEffect(() => {
     let isMounted = true;
+    let inFlight = false;
 
-    // Background fetch from Neon PostgreSQL
-    fetch("/api/jobs")
-      .then((res) => {
-        if (!res.ok) return null;
-        return res.json();
-      })
-      .then((data: { jobs?: Record<string, unknown>[] } | null) => {
+    const pollJobs = async () => {
+      if (!isMounted || inFlight) return;
+      inFlight = true;
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 4500);
+
+      try {
+        const res = await fetch("/api/jobs", { signal: controller.signal });
+        clearTimeout(timeoutId);
+        if (!res.ok) return;
+        const data = (await res.json()) as { jobs?: Record<string, unknown>[] };
         if (!isMounted || !data || !Array.isArray(data.jobs)) return;
         const neonJobs: MarketplaceJobItem[] = data.jobs.map((item) => ({
           id: String(item.id || ""),
@@ -298,14 +304,29 @@ export function useJobStore() {
           reviewLeft: (item.reviewLeft as MarketplaceJobItem["reviewLeft"]) || undefined,
         }));
 
-        saveLocalJobs(neonJobs);
-      })
-      .catch((err) => {
-        console.warn("Neon DB /api/jobs fetch notice:", err);
-      });
+        const current = getLocalJobs();
+        // Authoritative list from server; only preserve unsynced temporary local items
+        const pendingLocal = current.filter(
+          (local) => local.id.startsWith("job_temp_") && !neonJobs.some((m) => m.referenceCode === local.referenceCode || m.id === local.id)
+        );
+        const merged = [...neonJobs, ...pendingLocal];
+        saveLocalJobs(merged);
+      } catch (err: unknown) {
+        if ((err as Error)?.name !== "AbortError") {
+          console.warn("Neon DB /api/jobs fetch notice:", err);
+        }
+      } finally {
+        clearTimeout(timeoutId);
+        inFlight = false;
+      }
+    };
+
+    pollJobs();
+    const timer = setInterval(pollJobs, 5000);
 
     return () => {
       isMounted = false;
+      clearInterval(timer);
     };
   }, []);
 

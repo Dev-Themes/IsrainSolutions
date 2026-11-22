@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import {
   ShieldCheck,
   ShieldAlert,
@@ -35,11 +36,15 @@ import {
   useContractStore,
   JobContract,
   getContractorEarnings,
+  getContractFinancials,
 } from "@/lib/contract-store";
 import { DraftContractModal } from "@/components/contracts/draft-contract-modal";
 import { ContractorInvoiceModal } from "@/components/contracts/contractor-invoice-modal";
 import { useJobStore, QuoteProposal } from "@/lib/job-store";
 import { DeleteAccountModal } from "@/components/auth/delete-account-modal";
+import { toast } from "@/components/ui/toast";
+import { useUnreadMessages } from "@/lib/message-store";
+import { useCurrency } from "@/lib/currency";
 
 interface OpenLead {
   id: string;
@@ -77,6 +82,9 @@ interface ActiveContract {
   startDate: string;
   status: "SCHEDULED" | "ON_SITE" | "IN_PROGRESS";
   notes: string;
+  contractStatus?: "DRAFT" | "PENDING_APPROVAL" | "ACTIVE" | "INVOICED" | "PAID" | "COMPLETED";
+  providedServices?: string[];
+  providedEquipments?: string[];
 }
 
 interface CompletedContract {
@@ -111,6 +119,7 @@ function useIsClient() {
 }
 
 export default function ContractorDashboardPage() {
+  const router = useRouter();
   const { user, updateUser } = useAuth();
   const { contracts: storeContracts } = useContractStore();
   const { jobs: marketplaceJobs, updateJob } = useJobStore();
@@ -154,24 +163,24 @@ export default function ContractorDashboardPage() {
   const [hourlyRate, setHourlyRate] = React.useState("£75 / hr");
   const [calloutFee, setCalloutFee] = React.useState("£45");
 
-  React.useEffect(() => {
-    if (user) {
-      if (user.companyName) {
-        setCompanyName(user.companyName);
-      } else if (user.name && !isDemoPro) {
-        setCompanyName(user.name);
-      }
-      if (user.name && !isDemoPro) {
-        setLeadEngineer(user.name);
-      }
-      if (user.phone && !isDemoPro) {
-        setProPhone(user.phone);
-      }
-      if (user.city) {
-        setHomeBaseCity(user.city);
-      }
+  const [syncedUserId, setSyncedUserId] = React.useState(user?.id);
+  if (user && user.id !== syncedUserId) {
+    setSyncedUserId(user.id);
+    if (user.companyName) {
+      setCompanyName(user.companyName);
+    } else if (user.name && !isDemoPro) {
+      setCompanyName(user.name);
     }
-  }, [user, isDemoPro]);
+    if (user.name && !isDemoPro) {
+      setLeadEngineer(user.name);
+    }
+    if (user.phone && !isDemoPro) {
+      setProPhone(user.phone);
+    }
+    if (user.city) {
+      setHomeBaseCity(user.city);
+    }
+  }
 
   const earningsData = React.useMemo(() => {
     return getContractorEarnings(
@@ -179,10 +188,12 @@ export default function ContractorDashboardPage() {
         id: isDemoPro ? "pro_uk_1" : user?.id,
         email: user?.email,
         companyName: companyName,
+        name: user?.name,
       },
-      storeContracts
+      storeContracts,
+      marketplaceJobs
     );
-  }, [isDemoPro, user, companyName, storeContracts]);
+  }, [isDemoPro, user, companyName, storeContracts, marketplaceJobs]);
 
   const handleSaveProProfile = (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,11 +262,11 @@ export default function ContractorDashboardPage() {
   // Dynamic on-site status toggle overrides
   const [onSiteOverrides, setOnSiteOverrides] = React.useState<Record<string, "SCHEDULED" | "ON_SITE">>({});
 
-  // Derive active and completed contracts from real database store contracts
+  // Derive active, draft and invoiced contracts from real database store contracts + marketplace jobs
   const activeContracts: ActiveContract[] = React.useMemo(() => {
-    return storeContracts
+    const fromContracts = storeContracts
       .filter((c) => {
-        if (c.status !== "ACTIVE" && c.status !== "INVOICED") return false;
+        if (c.status !== "ACTIVE" && c.status !== "INVOICED" && c.status !== "PENDING_APPROVAL") return false;
         if (isDemoPro) {
           return (
             c.proId === "pro_uk_1" ||
@@ -266,7 +277,8 @@ export default function ContractorDashboardPage() {
         }
         if (user?.id && c.proId === user.id) return true;
         if (user?.email && c.proEmail && c.proEmail.toLowerCase() === user.email.toLowerCase()) return true;
-        if (companyName && c.proName.toLowerCase() === companyName.toLowerCase()) return true;
+        if (companyName && c.proName && c.proName.toLowerCase() === companyName.toLowerCase()) return true;
+        if (user?.name && c.proName && c.proName.toLowerCase() === user.name.toLowerCase()) return true;
         return false;
       })
       .map((c) => ({
@@ -282,8 +294,52 @@ export default function ContractorDashboardPage() {
         startDate: `${c.serviceDate} (${c.serviceTime})`,
         status: onSiteOverrides[c.id] || (c.status === "INVOICED" ? "ON_SITE" : "SCHEDULED"),
         notes: c.notes || "",
+        contractStatus: c.status,
+        providedServices: c.providedServices,
+        providedEquipments: c.providedEquipments,
       }));
-  }, [storeContracts, onSiteOverrides, isDemoPro, user, companyName]);
+
+    // Cross-link in-progress jobs from marketplaceJobs where homeowner accepted this contractor's proposal
+    const fromJobs: ActiveContract[] = marketplaceJobs
+      .filter((j) => {
+        if (j.status !== "IN_PROGRESS") return false;
+        if (fromContracts.some((c) => c.referenceCode === j.referenceCode)) return false;
+        if (isDemoPro) {
+          return j.proposals.some(
+            (p) => p.status === "ACCEPTED" && (p.proId === "pro_uk_1" || p.proName.toLowerCase().includes("apex"))
+          );
+        }
+        return j.proposals.some(
+          (p) =>
+            p.status === "ACCEPTED" &&
+            (p.proId === currentProId ||
+              p.proId === user?.id ||
+              (user?.email && p.proEmail?.toLowerCase() === user.email.toLowerCase()) ||
+              (companyName && p.proName.toLowerCase() === companyName.toLowerCase()) ||
+              (user?.name && p.proName.toLowerCase() === user.name.toLowerCase()))
+        );
+      })
+      .map((j) => {
+        const accepted = j.proposals.find((p) => p.status === "ACCEPTED");
+        return {
+          id: `cnt_${j.id}`,
+          referenceCode: j.referenceCode,
+          service: j.service,
+          title: j.title,
+          homeownerName: j.homeownerName,
+          homeownerPhone: j.homeownerPhone || "+44 20 7946 0812",
+          address: j.location,
+          city: j.city || "London",
+          agreedPrice: accepted?.price || j.finalCost || "£145.00",
+          startDate: `${new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} (09:00 AM)`,
+          status: "SCHEDULED" as const,
+          notes: accepted?.notes || "Work in progress.",
+          contractStatus: "ACTIVE" as const,
+        };
+      });
+
+    return [...fromContracts, ...fromJobs];
+  }, [storeContracts, marketplaceJobs, onSiteOverrides, isDemoPro, user, companyName, currentProId]);
 
   const completedContracts: CompletedContract[] = React.useMemo(() => {
     const fromContracts = storeContracts
@@ -299,10 +355,12 @@ export default function ContractorDashboardPage() {
         }
         if (user?.id && c.proId === user.id) return true;
         if (user?.email && c.proEmail && c.proEmail.toLowerCase() === user.email.toLowerCase()) return true;
-        if (companyName && c.proName.toLowerCase() === companyName.toLowerCase()) return true;
+        if (companyName && c.proName && c.proName.toLowerCase() === companyName.toLowerCase()) return true;
+        if (user?.name && c.proName && c.proName.toLowerCase() === user.name.toLowerCase()) return true;
         return false;
       })
       .map((c) => {
+        const fin = getContractFinancials(c);
         const jobMatch = marketplaceJobs.find((j) => j.referenceCode === c.referenceCode);
         const resolvedReview = c.review || (jobMatch?.reviewLeft ? {
           author: c.homeownerName || "Homeowner",
@@ -318,37 +376,48 @@ export default function ContractorDashboardPage() {
           title: c.title,
           homeownerName: c.homeownerName,
           completedDate: c.invoicePaidAt?.split(",")[0] || c.serviceDate,
-          settledAmount: c.agreedPrice,
+          settledAmount: `${c.currency || "£"}${fin.contractPrice.toFixed(2)}`,
           paymentStatus: "PAID" as const,
           invoiceNumber: c.invoiceNumber || `INV-${c.referenceCode}`,
           homeownerReview: resolvedReview,
         };
       });
 
-    const fromJobs = isDemoPro
-      ? marketplaceJobs
-          .filter((j) => j.status === "COMPLETED" && !fromContracts.some((c) => c.referenceCode === j.referenceCode))
-          .map((j) => ({
-            id: j.id,
-            referenceCode: j.referenceCode,
-            service: j.service,
-            title: j.title,
-            homeownerName: j.homeownerName,
-            completedDate: j.completedDate || "Recently Completed",
-            settledAmount: j.finalCost || "£145.00",
-            paymentStatus: "PAID" as const,
-            invoiceNumber: `INV-${j.referenceCode}`,
-            homeownerReview: j.reviewLeft ? {
-              author: j.homeownerName || "Homeowner",
-              rating: j.reviewLeft.rating,
-              date: j.completedDate || "Recently",
-              comment: j.reviewLeft.comment,
-            } : undefined,
-          }))
-      : [];
+    const fromJobs = marketplaceJobs
+      .filter((j) => {
+        if (j.status !== "COMPLETED") return false;
+        if (fromContracts.some((c) => c.referenceCode === j.referenceCode)) return false;
+        if (isDemoPro) return true;
+        return j.proposals.some(
+          (p) =>
+            p.status === "ACCEPTED" &&
+            (p.proId === currentProId ||
+              p.proId === user?.id ||
+              (user?.email && p.proEmail?.toLowerCase() === user.email.toLowerCase()) ||
+              (companyName && p.proName.toLowerCase() === companyName.toLowerCase()) ||
+              (user?.name && p.proName.toLowerCase() === user.name.toLowerCase()))
+        );
+      })
+      .map((j) => ({
+        id: j.id,
+        referenceCode: j.referenceCode,
+        service: j.service,
+        title: j.title,
+        homeownerName: j.homeownerName,
+        completedDate: j.completedDate || "Recently Completed",
+        settledAmount: j.finalCost || "£145.00",
+        paymentStatus: "PAID" as const,
+        invoiceNumber: `INV-${j.referenceCode}`,
+        homeownerReview: j.reviewLeft ? {
+          author: j.homeownerName || "Homeowner",
+          rating: j.reviewLeft.rating,
+          date: j.completedDate || "Recently",
+          comment: j.reviewLeft.comment,
+        } : undefined,
+      }));
 
     return [...fromContracts, ...fromJobs];
-  }, [storeContracts, marketplaceJobs, isDemoPro, user, companyName]);
+  }, [storeContracts, marketplaceJobs, isDemoPro, user, companyName, currentProId]);
 
   // Pro Verification Requirement: Must complete at least 10 contracts successfully AND have rating > 4.0
   const proCompletedCount = completedContracts.length;
@@ -376,6 +445,8 @@ export default function ContractorDashboardPage() {
 
   // Territory filter for Job Board
   const [territoryFilter, setTerritoryFilter] = React.useState<"ALL" | "BASE" | "EXPANDED">("ALL");
+  const { unreadMap } = useUnreadMessages("PRO");
+  const { currency, setCurrency, format } = useCurrency();
 
   // Document & Negotiation Modals State
   const [selectedDocData, setSelectedDocData] = React.useState<InvoiceContractData | null>(null);
@@ -533,19 +604,17 @@ export default function ContractorDashboardPage() {
   };
 
   const handleRetractQuote = async (leadId: string, referenceCode: string) => {
-    if (confirm(`Withdraw your submitted quote for job ${referenceCode}?`)) {
-      const targetJob = marketplaceJobs.find((j) => j.id === leadId || j.referenceCode === referenceCode);
-      if (targetJob) {
-        const updatedProposals = targetJob.proposals.filter((p) => {
-          const isMyProp = (isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName;
-          return !isMyProp;
-        });
-        await updateJob(targetJob.referenceCode, {
-          proposals: updatedProposals,
-        });
-      }
-      alert("Quote proposal successfully withdrawn.");
+    const targetJob = marketplaceJobs.find((j) => j.id === leadId || j.referenceCode === referenceCode);
+    if (targetJob) {
+      const updatedProposals = targetJob.proposals.filter((p) => {
+        const isMyProp = (isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName;
+        return !isMyProp;
+      });
+      await updateJob(targetJob.referenceCode, {
+        proposals: updatedProposals,
+      });
     }
+    toast.info(`Quote proposal for job ${referenceCode} successfully withdrawn.`);
   };
 
   const handleConfirmQuoteSubmit = async (e: React.FormEvent) => {
@@ -580,7 +649,7 @@ export default function ContractorDashboardPage() {
     }
 
     setQuotingLeadId(null);
-    alert("Quote submitted to homeowner! You will receive notification when the homeowner accepts.");
+    toast.success("Quote submitted to homeowner! You will receive notification when the homeowner accepts.");
   };
 
   const handleToggleOnSite = (contractId: string) => {
@@ -592,6 +661,7 @@ export default function ContractorDashboardPage() {
 
   const handleOpenDraftFromLead = (lead: OpenLead) => {
     const matched = storeContracts.find((c) => c.referenceCode === lead.referenceCode);
+    const matchedJob = marketplaceJobs.find((j) => j.referenceCode === lead.referenceCode || j.id === lead.id);
     const contractToDraft: JobContract = matched || {
       id: `cnt_${lead.id}`,
       referenceCode: lead.referenceCode,
@@ -602,16 +672,16 @@ export default function ContractorDashboardPage() {
       country: lead.country,
       urgency: lead.urgency,
       datePosted: lead.datePosted,
-      homeownerId: "usr_homeowner_1",
-      homeownerName: lead.homeownerName,
-      homeownerPhone: "+44 20 7946 0812",
-      homeownerEmail: "sarah.jenkins@example.co.uk",
-      homeownerAddress: lead.location,
+      homeownerId: matchedJob?.homeownerId || "usr_homeowner_1",
+      homeownerName: matchedJob?.homeownerName || lead.homeownerName,
+      homeownerPhone: matchedJob?.homeownerPhone || "+44 20 7946 0812",
+      homeownerEmail: matchedJob?.homeownerEmail || "",
+      homeownerAddress: matchedJob?.location || lead.location,
       proId: currentProId,
       proSlug: isDemoPro ? "apex-plumbing-heating-london" : companyName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       proName: companyName,
-      proPhone: proPhone || "+44 20 7946 0812",
-      proEmail: proEmail || "contractor@tradeconnect.co.uk",
+      proPhone: proPhone || user?.phone || "+44 20 7946 0812",
+      proEmail: proEmail || user?.email || "contractor@tradeconnect.co.uk",
       proLicense: isDemoPro ? "Gas Safe Register #592104" : "Verified Trade Certification",
       proInsurance: isDemoPro ? "£5,000,000 Direct Line Public Liability" : "£2,000,000 Trade Liability",
       proCity: homeBaseCity,
@@ -628,7 +698,7 @@ export default function ContractorDashboardPage() {
         "Certified trade replacement parts and compression fittings",
         "Standard high-spec trade consumables",
       ],
-      serviceDate: "17 Nov 2026",
+      serviceDate: new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
       serviceTime: "09:30 AM",
       warrantyPeriod: "12 Months Workmanship Guarantee",
       notes: lead.myQuote?.notes || "Final terms agreed following negotiation.",
@@ -719,50 +789,87 @@ export default function ContractorDashboardPage() {
 
   const handleOpenIssueInvoice = (contract: ActiveContract) => {
     const matched = storeContracts.find((c) => c.referenceCode === contract.referenceCode);
+    const matchedJob = marketplaceJobs.find((j) => j.referenceCode === contract.referenceCode || j.id === contract.id);
     const resolvedPrice = matched?.agreedPrice || contract.agreedPrice;
-    const cnt: JobContract = matched || {
-      id: `cnt_${contract.id}`,
-      referenceCode: contract.referenceCode,
-      service: contract.service,
-      title: contract.title,
-      location: contract.address,
-      city: contract.city || "London",
-      country: "UK",
-      urgency: "Standard",
-      datePosted: "14 Nov 2026",
-      homeownerId: "usr_homeowner_1",
-      homeownerName: contract.homeownerName,
-      homeownerPhone: contract.homeownerPhone,
-      homeownerEmail: "sarah.jenkins@example.co.uk",
-      homeownerAddress: contract.address,
-      proId: currentProId,
-      proSlug: isDemoPro ? "apex-plumbing-heating-london" : companyName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      proName: companyName,
-      proPhone: proPhone || "+44 20 7946 0812",
-      proEmail: proEmail || "contractor@tradeconnect.co.uk",
-      proLicense: isDemoPro ? "Gas Safe #592104" : "Verified Trade Certification",
-      proInsurance: isDemoPro ? "£5,000,000 Direct Line Public Liability" : "£2,000,000 Trade Liability",
-      proCity: homeBaseCity,
-      status: "ACTIVE",
-      agreedPrice: resolvedPrice,
-      currency: "£",
-      priceNumeric: parseFloat(resolvedPrice.replace(/[^0-9.]/g, "")) || 520,
-      providedServices: [
-        "Primary trade installation & circuit isolation",
-        "Full test and certification compliance",
-      ],
-      providedEquipments: [
-        "10-way dual RCD metal consumer unit",
-        "Surge Protection Device (SPD) and type A RCBOs",
-      ],
-      serviceDate: "16 Nov 2026",
-      serviceTime: "08:30 AM",
-      warrantyPeriod: "12 Months Workmanship Guarantee",
-      notes: contract.notes,
-    };
+    const cnt: JobContract = matched
+      ? {
+          ...matched,
+          providedServices: matched.providedServices || contract.providedServices || [
+            "Primary trade installation & circuit isolation",
+            "Full test and certification compliance",
+          ],
+          providedEquipments: matched.providedEquipments || contract.providedEquipments || [
+            "Certified trade replacement parts and compression fittings",
+            "Standard high-spec trade consumables",
+          ],
+        }
+      : {
+          id: `cnt_${contract.id}`,
+          referenceCode: contract.referenceCode,
+          service: contract.service,
+          title: contract.title,
+          location: contract.address,
+          city: contract.city || "London",
+          country: "UK",
+          urgency: "Standard",
+          datePosted: "Today",
+          homeownerId: matchedJob?.homeownerId || "usr_homeowner_1",
+          homeownerName: contract.homeownerName,
+          homeownerPhone: contract.homeownerPhone,
+          homeownerEmail: matchedJob?.homeownerEmail || "",
+          homeownerAddress: contract.address,
+          proId: currentProId,
+          proSlug: isDemoPro ? "apex-plumbing-heating-london" : companyName.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+          proName: companyName,
+          proPhone: proPhone || user?.phone || "+44 20 7946 0812",
+          proEmail: proEmail || user?.email || "contractor@tradeconnect.co.uk",
+          proLicense: isDemoPro ? "Gas Safe #592104" : "Verified Trade Certification",
+          proInsurance: isDemoPro ? "£5,000,000 Direct Line Public Liability" : "£2,000,000 Trade Liability",
+          proCity: homeBaseCity,
+          status: "ACTIVE",
+          agreedPrice: resolvedPrice,
+          currency: "£",
+          priceNumeric: parseFloat(resolvedPrice.replace(/[^0-9.]/g, "")) || 145,
+          providedServices: contract.providedServices || [
+            "Primary trade installation & circuit isolation",
+            "Full test and certification compliance",
+          ],
+          providedEquipments: contract.providedEquipments || [
+            "Certified trade replacement parts and compression fittings",
+            "Standard high-spec trade consumables",
+          ],
+          serviceDate: contract.startDate || new Date().toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
+          serviceTime: "08:30 AM",
+          warrantyPeriod: "12 Months Workmanship Guarantee",
+          notes: contract.notes,
+        };
     setInvoicingContract(cnt);
     setIsInvoicingModalOpen(true);
   };
+
+  // Airtight Auth & Role Guard
+  React.useEffect(() => {
+    if (mounted) {
+      if (!user) {
+        router.replace("/auth/login?redirect=/dashboard/pro");
+      } else if (user.role === "CUSTOMER") {
+        router.replace("/dashboard/homeowner");
+      }
+    }
+  }, [mounted, user, router]);
+
+  // Shield contractor portal UI from unauthenticated users or homeowners
+  if (!mounted || !user || user.role === "CUSTOMER") {
+    return (
+      <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center">
+        <div className="w-12 h-12 border-4 border-[var(--brand)] border-t-transparent rounded-full animate-spin mb-4" />
+        <p className="text-sm font-bold text-[var(--text)]">Verifying Contractor Credentials...</p>
+        <p className="text-xs text-[var(--text-muted)] mt-1">
+          {!user ? "Please sign in to access contractor dispatch. Redirecting to login..." : "Redirecting to your homeowner portal..."}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="section-light section-spacing">
@@ -839,7 +946,7 @@ export default function ContractorDashboardPage() {
               Verified Settlement
             </div>
             <div className="text-2xl font-bold text-[var(--text)] mt-1 font-serif" suppressHydrationWarning>
-              {earningsData.currency}{earningsData.lifetimeTotal.toLocaleString()}
+              {format(earningsData.lifetimeTotal)}
             </div>
             <div className="text-[11px] text-[var(--pine-accent)] font-semibold mt-0.5">
               {earningsData.completedContractsCount} paid contracts settled
@@ -847,68 +954,112 @@ export default function ContractorDashboardPage() {
           </div>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="flex border-b border-[var(--line)] mb-6 overflow-x-auto">
-          <button
-            type="button"
-            onClick={() => setActiveTab("LEADS")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "LEADS"
-                ? "border-[var(--brand)] text-[var(--brand)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <span suppressHydrationWarning>Live Job Board & Leads ({leads.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("ACTIVE")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "ACTIVE"
-                ? "border-[var(--brand)] text-[var(--brand)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <span suppressHydrationWarning>In-Progress Contracts ({activeContracts.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("EARNED")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "EARNED"
-                ? "border-[var(--brand)] text-[var(--brand)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <span suppressHydrationWarning>Earned Tab ({earningsData.currency}{earningsData.lifetimeTotal.toLocaleString()})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("HISTORY")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "HISTORY"
-                ? "border-[var(--brand)] text-[var(--brand)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            <span suppressHydrationWarning>Contract History & Receipts ({completedContracts.length})</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("PROFILE")}
-            className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
-              activeTab === "PROFILE"
-                ? "border-[var(--brand)] text-[var(--brand)]"
-                : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
-            }`}
-          >
-            Company Profile &amp; Security
-          </button>
+        {/* Tab Navigation with Currency Conversion Switcher */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--line)] mb-6">
+          <div className="flex overflow-x-auto">
+            <button
+              type="button"
+              onClick={() => setActiveTab("LEADS")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "LEADS"
+                  ? "border-[var(--brand)] text-[var(--brand)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <span suppressHydrationWarning>Live Job Board & Leads ({leads.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("ACTIVE")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "ACTIVE"
+                  ? "border-[var(--brand)] text-[var(--brand)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <span suppressHydrationWarning>In-Progress Contracts ({activeContracts.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("EARNED")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "EARNED"
+                  ? "border-[var(--brand)] text-[var(--brand)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <span suppressHydrationWarning>Earned Tab ({format(earningsData.lifetimeTotal)})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("HISTORY")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "HISTORY"
+                  ? "border-[var(--brand)] text-[var(--brand)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              <span suppressHydrationWarning>Contract History & Receipts ({completedContracts.length})</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("PROFILE")}
+              className={`pb-3 px-4 text-xs font-bold border-b-2 transition-colors cursor-pointer whitespace-nowrap ${
+                activeTab === "PROFILE"
+                  ? "border-[var(--brand)] text-[var(--brand)]"
+                  : "border-transparent text-[var(--text-muted)] hover:text-[var(--text)]"
+              }`}
+            >
+              Company Profile &amp; Security
+            </button>
+          </div>
+
+          <div className="flex items-center space-x-1 p-1 rounded-lg bg-[var(--surface)] border border-[var(--line)] text-xs shrink-0 self-start sm:self-center mb-2 sm:mb-0 shadow-2xs">
+            <span className="text-[10px] text-[var(--text-muted)] font-bold px-1.5 uppercase">Currency:</span>
+            {(["GBP", "USD", "EUR"] as const).map((currCode) => (
+              <button
+                key={currCode}
+                type="button"
+                onClick={() => setCurrency(currCode)}
+                className={`px-2 py-0.5 rounded text-[11px] font-bold transition-all cursor-pointer ${
+                  currency === currCode
+                    ? "bg-[var(--brand)] text-white shadow-xs"
+                    : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                }`}
+              >
+                {currCode === "GBP" ? "£ GBP" : currCode === "USD" ? "$ USD" : "€ EUR"}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* TAB 1: LIVE JOB BOARD & LEADS */}
         {activeTab === "LEADS" && (
           <div className="space-y-4">
+            {/* Active Contracts Notification Banner */}
+            {activeContracts.length > 0 && (
+              <div className="p-4 rounded-[var(--radius)] bg-emerald-500/10 border-2 border-emerald-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs animate-in fade-in duration-200">
+                <div className="flex items-center space-x-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+                  <div>
+                    <span className="font-bold text-emerald-900 dark:text-emerald-200 block">
+                      You have {activeContracts.length} active contract{activeContracts.length > 1 ? "s" : ""} in progress!
+                    </span>
+                    <span className="text-[11px] text-emerald-700 dark:text-emerald-300">
+                      Homeowner has accepted your quote. Track arrival time, chat, or issue your final itemized VAT invoices.
+                    </span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("ACTIVE")}
+                  className="px-3.5 py-1.5 rounded-[var(--radius-sm)] bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shrink-0 inline-flex items-center space-x-1 cursor-pointer shadow-xs"
+                >
+                  <span>View In-Progress Contracts &amp; Issue Invoice &rarr;</span>
+                </button>
+              </div>
+            )}
+
             {/* Territory Filter Controls */}
             <div className="p-4 rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-xs space-y-3">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
@@ -1074,6 +1225,11 @@ export default function ContractorDashboardPage() {
                         >
                           <Lock className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                           <span>Negotiate</span>
+                          {unreadMap[lead.referenceCode] > 0 && (
+                            <span className="ml-1 px-1.5 py-0.2 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                              {unreadMap[lead.referenceCode]} new
+                            </span>
+                          )}
                         </button>
                         <button
                           type="button"
@@ -1191,12 +1347,28 @@ export default function ContractorDashboardPage() {
                           <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--bg-alt)] text-[var(--text-muted)] font-mono">
                             {contract.referenceCode}
                           </span>
-                          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/15 text-blue-600 dark:text-blue-400">
-                            {contract.status === "SCHEDULED" ? "Work Scheduled" : "In Progress"}
-                          </span>
+                          {contract.contractStatus === "PENDING_APPROVAL" ? (
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                              Draft Sent &bull; Awaiting Homeowner Signature
+                            </span>
+                          ) : contract.contractStatus === "INVOICED" ? (
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                              Invoice Issued &bull; Work Completed
+                            </span>
+                          ) : (
+                            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/30">
+                              {contract.status === "ON_SITE" ? "✓ Currently On Site" : "Contract Active &bull; In Progress"}
+                            </span>
+                          )}
                           <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[var(--brand-light)] text-[var(--brand)]">
                             {contract.service}
                           </span>
+                          {unreadMap[contract.referenceCode] > 0 && (
+                            <span className="px-2.5 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[10px] animate-pulse flex items-center space-x-1 shadow-xs">
+                              <span>💬</span>
+                              <span>{unreadMap[contract.referenceCode]} New Message{unreadMap[contract.referenceCode] > 1 ? "s" : ""}</span>
+                            </span>
+                          )}
                         </div>
                         <h3 className="text-base font-bold text-[var(--text)]">
                           {contract.title}
@@ -1208,7 +1380,7 @@ export default function ContractorDashboardPage() {
                           Agreed Contract Amount
                         </span>
                         <span className="text-base font-bold text-[var(--accent)] font-serif">
-                          {displayPrice}
+                          {format(matchedStore?.subtotalAmount || matchedStore?.priceNumeric || displayPrice)}
                         </span>
                       </div>
                     </div>
@@ -1249,17 +1421,19 @@ export default function ContractorDashboardPage() {
                       <span className="text-xs text-[var(--text-muted)]">
                         Status Milestone:
                       </span>
-                      <button
-                        type="button"
-                        onClick={() => handleToggleOnSite(contract.id)}
-                        className={`px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold border transition-colors cursor-pointer ${
-                          contract.status === "ON_SITE"
-                            ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30"
-                            : "bg-[var(--bg-alt)] text-[var(--text)] border-[var(--line)] hover:bg-[var(--line-subtle)]"
-                        }`}
-                      >
-                        {contract.status === "ON_SITE" ? "✓ Currently On Site" : "Mark as On Site"}
-                      </button>
+                      {contract.contractStatus !== "PENDING_APPROVAL" && (
+                        <button
+                          type="button"
+                          onClick={() => handleToggleOnSite(contract.id)}
+                          className={`px-2.5 py-1 rounded-[var(--radius-sm)] text-[11px] font-bold border transition-colors cursor-pointer ${
+                            contract.status === "ON_SITE"
+                              ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30"
+                              : "bg-[var(--bg-alt)] text-[var(--text)] border-[var(--line)] hover:bg-[var(--line-subtle)]"
+                          }`}
+                        >
+                          {contract.status === "ON_SITE" ? "✓ Currently On Site" : "Mark as On Site"}
+                        </button>
+                      )}
 
                       <button
                         type="button"
@@ -1268,7 +1442,7 @@ export default function ContractorDashboardPage() {
                         title="Print Official Work Contract as PDF"
                       >
                         <Printer className="w-3.5 h-3.5 text-[var(--accent)]" />
-                        <span>Print Contract PDF</span>
+                        <span>{contract.contractStatus === "PENDING_APPROVAL" ? "Preview Draft PDF" : "Print Contract PDF"}</span>
                       </button>
 
                       <button
@@ -1287,17 +1461,38 @@ export default function ContractorDashboardPage() {
                       >
                         <Lock className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                         <span>E2EE Chat</span>
+                        {unreadMap[contract.referenceCode] > 0 && (
+                          <span className="ml-1 px-1.5 py-0.2 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                            {unreadMap[contract.referenceCode]} new
+                          </span>
+                        )}
                       </button>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => handleOpenIssueInvoice(contract)}
-                      className="btn-primary px-4 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1.5 shadow-xs cursor-pointer"
-                    >
-                      <CheckCircle2 className="w-4 h-4" />
-                      <span>Issue Final Invoice</span>
-                    </button>
+                    {contract.contractStatus === "INVOICED" ? (
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xs font-bold text-emerald-700 bg-emerald-100 dark:bg-emerald-950/40 px-3 py-1.5 rounded">
+                          Invoice Sent &bull; Awaiting Homeowner Payment
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => handleOpenActiveContractDoc(contract)}
+                          className="btn-secondary px-3.5 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1.5 cursor-pointer"
+                        >
+                          <Printer className="w-3.5 h-3.5 text-[var(--accent)]" />
+                          <span>View VAT Invoice</span>
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => handleOpenIssueInvoice(contract)}
+                        className="btn-primary px-4 py-2 rounded-[var(--radius-sm)] text-xs font-bold inline-flex items-center space-x-1.5 shadow-xs cursor-pointer"
+                      >
+                        <CheckCircle2 className="w-4 h-4" />
+                        <span>Issue Final Invoice</span>
+                      </button>
+                    )}
                   </div>
                 </div>
                 );
@@ -1316,10 +1511,10 @@ export default function ContractorDashboardPage() {
                   Verified Contractor Payout Dashboard
                 </span>
                 <div className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-white">
-                  {earningsData.currency}{earningsData.lifetimeTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {format(earningsData.lifetimeTotal)}
                 </div>
                 <p className="text-xs text-zinc-400 max-w-md pt-1 leading-relaxed">
-                  Total lifetime trade earnings secured and settled through TradeConnect Escrow. Zero commission fee deducted (100% contractor payout).
+                  Total lifetime trade earnings secured and settled through TradeConnect Escrow. Shows pure contract price (100% contractor payout, excluding platform protection fee).
                 </p>
               </div>
 
@@ -1334,7 +1529,7 @@ export default function ContractorDashboardPage() {
                 <div className="p-3.5 rounded-xl bg-zinc-800/80 border border-zinc-700/60">
                   <span className="text-[10px] uppercase font-bold text-zinc-400 block">Active Month</span>
                   <div className="text-xl font-black text-[var(--accent)] mt-0.5 font-mono">
-                    {earningsData.currency}{(earningsData.monthlyBreakdown[0]?.total || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    {format(earningsData.monthlyBreakdown[0]?.total || 0)}
                   </div>
                   <span className="text-[10px] text-zinc-400">November 2026</span>
                 </div>
@@ -1368,9 +1563,9 @@ export default function ContractorDashboardPage() {
                   </p>
                 </div>
               ) : (
-                earningsData.monthlyBreakdown.map((mGroup) => (
+                earningsData.monthlyBreakdown.map((mGroup, mIdx) => (
                   <div
-                    key={mGroup.monthLabel}
+                    key={`${mGroup.monthKey || mGroup.monthLabel}-${mIdx}`}
                     className="rounded-[var(--radius-lg)] bg-[var(--surface)] border border-[var(--line)] shadow-soft overflow-hidden"
                   >
                     {/* Month Header Banner */}
@@ -1394,7 +1589,7 @@ export default function ContractorDashboardPage() {
                           Monthly Settled Total
                         </span>
                         <span className="text-lg font-black font-mono text-[var(--accent)]">
-                          {earningsData.currency}{mGroup.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                          {format(mGroup.total)}
                         </span>
                       </div>
                     </div>
@@ -1408,13 +1603,13 @@ export default function ContractorDashboardPage() {
                             <th className="py-3 px-4">Job Scope</th>
                             <th className="py-3 px-4">Client</th>
                             <th className="py-3 px-4">Settled Date</th>
-                            <th className="py-3 px-4 text-right">Earned Amount</th>
+                            <th className="py-3 px-4 text-right">Earned Contract Price</th>
                             <th className="py-3 px-4 text-right">Invoice Document</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-[var(--line)]">
-                          {mGroup.contracts.map((cnt) => (
-                            <tr key={cnt.id} className="hover:bg-[var(--bg-alt)]/50 transition-colors">
+                          {mGroup.contracts.map((cnt, cntIdx) => (
+                            <tr key={`${cnt.id || cnt.referenceCode}-${cntIdx}`} className="hover:bg-[var(--bg-alt)]/50 transition-colors">
                               <td className="py-3.5 px-4 whitespace-nowrap">
                                 <span className="font-mono font-bold text-[var(--text)] block">
                                   {cnt.referenceCode}
@@ -1443,7 +1638,7 @@ export default function ContractorDashboardPage() {
                                 {cnt.invoicePaidAt?.split(",")[0] || cnt.serviceDate}
                               </td>
                               <td className="py-3.5 px-4 text-right whitespace-nowrap font-mono font-extrabold text-sm text-[var(--text)]">
-                                {cnt.currency}{(cnt.totalAmount || cnt.priceNumeric).toFixed(2)}
+                                {format(getContractFinancials(cnt).contractPrice)}
                               </td>
                               <td className="py-3.5 px-4 text-right whitespace-nowrap">
                                 <button
@@ -1523,10 +1718,10 @@ export default function ContractorDashboardPage() {
 
                     <div className="sm:text-right shrink-0">
                       <span className="text-xs text-[var(--text-muted)] block">
-                        Settled Amount
+                        Settled Contract Price
                       </span>
-                      <span className="text-base font-bold text-[var(--text)] font-serif">
-                        {job.settledAmount}
+                      <span className="text-base font-bold text-[var(--text)] font-mono">
+                        {format(job.settledAmount)}
                       </span>
                     </div>
                   </div>
@@ -1651,34 +1846,39 @@ export default function ContractorDashboardPage() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] border border-[var(--line)] space-y-2">
-                  <div className="flex justify-between items-center text-xs font-bold">
-                    <span className="text-[var(--text)]">Homeowner Review Rating Requirement</span>
-                    <span
-                      className={
-                        safeProRating > 4.0
-                          ? "text-emerald-700 font-extrabold flex items-center"
-                          : "text-[var(--accent)] font-extrabold flex items-center"
-                      }
-                    >
-                      <Star className="w-3.5 h-3.5 fill-current mr-1" />
-                      {safeProRating > 0 ? safeProRating.toFixed(2) : "0.0"} / 4.0★ Required
-                    </span>
+                <div className="p-4 rounded-[var(--radius-sm)] bg-[var(--bg-alt)] border border-[var(--line)] space-y-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs font-bold">
+                    <span className="text-[var(--text)]">Homeowner Review Rating</span>
+                    <div className="flex items-center space-x-2">
+                      <span
+                        className={
+                          safeProRating >= 4.0
+                            ? "text-emerald-700 dark:text-emerald-400 font-extrabold flex items-center"
+                            : "text-[var(--accent)] font-extrabold flex items-center"
+                        }
+                      >
+                        <Star className="w-3.5 h-3.5 fill-current mr-1 text-amber-500" />
+                        {safeProRating > 0 ? `${safeProRating.toFixed(2)} / 5.0★` : "0.0 / 5.0★"}
+                      </span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[var(--surface)] border border-[var(--line)] text-[var(--text-muted)]">
+                        Target: &gt; 4.0★ Required
+                      </span>
+                    </div>
                   </div>
                   <div className="w-full bg-[var(--line)] rounded-full h-2.5 overflow-hidden">
                     <div
                       className={`h-2.5 rounded-full transition-all duration-500 ${
-                        safeProRating > 4.0 ? "bg-emerald-600" : "bg-[var(--accent)]"
+                        safeProRating >= 4.0 ? "bg-emerald-600" : "bg-[var(--accent)]"
                       }`}
                       style={{ width: `${Math.min(100, (safeProRating / 5.0) * 100)}%` }}
                     />
                   </div>
                   <p className="text-[11px] text-[var(--text-muted)]">
-                    {safeProRating > 4.0
-                      ? `✓ Rating criteria met with ${safeProRating}★ across ${proReviews.length} reviews`
+                    {safeProRating >= 4.0
+                      ? `✓ Rating criteria met with ${safeProRating.toFixed(2)}★ across ${proReviews.length} verified review${proReviews.length === 1 ? "" : "s"}.`
                       : proReviews.length === 0
-                      ? "Awaiting first completed job reviews from homeowners."
-                      : `Current average is ${safeProRating}★. Minimum >4.0★ required.`}
+                      ? "Awaiting first completed job reviews from homeowners. Minimum >4.0★ required for Verified Pro badge."
+                      : `Current average is ${safeProRating.toFixed(2)}★ out of 5.0★. Minimum >4.0★ required for Verified Pro badge.`}
                   </p>
                 </div>
               </div>
@@ -2115,6 +2315,7 @@ export default function ContractorDashboardPage() {
         {/* MODAL 4: END-TO-END ENCRYPTED NEGOTIATION CHAT */}
         {activeNegotiation && (
           <NegotiationModal
+            key={activeNegotiation.referenceCode}
             isOpen={Boolean(activeNegotiation)}
             onClose={() => setActiveNegotiation(null)}
             jobTitle={activeNegotiation.jobTitle}
@@ -2140,11 +2341,26 @@ export default function ContractorDashboardPage() {
               setDraftingContract(updated);
               const target = marketplaceJobs.find((j) => j.referenceCode === updated.referenceCode);
               if (target) {
-                const updatedProposals = target.proposals.map((p) =>
-                  ((isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName)
-                    ? { ...p, price: updated.agreedPrice, notes: updated.notes }
-                    : p
+                const hasMyProp = target.proposals.some(
+                  (p) => ((isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName)
                 );
+                const myPropObj: QuoteProposal = {
+                  proId: currentProId,
+                  proName: companyName,
+                  rating: isDemoPro ? 4.96 : 5.0,
+                  phone: proPhone || "+44 20 7946 0812",
+                  price: updated.agreedPrice,
+                  notes: updated.notes || `Contract proposal drafted for ${updated.serviceDate} (${updated.serviceTime})`,
+                  status: "PENDING",
+                  proEmail: proEmail || user?.email,
+                };
+                const updatedProposals = hasMyProp
+                  ? target.proposals.map((p) =>
+                      ((isDemoPro && (p.proId === "pro_uk_1" || p.proName.includes("Apex"))) || p.proId === currentProId || p.proName === companyName)
+                        ? { ...p, price: updated.agreedPrice, notes: updated.notes || p.notes, status: "PENDING" as const, proEmail: proEmail || user?.email }
+                        : p
+                    )
+                  : [...target.proposals, myPropObj];
                 await updateJob(target.referenceCode, {
                   proposals: updatedProposals,
                 });
@@ -2162,10 +2378,16 @@ export default function ContractorDashboardPage() {
               setInvoicingContract(null);
             }}
             contract={invoicingContract}
-            onInvoiceSent={() => {
+            onInvoiceSent={async (updated) => {
               setIsInvoicingModalOpen(false);
               setInvoicingContract(null);
-              setActiveTab("EARNED");
+              const target = marketplaceJobs.find((j) => j.referenceCode === updated.referenceCode);
+              if (target) {
+                await updateJob(target.referenceCode, {
+                  finalCost: updated.agreedPrice,
+                });
+              }
+              setActiveTab("ACTIVE");
             }}
           />
         )}

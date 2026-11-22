@@ -14,11 +14,13 @@ import {
   LogOut,
   LayoutDashboard,
   FileText,
+  MessageSquare,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AnnouncementBar } from "@/components/layout/announcement-bar";
 import { CATEGORIES } from "@/lib/data";
 import { useAuth } from "@/lib/auth-context";
+import { useUnreadMessages } from "@/lib/message-store";
 import { UkFlagIcon, UsFlagIcon } from "@/components/ui/flag-icon";
 
 export function Header() {
@@ -29,6 +31,8 @@ export function Header() {
   const [mobileServicesOpen, setMobileServicesOpen] = React.useState(false);
   const [desktopServicesOpen, setDesktopServicesOpen] = React.useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = React.useState(false);
+  const [messagesDropdownOpen, setMessagesDropdownOpen] = React.useState(false);
+  const { totalUnread, threadSummaries, markAsRead } = useUnreadMessages(user?.role);
   const [userCountry, setUserCountry] = React.useState<"UK" | "US">("UK");
 
   // Derive active country from route first, falling back to selected preference
@@ -50,6 +54,13 @@ export function Header() {
     } else if (pathname === "/") {
       router.push(`/${target.toLowerCase()}`);
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    setUserDropdownOpen(false);
+    setMobileMenuOpen(false);
+    router.replace("/auth/login");
   };
 
   const hamburgerButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -239,6 +250,107 @@ export function Header() {
 
               <ThemeToggle />
 
+              {/* FIVERR-STYLE MESSAGE NOTIFICATIONS BADGE */}
+              {user && (
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMessagesDropdownOpen(!messagesDropdownOpen);
+                      setUserDropdownOpen(false);
+                    }}
+                    title="Messages & Negotiations"
+                    className="relative p-2 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] transition-colors cursor-pointer text-[var(--text-muted)] hover:text-[var(--text)] flex items-center justify-center"
+                    aria-label="Messages & Negotiations"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    {totalUnread > 0 && (
+                      <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white font-black text-[10px] flex items-center justify-center shadow-xs animate-pulse">
+                        {totalUnread > 99 ? "99+" : totalUnread}
+                      </span>
+                    )}
+                  </button>
+
+                  {messagesDropdownOpen && (
+                    <div className="absolute right-0 top-full mt-1.5 w-72 sm:w-80 max-w-[calc(100vw-24px)] rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-xl p-3 z-50 text-xs animate-in fade-in slide-in-from-top-1 duration-150">
+                      <div className="flex items-center justify-between pb-2 border-b border-[var(--line)] mb-2">
+                        <div className="flex items-center space-x-1.5">
+                          <MessageSquare className="w-4 h-4 text-[var(--accent)]" />
+                          <span className="font-bold text-[var(--text)]">Messages &amp; Negotiations</span>
+                        </div>
+                        {totalUnread > 0 ? (
+                          <span className="px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 font-bold text-[10px]">
+                            {totalUnread} new
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-[var(--text-muted)]">All caught up</span>
+                        )}
+                      </div>
+
+                      {threadSummaries.length === 0 ? (
+                        <div className="py-6 text-center text-zinc-500 dark:text-zinc-400">
+                          <p className="font-medium text-xs">No active contract discussions</p>
+                          <p className="text-[10px] mt-0.5">Start negotiating in job quotes or contracts</p>
+                        </div>
+                      ) : (
+                        <div className="space-y-1.5 max-h-72 overflow-y-auto">
+                          {threadSummaries.map((thread) => (
+                            <Link
+                              key={thread.referenceCode}
+                              href={user.role === "PRO" ? "/dashboard/pro" : "/dashboard/homeowner"}
+                              onClick={() => {
+                                markAsRead(thread.referenceCode);
+                                setMessagesDropdownOpen(false);
+                              }}
+                              className={`block p-2.5 rounded-[var(--radius-sm)] border transition-colors ${
+                                thread.unreadCount > 0
+                                  ? "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/15"
+                                  : "bg-[var(--surface)] border-[var(--line-subtle)] hover:bg-[var(--bg-alt)]"
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="font-mono font-bold text-xs text-[var(--text)]">
+                                  {thread.referenceCode}
+                                </span>
+                                {thread.unreadCount > 0 && (
+                                  <span className="px-1.5 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                                    {thread.unreadCount} new
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-[11px] text-[var(--text-muted)] line-clamp-1 mt-1 font-normal">
+                                {thread.lastMessageText || "New contract negotiation update"}
+                              </p>
+                              <div className="mt-1 text-[9px] text-zinc-400 flex items-center justify-between">
+                                <span>{thread.lastMessageTime || "Recent"}</span>
+                                <span className="text-[var(--accent)] font-semibold">View thread &rarr;</span>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className="mt-2 pt-2 border-t border-[var(--line)] flex justify-between items-center text-[11px]">
+                        <Link
+                          href={user.role === "PRO" ? "/dashboard/pro" : "/dashboard/homeowner"}
+                          onClick={() => setMessagesDropdownOpen(false)}
+                          className="font-bold text-[var(--accent)] hover:underline"
+                        >
+                          Go to Dashboard &rarr;
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => setMessagesDropdownOpen(false)}
+                          className="text-[var(--text-muted)] hover:text-[var(--text)] cursor-pointer"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* USER PROFILE OR SIGN IN BUTTON */}
               {user ? (
                 <div className="relative">
@@ -294,10 +406,7 @@ export function Header() {
 
                       <button
                         type="button"
-                        onClick={() => {
-                          logout();
-                          setUserDropdownOpen(false);
-                        }}
+                        onClick={handleLogout}
                         className="w-full flex items-center space-x-2 px-2.5 py-2 rounded-[var(--radius-sm)] hover:bg-red-500/10 text-red-600 dark:text-red-400 transition-colors text-left cursor-pointer mt-1 pt-2 border-t border-[var(--line)]"
                       >
                         <LogOut className="w-3.5 h-3.5" />
@@ -366,6 +475,107 @@ export function Header() {
             {/* Mobile Controls (< 1024px) */}
             <div className="flex items-center space-x-2 lg:hidden">
               <ThemeToggle />
+
+              {/* FIVERR-STYLE MESSAGE NOTIFICATIONS BADGE */}
+              {user && (
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setMessagesDropdownOpen(!messagesDropdownOpen);
+                      setUserDropdownOpen(false);
+                    }}
+                    title="Messages & Negotiations"
+                    className="relative p-2 rounded-[var(--radius-sm)] border border-[var(--line)] bg-[var(--surface)] hover:bg-[var(--bg-alt)] transition-colors cursor-pointer text-[var(--text-muted)] hover:text-[var(--text)] flex items-center justify-center"
+                    aria-label="Messages & Negotiations"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    {totalUnread > 0 && (
+                      <span className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full bg-red-600 text-white font-black text-[10px] flex items-center justify-center shadow-xs animate-pulse">
+                        {totalUnread > 99 ? "99+" : totalUnread}
+                      </span>
+                    )}
+                  </button>
+
+                  {messagesDropdownOpen && (
+                    <div className="absolute right-0 top-full mt-1.5 w-72 sm:w-80 max-w-[calc(100vw-24px)] rounded-[var(--radius)] bg-[var(--surface)] border border-[var(--line)] shadow-xl p-3 z-50 text-xs animate-in fade-in slide-in-from-top-1 duration-150">
+                      <div className="flex items-center justify-between pb-2 border-b border-[var(--line)] mb-2">
+                        <div className="flex items-center space-x-1.5">
+                          <MessageSquare className="w-4 h-4 text-[var(--accent)]" />
+                          <span className="font-bold text-[var(--text)]">Messages &amp; Negotiations</span>
+                        </div>
+                        {totalUnread > 0 ? (
+                          <span className="px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 font-bold text-[10px]">
+                            {totalUnread} new
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-[var(--text-muted)]">All caught up</span>
+                        )}
+                      </div>
+
+                      {threadSummaries.length === 0 ? (
+                        <div className="py-6 text-center text-zinc-500 dark:text-zinc-400">
+                          <p className="font-medium text-xs">No active contract discussions</p>
+                          <p className="text-[10px] mt-0.5">Start negotiating in job quotes or contracts</p>
+                        </div>
+                      ) : (
+                        <div className="space-y-1.5 max-h-72 overflow-y-auto">
+                          {threadSummaries.map((thread) => (
+                            <Link
+                              key={thread.referenceCode}
+                              href={user.role === "PRO" ? "/dashboard/pro" : "/dashboard/homeowner"}
+                              onClick={() => {
+                                markAsRead(thread.referenceCode);
+                                setMessagesDropdownOpen(false);
+                              }}
+                              className={`block p-2.5 rounded-[var(--radius-sm)] border transition-colors ${
+                                thread.unreadCount > 0
+                                  ? "bg-amber-500/10 border-amber-500/30 hover:bg-amber-500/15"
+                                  : "bg-[var(--surface)] border-[var(--line-subtle)] hover:bg-[var(--bg-alt)]"
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <span className="font-mono font-bold text-xs text-[var(--text)]">
+                                  {thread.referenceCode}
+                                </span>
+                                {thread.unreadCount > 0 && (
+                                  <span className="px-1.5 py-0.5 rounded-full bg-red-600 text-white font-extrabold text-[9px] animate-pulse">
+                                    {thread.unreadCount} new
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-[11px] text-[var(--text-muted)] line-clamp-1 mt-1 font-normal">
+                                {thread.lastMessageText || "New contract negotiation update"}
+                              </p>
+                              <div className="mt-1 text-[9px] text-zinc-400 flex items-center justify-between">
+                                <span>{thread.lastMessageTime || "Recent"}</span>
+                                <span className="text-[var(--accent)] font-semibold">View thread &rarr;</span>
+                              </div>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className="mt-2 pt-2 border-t border-[var(--line)] flex justify-between items-center text-[11px]">
+                        <Link
+                          href={user.role === "PRO" ? "/dashboard/pro" : "/dashboard/homeowner"}
+                          onClick={() => setMessagesDropdownOpen(false)}
+                          className="font-bold text-[var(--accent)] hover:underline"
+                        >
+                          Go to Dashboard &rarr;
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() => setMessagesDropdownOpen(false)}
+                          className="text-[var(--text-muted)] hover:text-[var(--text)] cursor-pointer"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
               <button
                 ref={hamburgerButtonRef}
                 type="button"
@@ -585,10 +795,7 @@ export function Header() {
                   </Link>
                   <button
                     type="button"
-                    onClick={() => {
-                      logout();
-                      closeMobileMenu();
-                    }}
+                    onClick={handleLogout}
                     className="w-full py-2 rounded-[var(--radius-sm)] text-center text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-500/10 transition-colors block cursor-pointer"
                   >
                     Sign Out

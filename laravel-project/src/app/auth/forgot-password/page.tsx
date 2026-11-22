@@ -10,7 +10,6 @@ import {
   CheckCircle2,
   ArrowLeft,
   AlertCircle,
-  Info,
   RefreshCw,
   ShieldCheck,
 } from "lucide-react";

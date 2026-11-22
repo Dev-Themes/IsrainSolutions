@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { X, Send, Receipt, Landmark } from "lucide-react";
+import { X, Send, Receipt, Landmark, ShieldCheck } from "lucide-react";
 import { JobContract, sendContractInvoice } from "@/lib/contract-store";
+import { toast } from "@/components/ui/toast";
 
 interface ContractorInvoiceModalProps {
   isOpen: boolean;
@@ -26,11 +27,10 @@ export function ContractorInvoiceModal({
   const [invoiceNumber] = React.useState<string>(() => {
     return `INV-2026-${Math.floor(100 + Math.random() * 900)}`;
   });
-  const [vatRate, setVatRate] = React.useState<number>(20);
-  const [vatNumber, setVatNumber] = React.useState<string>("GB 948 2014 92");
+  const platformFeeRate = 5;
   const [bankName, setBankName] = React.useState<string>("Barclays Business Bank UK");
   const [accountName, setAccountName] = React.useState<string>(
-    contract.proName || "Apex Heating & Emergency Plumbing Ltd"
+    contract.proName || "Trade Specialist"
   );
   const [sortCode, setSortCode] = React.useState<string>("20-04-15");
   const [accountNumber, setAccountNumber] = React.useState<string>("83921049");
@@ -42,34 +42,41 @@ export function ContractorInvoiceModal({
   if (!isOpen) return null;
 
   const subtotalAmount = (Number(labourAmount) || 0) + (Number(materialsAmount) || 0);
-  const vatAmount = Math.round(subtotalAmount * (vatRate / 100) * 100) / 100;
-  const totalAmount = Math.round((subtotalAmount + vatAmount) * 100) / 100;
+  const platformFeeAmount = Math.round(subtotalAmount * 0.05 * 100) / 100;
+  const totalAmount = Math.round((subtotalAmount + platformFeeAmount) * 100) / 100;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const updated = sendContractInvoice(contract.id, {
-      invoiceNumber,
-      labourAmount: Number(labourAmount) || 0,
-      materialsAmount: Number(materialsAmount) || 0,
-      subtotalAmount,
-      vatRate,
-      vatAmount,
-      vatNumber,
-      totalAmount,
-      paymentMethod: "Bank Transfer (Direct BACS) / Escrow",
-      bankDetails: {
-        bankName,
-        accountName,
-        sortCode,
-        accountNumber,
-        paymentReference: contract.referenceCode,
+    const updated = sendContractInvoice(
+      contract.id,
+      {
+        invoiceNumber,
+        labourAmount: Number(labourAmount) || 0,
+        materialsAmount: Number(materialsAmount) || 0,
+        subtotalAmount,
+        platformFeeRate,
+        platformFeeAmount,
+        totalAmount,
+        paymentMethod: "Bank Transfer (Direct BACS) / Escrow",
+        bankDetails: {
+          bankName,
+          accountName,
+          sortCode,
+          accountNumber,
+          paymentReference: contract.referenceCode,
+        },
       },
-    });
+      contract
+    );
 
     setIsSubmitting(false);
     if (updated) {
+      toast.success(
+        "Invoice Dispatched",
+        `Final invoice ${invoiceNumber} sent to homeowner with included 5% platform fee.`
+      );
       if (onInvoiceSent) onInvoiceSent(updated);
       onClose();
     }
@@ -89,7 +96,7 @@ export function ContractorInvoiceModal({
           <div>
             <div className="flex items-center space-x-2">
               <span className="font-bold text-xs text-[var(--accent)] uppercase tracking-wider">
-                Issue Final VAT Invoice
+                Issue Final Invoice &amp; Escrow Settlement
               </span>
               <span className="text-zinc-500">&bull;</span>
               <span className="font-mono text-xs text-zinc-300 font-semibold">{invoiceNumber}</span>
@@ -127,7 +134,7 @@ export function ContractorInvoiceModal({
           <div className="space-y-3">
             <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700 flex items-center space-x-1.5">
               <Receipt className="w-4 h-4 text-zinc-500" />
-              <span>Invoice Itemization &amp; VAT Breakdown</span>
+              <span>Invoice Itemization &amp; 5% Platform Fee</span>
             </h4>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -168,49 +175,36 @@ export function ContractorInvoiceModal({
               </div>
             </div>
 
-            {/* VAT Rate & VAT Reg */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <div>
-                <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1">
-                  Applicable VAT Rate
-                </label>
-                <select
-                  value={vatRate}
-                  onChange={(e) => setVatRate(Number(e.target.value))}
-                  className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-zinc-300 text-xs font-semibold focus:outline-hidden focus:ring-2 focus:ring-[var(--accent)]"
-                >
-                  <option value={20}>Standard 20% VAT</option>
-                  <option value={5}>Reduced 5% Energy/Heating VAT</option>
-                  <option value={0}>0% Zero-Rated / Exempt</option>
-                </select>
+            {/* Platform Protection & Escrow Fee Notice */}
+            <div className="p-3 rounded-lg bg-amber-50 border border-amber-200/80 text-xs space-y-1">
+              <div className="flex items-center space-x-1.5 text-amber-900 font-bold">
+                <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0" />
+                <span>TradeConnect Fixed 5% Platform Protection Fee</span>
               </div>
-              <div>
-                <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1">
-                  Contractor VAT Reg #
-                </label>
-                <input
-                  type="text"
-                  value={vatNumber}
-                  onChange={(e) => setVatNumber(e.target.value)}
-                  className="w-full px-3 py-2 rounded-[var(--radius-sm)] border border-zinc-300 text-xs font-mono focus:outline-hidden focus:ring-2 focus:ring-[var(--accent)]"
-                />
-              </div>
+              <p className="text-[11px] text-zinc-600 leading-relaxed">
+                A fixed 5% escrow and dispute guarantee fee is added separately to the final invoice payable by the homeowner. No VAT deductions apply. Your full agreed work subtotal ({contract.currency}{subtotalAmount.toFixed(2)}) is paid directly to your account.
+              </p>
             </div>
 
             {/* Total Financial Summary Card */}
             <div className="p-3.5 rounded-xl bg-zinc-900 text-white space-y-1.5">
               <div className="flex justify-between text-xs text-zinc-300">
-                <span>Subtotal (Net of VAT):</span>
+                <span>Contractor Work (Labour + Materials):</span>
                 <span className="font-mono font-bold">{contract.currency}{subtotalAmount.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-xs text-zinc-300">
-                <span>VAT ({vatRate}%):</span>
-                <span className="font-mono font-bold">{contract.currency}{vatAmount.toFixed(2)}</span>
+              <div className="flex justify-between text-xs text-amber-300">
+                <span>TradeConnect Platform Protection Fee (5% Fixed):</span>
+                <span className="font-mono font-bold">+{contract.currency}{platformFeeAmount.toFixed(2)}</span>
               </div>
               <div className="border-t border-zinc-700 pt-2 flex justify-between items-center">
-                <span className="text-xs font-bold text-zinc-200 uppercase tracking-wider">
-                  Total Gross Payable:
-                </span>
+                <div>
+                  <span className="text-xs font-bold text-zinc-200 uppercase tracking-wider block">
+                    Total Billed to Homeowner:
+                  </span>
+                  <span className="text-[10px] text-zinc-400">
+                    Your direct net payout: <strong className="text-emerald-400">{contract.currency}{subtotalAmount.toFixed(2)}</strong>
+                  </span>
+                </div>
                 <span className="text-2xl font-black text-[var(--accent)] font-mono">
                   {contract.currency}{totalAmount.toFixed(2)}
                 </span>
