@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #1FA9E0;
+  --color-brand-hover: #34bbf0;
+  --color-brand-cyan: #38bdf8;
+  --color-brand-frozen: #7dd3fc;
+  --color-brand-ice: #bae6fd;
+  --color-brand-border: #38bdf8;
+  --color-brand-muted: rgba(56, 189, 248, 0.12);
+  --color-brand-glow: rgba(56, 189, 248, 0.28);
+
+  --color-bg-header: rgba(2, 8, 23, 0.92);
+  --color-bg-hero: #030f2e;
+  --color-bg-hero-deep: #020817;
+  --color-bg-section-alt: #051438;
+  --color-bg-section-deep: #020817;
+  --color-bg-card: #06163b;
+  --color-bg-card-subtle: #09204e;
+  --color-bg-glass: rgba(6, 22, 59, 0.85);
+  --color-bg-trust: #04102d;
+
+  --color-text-heading: #FFFFFF;
+  --color-text-body: #EBF1FF;
+  --color-text-muted: #cbd5e1;
+  --color-text-subtle: #94a3b8;
+
+  --color-star: #FCD404;
+  --color-border-hairline: rgba(56, 189, 248, 0.2);
+  --color-border-card: rgba(56, 189, 248, 0.32);
+  --color-border-card-hover: rgba(125, 211, 252, 0.7);
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #020817;
+  color: #EBF1FF;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #020817;
+  background-image: 
+    radial-gradient(at 15% 10%, rgba(14, 165, 233, 0.12) 0px, transparent 45%),
+    radial-gradient(at 85% 35%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
+    radial-gradient(at 50% 80%, rgba(2, 132, 199, 0.06) 0px, transparent 50%);
+  background-attachment: fixed;
+  color: #cbd5e1;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Accessible focus outlines */
+:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom scrollbar with frozen cyan thumb */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020817;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0e2b5c;
+  border-radius: 4px;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38bdf8;
+}
+
+/* Custom frozen ice card utilities */
+.card-frozen {
+  background: rgba(6, 22, 59, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.32);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px 0 rgba(2, 8, 23, 0.7), inset 0 1px 0 rgba(125, 211, 252, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-frozen:hover {
+  border-color: rgba(125, 211, 252, 0.7);
+  box-shadow: 0 12px 40px -4px rgba(2, 8, 23, 0.85), 0 0 25px 0 rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(125, 211, 252, 0.3);
+}
+
+/* Continuous smooth marquee animations */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-continuous {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-continuous:hover {
+  animation-play-state: paused;
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 48s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
