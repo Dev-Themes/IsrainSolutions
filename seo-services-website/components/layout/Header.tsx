@@ -94,7 +94,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-[#020817] border-b border-sky-500/20">
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1280px] mx-auto px-3.5 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Brand Logo */}
           <Link
@@ -102,12 +102,12 @@ export const Header: React.FC = () => {
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center flex-shrink-0"
           >
-            <div className="relative h-8 w-36 sm:w-44">
+            <div className="relative h-7 sm:h-8 w-34 sm:w-44">
               <Image
                 src="/brand/israin-wordmark-1024x244.webp"
                 alt="Israin Solutions"
                 fill
-                sizes="(max-width: 640px) 144px, 176px"
+                sizes="(max-width: 640px) 140px, 176px"
                 priority
                 className="object-contain object-left"
               />
@@ -271,10 +271,10 @@ export const Header: React.FC = () => {
           </nav>
 
           {/* Right Action & Hamburger */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0">
             <Link
               href="/order"
-              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#1FA9E0] bg-[#1FA9E0]/15 hover:bg-[#1FA9E0] hover:text-slate-950 text-xs font-bold text-white transition-all"
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-[#1FA9E0] bg-[#1FA9E0]/15 hover:bg-[#1FA9E0] hover:text-slate-950 text-xs font-bold text-white transition-all whitespace-nowrap"
             >
               <span>Order links</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -294,173 +294,200 @@ export const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Pure, Simple, Normal Mobile Navigation Dropdown */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-sky-500/20 bg-[#020817] px-5 py-4 max-h-[calc(100vh-64px)] overflow-y-auto">
-          <nav className="flex flex-col text-sm divide-y divide-white/10">
-            {/* 1. Home */}
-            <Link
-              href="/"
-              onClick={() => setMobileMenuOpen(false)}
-              className={cn(
-                "py-3 font-medium transition-colors",
-                pathname === "/" ? "text-[#1FA9E0]" : "text-white hover:text-[#1FA9E0]"
-              )}
-            >
-              Home
-            </Link>
-
-            {/* 2. Services Dropdown Toggle */}
-            <div className="py-2">
-              <button
-                type="button"
-                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className="w-full py-1.5 flex items-center justify-between font-medium text-white hover:text-[#1FA9E0] transition-colors cursor-pointer"
-              >
-                <span className={cn(isServicesActive && "text-[#1FA9E0]")}>Services</span>
-                <ChevronDown
-                  className={cn(
-                    "w-4 h-4 text-sky-400 transition-transform duration-200",
-                    mobileServicesOpen ? "rotate-180" : ""
-                  )}
-                />
-              </button>
-
-              {/* Services Sub-links */}
-              {mobileServicesOpen && (
-                <div className="pl-3 pt-2 pb-1 space-y-2.5 text-xs text-slate-300">
-                  <Link
-                    href="/services/niche-guest-posts"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Niche guest posts
-                  </Link>
-                  <Link
-                    href="/services/general-guest-posts"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    General guest posts
-                  </Link>
-                  <Link
-                    href="/services/niche-edits"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Niche edits
-                  </Link>
-                  <Link
-                    href="/services/casino-igaming-guest-posts"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Casino / iGaming guest posts
-                  </Link>
-                  <Link
-                    href="/services/off-page-seo-packages"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Off-page SEO packages
-                  </Link>
-                  <Link
-                    href="/services/niche-blog-comments"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Niche blog comments
-                  </Link>
-                  <Link
-                    href="/services/pbn-links"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Aged PBN links
-                  </Link>
-                  <Link
-                    href="/services/wikipedia-links"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Wikipedia links
-                  </Link>
-                  <Link
-                    href="/services/press-releases"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    Press releases
-                  </Link>
-                  <Link
-                    href="/services/seo-content-writing"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block hover:text-[#1FA9E0] transition-colors"
-                  >
-                    SEO content writing
-                  </Link>
-                  <Link
-                    href="/services"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block pt-1 text-[#1FA9E0] font-semibold hover:underline"
-                  >
-                    View all services →
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* 3. Guest Post Sites */}
-            <Link
-              href="/guest-post-sites"
-              onClick={() => setMobileMenuOpen(false)}
-              className={cn(
-                "py-3 font-medium transition-colors",
-                pathname === "/guest-post-sites" ? "text-[#1FA9E0]" : "text-white hover:text-[#1FA9E0]"
-              )}
-            >
-              Guest Post Sites
-            </Link>
-
-            {/* 4. Link Insertion Sites */}
-            <Link
-              href="/link-insertion-sites"
-              onClick={() => setMobileMenuOpen(false)}
-              className={cn(
-                "py-3 font-medium transition-colors",
-                pathname === "/link-insertion-sites" ? "text-[#1FA9E0]" : "text-white hover:text-[#1FA9E0]"
-              )}
-            >
-              Link Insertion Sites
-            </Link>
-
-            {/* 5. Contact */}
-            <Link
-              href="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className={cn(
-                "py-3 font-medium transition-colors",
-                pathname === "/contact" || pathname === "/contact-us"
-                  ? "text-[#1FA9E0]"
-                  : "text-white hover:text-[#1FA9E0]"
-              )}
-            >
-              Contact
-            </Link>
-
-            {/* Order Links CTA */}
-            <div className="pt-4 pb-2">
+      {/* Pure, Simple Mobile Navigation with Buttery Smooth Top-to-Bottom Transition */}
+      <div
+        className={cn(
+          "lg:hidden grid transition-all duration-300 ease-in-out bg-[#020817] border-sky-500/20",
+          mobileMenuOpen
+            ? "grid-rows-[1fr] opacity-100 border-t"
+            : "grid-rows-[0fr] opacity-0 border-t-0 pointer-events-none"
+        )}
+      >
+        <div className="overflow-hidden">
+          <div
+            className={cn(
+              "px-4 sm:px-6 py-4 max-h-[calc(100dvh-64px)] overflow-y-auto transition-all duration-300 ease-out",
+              mobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0"
+            )}
+          >
+            <nav className="flex flex-col text-sm divide-y divide-white/10">
+              {/* 1. Home */}
               <Link
-                href="/order"
+                href="/"
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 rounded-lg bg-[#1FA9E0] hover:bg-[#34bbf0] text-slate-950 font-bold text-xs uppercase tracking-wider text-center block transition-all"
+                className={cn(
+                  "py-3 font-medium transition-colors",
+                  pathname === "/" ? "text-[#1FA9E0]" : "text-white hover:text-[#1FA9E0]"
+                )}
               >
-                Order links now →
+                Home
               </Link>
-            </div>
-          </nav>
+
+              {/* 2. Services Dropdown Toggle */}
+              <div className="py-2">
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                  className="w-full py-1.5 flex items-center justify-between font-medium text-white hover:text-[#1FA9E0] transition-colors cursor-pointer"
+                >
+                  <span className={cn(isServicesActive && "text-[#1FA9E0]")}>Services</span>
+                  <ChevronDown
+                    className={cn(
+                      "w-4 h-4 text-sky-400 transition-transform duration-200",
+                      mobileServicesOpen ? "rotate-180" : ""
+                    )}
+                  />
+                </button>
+
+                {/* Services Sub-links with Smooth Top-to-Bottom Slide */}
+                <div
+                  className={cn(
+                    "grid transition-all duration-200 ease-in-out",
+                    mobileServicesOpen
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0 pointer-events-none"
+                  )}
+                >
+                  <div className="overflow-hidden">
+                    <div className="pl-3 pt-2 pb-1 space-y-2.5 text-xs text-slate-300">
+                      <Link
+                        href="/services/niche-guest-posts"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Niche guest posts
+                      </Link>
+                      <Link
+                        href="/services/general-guest-posts"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        General guest posts
+                      </Link>
+                      <Link
+                        href="/services/niche-edits"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Niche edits
+                      </Link>
+                      <Link
+                        href="/services/casino-igaming-guest-posts"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Casino / iGaming guest posts
+                      </Link>
+                      <Link
+                        href="/services/off-page-seo-packages"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Off-page SEO packages
+                      </Link>
+                      <Link
+                        href="/services/niche-blog-comments"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Niche blog comments
+                      </Link>
+                      <Link
+                        href="/services/pbn-links"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Aged PBN links
+                      </Link>
+                      <Link
+                        href="/services/wikipedia-links"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Wikipedia links
+                      </Link>
+                      <Link
+                        href="/services/press-releases"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        Press releases
+                      </Link>
+                      <Link
+                        href="/services/seo-content-writing"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block hover:text-[#1FA9E0] transition-colors"
+                      >
+                        SEO content writing
+                      </Link>
+                      <Link
+                        href="/services"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="block pt-1 text-[#1FA9E0] font-semibold hover:underline"
+                      >
+                        View all services →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Guest Post Sites */}
+              <Link
+                href="/guest-post-sites"
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  "py-3 font-medium transition-colors",
+                  pathname === "/guest-post-sites"
+                    ? "text-[#1FA9E0]"
+                    : "text-white hover:text-[#1FA9E0]"
+                )}
+              >
+                Guest Post Sites
+              </Link>
+
+              {/* 4. Link Insertion Sites */}
+              <Link
+                href="/link-insertion-sites"
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  "py-3 font-medium transition-colors",
+                  pathname === "/link-insertion-sites"
+                    ? "text-[#1FA9E0]"
+                    : "text-white hover:text-[#1FA9E0]"
+                )}
+              >
+                Link Insertion Sites
+              </Link>
+
+              {/* 5. Contact */}
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  "py-3 font-medium transition-colors",
+                  pathname === "/contact" || pathname === "/contact-us"
+                    ? "text-[#1FA9E0]"
+                    : "text-white hover:text-[#1FA9E0]"
+                )}
+              >
+                Contact
+              </Link>
+
+              {/* Order Links CTA Button */}
+              <div className="pt-4 pb-2">
+                <Link
+                  href="/order"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-3 rounded-lg bg-[#1FA9E0] hover:bg-[#34bbf0] text-slate-950 font-bold text-xs uppercase tracking-wider text-center block transition-all shadow-[0_0_15px_rgba(31,169,224,0.3)] active:scale-95"
+                >
+                  Order links now →
+                </Link>
+              </div>
+            </nav>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };

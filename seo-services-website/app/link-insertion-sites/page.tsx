@@ -12,17 +12,17 @@ export const metadata = buildMetadata({
 
 export default function LinkInsertionSitesPage() {
   return (
-    <div className="flex flex-col w-full py-16 sm:py-24">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+    <div className="flex flex-col w-full py-8 sm:py-20 overflow-hidden">
+      <div className="max-w-[1240px] mx-auto px-3.5 sm:px-6 lg:px-8 space-y-6 sm:space-y-10 w-full">
         <div className="max-w-3xl space-y-3">
           <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[#1FA9E0]">
             <span className="w-1.5 h-1.5 rounded-full bg-[#1FA9E0]" />
             <span>Niche Edit Inventory</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl font-bold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-5xl font-bold text-white tracking-tight break-words">
             Pick the article your link goes into.
           </h1>
-          <p className="text-sm sm:text-base text-[#EBF1FF] leading-relaxed">
+          <p className="text-xs sm:text-base text-[#EBF1FF] leading-relaxed">
             Insert your target URL and anchor text directly into pre-ranked, indexed articles with accumulated search engine trust. Zero wait time for post indexing.
           </p>
         </div>
