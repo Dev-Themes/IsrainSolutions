@@ -11,27 +11,17 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-sky-500/15">
           {/* Brand Column */}
           <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="relative w-8 h-8 flex-shrink-0">
-                <Image
-                  src="/brand/israin-icon.png"
-                  alt="Israin Solutions Icon"
-                  fill
-                  sizes="32px"
-                  className="object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-white tracking-wider text-base uppercase">
-                  ISRAIN SOLUTIONS
-                </span>
-                <span className="text-[10px] text-sky-300/80 tracking-wide font-normal">
-                  Developing Beyond Imagination
-                </span>
-              </div>
+            <div className="relative h-9 w-44">
+              <Image
+                src="/brand/israin-wordmark-1024x244.webp"
+                alt="Israin Solutions"
+                fill
+                sizes="176px"
+                className="object-contain object-left"
+              />
             </div>
             <p className="text-sm text-slate-300 leading-relaxed">
-              Guest posts, niche edits, and off-page SEO built by hand since 2016. Every order ends with verified live URL reporting and direct search impact.
+              Authority guest posts, curated niche edits, and search engine optimization built by hand since 2016. Every order ends with verified live URL reporting and direct search impact.
             </p>
           </div>
 

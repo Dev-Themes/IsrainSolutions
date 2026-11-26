@@ -1,16 +1,15 @@
 import React from "react";
 import { buildMetadata } from "@/lib/seo";
 import { Hero } from "@/components/sections/Hero";
-import { StatStrip } from "@/components/sections/StatStrip";
 import { PublisherMarquee } from "@/components/sections/PublisherMarquee";
-import { ServiceTabs } from "@/components/sections/ServiceTabs";
-import { BacklinksInSeo } from "@/components/sections/BacklinksInSeo";
-import { AiSearchSection } from "@/components/sections/AiSearchSection";
+import { CapabilitiesSection } from "@/components/sections/CapabilitiesSection";
+import { WhyChooseUs } from "@/components/sections/WhyChooseUs";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { PricingSection } from "@/components/sections/PricingSection";
-import { OrderInclusions } from "@/components/sections/OrderInclusions";
+import { AiSearchSection } from "@/components/sections/AiSearchSection";
 import { ContactBriefSection } from "@/components/sections/ContactBriefSection";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
+import { ReadyToGrowCta } from "@/components/sections/ReadyToGrowCta";
 
 const homeFaqs = [
   {
@@ -43,6 +42,11 @@ const homeFaqs = [
     answer:
       "Yes. You specify the target URLs and preferred anchor text. Our team reviews your anchor distribution to ensure natural variety (branded, topical partial match, and exact match) so your backlink profile remains compliant with Google Search essentials.",
   },
+  {
+    question: "What information do you need to get started?",
+    answer:
+      "All we need is your target landing page URL and your preferred keywords or target anchor phrases. If you're not sure which anchors to target, our link building team will analyze your existing backlink profile free of charge and recommend a safe, high-impact distribution.",
+  },
 ];
 
 export const metadata = buildMetadata({
@@ -54,43 +58,41 @@ export const metadata = buildMetadata({
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col w-full">
-      {/* 1. Hero Section */}
+    <div className="flex flex-col w-full bg-[#00081d]">
+      {/* 1. Hero Section (Israin Solutions agency style with live terminal) */}
       <Hero />
 
-      {/* 2. Stats Strip */}
-      <StatStrip />
-
-      {/* 3. Publisher Marquee */}
+      {/* 2. Authority Platforms & Publishers Marquee */}
       <PublisherMarquee />
 
-      {/* 4. Link Building Services with Tabs */}
-      <ServiceTabs />
+      {/* 3. Our Capabilities: 6-Card High-Impact Solutions Grid */}
+      <CapabilitiesSection />
 
-      {/* 5. Backlinks in SEO */}
-      <BacklinksInSeo />
+      {/* 4. Why Choose Us: Built on trust. Driven by expertise. */}
+      <WhyChooseUs />
 
-      {/* 6. AI Search: AEO & GEO */}
-      <AiSearchSection />
-
-      {/* 7. How It Works (01-04 Process) */}
+      {/* 5. How It Works: Interactive 4-Stage Workflow */}
       <HowItWorks />
 
-      {/* 8. Guest Post Packages (Pricing) */}
+      {/* 6. Curated Guest Post Packages (Pricing) */}
       <PricingSection />
 
-      {/* 9. Order Inclusions */}
-      <OrderInclusions />
+      {/* 7. AI Search: AEO & GEO (Modern Algorithm Alignment) */}
+      <AiSearchSection />
 
-      {/* 10. Frequently Asked Questions Accordion */}
+      {/* 8. Frequently Asked Questions Accordion (Parent site layout) */}
       <FaqAccordion
         faqs={homeFaqs}
-        title="Frequently asked questions."
-        subtitle="Common questions about link building methods, turnaround times, anchor safety, and refund policies."
+        eyebrow="Have Questions?"
+        title="Have Questions? Our Link Building Specialists Got You Covered!"
+        subtitle="Common questions regarding editorial link building methods, turnaround times, anchor safety, and refund policies."
       />
 
-      {/* 11. Contact & Brief Form */}
+      {/* 9. Interactive Brief Submission */}
       <ContactBriefSection />
+
+      {/* 10. Closing High-Impact Call to Action */}
+      <ReadyToGrowCta />
     </div>
   );
 }

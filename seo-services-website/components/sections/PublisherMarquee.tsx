@@ -3,6 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight, Globe } from "lucide-react";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 interface Publisher {
   name: string;
@@ -36,102 +38,117 @@ const publishersRow2: Publisher[] = [
 ];
 
 export const PublisherMarquee: React.FC = () => {
-  // Seamless loop duplicates
   const row1Duplicated = [...publishersRow1, ...publishersRow1];
   const row2Duplicated = [...publishersRow2, ...publishersRow2];
 
   return (
-    <section className="bg-[#020817] py-16 sm:py-20 border-b border-sky-500/15 overflow-hidden">
-      <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-sky-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_#38bdf8]" />
-              <span>Where we publish</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Sites we place guest posts on.
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-xl">
-              A sample of the 2,000+ vetted websites in our catalog across technology, business, lifestyle, finance, and general media.
-            </p>
+    <section className="bg-[#00081d] py-16 sm:py-24 border-b border-sky-500/20 overflow-hidden relative">
+      {/* Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] bg-sky-500/5 blur-[160px] pointer-events-none -z-10 rounded-full" />
+
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 text-center">
+        <ScrollReveal direction="up" delay={100}>
+          <SectionHeading
+            align="center"
+            eyebrow="Technologies &amp; Publications"
+            title={
+              <>
+                Platforms &amp; Media We{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1FA9E0] to-[#38bdf8]">
+                  Love To Work With
+                </span>
+              </>
+            }
+            subtitle="Direct manual outreach across 2,000+ active niche websites, national media outlets, and high-trust search platforms. Inspect sample publishers below."
+          />
+
+          <div className="flex items-center justify-center -mt-6 mb-4">
+            <Link
+              href="/guest-post-sites"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-sky-400/40 bg-[#06173d]/70 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#0a2355] hover:border-sky-300 transition-all shadow-sm group"
+            >
+              <span>Explore All 2,000+ Vetted Sites</span>
+              <ArrowRight className="w-3.5 h-3.5 text-[#1FA9E0] transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
-
-          <Link
-            href="/guest-post-sites"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-sky-500/15 border border-sky-400/40 text-xs font-bold text-sky-300 hover:text-white hover:bg-sky-400/25 transition-all shadow-[0_0_15px_rgba(56,189,248,0.12)] whitespace-nowrap"
-          >
-            <span>Browse 2,000+ sites</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
+        </ScrollReveal>
       </div>
 
-      {/* Continuous Marquee Stream 1 (Uni-directional smooth motion) */}
-      <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="animate-marquee-continuous flex gap-3.5 py-2">
-          {row1Duplicated.map((pub, idx) => (
-            <div
-              key={`r1-${idx}`}
-              className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-[#06163b]/90 border border-sky-400/30 hover:border-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all min-w-[270px] sm:min-w-[290px] flex-shrink-0 cursor-default group"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-sky-500/15 border border-sky-400/40 flex items-center justify-center font-bold text-xs text-sky-300 flex-shrink-0 group-hover:scale-105 transition-transform">
-                  {pub.name.charAt(0)}
+      {/* Row 1: Leftward continuous marquee */}
+      <div className="relative w-full overflow-hidden mb-5">
+        {/* Left & Right Gradient Fade Edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#00081d] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#00081d] to-transparent z-10" />
+
+        <div className="flex gap-4 w-max animate-publisher-marquee hover:[animation-play-state:paused]">
+          {row1Duplicated.map((pub, idx) => {
+            const floatClass = idx % 2 === 0 ? "floating-tile-1" : "floating-tile-2";
+            return (
+              <div
+                key={`row1-${idx}`}
+                className={`flex items-center gap-3.5 px-4 py-3 rounded-xl bg-[#03000B] border border-sky-500/25 hover:border-sky-400 transition-all duration-200 hover:shadow-[0_0_25px_rgba(31,169,224,0.3)] flex-shrink-0 w-[240px] sm:w-[270px] group cursor-pointer ${floatClass}`}
+              >
+                <div className="w-8 h-8 rounded-lg bg-[#06173d] border border-sky-500/30 flex items-center justify-center text-[#1FA9E0] group-hover:bg-[#1FA9E0] group-hover:text-slate-950 transition-colors flex-shrink-0 shadow-[0_0_10px_rgba(31,169,224,0.15)]">
+                  <Globe className="w-4 h-4" />
                 </div>
-                <div className="min-w-0">
-                  <span className="font-bold text-xs text-white block truncate group-hover:text-sky-300 transition-colors">
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs font-bold text-white group-hover:text-sky-300 transition-colors truncate block">
                     {pub.name}
                   </span>
-                  <span className="text-[10px] text-sky-300/80 font-mono block truncate">
+                  <span className="text-[10px] text-sky-200/70 font-mono truncate block">
                     {pub.domain}
                   </span>
                 </div>
+                <div className="flex flex-col items-end flex-shrink-0">
+                  <span className="text-[10px] font-mono font-bold text-sky-300 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-400/30">
+                    DA {pub.da}
+                  </span>
+                  <span className="text-[9px] text-slate-400 font-mono mt-0.5">
+                    {pub.traffic}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col items-end flex-shrink-0">
-                <span className="px-2 py-0.5 rounded-full bg-sky-950/80 border border-sky-400/35 text-[10px] font-mono font-bold text-sky-300">
-                  DA {pub.da}
-                </span>
-                <span className="text-[9px] text-slate-400 mt-0.5 font-mono">
-                  DR {pub.dr}
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* Continuous Marquee Stream 2 (Slightly offset speed, uni-directional smooth motion) */}
-      <div className="relative w-full overflow-hidden mt-3.5 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <div className="animate-marquee-slow flex gap-3.5 py-2">
-          {row2Duplicated.map((pub, idx) => (
-            <div
-              key={`r2-${idx}`}
-              className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-[#06163b]/90 border border-sky-400/30 hover:border-sky-300 hover:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all min-w-[270px] sm:min-w-[290px] flex-shrink-0 cursor-default group"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-sky-500/15 border border-sky-400/40 flex items-center justify-center font-bold text-xs text-sky-300 flex-shrink-0 group-hover:scale-105 transition-transform">
-                  <Globe className="w-4 h-4 text-sky-400" />
+      {/* Row 2: Rightward / offset continuous marquee */}
+      <div className="relative w-full overflow-hidden">
+        {/* Left & Right Gradient Fade Edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-[#00081d] to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-[#00081d] to-transparent z-10" />
+
+        <div className="flex gap-4 w-max animate-publisher-marquee-reverse hover:[animation-play-state:paused]">
+          {row2Duplicated.map((pub, idx) => {
+            const floatClass = idx % 2 === 0 ? "floating-tile-2" : "floating-tile-1";
+            return (
+              <div
+                key={`row2-${idx}`}
+                className={`flex items-center gap-3.5 px-4 py-3 rounded-xl bg-[#03000B] border border-sky-500/25 hover:border-sky-400 transition-all duration-200 hover:shadow-[0_0_25px_rgba(31,169,224,0.3)] flex-shrink-0 w-[240px] sm:w-[270px] group cursor-pointer ${floatClass}`}
+              >
+                <div className="w-8 h-8 rounded-lg bg-[#06173d] border border-sky-500/30 flex items-center justify-center text-[#1FA9E0] group-hover:bg-[#1FA9E0] group-hover:text-slate-950 transition-colors flex-shrink-0 shadow-[0_0_10px_rgba(31,169,224,0.15)]">
+                  <Globe className="w-4 h-4" />
                 </div>
-                <div className="min-w-0">
-                  <span className="font-bold text-xs text-white block truncate group-hover:text-sky-300 transition-colors">
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs font-bold text-white group-hover:text-sky-300 transition-colors truncate block">
                     {pub.name}
                   </span>
-                  <span className="text-[10px] text-sky-300/80 font-mono block truncate">
+                  <span className="text-[10px] text-sky-200/70 font-mono truncate block">
                     {pub.domain}
                   </span>
                 </div>
+                <div className="flex flex-col items-end flex-shrink-0">
+                  <span className="text-[10px] font-mono font-bold text-sky-300 bg-sky-950/80 px-1.5 py-0.5 rounded border border-sky-400/30">
+                    DA {pub.da}
+                  </span>
+                  <span className="text-[9px] text-slate-400 font-mono mt-0.5">
+                    {pub.traffic}
+                  </span>
+                </div>
               </div>
-              <div className="flex flex-col items-end flex-shrink-0">
-                <span className="px-2 py-0.5 rounded-full bg-sky-950/80 border border-sky-400/35 text-[10px] font-mono font-bold text-sky-300">
-                  DA {pub.da}
-                </span>
-                <span className="text-[9px] text-slate-400 mt-0.5 font-mono">
-                  {pub.traffic}
-                </span>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

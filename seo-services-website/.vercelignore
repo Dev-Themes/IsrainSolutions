@@ -1,0 +1,7 @@
+# Exclude development references and large audit dumps from Vercel deployment
+reference/
+docs/
+scripts/
+AGY_BUILD_PROMPT.md
+*.ps1
+*.py

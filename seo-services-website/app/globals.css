@@ -115,34 +115,67 @@ body {
   box-shadow: 0 12px 40px -4px rgba(2, 8, 23, 0.85), 0 0 25px 0 rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(125, 211, 252, 0.3);
 }
 
-/* Continuous smooth marquee animations */
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
+/* Continuous autonomous floating marquee animations */
+@keyframes publisher-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
   }
-  to {
-    transform: translateX(-50%);
+  100% {
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
-.animate-marquee-continuous {
+@keyframes publisher-marquee-reverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-publisher-marquee {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 38s linear infinite;
+  animation: publisher-marquee 35s linear infinite;
   will-change: transform;
 }
 
-.animate-marquee-continuous:hover {
-  animation-play-state: paused;
-}
-
-.animate-marquee-slow {
+.animate-publisher-marquee-reverse {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 48s linear infinite;
+  animation: publisher-marquee-reverse 35s linear infinite;
   will-change: transform;
 }
 
-.animate-marquee-slow:hover {
+.animate-publisher-marquee:hover,
+.animate-publisher-marquee-reverse:hover {
   animation-play-state: paused;
+}
+
+/* Subtle autonomous floating wave for cards */
+@keyframes card-float-1 {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes card-float-2 {
+  0%, 100% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(2px);
+  }
+}
+
+.floating-tile-1 {
+  animation: card-float-1 4s ease-in-out infinite;
+}
+
+.floating-tile-2 {
+  animation: card-float-2 5s ease-in-out infinite;
 }

@@ -367,13 +367,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {/* Basic Package */}
             <div className="rounded-2xl bg-[#06163b]/85 border border-sky-400/35 p-6 sm:p-8 flex flex-col justify-between shadow-lg">
               <div className="space-y-6">
-                <div>
+                <div className="text-center">
                   <h3 className="text-xl font-bold text-white">Basic</h3>
                   <p className="text-xs text-slate-300 mt-1 min-h-[32px]">
                     Single placement to test our outreach quality or support a newly published page.
                   </p>
                 </div>
-                <div className="flex items-baseline gap-1 pb-4 border-b border-sky-500/20">
+                <div className="flex items-baseline justify-center gap-1 pb-4 border-b border-sky-500/20">
                   <span className="text-4xl font-extrabold text-white">${service.startingPrice}</span>
                   <span className="text-xs text-sky-300">/ one-time</span>
                 </div>
@@ -412,17 +412,17 @@ export default async function ServiceDetailPage({ params }: PageProps) {
 
             {/* Popular Package */}
             <div className="rounded-2xl bg-gradient-to-b from-[#082255] to-[#05163b] border-2 border-sky-400 p-6 sm:p-8 flex flex-col justify-between shadow-[0_0_35px_rgba(56,189,248,0.3)] md:-translate-y-2 relative">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-sky-400 text-slate-950 text-[11px] font-extrabold uppercase tracking-widest shadow-[0_0_15px_rgba(56,189,248,0.5)]">
-                Most Popular
+              <div className="absolute -top-3.5 inset-x-0 mx-auto w-max px-4 py-1 rounded-full bg-[#1FA9E0] text-slate-950 text-[11px] font-black uppercase tracking-widest text-center shadow-[0_0_15px_rgba(31,169,224,0.6)] z-10">
+                Most Popular Choice
               </div>
               <div className="space-y-6">
-                <div>
+                <div className="text-center">
                   <h3 className="text-xl font-bold text-white">Popular</h3>
                   <p className="text-xs text-slate-300 mt-1 min-h-[32px]">
                     Two authoritative links for pages actively competing for commercial keyword positions.
                   </p>
                 </div>
-                <div className="flex items-baseline gap-1 pb-4 border-b border-sky-500/20">
+                <div className="flex items-baseline justify-center gap-1 pb-4 border-b border-sky-500/20">
                   <span className="text-4xl font-extrabold text-white">${service.startingPrice * 2}</span>
                   <span className="text-xs text-sky-300">/ one-time</span>
                 </div>
@@ -462,13 +462,13 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             {/* Advanced Package */}
             <div className="rounded-2xl bg-[#06163b]/85 border border-sky-400/35 p-6 sm:p-8 flex flex-col justify-between shadow-lg">
               <div className="space-y-6">
-                <div>
+                <div className="text-center">
                   <h3 className="text-xl font-bold text-white">Advanced</h3>
                   <p className="text-xs text-slate-300 mt-1 min-h-[32px]">
                     Three targeted placements to build sustainable topical authority in competitive industries.
                   </p>
                 </div>
-                <div className="flex items-baseline gap-1 pb-4 border-b border-sky-500/20">
+                <div className="flex items-baseline justify-center gap-1 pb-4 border-b border-sky-500/20">
                   <span className="text-4xl font-extrabold text-white">${service.startingPrice * 3}</span>
                   <span className="text-xs text-sky-300">/ one-time</span>
                 </div>

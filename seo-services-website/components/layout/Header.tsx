@@ -56,7 +56,7 @@ const serviceMenuItems: NavServiceItem[] = [
   },
   {
     label: "SEO content writing",
-    href: "/services/seo-content-writing-services",
+    href: "/services/seo-content-writing",
   },
   {
     label: "All services",
@@ -124,30 +124,22 @@ export const Header: React.FC = () => {
           : "bg-[#020817]/90 backdrop-blur-sm py-3.5 border-sky-500/20"
       )}
     >
-      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4">
-          {/* Brand Lockup */}
+      <div className="max-w-[1280px] mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
+          {/* Brand Lockup: Official Parent Wordmark Logo */}
           <Link
             href="/"
-            className="flex items-center gap-3 flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1FA9E0] rounded"
+            className="flex items-center flex-shrink-0 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1FA9E0] rounded"
           >
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 flex-shrink-0">
+            <div className="relative h-7 sm:h-9 w-32 sm:w-44 flex-shrink-0">
               <Image
-                src="/brand/israin-icon.png"
+                src="/brand/israin-wordmark-1024x244.webp"
                 alt="Israin Solutions"
                 fill
-                sizes="36px"
+                sizes="(max-width: 640px) 144px, 176px"
                 priority
-                className="object-contain transition-transform group-hover:scale-105"
+                className="object-contain object-left transition-transform group-hover:scale-105"
               />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bold text-white tracking-wider text-sm sm:text-base uppercase">
-                ISRAIN SOLUTIONS
-              </span>
-              <span className="text-[10px] text-sky-300/80 tracking-wide font-normal">
-                Developing Beyond Imagination
-              </span>
             </div>
           </Link>
 
@@ -490,7 +482,7 @@ export const Header: React.FC = () => {
 
               {/* SEO content writing */}
               <Link
-                href="/services/seo-content-writing-services"
+                href="/services/seo-content-writing"
                 className="block p-3 rounded-lg bg-[#06163b]/60 border border-sky-500/20 text-xs font-semibold text-white hover:bg-sky-500/10"
               >
                 SEO content writing
@@ -514,9 +506,16 @@ export const Header: React.FC = () => {
             >
               Order links now →
             </Link>
-            <div className="text-center text-[11px] text-slate-400">
-              <span className="text-white font-semibold">ISRAIN SOLUTIONS</span>
-              <span className="block text-[10px] text-sky-300/80">Developing Beyond Imagination</span>
+            <div className="flex flex-col items-center justify-center pt-1">
+              <div className="relative h-7 w-36">
+                <Image
+                  src="/brand/israin-wordmark-1024x244.webp"
+                  alt="Israin Solutions"
+                  fill
+                  sizes="144px"
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
